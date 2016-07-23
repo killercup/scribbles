@@ -5,7 +5,7 @@ url: "https://scribbles.pascalhertleif.de"
 twitter_username: killercup
 github_username: killercup
 
-permalink: "/:year-:month-:day-:title.html"
+permalink: "/:title.html"
 defaults:
   - scope:
       path: ""
