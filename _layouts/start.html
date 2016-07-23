@@ -2,10 +2,11 @@
 layout: default
 ---
 <article class="home">
-  <h1 class="page-heading">
-    {{site.title}}
-  </h1>
+  {{content}}
 
+  <h2>
+    Posts
+  </h2>
   <ul class="post-list">
     {% for post in site.posts %}
       <li>
