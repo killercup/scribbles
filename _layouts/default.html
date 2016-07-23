@@ -10,20 +10,18 @@
     {{content}}
   </div>
   <footer class="container site-footer">
-    <p>
-      <a href="{{ site.url }}">Start</a>
-      /
-      <a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS feed</a>
-      /
-      <a href="https://twitter.com/{{site.author.twitter}}">Follow me on Twitter</a>
-      /
-      <a href="{{site.feedback_url}}">Tell me how wrong I am</a>
-    </p>
-    <p>
-      <a href="{{site.license_url}}" rel="license">&copy; Copyright 2015-{{ site.time | date:"%Y" }} {{site.author.name}}</a>
-      /
-      <a href="{{site.imprint_url}}">Imprint</a>
-    </p>
+    <nav>
+      <p>
+        <a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS feed</a>
+        /
+        <a href="https://twitter.com/{{site.author.twitter}}">Follow me on Twitter</a>
+      </p>
+      <p>
+        <a href="{{site.license_url}}" rel="license">&copy; Copyright 2015-{{ site.time | date:"%Y" }} {{site.author.name}}</a>
+        /
+        <a href="{{site.imprint_url}}">Imprint</a>
+      </p>
+    </nav>
   </footer>
 </body>
 </html>

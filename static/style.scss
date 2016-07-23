@@ -22,10 +22,14 @@
 @import 'hack/components/table';
 @import 'highlight-github';
 
-.site-footer {
+footer.site-footer {
   margin-top: 3rem;
   border-top: 2px solid $grey-400;
   padding-top: 2rem;
+}
+
+footer.article-footer {
+  margin: 3rem 0 2rem;
 }
 
 .highlight {
