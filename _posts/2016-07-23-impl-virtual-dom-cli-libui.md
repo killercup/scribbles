@@ -1,5 +1,8 @@
 ---
 title: Virtual DOM for CLI and libui
+categories:
+- rust
+- idea
 ---
 
 I want to easily write UIs in Rust. (What I describe below could also be done in any other language though.)
