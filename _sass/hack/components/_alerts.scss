@@ -1,0 +1,25 @@
+/**
+ * Alerts
+ */
+.alert {
+  color: #ccc;
+  padding: 1rem;
+  border: 1px solid #ccc;
+  margin-bottom: 1.75rem;
+}
+
+.alert-success {
+  @include alert($green);
+}
+
+.alert-error {
+  @include alert($red);
+}
+
+.alert-info {
+  @include alert($cyan);
+}
+
+.alert-warning {
+  @include alert($orange);
+}

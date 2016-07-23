@@ -1,0 +1,32 @@
+/**
+ * Media
+ */
+.media:not(:last-child) {
+  margin-bottom: calc(15/12)rem;
+}
+
+.media-left {
+  display: table-cell;
+  vertical-align: top;
+  padding-right: 1rem;
+}
+
+.media-right {
+  display: table-cell;
+  vertical-align: top;
+  padding-left: 1rem;
+}
+
+.media-body {
+  display: table-cell;
+  vertical-align: top;
+}
+
+.media-heading {
+  font-size: calc(14/12)rem;
+  font-weight: 700;
+}
+
+.media-content {
+  margin-top: .3rem;
+}

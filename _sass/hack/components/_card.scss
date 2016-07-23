@@ -1,0 +1,12 @@
+/**
+ * Card
+ */
+.card {
+  border: 1px solid #ccc;
+  & .card-header {
+    color: #333;
+    text-align: center;
+    background-color: #ddd;
+    padding: .5rem 0;
+  }
+}

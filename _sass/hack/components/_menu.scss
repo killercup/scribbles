@@ -1,0 +1,17 @@
+/**
+ * Menu
+ */
+.menu {
+  width: 100%;
+  & .menu-item {
+    display: block;
+    color: $grey-700;
+    border-color: $grey-700;
+
+    &:hover, &.active {
+      color: black;
+      border-color: black;
+      background-color: transparent;
+    }
+  }
+}
