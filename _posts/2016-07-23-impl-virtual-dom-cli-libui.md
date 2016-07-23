@@ -143,12 +143,12 @@ Imagine defining a CLI select box like this:
 
 ```rust
 fn render_select<C: Choice>(options: &[C], selected: usize) -> Cli {
-	let options = options.enumerate().map(|(option, index)| if index == selected {
-    	ui!(format!(" [x] {}", option.label))
+    let options = options.enumerate().map(|(option, index)| if index == selected {
+        ui!(format!(" [x] {}", option.label))
     else {
-    	ui!(format!(" [ ] {}", option.label))
+        ui!(format!(" [ ] {}", option.label))
     });
-    
+
     ui!(CliSection "Select" {header => "Please select an option:"} options)
 }
 ```
