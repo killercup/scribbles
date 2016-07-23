@@ -142,7 +142,7 @@ There are some ways to make fancy command like interfaces. I've recently used [t
 Imagine defining a CLI select box like this:
 
 ```rust
-fn render_select<C: Choice>(options: &[C], selected: usize) -> Cli {
+fn render_select<C: Choice>(options: &[C], selected: usize) -> CliSection {
     let options = options.enumerate().map(|(option, index)| if index == selected {
         ui!(format!(" [x] {}", option.label))
     else {
