@@ -2,7 +2,7 @@
 title: Virtual DOM for CLI and libui
 ---
 
-I want to easily write UIs in Rust, but what I describe below could also be done in any other language.
+I want to easily write UIs in Rust. (What I describe below could also be done in any other language though.)
 
 ## Contents
 {:.no_toc}
