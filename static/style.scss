@@ -27,3 +27,14 @@
   border-top: 2px solid $grey-400;
   padding-top: 2rem;
 }
+
+.highlight {
+  code {
+    font-weight: normal;
+  }
+}
+
+.hack ul ul {
+  margin-top: 0;
+  margin-bottom: 0;
+}
