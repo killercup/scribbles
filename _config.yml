@@ -2,9 +2,13 @@ title: "Pascal's Scribbles"
 description: >
     Some notes. Think of this as an alternative to a bunch of Gists.
 url: "https://scribbles.pascalhertleif.de"
-twitter_username: killercup
-github_username: killercup
+author:
+  name: Pascal Hertleif
+  twitter: killercup
+  github: killercup
+imprint_url: https://pascalhertleif.de/impressum/
 
+# Posts
 permalink: "/:title.html"
 defaults:
   - scope:
@@ -13,9 +17,9 @@ defaults:
     values:
       layout: "post"
       author: Pascal Hertleif
-
 timezone: "Europe/Berlin"
 
+# Markdown rendering
 markdown: kramdown
 highlighter: rouge
 kramdown:
@@ -26,5 +30,7 @@ kramdown:
   toc_levels: 1..6
   smart_quotes: lsquo,rsquo,ldquo,rdquo
   enable_coderay: false
+
+# Assets
 sass:
   style: compressed
