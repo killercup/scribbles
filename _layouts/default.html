@@ -1,0 +1,23 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <title>{% if page.title %}{{ page.title | escape }}{% else %}{{ site.title | escape }}{% endif %}</title>
+  <link rel="stylesheet" href="/style.css"/>
+</head>
+<body>
+  <div class="hack container">
+    {{content}}
+  </div>
+  <footer class="container site-footer">
+    <p>
+      subscribe <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a>
+    </p>
+    <p>
+      <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license">&copy; Copyright 2015-{{ site.time | date:"%Y" }} Pascal Hertleif</a>
+      /
+      <a href="https://pascalhertleif.de/impressum/">Imprint</a>
+    </p>
+  </footer>
+</body>
+</html>
