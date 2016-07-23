@@ -11,12 +11,12 @@
   </div>
   <footer class="container site-footer">
     <p>
-      <a href="{{ "/feed.xml" | prepend: site.baseurl }}">via RSS</a>
+      <a href="{{ "/feed.xml" | prepend: site.baseurl }}">RSS feed</a>
       /
       <a href="https://twitter.com/{{site.author.twitter}}">Follow me on Twitter</a>
     </p>
     <p>
-      <a href="https://creativecommons.org/licenses/by-nc/4.0/" rel="license">&copy; Copyright 2015-{{ site.time | date:"%Y" }} {{site.author.name}}</a>
+      <a href="{{site.license_url}}" rel="license">&copy; Copyright 2015-{{ site.time | date:"%Y" }} {{site.author.name}}</a>
       /
       <a href="{{site.imprint_url}}">Imprint</a>
     </p>
