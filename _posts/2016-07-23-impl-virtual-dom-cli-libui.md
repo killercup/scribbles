@@ -26,7 +26,7 @@ Basic building blocks:
 
 1. Define "UI component" trait that can be rendered.
 2. UI components can be nested to build a tree (with exactly one root).
-2. Implement clever diffing between two trees of UI components. (React uses the component type and `key` attributes unique among sibling components to short-circuit the otherwise $$\mathcal{O}(n^3)$$ diffing.)
+3. Implement clever diffing between two trees of UI components. (React uses the component type and `key` attributes unique among sibling components to short-circuit the otherwise `O(n^3)` diffing.)
 
 ### Abstract component definition
 
@@ -152,4 +152,3 @@ fn render_select<C: Choice>(options: &[C], selected: usize) -> Cli {
     ui!(CliSection "Select" {header => "Please select an option:"} options)
 }
 ```
-
