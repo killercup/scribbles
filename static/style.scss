@@ -50,6 +50,20 @@ footer.article-footer {
   margin-bottom: 0;
 }
 
+.hack sup[id^="fnref"] {
+  font-size: 1em;
+  vertical-align: baseline;
+
+  &:before {
+    content: "[^";
+    color: $grey-600;
+  }
+  &:after {
+    content: "]";
+    color: $grey-600;
+  }
+}
+
 .hack .footnotes {
   color: $grey-600;
 
