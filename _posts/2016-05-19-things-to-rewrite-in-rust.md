@@ -1,12 +1,14 @@
 ---
 title: Things to rewrite in Rust
+categories:
+- rust
 ---
 
 Some people wrote posts about stuff they want to see rewritten in Rust[^1], but that's not this is about. I want to rewrite stuff in Rust to learn more Rust, learn more about the projects and their fields, and, well, just for fun.
 
-[^1]: For example: libpng, musl, life, the Linux kernel, the universe, everything.
+[^1]: For example: libpng, musl, life, the Linux kernel, the universe, and everything.
 
-## A list of probably interesting things
+## A list of probably interesting things to write in Rust
 
 - [Butteraugli](https://github.com/google/butteraugli) – a tool for measuring differences between images (C++, [Go port](https://github.com/jasonmoo/go-butteraugli))
 - [FLIF](https://github.com/FLIF-hub/FLIF) – Free Lossless Image Format (C++)
