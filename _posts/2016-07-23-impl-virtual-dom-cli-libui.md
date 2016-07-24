@@ -1,11 +1,12 @@
 ---
 title: Virtual DOM for CLI and libui
 categories:
-- rust
-- idea
+  - rust
+  - idea
+published: true
 ---
 
-I want to easily write UIs in Rust. (What I describe below could also be done in any other language though.)
+Among [other things]({% post_url 2016-05-19-things-to-rewrite-in-rust %}), I want to easily write UIs in Rust. (What I describe below could also be done in any other language though.)
 
 ## Contents
 {:.no_toc}
