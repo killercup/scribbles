@@ -49,3 +49,12 @@ footer.article-footer {
   margin-top: 0;
   margin-bottom: 0;
 }
+
+.hack .footnotes {
+  color: $grey-600;
+
+  &:before {
+    content: "___";
+    display: block;
+  }
+}
