@@ -15,3 +15,4 @@ Some people wrote posts about stuff they want to see rewritten in Rust[^1], but 
   - FLIF's "Maniac" encoding ([part](https://github.com/FLIF-hub/FLIF/tree/0f0041079dba5195ea88235ba6ff1656b16dfc47/src/maniac) of FLIF's repo)
 - [story-graph](https://github.com/incrediblesound/story-graph) – The Graph that Generates Stories (JavaScript)
 - A virtual DOM thingy with adaptors for libui and CLI [as described in this note]({% post_url 2016-07-23-impl-virtual-dom-cli-libui %})
+- [A Twitter bot]({% post_url 2016-07-16-twitter-bot-driven-twitter-bot %})
