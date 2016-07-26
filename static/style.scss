@@ -45,10 +45,13 @@ footer.article-footer {
   }
 }
 
-.hack ul ul,
-.hack ol ol{
-  margin-top: 0;
-  margin-bottom: 0;
+.hack {
+  ul, ol {
+    ul, ol {
+      margin-top: 0;
+      margin-bottom: 0;
+    }
+  }
 }
 
 .hack sup[id^="fnref"] {
