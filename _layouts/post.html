@@ -7,7 +7,7 @@ layout: default
     <p class="post-meta">
       Created <time datetime="{{ page.date | date_to_xmlschema }}" itemprop="datePublished">{{ page.date | date: "%b %-d, %Y" }}</time>
       {% if page.author %} by <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name">{{ page.author }}</span></span>{% endif %}
-      in <a href="{{site.url}}">{{site.title}}</a>.
+      and published in <a href="{{site.url}}">{{site.title}}</a>.
       {% if page.categories.size > 0 %}
         Labeled as {% for category in page.categories %}{% unless forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endunless %}<em>{{ category }}</em>{% endfor %}.
       {% endif %}
