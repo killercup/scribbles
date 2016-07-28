@@ -8,7 +8,7 @@ categories:
 ## The secret life of `std`
 
 - You can call `"text".parse::<T>()` on all types `T` that `impl std::str::FromStr for T`
-- You can `.collect()` into a `Result<T, E> where T: IntoIterator`
+- You can `.collect()` into a `Result<T, E> where T: FromIterator`
 
 ## Wonders of Rust documentation
 
