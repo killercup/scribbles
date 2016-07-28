@@ -22,7 +22,7 @@ categories:
 - [quick-error](https://github.com/tailhook/quick-error) makes creating error enums easy
 - [conv](https://github.com/DanielKeep/rust-conv), a bunch of conversion traits that go beyond what `std::convert` offers, by Daniel Keep
 - [difference.rs](https://github.com/johannhof/difference.rs), a text diffing library with built-in diffing assertion, by Johann Hofmann
-- [strsim](https://github.com/dguo/strsim-rs): "Implementations of string similarity metrics. Includes Hamming, Levenshtein, Damerau-Levenshtein, Jaro, and Jaro-Winkler." By Danny Guo. I can't remember this crate's name!
+- [strsim](https://github.com/dguo/strsim-rs): "Implementations of string similarity metrics. Includes Hamming, Levenshtein, Damerau-Levenshtein, Jaro, and Jaro-Winkler." By Danny Guo. I can never remember this crate's name!
 - [iter-tools](https://github.com/bluss/rust-itertools) by bluss, because Iterators are awesome.
 - The [contain-rs](https://github.com/contain-rs) GitHub organisation which not only has a funny name but also a bunch of crates for various data structures. (While I have seen [this](https://github.com/michaelwoerister/rs-persistent-datastructures) crate, I'm still looking forward to popular, idiomatic, persistent data structures.)
 - [quickcheck](https://github.com/BurntSushi/quickcheck) (and everything else) by Andrew Gallant
