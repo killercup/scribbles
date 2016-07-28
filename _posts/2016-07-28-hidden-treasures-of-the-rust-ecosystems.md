@@ -29,7 +29,7 @@ categories:
 - [typenum](https://github.com/paholg/typenum), compile-time numbers in Rust, by Paho Lurie-Gregg and Andre Bogus.
 - [timely dataflow](https://github.com/frankmcsherry/timely-dataflow), a low-latency cyclic dataflow computational model. Awesome stuff, like all the other projects by Frank McSherry.
 
-## The private life of Rust's work in progress
+## The private life of Rust work in progress
 
 - [futures-rs](https://github.com/alexcrichton/futures-rs), a WIP implementation of future, promise, and (async) stream types, by Alex Crichton.
 - [miri](https://github.com/solson/miri), an interpreter for Rust's mid-level intermediate representation, by Scott Olson.
