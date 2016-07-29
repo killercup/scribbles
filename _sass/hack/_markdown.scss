@@ -104,18 +104,18 @@
   display: block;
   padding-left: 20px;
 }
-.hack li:after {
+.hack li:before {
   position: absolute;
   top: 0;
   left: 0;
 }
-.hack ul > li:after {
+.hack ul > li:before {
   content: "-";
 }
 .hack ol {
   counter-reset: ol;
 }
-.hack ol > li:after {
+.hack ol > li:before {
   content: counter(ol) ".";
   counter-increment: ol;
 }
