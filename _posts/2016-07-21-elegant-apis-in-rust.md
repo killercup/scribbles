@@ -3,6 +3,7 @@ title: Elegant Library APIs in Rust
 categories:
 - rust
 - writing
+- incomplete
 ---
 
 ## Contents
