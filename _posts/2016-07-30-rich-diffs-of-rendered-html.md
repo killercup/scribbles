@@ -7,7 +7,7 @@ Have you ever seen the way Github allows you to see rendered diffs for code they
 
 For some reason I wanted something similar (probably for [Silicon Zucchini](https://pascalhertleif.de/artikel/silicon-zucchini/)), but couldn't find a good library that did that nicely. Now I have a nice idea how to implement this.
 
-"Virtual DOM" is a nice abstraction of how to render HTML entities to the DOM[^1] – and how to quickly update them. The idea is to find a quick way to compare two virtual DOM trees and only update the differences. Thus, any virtual DOM implementation contains a way to two HTML trees!
+"Virtual DOM" is a nice abstraction of how to render HTML entities to the DOM[^1] – and how to quickly update them. The idea is to find a quick way to compare two virtual DOM trees and only update the differences. Thus, any virtual DOM implementation contains a way to diff two HTML trees!
 
 Assuming we can render a file to HTML and build a virtual DOM, we can then construct _two_ virtual DOM trees from two versions of this files and compare them. Instead of updating the real DOM by replacing DOM nodes, we
 
