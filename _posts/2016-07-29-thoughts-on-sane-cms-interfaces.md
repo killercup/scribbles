@@ -52,5 +52,5 @@ The edit view can quickly become quite complex. I imagine that one will want to 
 
 For 'regular' pages (like special promotion pages for a product), the author may want to influence the layout quite a bit. A nice way to represent that is by using a schema that contains an array of many items that can have different types (algebraic data types in JSON schema, basically). Each such type has a custom editor interface and HTML output.
 
-An editor that is based on the idea of content blocks of different types is [Sir Trevor JS](http://madebymany.github.io/sir-trevor-js/).
+An editor that is based on the idea of content blocks of different types is [Sir Trevor JS](http://madebymany.github.io/sir-trevor-js/). Craft's [Matrix](https://craftcms.com/features/matrix) feature seems to work the same way.
 
