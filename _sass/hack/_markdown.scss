@@ -169,9 +169,11 @@
   position: absolute;
   top: 0;
   left: 0;
+  font-size: 1rem;
   line-height: 1.666rem;
   width: 100%;
   word-wrap: break-word;
+  color: $grey-500;
 }
 @-moz-document url-prefix() {
   .hack h1 {
