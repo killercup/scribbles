@@ -42,6 +42,8 @@ The downside of this is that the documentation will be less readable (as it will
 - `TryFrom`: Attempt to construct Self via a conversion. (Unstable as of Rust 1.10)
 - `TryInto`: An attempted conversion that consumes self, which may or may not be expensive. (Unstable as of Rust 1.10)
 
+You might also enjoy [this article about _Convenient and idiomatic conversions in Rust_](https://ricardomartins.cc/2016/08/03/convenient_and_idiomatic_conversions_in_rust) .
+
 If you are dealing with a lot of things that may or may not need to be allocated, you should also look into [`Cow<'a, B>`](https://doc.rust-lang.org/std/borrow/enum.Cow.html) which allows you to abstract over borrowed and owned data.
 
 #### Example: [`std::convert::Into`](https://doc.rust-lang.org/std/convert/trait.Into.html)
