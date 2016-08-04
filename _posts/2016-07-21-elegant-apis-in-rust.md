@@ -18,8 +18,8 @@ categories:
 - Guessable method names when using the API, so there is less need to read documentation
 - Everything has at least some little snippet of documentation
 - You need to write little boilerplate code to use it
-	- methods accept a wide range of valid input types (where conversions are obvious)
-	- Shortcuts to get the 'usual' stuff done quickly
+    - methods accept a wide range of valid input types (where conversions are obvious)
+    - Shortcuts to get the 'usual' stuff done quickly
 - Clever use of types that prevent you from doing some kind of errors but don't get in your way too much
 - Useful errors, clearly documented panic cases
 
@@ -44,6 +44,8 @@ The downside of this is that the documentation will be less readable (as it will
 
 You might also enjoy [this article about _Convenient and idiomatic conversions in Rust_](https://ricardomartins.cc/2016/08/03/convenient_and_idiomatic_conversions_in_rust).
 
+#### Cow
+
 If you are dealing with a lot of things that may or may not need to be allocated, you should also look into [`Cow<'a, B>`](https://doc.rust-lang.org/std/borrow/enum.Cow.html) which allows you to abstract over borrowed and owned data.
 
 #### Example: [`std::convert::Into`](https://doc.rust-lang.org/std/convert/trait.Into.html)
@@ -54,6 +56,46 @@ If you are dealing with a lot of things that may or may not need to be allocated
 | User does allocation | Less obvious: Library might need to do allocation |
 | User needs to care about what a `PathBuf` is and how to get one | User can just give a `String` or an `OsString` or a `PathBuf` and be happy |
 
+#### `Into<Option<_>>`
+
+Recently (will land in Rust 1.12), [a pull request](https://github.com/rust-lang/rust/pull/34828) was merged that adds an `impl<T> From<T> for Option<T>`. While only a few lines long this allows you to write APIs that can be called without typing `Some(…)` all the time.
+
+[Before:](https://play.rust-lang.org/?gist=68645e903a2f903cf43d3070d562a809&version=nightly&backtrace=0)
+
+```rust
+// Easy for API author, easy to read documentation
+fn foo(lorem: &str, ipsum: Option<i32>, dolor: Option<i32>, sit: Option<i32>) {
+    println!("{}", lorem);
+}
+
+fn main() {
+    foo("bar", None, None, None);               // That looks weird
+    foo("bar", Some(42), None, None);           // Okay
+    foo("bar", Some(42), Some(1337), Some(-1)); // Halp! Too… much… Some…!
+}
+```
+
+[After:](https://play.rust-lang.org/?gist=23b98645fa7fd68cb9e28da9425a62f9&version=nightly&backtrace=0)
+
+```rust
+// A bit more typing for the API author.
+// (Sadly, the parameters need to be specified individually – or Rust would
+// infer the concrete type from the first parameter given. This reads not as
+// nicely, and documentation might not look as pretty as before.)
+fn foo<I, D, S>(lorem: &str, ipsum: I, dolor: D, sit: S) where
+    I: Into<Option<i32>>,
+    D: Into<Option<i32>>,
+    S: Into<Option<i32>>,
+{
+    println!("{}", lorem);
+}
+
+fn main() {
+    foo("bar", None, None, None); // Still weird
+    foo("bar", 42, None, None);   // Okay
+    foo("bar", 42, 1337, -1);     // Wow, that's nice! Gimme more APIs like this!
+}
+```
 
 ### Custom traits for input parameters
 
