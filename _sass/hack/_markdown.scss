@@ -149,6 +149,9 @@
 .hack a code {
   color: $link-color;
 }
+.hack a:hover code {
+  color: white;
+}
 .hack code:before,
 .hack code:after {
   content: "`";
