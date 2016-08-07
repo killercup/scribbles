@@ -3,7 +3,7 @@ title: Rust's ownership and borrowing in 150 words
 categories:
 - rust
 ---
-Recently, I wrote [on reddit](https://www.reddit.com/r/rust/comments/4vfzvc/list_of_rust_books/d5y8i0o?context=3) that a Rust book won't become obsolete in the next years if it focused on explaining concepts instead of current APIs. At basically the same time, I tried to explain some of Rust's concepts to a friend. I think I came up with a quite concise description (maybe even explaination) of ownership in Rust.
+Recently, I wrote [on reddit](https://www.reddit.com/r/rust/comments/4vfzvc/list_of_rust_books/d5y8i0o?context=3) that a Rust book won't become obsolete in the next years if it focused on explaining concepts instead of current APIs. At basically the same time, I tried to explain some of Rust's concepts to a friend. I think I came up with a quite concise description (maybe even explanation) of ownership in Rust.
 
 - - -
 
