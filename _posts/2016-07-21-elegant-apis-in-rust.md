@@ -25,7 +25,7 @@ categories:
 
 ## Techniques
 
-### Liberal usage of `Into<T>`, `AsRef<T>`, `FromStr` , and similar
+### Liberal usage of `Into<T>`, `AsRef<T>`, `FromStr`, and similar
 
 It's good practice to never have `&String` or `&Vec<T>` as input parameters and instead use `&str` and `&[T]` instead as they allow more types to be passed in. (Basically, everything that `deref`s to a (string) slice).
 
