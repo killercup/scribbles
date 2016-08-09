@@ -22,6 +22,8 @@ Dealing with a virtual DOM (instead of directly manipulating the real DOM) was p
 - Works nicely with reactive programming
 - Works nicely with doing as little as possible in the render/UI thread (send diff result to UI thread which can just apply the changes)
 
+The name "Virtual DOM" might suggest a direct relation to the HTML DOM implemented in browsers; I mean it in a more abstract way, though. (I just haven't come up with a good alternative name, yet!)
+
 ### Just a tree of UI components
 
 While React.js started with rendering to HTML, there are several other targets available now, including React Native (iOS, Android) and HTML5 canvas.
@@ -39,18 +41,6 @@ One nice thing about all things virtual DOM is that it also abstracts how compon
 The abstract idea is this: UI components can have attributes and children (i.e., an array of more UI components). A plain string is also considered a UI component and is rendered as a simple text node.
 
 Imagine a pseudo-Rust macro called `ui!` that matches like this: `($type:ident $label:expr? {$($key:ident => $val:expr),*}? [$($subcomponent:tt),*]?) => {...}` (disregarding text nodes for now).
-
-### Immediate-mode GUIs
-
-[@lqd](https://twitter.com/lqd) mentioned [on Twitter](https://twitter.com/lqd/status/760223190182465538) that virtual DOM might be a poorer version of immediate-mode GUI APIs:
-
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/killercup">@killercup</a> your vdom/libui post was cool, but to me vdom is also a poorer version of immediate-mode GUI APIs which would be even simpler :)</p>&mdash; Rémy Rakić (@lqd) <a href="https://twitter.com/lqd/status/760223190182465538">August 1, 2016</a></blockquote>
-
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/lqd">@lqd</a> interesting. do you have an example for nice immediate-mode GUI code?</p>&mdash; Pascal (@killercup) <a href="https://twitter.com/killercup/status/760224634855911424">August 1, 2016</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/killercup">@killercup</a> 1) <a href="https://t.co/zd9I0owlpf">https://t.co/zd9I0owlpf</a> 2) <a href="https://t.co/JgrbdaZGSw">https://t.co/JgrbdaZGSw</a> (page 34) 3) <a href="https://t.co/9lldQFUlWR">https://t.co/9lldQFUlWR</a> 4) surely on <a href="https://twitter.com/handmade_hero">@handmade_hero</a> as well</p>&mdash; Rémy Rakić (@lqd) <a href="https://twitter.com/lqd/status/760229545010163715">August 1, 2016</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
 
 ## Render targets
 
@@ -168,3 +158,29 @@ fn render_select<C: Choice>(options: &[C], selected: usize) -> CliSection {
     ui!(CliSection "Select" {header => "Please select an option:"} options)
 }
 ```
+
+## Updates
+
+### Immediate-mode GUIs
+
+[@lqd](https://twitter.com/lqd) mentioned [on Twitter](https://twitter.com/lqd/status/760223190182465538) that virtual DOM might be a poorer version of immediate-mode GUI APIs:
+
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/killercup">@killercup</a> your vdom/libui post was cool, but to me vdom is also a poorer version of immediate-mode GUI APIs which would be even simpler :)</p>&mdash; Rémy Rakić (@lqd) <a href="https://twitter.com/lqd/status/760223190182465538">August 1, 2016</a></blockquote>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/lqd">@lqd</a> interesting. do you have an example for nice immediate-mode GUI code?</p>&mdash; Pascal (@killercup) <a href="https://twitter.com/killercup/status/760224634855911424">August 1, 2016</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/killercup">@killercup</a> 1) <a href="https://t.co/zd9I0owlpf">https://t.co/zd9I0owlpf</a> 2) <a href="https://t.co/JgrbdaZGSw">https://t.co/JgrbdaZGSw</a> (page 34) 3) <a href="https://t.co/9lldQFUlWR">https://t.co/9lldQFUlWR</a> 4) surely on <a href="https://twitter.com/handmade_hero">@handmade_hero</a> as well</p>&mdash; Rémy Rakić (@lqd) <a href="https://twitter.com/lqd/status/760229545010163715">August 1, 2016</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+
+### React Fibre
+
+[Andrew Clark](https://github.com/acdlite) published [an overview of the React Fiber Architecture](https://github.com/acdlite/react-fiber-architecture/blob/efbf8936293f7cc4e8a30f475ffd01087d4d974c/README.md) recently:
+
+> React Fiber is an ongoing reimplementation of React's core algorithm. It is the culmination of over two years of research by the React team.
+>
+> The goal of React Fiber is to increase its suitability for areas like animation, layout, and gestures. Its headline feature is incremental rendering: the ability to split rendering work into chunks and spread it out over multiple frames.
+>
+> Other key features include the ability to pause, abort, or reuse work as new updates come in; the ability to assign priority to different types of updates; and new concurrency primitives.
+
+It'll be interesting to see if React Fibre ends up being the same kind of abstraction I was describing here.
