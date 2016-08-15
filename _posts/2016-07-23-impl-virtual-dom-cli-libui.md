@@ -141,7 +141,7 @@ Each sub-component or list of subcomponents can also be refactored into a variab
 
 ### CLI
 
-(I think I've seen a virtual-dom-like CLI library some time ago, but can't find it right now.)
+(~~I think I've seen a virtual-dom-like CLI library some time ago, but can't find it right now.~~ Found it again: It's [react-blessed](https://github.com/Yomguithereal/react-blessed), a React-based renderer for the curses-like JS library [blessed](https://github.com/chjj/blessed).)
 
 There are some ways to make fancy command like interfaces. I've recently used [termion](https://github.com/ticki/termion) and contributed to [inquirer-rs](https://github.com/Munksgaard/inquirer-rs).
 
