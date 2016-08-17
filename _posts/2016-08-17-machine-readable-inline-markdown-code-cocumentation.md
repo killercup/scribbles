@@ -5,7 +5,7 @@ categories:
 ---
 In [Rust RFC 1713][rfc-pr-1713], a set of documentation 'tags' is proposed, to document functions in a similar fashion to e.g. JavaDoc or JSDoc. I recently [saw][swift-doc-markup] that Swift uses plain Markdown for documentation. Xcode is able to parse this and show contextual information based on it.
 
-Since Rust's [current documentation conventions][rfc-1574] already want you to use common headlines to structure your code documentation, I think it would be very nice to continue in this style and use plain Markdown with specific conventions.
+Since Rust's [current documentation conventions][rfc-1574] already wants you to use common names for Markdown headlines to structure your code documentation, I think it would be very nice to continue in this style and use plain Markdown with specific conventions.
 
 ## Markdown formatting conventions
 
@@ -23,6 +23,8 @@ These are the common headlines from [RFC 1574][rfc-1574]:
 - *Undefined Behavior*: Describe for which inputs the function behavior is not defined
 
 ### Specific machine readable sections
+
+This is aimed at documenting functions and methods, but should also work for documenting type parameters and lifetime parameters of `struct`s, `enum`s, and `trait`s.
 
 - *Parameters* (always plural): List of parameter names with description
 - *Returns* (read either as 3rd person singular form or plural "return [values]"): Prose description which can be followed by a list of valid `enum` variants for the return type and descriptions
