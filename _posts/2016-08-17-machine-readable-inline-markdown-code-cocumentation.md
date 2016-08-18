@@ -41,8 +41,8 @@ All lists mentioned above must be written like this:
 
 That is: A Markdown list where each list items
 
-- starts with an inline code snippet containing containing a valid Rust identifier (`$name`),
-- optionally followed by a colon and a space, which is followd by valid Markdown text (`$explanation`, can be multi-line, but must be correct in list-item position).
+- starts with an inline code snippet containing a valid Rust identifier (`$name`),
+- optionally followed by a colon and a space, which is followed by valid Markdown text (`$explanation`, can be multi-line, but must be correct in list-item position).
 
 ### Lints
 
@@ -55,7 +55,7 @@ All conventions listed above should be checked by lints.
 ///
 /// # Parameters
 ///
-/// - `label`: A string labeling the foo
+/// - `label`: A string labelling the foo
 /// - `magic`: A `Foo` that will be labeled
 ///
 /// # Returns
