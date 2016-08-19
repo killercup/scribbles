@@ -7,5 +7,7 @@ $light-grey: $grey-600;
 $link-color: #FF2E88;
 
 $font-size-base: 14px;
-$font-family-code: Menlo, Monaco, "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
+$font-family-code: Menlo, Monaco, "Droid Sans", "Lucida Console", "Liberation Mono", "DejaVu Sans Mono", "Bitstream Vera Sans Mono", "Courier New", monospace, serif;
 $font-family: $font-family-code;
+
+$lh: 1.5rem; // vertical rhythm

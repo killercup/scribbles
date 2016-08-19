@@ -19,7 +19,7 @@
 .hack strong,
 .hack code {
   font-size: 1rem;
-  line-height: 1.5rem;
+  line-height: $lh;
   font-style: normal;
   font-family: $font-family-code;
 }
@@ -33,6 +33,7 @@
 .hack blockquote,
 .hack ol,
 .hack ul,
+.hack dl,
 .hack li,
 .hack p,
 .hack section,
@@ -45,23 +46,24 @@
 .hack h1,
 .hack p,
 .hack ul,
+.hack dl,
 .hack ol,
 .hack blockquote {
-  margin-top: 20px;
-  margin-bottom: 20px;
+  margin-top: $lh;
+  margin-bottom: $lh;
 }
 .hack h1 {
   position: relative;
   display: inline-block;
   display: table-cell;
-  padding: 20px 0 40px;
+  padding: $lh 0 (2 * $lh);
   margin: 0;
   overflow: hidden;
 }
 .hack h1:after {
   content: "====================================================================================================";
   position: absolute;
-  bottom: 10px;
+  bottom: 0.8 * $lh;
   left: 0;
 }
 .hack h1 + * {
@@ -73,11 +75,11 @@
 .hack h5,
 .hack h6 {
   position: relative;
-  margin-bottom: 1.75rem;
+  margin-bottom: $lh;
 }
 .hack h1,
 .hack h2 {
-  line-height: 2.5rem;
+  line-height: $lh;
 }
 .hack h2:before,
 .hack h3:before,
@@ -102,7 +104,7 @@
 .hack li {
   position: relative;
   display: block;
-  padding-left: 20px;
+  padding-left: $lh;
 }
 .hack li:before {
   position: absolute;
@@ -131,7 +133,7 @@
   position: absolute;
   top: 0;
   left: 0;
-  line-height: 1.666rem;
+  line-height: $lh;
 }
 .hack em:before,
 .hack em:after {
@@ -160,12 +162,12 @@
 
 .hack hr {
   position: relative;
-  height: 20px;
+  height: $lh;
   font-size: 0;
   line-height: 0;
   overflow: hidden;
   border: 0;
-  margin-bottom: 20px;
+  margin-bottom: $lh;
 }
 .hack hr:after {
   content: "- - -";
@@ -173,7 +175,7 @@
   top: 0;
   left: 0;
   font-size: 1rem;
-  line-height: 1.666rem;
+  line-height: $lh;
   width: 100%;
   word-wrap: break-word;
   color: $grey-500;

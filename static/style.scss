@@ -54,8 +54,18 @@ footer.article-footer {
   }
 }
 
+.hack blockquote {
+  :first-child {
+    margin-top: 0;
+  }
+
+  :last-child {
+    margin-bottom: 0;
+  }
+}
+
 .hack sup[id^="fnref"] {
-  font-size: 1em;
+  font-size: 1rem;
   vertical-align: baseline;
 
   &:before {
@@ -76,3 +86,21 @@ footer.article-footer {
     display: block;
   }
 }
+
+.hack dt {
+  font-weight: bold;
+}
+
+.hack dd {
+  margin-left: 0;
+  padding-left: $lh;
+  position: relative;
+
+  &:before {
+    content: ":";
+    position: absolute;
+    left: 0;
+    top: 0;
+  }
+}
+
