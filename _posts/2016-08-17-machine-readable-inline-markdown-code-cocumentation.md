@@ -15,21 +15,45 @@ The following sections are treated specially and are expected to be in the descr
 
 These are the common headlines from [RFC 1574][rfc-1574]:
 
-- *Examples*: Must contain at least one Rust code snippet
-- *Panics*: Explains when a function panics, should always be included when `panic!`, `assert!` or similar are used/when any branch of the function can directly return `!`
-- *Errors*: Explain when an error value is returned (see also "Returns" in the next section)
-- *Safety*: Describe the safety requirements of this function
-- *Aborts*: Similar to panic
-- *Undefined Behavior*: Describe for which inputs the function behavior is not defined
+Examples
+: Must contain at least one Rust code snippet
+: Should use sub-headlines when multiple examples are given. Each sub-section should have a headline, followed by a short paragraph explaining the examples, and at least one Rust code block.
+
+Panics
+: Explains when a function panics, should always be included when `panic!`, `assert!` or similar are used/when any branch of the function can directly return `!`
+
+Errors
+: Explain when an error value is returned (see also "Returns" in the next section)
+
+Safety
+: Describes the safety requirements of this function
+
+Aborts
+: Similar to panic
+
+Undefined Behavior
+: Describes for which inputs the function behavior is not defined
 
 ### Specific machine readable sections
 
 This is aimed at documenting functions and methods, but should also work for documenting type parameters and lifetime parameters of `struct`s, `enum`s, and `trait`s.
 
-- *Parameters* (always plural): List of parameter names with description
-- *Returns* (read either as 3rd person singular form or plural "return [values]"): Prose description which can be followed by a list of valid `enum` variants for the return type and descriptions
-- *Type parameters*: List of generic type parameters (the `T` in `fn foo<T>()`) and description (can also be used to describe trait bounds in where clauses)
-- *Lifetimes* or *Lifetime parameters*: List of valid lifetime identifiers (without leading `'`) and description
+Parameters
+: (always plural)
+: List of parameter names with description
+
+Returns
+: (read either as 3rd person singular form or plural "return [values]")
+: Plain text description
+: can be followed by a list of valid `enum` variants for the return type and descriptions
+: Alternatively, allow regular pattern matching syntax instead of enum variant names
+
+Type parameters
+: List of generic type parameters (the `T` in `fn foo<T>()`) and description (can also be used to describe trait bounds in where clauses)
+
+Lifetimes
+: (alternatively "Lifetime parameters")
+: List of valid lifetime identifiers (without leading `'`) and description
 
 ### List syntax
 
