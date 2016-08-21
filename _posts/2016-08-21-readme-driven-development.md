@@ -59,6 +59,10 @@ You can use tools like [skeptic](https://crates.io/crates/skeptic) to extract co
 
 After you wrote the README file, you should publish it. Probably with a big "THIS IS JUST AN IDEA SO FAR" warning. Maybe just as a [Gist](https://gist.github.com), but definitely in a place where you (or others) can easily start implementing the features you described.
 
+- - -
+
+After posting this, Salty Rando [informed me](https://twitter.com/iwhitney/status/767464762749747200) that Tom Preston-Werner already [wrote about](http://tom.preston-werner.com/2010/08/23/readme-driven-development.html) Readme Driven Development in 2010!
+
 
 [^1]: E.g., [Test-driven Development](https://en.wikipedia.org/wiki/Test-driven_development), [Behavior-driven Development](https://en.wikipedia.org/wiki/Behavior-driven_development), or [Calendar-driven Development](https://www.reddit.com/r/rust/comments/37b6oo/the_calendar_example_challenge/crlkfec).
 [^2]: Been there, [done that](https://github.com/killercup/vibrant-rs). (That README is pretty bad, though.)
