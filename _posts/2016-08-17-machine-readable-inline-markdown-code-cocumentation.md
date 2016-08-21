@@ -128,3 +128,7 @@ fn fooify<'floof, T>(label: T, magic: Foo<'floof>) -> Result<Bar<'floof>, i32>
 [rfc-pr-1713]: https://github.com/rust-lang/rfcs/pull/1713
 [rfc-1574]: https://github.com/rust-lang/rfcs/blob/30221dc3e025eb9f8f84ccacbc9622e3a75dff5e/text/1574-more-api-documentation-conventions.md
 [swift-doc-markup]: https://developer.apple.com/library/tvos/documentation/Xcode/Reference/xcode_markup_formatting_ref/AddingMarkup.html#//apple_ref/doc/uid/TP40016497-CH3-SW1
+
+- - -
+
+People have been wanting to update rustdoc to use the [pulldown-cmark](https://github.com/google/pulldown-cmark) crate instead of the currently used bindings to the [hoedown](https://github.com/hoedown/hoedown) library. It might be interesting to implement a POC for parsing the format specified above with pulldown-cmark.
