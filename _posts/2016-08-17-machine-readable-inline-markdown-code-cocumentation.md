@@ -3,9 +3,17 @@ title: Machine Readable Inline Markdown Code Documentation
 categories:
 - rust
 ---
+
 In [Rust RFC 1713][rfc-pr-1713], a set of documentation 'tags' is proposed, to document functions in a similar fashion to e.g. JavaDoc or JSDoc. I recently [saw][swift-doc-markup] that Swift uses plain Markdown for documentation. Xcode is able to parse this and show contextual information based on it.
 
 Since Rust's [current documentation conventions][rfc-1574] already wants you to use common names for Markdown headlines to structure your code documentation, I think it would be very nice to continue in this style and use plain Markdown with specific conventions.
+
+## Contents
+{:.no_toc}
+
+* Table of contents
+{:toc}
+
 
 ## Markdown formatting conventions
 
