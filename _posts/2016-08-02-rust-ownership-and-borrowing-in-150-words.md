@@ -7,14 +7,14 @@ Recently, I wrote [on reddit](https://www.reddit.com/r/rust/comments/4vfzvc/list
 
 - - -
 
-**Ownership and borrowing**, the one that differentiates Rust from pretty much everything. You have an owned resource, and when you are done, that resource gets deallocated.
+**Ownership and borrowing**, the one that differentiates Rust from pretty much everything. You own a resource, and when you are done with it, that resource is no longer in scope and gets deallocated.
 
-All **references** to a resource depend on the lifetime of that resource (i.e., the are only valid when the resource has not yet been deallocated).
+All **references** to a resource depend on the lifetime of that resource (i.e., they are only valid when the resource has not yet been deallocated).
 
 **Move semantics** means: Giving an owned resource to a function means _giving it away_. You can no longer access it.
 
-To _not_ move a resource, you instead create a reference to it and move _that_. You create a reference, that you own, and then give ownership of that to the function you call. (Nothing new, just both concepts at the same time.)
+To _not_ move a resource, you instead create a reference to it and move _that_. When you create a reference, you own that reference. Then you it (and ownership of it) to the function you call. (Nothing new, just both concepts at the same time.)
 
-To manipulate a resource without giving up ownership, you can create one **mutable reference**. During the lifetime of this reference, no other references can be created.
+To manipulate a resource without giving up ownership, you can create one **mutable reference**. During the lifetime of this reference, no other references to the same resource can exist.
 
 That's it. And it's all checked at compile-time.
