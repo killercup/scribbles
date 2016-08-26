@@ -6,20 +6,48 @@ title: Symbol Pronounciation
 >
 > – [Hoon documentation][0]
 
-Symbol | Pronounciation
------- | --------------
-`|`    | bar
-`$`    | buc
-`%`    | cen
-`:`    | col
-`.`    | dot
-`#`    | hax
-`^`    | ket
-`;`    | sem
-`~`    | sig
-`=`    | tis
-`?`    | wut
-`!`    | zap
+> Because Hoon uses ASCII symbols so heavily (there is some resemblance to Perl or even the APL family, although Hoon is more regular than both), it presents a serious vocalization problem. To aid in speaking Hoon – both for actual communication, and to assist in subvocalized reading – we have our own one-syllable names for ASCII tokens
+>
+> – [Urbit: A Solid-State Interpreter][1]
+
+The following pronunciation listing is directly from "Phonetic names for symbols" (Listing 3 from the [Urbit whitepaper][1]).
+
+Symbol     | Pronounciation
+---------- | --------------
+[1 space]  | ace
+[>1 space] | gap
+`!`        | zap
+`"`        | doq
+`#`        | hax
+`$`        | buc
+`%`        | cen
+`&`        | pam
+`(`        | pal
+`)`        | par
+`*`        | tar
+`+`        | lus
+`,`        | com
+`-`        | hep
+`.`        | dot
+`/`        | fas
+`:`        | col
+`;`        | sem
+`<`        | gal
+`=`        | tis
+`>`        | gar
+`?`        | wut
+`@`        | pat
+`[`        | sel
+`\`        | bas
+`]`        | ser
+`^`        | ket
+`_`        | cab
+`{`        | kel
+`|`        | bar
+`}`        | ker
+`~`        | sig
+`‘`        | tec
+`’`        | soq
 
 ## Irregular pronuncations
 
@@ -27,11 +55,12 @@ Symbol | Pronounciation
 >
 > – [Hoon documentation][0]
 
-Symbol | Pronounciation
------- | --------------
-`--`   | hephep
-`+-`   | lushep
-`++`   | luslus
-`==`   | tistis
+Symbol | Irregular Pronounciation | Original pronounciation
+------ | ------------------------ | -----------------------
+`--`   | phep                     | hephep
+`+-`   | slep                     | lushep
+`++`   | slus                     | luslus
+`==`   | stet                     | tistis
 
 [0]: https://github.com/urbit/urbit/blob/c9592664c797b2dd74f26886528656f8a7058640/urb/zod/pub/doc/hoon/runes.md#names-and-categories
+[1]: http://media.urbit.org/whitepaper.pdf
