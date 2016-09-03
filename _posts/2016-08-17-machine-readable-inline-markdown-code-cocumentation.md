@@ -131,4 +131,6 @@ fn fooify<'floof, T>(label: T, magic: Foo<'floof>) -> Result<Bar<'floof>, i32>
 
 - - -
 
-People have been wanting to update rustdoc to use the [pulldown-cmark](https://github.com/google/pulldown-cmark) crate instead of the currently used bindings to the [hoedown](https://github.com/hoedown/hoedown) library. It might be interesting to implement a POC for parsing the format specified above with pulldown-cmark.
+People have been wanting to update rustdoc to use the [pulldown-cmark](https://github.com/google/pulldown-cmark) crate instead of the currently used bindings to the [hoedown](https://github.com/hoedown/hoedown) library.
+
+~~It might be interesting to implement a POC for parsing the format specified above with pulldown-cmark.~~ [I did just that.](https://github.com/killercup/rust-docstrings)
