@@ -22,3 +22,9 @@ VSCode supports autocomplete based on JSON Schema files. Doing the same for simi
 ## Sanity check, linters
 
 When human and machine want to read, edit, and understand the same file, it usually pays off to let the machine a bit of sanity checking. Linters and formatters are your friend.
+
+- - - -
+
+## See also
+
+Andre not only wrote about this a year before I did, but his arguments are also much better: [Plain Text Reigns Supreme](https://llogiq.github.io/2015/09/14/plaintext.html).
