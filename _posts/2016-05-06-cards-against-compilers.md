@@ -31,3 +31,8 @@ Cards visible in the picture. Would love to add some own ideas later on.
 
 - Only use \______ if you are truly desperate.
 
+## Similar card sets
+
+- [Nerds against humanity](http://www.laurieneilsen.com/nah.html)
+- [DevOps Against Humanity](https://github.com/bridgetkromhout/devops-against-humanity)
+- [Cards Against Developers #2](https://www.cardcastgame.com/browse/deck/3FAGW)
