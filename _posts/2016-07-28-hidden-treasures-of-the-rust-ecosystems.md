@@ -15,6 +15,7 @@ categories:
 - [The Little Book of Rust Macros](https://danielkeep.github.io/tlborm/) by Daniel Keep
 - [Rust Design Patterns](https://github.com/nrc/patterns), a collection by Nick Cameron
 - [Learning Rust With Entirely Too Many Linked Lists](http://cglab.ca/~abeinges/blah/too-many-lists/book/) by Alexis Beingessner
+- [Ticki's blog](http://ticki.github.io/blog/) with great posts showing the theoretical CS aspects of Rust
 
 ## The ancient treasures of crates.io
 
@@ -31,5 +32,5 @@ categories:
 
 ## The private life of Rust work in progress
 
-- [futures-rs](https://github.com/alexcrichton/futures-rs), a WIP implementation of future, promise, and (async) stream types, by Alex Crichton.
+- [futures-rs](https://github.com/alexcrichton/futures-rs), a WIP implementation of future, promise, and (async) stream types, by Alex Crichton. **Now public!**
 - [miri](https://github.com/solson/miri), an interpreter for Rust's mid-level intermediate representation, by Scott Olson.
