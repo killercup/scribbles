@@ -8,7 +8,7 @@ Some people wrote posts about stuff they want to see rewritten in Rust[^1], but 
 
 [^1]: For example: libpng, musl, life, the Linux kernel, the universe, and everything.
 
-## A list of probably interesting things to write in Rust
+## A list of probably interesting things to (re)write in Rust
 
 - [Butteraugli](https://github.com/google/butteraugli) – a tool for measuring differences between images (C++, [Go port](https://github.com/jasonmoo/go-butteraugli))
 - [FLIF](https://github.com/FLIF-hub/FLIF) – Free Lossless Image Format (C++)
@@ -16,3 +16,4 @@ Some people wrote posts about stuff they want to see rewritten in Rust[^1], but 
 - [story-graph](https://github.com/incrediblesound/story-graph) – The Graph that Generates Stories (JavaScript)
 - A virtual DOM thingy with adaptors for libui and CLI [as described in this note]({% post_url 2016-07-23-impl-virtual-dom-cli-libui %})
 - [A Twitter bot]({% post_url 2016-07-16-twitter-bot-driven-twitter-bot %})
+- [git-guilt](https://bitbucket.org/tpettersen/git-guilt) using libgit2 (with the [git2](https://crates.io/crates/git2) crate) instead of spawning `git blame` processes
