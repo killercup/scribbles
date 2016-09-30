@@ -58,7 +58,7 @@ If you are dealing with a lot of things that may or may not need to be allocated
 
 #### `Into<Option<_>>`
 
-Recently (will land in Rust 1.12), [a pull request](https://github.com/rust-lang/rust/pull/34828) was merged that adds an `impl<T> From<T> for Option<T>`. While only a few lines long this allows you to write APIs that can be called without typing `Some(…)` all the time.
+[This pull request](https://github.com/rust-lang/rust/pull/34828), which landed in Rust 1.12, adds an `impl<T> From<T> for Option<T>`. While only a few lines long this allows you to write APIs that can be called without typing `Some(…)` all the time.
 
 [Before:](https://play.rust-lang.org/?gist=68645e903a2f903cf43d3070d562a809&version=nightly&backtrace=0)
 
@@ -94,6 +94,27 @@ fn main() {
     foo("bar", None, None, None); // Still weird
     foo("bar", 42, None, None);   // Okay
     foo("bar", 42, 1337, -1);     // Wow, that's nice! Gimme more APIs like this!
+}
+```
+
+#### A note on possibly long compile times
+
+If you have:
+
+1. a lot of type parameters (e.g. for the conversion traits)
+2. on a complex/large function
+3. which is used a lot
+
+then `rustc` will need to compile a lot of permutations of this function (it monomorphizes generic functions), which will lead to long compile times.
+
+[bluss](https://github.com/bluss) mentioned [on Reddit](https://www.reddit.com/r/rust/comments/556c0g/optional_arguments_in_rust_112/d8839pu?context=1) that you can use "de-generization" to circumvent this issue: Your (public) generic function just calls another, (private) non-generic function, which will only be compiled once.
+
+The examples bluss gave was the implementation of `std::fs::OpenOptions::open` ([source](https://doc.rust-lang.org/1.12.0/src/std/up/src/libstd/fs.rs.html#599-604) from Rust 1.12) and [this pull request](https://github.com/PistonDevelopers/image/pull/518) on the `image` crate, which changed its `open` function to this:
+
+```rust
+pub fn open<P>(path: P) -> ImageResult<DynamicImage> where P: AsRef<Path> {
+    // thin wrapper function to strip generics before calling open_impl
+    open_impl(path.as_ref())
 }
 ```
 
