@@ -2,7 +2,7 @@
  * Media
  */
 .media:not(:last-child) {
-  margin-bottom: calc(15/12)rem;
+  margin-bottom: (15 / 12) * 1rem;
 }
 
 .media-left {

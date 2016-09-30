@@ -86,8 +86,17 @@
 .hack h4:before,
 .hack h5:before,
 .hack h6:before {
-  content: "## ";
   display: inline;
+
+  @media screen and (min-width: $breakpoint-wide) {
+    display: block;
+    position: absolute;
+    transform: translateX(-100%);
+    padding-right: 0.6rem;
+  }
+}
+.hack h2:before {
+  content: "## ";
 }
 .hack h3:before {
   content: "### ";

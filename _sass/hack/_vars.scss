@@ -11,3 +11,6 @@ $font-family-code: Menlo, Monaco, "Droid Sans", "Lucida Console", "Liberation Mo
 $font-family: $font-family-code;
 
 $lh: 1.5rem; // vertical rhythm
+
+$max-width: 60rem;
+$breakpoint-wide: $max-width + 6rem;
