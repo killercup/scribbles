@@ -48,9 +48,19 @@ To enforce that every public API item is documented, use `#![deny(missing_docs)]
 
 ### Error handling
 
-The official book has an [awesome chapter](https://doc.rust-lang.org/book/error-handling.html) on error handling.
+The official book has an [awesome chapter](https://doc.rust-lang.org/1.12.0/book/error-handling.html) on error handling.
 
 There are a few crates to reduce the boilerplate needed for good error types, e.g., [quick-error](https://crates.io/crates/quick-error), and [error-chain](https://crates.io/crates/error-chain).
+
+### Public type aliases
+
+If your internal code uses generic types with the same type parameters over and over again, it makes sense to use a type alias. If you also expose those types to your users, you should expose (and document) the type alias as well.
+
+A common case where this is used is `Result<T, E>` types, where the error case (`E`) is fixed. For example, [`std::io::Result<T>`][io-result] is an alias for `Result<T, std::io::Error>`, [`std::fmt::Result`][fmt-result] is an alias for `Result<(), std::fmt::Error>`, and [`serde_json::error::Result<T>`][serde-json-result] is an alias for `Result<T, serde_json::error::Error>`.
+
+[io-result]: https://doc.rust-lang.org/std/io/type.Result.html
+[fmt-result]: https://doc.rust-lang.org/std/fmt/type.Result.html
+[serde-json-result]: https://github.com/serde-rs/json/blob/e5f9ca89c6de1a7bf86aff0283bcd83845b05576/json/src/error.rs#L258
 
 ### Liberal usage of `Into<T>`, `AsRef<T>`, `FromStr`, and similar
 
