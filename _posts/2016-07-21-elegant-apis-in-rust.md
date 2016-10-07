@@ -46,6 +46,12 @@ fn min(lhs: i32, rhs: i32) -> i32 {
 
 To enforce that every public API item is documented, use `#![deny(missing_docs)]`. You might also be interested in my post suggesting [conventions for formatting Rust documentation]({% post_url 2016-08-17-machine-readable-inline-markdown-code-cocumentation %}).
 
+### Error handling
+
+The official book has an [awesome chapter](https://doc.rust-lang.org/book/error-handling.html) on error handling.
+
+There are a few crates to reduce the boilerplate needed for good error types, e.g., [quick-error](https://crates.io/crates/quick-error), and [error-chain](https://crates.io/crates/error-chain).
+
 ### Liberal usage of `Into<T>`, `AsRef<T>`, `FromStr`, and similar
 
 It's good practice to never have `&String` or `&Vec<T>` as input parameters and instead use `&str` and `&[T]` as they allow more types to be passed in. (Basically, everything that `deref`s to a (string) slice).
@@ -165,12 +171,6 @@ You can make it easier to make complex API calls by chaining several smaller met
 use std::fs::OpenOptions;
 let file = OpenOptions::new().read(true).write(true).open("foo.txt");
 ```
-
-### Error handling
-
-The official book has an [awesome chapter](https://doc.rust-lang.org/book/error-handling.html) on error handling.
-
-There are a few crates to reduce the boilerplate needed for good error types, e.g., [quick-error](https://crates.io/crates/quick-error), and [error-chain](https://crates.io/crates/error-chain).
 
 ### Session types
 
