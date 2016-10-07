@@ -14,24 +14,43 @@ categories:
 
 ## What makes an API elegant?
 
-- Code using the API is easily readable thanks to obvious, self-explanatory method names
-- Guessable method names when using the API, so there is less need to read documentation
-- Everything has at least some little snippet of documentation
-- You need to write little boilerplate code to use it
-    - methods accept a wide range of valid input types (where conversions are obvious)
-    - Shortcuts to get the 'usual' stuff done quickly
-- Clever use of types that prevent you from doing some kind of errors but don't get in your way too much
-- Useful errors, clearly documented panic cases
+- Code using the API is easily readable thanks to obvious, self-explanatory method names.
+- Guessable method names also help when using the API, so there is less need to read documentation.
+- Everything has at least some documentation and a small code example.
+- Users of the API need to write little boilerplate code to use it, as
+    - methods accept a wide range of valid input types (where conversions are obvious), and
+    - shortcuts to get the 'usual' stuff done quickly are available.
+- Types are cleverly used to prevent logic errors, but don't get in your way too much.
+- Returned errors are useful, and panic cases are clearly documented.
 
 ## Techniques
 
+### Doc tests
+
+Write documentation with example code showing how to use your API and get automatic tests for free – Two birds, one stone. You can read more about in the [documentation chapter](https://doc.rust-lang.org/1.12.0/book/documentation.html#documentation-as-tests) of the official book.
+
+```rust
+/// Manipulate a number by magic
+///
+/// # Examples
+///
+/// ```rust
+/// assert_eq!(min( 0,   14),    0);
+/// assert_eq!(min( 0, -127), -127);
+/// assert_eq!(min(42,  666),  666);
+/// ```
+fn min(lhs: i32, rhs: i32) -> i32 {
+	if lhs < rhs { lhs } else { rhs }
+}
+```
+
+To enforce that every public API item is documented, use `#![deny(missing_docs)]`. You might also be interested in my post suggesting [conventions for formatting Rust documentation]({% post_url 2016-08-17-machine-readable-inline-markdown-code-cocumentation %}).
+
 ### Liberal usage of `Into<T>`, `AsRef<T>`, `FromStr`, and similar
 
-It's good practice to never have `&String` or `&Vec<T>` as input parameters and instead use `&str` and `&[T]` instead as they allow more types to be passed in. (Basically, everything that `deref`s to a (string) slice).
+It's good practice to never have `&String` or `&Vec<T>` as input parameters and instead use `&str` and `&[T]` as they allow more types to be passed in. (Basically, everything that `deref`s to a (string) slice).
 
-We can apply the same idea at a more abstract level: Instead of using concrete types for input parameters, try to use generics with precise constraints.
-
-The downside of this is that the documentation will be less readable (as it will be full of generics with complex constraints!)
+We can apply the same idea at a more abstract level: Instead of using concrete types for input parameters, try to use generics with precise constraints. The downside of this is that the documentation will be less readable as it will be full of generics with complex constraints!
 
 [`std::convert`](https://doc.rust-lang.org/std/convert/index.html) has some goodies for that:
 
@@ -118,6 +137,10 @@ pub fn open<P>(path: P) -> ImageResult<DynamicImage> where P: AsRef<Path> {
 }
 ```
 
+### Laziness and Iterators
+
+**t.b.d.**
+
 ### Custom traits for input parameters
 
 The Rust way to implement a kind of "function overloading" is by using a generic trait `T` for one input parameter and implement `T` for all types the function should accept.
@@ -132,13 +155,9 @@ The Rust way to implement a kind of "function overloading" is by using a generic
 "Lorem ipsum".find(char::is_whitespace);
 ```
 
-### Session types
-
-Basically: Encode a state machine in the type system. Each state is a different type and implements different methods. There's even a [paper](http://munksgaard.me/laumann-munksgaard-larsen.pdf) on it.
-
 ### Builder pattern
 
-Make it easier to make complex API calls by chaining several smaller methods together. Works nicely with session types.
+You can make it easier to make complex API calls by chaining several smaller methods together. This works nicely with session types (see below). The [`derive_builder`](https://crates.io/crates/derive_builder) crate can be used to automatically generate (simpler) builders for custom structs.
 
 #### Example: [`std::fs::OpenOptions`](https://doc.rust-lang.org/std/fs/struct.OpenOptions.html)
 
@@ -153,12 +172,53 @@ The official book has an [awesome chapter](https://doc.rust-lang.org/book/error-
 
 There are a few crates to reduce the boilerplate needed for good error types, e.g., [quick-error](https://crates.io/crates/quick-error), and [error-chain](https://crates.io/crates/error-chain).
 
-### Doc tests
+### Session types
 
-Write documentation with examples and get automatic tests for free – Two birds, one stone.
+You can encode a state machine in the type system.
 
-To enforce that every public API item is documented, use `#![deny(missing_docs)]`.
+1. Each state is a different type.
+2. Each state type implements different methods.
+3. Some methods consume a state type (by taking ownership of it) and return a different state type.
+
+This works really well in Rust as your methods can move your data into a new type and you can no longer access the old state afterwards.
+
+Here's an arbitrary example about mailing a package:
+
+```rust
+let package = Package::new(); // -> OpenPackage
+package.insert([stuff, padding, padding]); // -> OpenPackage
+package.seal_up(); // -> ClosedPackage
+// package.insert([more_stuff]); // ERROR: No method `insert` on `ClosedPackage`
+package.send(address, postage); // -> DeliveryTracking
+```
+
+A good real-life example was given by /u/ssokolow [in this thread on /r/rust](https://www.reddit.com/r/rust/comments/568yvh/typesafe_unions_in_c_and_rust/d8hcwfs):
+
+> Hyper uses this to ensure, at compile time, that it's impossible to get into situations like the "tried to set HTTP headers after request/response body has begun" that we see periodically on PHP sites. (The compiler can catch that because there is no "set header" method on a connection in that state and the invalidating of stale references allows it to be certain that only the correct state is being referenced.)
+
+The [`hyper::server` docs](http://hyper.rs/hyper/v0.9.10/hyper/server/index.html#an-aside-write-status) go into a bit of detail on how this is implemented.
+
+More information:
+
+- The article ["Beyond Memory Safety With Types"](https://insanitybit.github.io/2016/05/30/beyond-memory-safety-with-types) describes how this technique can be used to implement a nice and type safe interface for the IMAP protocol.
+- The paper ["Session types for Rust" (PDF)](http://munksgaard.me/laumann-munksgaard-larsen.pdf) by Thomas Bracht Laumann Jespersen, Philip Munksgaard, and Ken Friis Larsen (2015). [DOI](http://dx.doi.org/10.1145/2808098.2808100).
+
+### Use lifetimes well
+
+Specifying type and trait constraints on your API is essential to designing an API in a statically typed language, and, as written above, to help your users prevent logic errors. Rust's type system can also encode another dimension: You can also describe the lifetimes of your data (and write constraints on lifetimes).
+
+This can allow you (as a developer) to be more relaxed about giving out borrowed resources (instead of more computationally expensive owned data). Using references to data where possible is definitely a good practice in Rust, as high performance and "zero allocation" libraries are one of the languages selling points.
+
+You should try to write good documentation on this, though, as understanding lifetimes and dealing with references can present a challenge to users of your library, especially when they are new to Rust.
+
+For some reason (probably brevity), a lot of lifetimes are called `'a`, `'b`, or something similarly meaningless. If you know the resource for whose lifetime your references are valid, you can probably find a better name, though. For examples, if you read a file into memory and are working with references to that memory, call those lifetimes `'file`. Or if you are processing a TCP request and are parsing its data, you can call its lifetime `'req`.
 
 ## Case Studies
 
-tbd
+**t.b.d.**
+
+Possible Rust libraries that some nice tricks in their APIs:
+
+- [hyper](https://crates.io/crates/hyper): session types (see above)
+- [diesel](https://crates.io/crates/diesel): encodes SQL queries as types, uses traits with complex associated types
+- [futures](https://crates.io/crates/futures): very abstract and well documented crate
