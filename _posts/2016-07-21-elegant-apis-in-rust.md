@@ -190,7 +190,7 @@ fn main() {
     let fortune = library_function()
         .method_returning_result()
         .party()
-        .unwrap_or("Out of luck.");
+        .unwrap_or("Out of luck.".to_string());
 }
 ```
 
