@@ -161,6 +161,53 @@ The Rust way to implement a kind of "function overloading" is by using a generic
 "Lorem ipsum".find(char::is_whitespace);
 ```
 
+### Extension traits
+
+It's a good practice to use types and traits defined in the standard library, as those are known by many Rust programmers, well-tested, and nicely documented. And while Rust's standard library tends to offer types with semantic meaning[^1], the methods implemented on these types might not be enough for your API. Luckily, Rust's "orphan rules" allow you implement a trait for a (generic) type if at least one of them is defined in the current crate.
+
+[^1]: For examples, `std` has an `Result` type (with `Ok` and `Err` variants) which should be used to handle errors, instead of an `Either` type (with `Left` and `Right` variants) which does not imply that meaning.
+
+#### Decorating results
+
+As [Florian](https://twitter.com/Argorak) writes in ["Decorating Results"](http://yakshav.es/decorating-results/), you can use this to write and implement traits to supply your own methods to built-in types like `Result`. For example:
+
+```rust
+pub trait GrandResultExt {
+    fn party(self) -> Self;
+}
+
+impl GrandResultExt for Result<String, Box<Error>> {
+    fn party(self) -> Result<String, Box<Error>> {
+        if self.is_ok() {
+          println!("Wooohoo! 🎉");
+        }
+        self
+    }
+}
+
+// User's code
+fn main() {
+    let fortune = library_function()
+        .method_returning_result()
+        .party()
+        .unwrap_or("Out of luck.");
+}
+```
+
+Florian's real-life code in [lazers][lazers-decorations] uses the same pattern to decorate the `BoxFuture` (from the `futures` crate) to make the code more readable (abbreviated):
+
+```rust
+let my_database = client
+    .find_database("might_not_exist")
+    .or_create();
+```
+
+[lazers-decorations]: https://github.com/skade/lazers/blob/d9ace30c05cf103c5faf0660c06127b578c92762/lazers-traits/src/decorations.md#results-of-finding-a-database
+
+#### Extending traits
+
+So far, we've extended the methods available on a type by defining and implementing our own trait. You can also define traits that _extend other traits_ (`trait MyTrait: BufRead + Debug {}`). The most prominent example for this is the [itertools](https://crates.io/crates/itertools) crate, which adds a long list of methods to `std`'s Iterators.
+
 ### Builder pattern
 
 You can make it easier to make complex API calls by chaining several smaller methods together. This works nicely with session types (see below). The [`derive_builder`](https://crates.io/crates/derive_builder) crate can be used to automatically generate (simpler) builders for custom structs.
@@ -196,7 +243,9 @@ A good real-life example was given by /u/ssokolow [in this thread on /r/rust](ht
 
 > Hyper uses this to ensure, at compile time, that it's impossible to get into situations like the "tried to set HTTP headers after request/response body has begun" that we see periodically on PHP sites. (The compiler can catch that because there is no "set header" method on a connection in that state and the invalidating of stale references allows it to be certain that only the correct state is being referenced.)
 
-The [`hyper::server` docs](http://hyper.rs/hyper/v0.9.10/hyper/server/index.html#an-aside-write-status) go into a bit of detail on how this is implemented.
+The [`hyper::server` docs](http://hyper.rs/hyper/v0.9.10/hyper/server/index.html#an-aside-write-status) go into a bit of detail on how this is implemented. Another interesting idea can be found [in the lazers-replicator crate][from-lazers-with-love]: It uses `std::convert::From` to transition between states.
+
+[from-lazers-with-love]: https://github.com/skade/lazers/blob/96efff493be9312ffc70eac5a04b441952e089eb/lazers-replicator/src/lib.md#verify-peers
 
 More information:
 
