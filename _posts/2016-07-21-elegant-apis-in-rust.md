@@ -177,7 +177,7 @@ That is, everything a user can use in a `for` loop, they can also give to your f
 
 ##### Returning iterators
 
-If you want to return something your users can as an iterator, the best practice is to define a new type that implements `Iterator`. This may become easier once `impl Trait` is stabilized (see [the tracking issue][rust-34511]).
+If you want to return something your users can use as an iterator, the best practice is to define a new type that implements `Iterator`. This may become easier once `impl Trait` is stabilized (see [the tracking issue][rust-34511]).
 
 **TODO.** Expand this.
 
@@ -195,9 +195,9 @@ As written in the [`futures` tutorial][futures-tut-stream], where `Iterator::nex
 
 #### Take closures
 
-If a potentially expensive value (let's say of type `Value`) is not used in all branches in your control flow, consider taking a closures that returns that value (`Fn() -> Value`).
+If a potentially expensive value (let's say of type `Value`) is not used in all branches in your control flow, consider taking a closure that returns that value (`Fn() -> Value`).
 
-If you are designing a trait, you can also have two methods that do the same thing, but where one takes a value and he other a closure that computes the value. A real-life example of this pattern is in `Result` with [`unwrap_or`] and [`unwrap_or_else`]:
+If you are designing a trait, you can also have two methods that do the same thing, but where one takes a value and the other a closure that computes the value. A real-life example of this pattern is in `Result` with [`unwrap_or`] and [`unwrap_or_else`]:
 
 [`unwrap_or`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or
 [`unwrap_or_else`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or_else
