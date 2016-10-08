@@ -153,9 +153,74 @@ pub fn open<P>(path: P) -> ImageResult<DynamicImage> where P: AsRef<Path> {
 }
 ```
 
-### Laziness and Iterators
+### Laziness
 
-**t.b.d.**
+While Rust does not have 'laziness' in the sense of lazy evaluation of expressions like Haskell implements it, there are several techniques you can use to elegantly omit doing unnecessary computations and allocations.
+
+#### Use Iterators
+
+One of the most amazing constructs in the standard library is `Iterator`, a trait that allows generator-like iteration of values where you only need to implement a `next` method[^2]. Rust's iterators are lazy in that you explicitly need to call a consumer to start iterating through values. Just writing `"hello".chars().filter(char::is_whitespace)` won't _do_ anything until you call something like `.collect::<String>()` on it.
+
+[^2]: In that regard, Rust's Iterators are very similar to the `Iterator` interface in Java or the `Iteration` protocol in Python (as well as many others).
+
+##### Iterators as parameters
+
+Using iterators as inputs may make your API harder to read (taking a `T: Iterator<Item=Thingy>` vs. `&[Thingy]`), but allows users to skip allocations.
+
+_Actually_, though, you might not want to take a generic `Iterator`: Use [`IntoIterator`] instead. This way, can give you anything that you can easily turn into an iterator yourself by calling `.into_iter()` on it. It's also quite easy to determine which types implement `IntoIterator`—as the documentation says:
+
+> One benefit of implementing IntoIterator is that your type will work with Rust's for loop syntax.
+
+That is, everything a user can use in a `for` loop, they can also give to your function.
+
+[`IntoIterator`]: https://doc.rust-lang.org/std/iter/trait.IntoIterator.html
+
+##### Returning iterators
+
+If you want to return something your users can as an iterator, the best practice is to define a new type that implements `Iterator`. This may become easier once `impl Trait` is stabilized (see [the tracking issue][rust-34511]).
+
+**TODO.** Expand this.
+
+[rust-34511]: https://github.com/rust-lang/rust/issues/34511
+
+##### Implementing `Iterator` on your types
+
+**TODO.**
+
+##### Very similar: `futures::Stream`
+
+As written in the [`futures` tutorial][futures-tut-stream], where `Iterator::next` returns `Option<Self::Item>`, `Stream::poll` returns an async result of `Option<Self::Item>` (or an error).
+
+[futures-tut-stream]: https://github.com/alexcrichton/futures-rs/blob/f78905e584d06e69e5237ca12745ccd3d6f4a73a/TUTORIAL.md#the-stream-trait
+
+#### Take closures
+
+If a potentially expensive value (let's say of type `Value`) is not used in all branches in your control flow, consider taking a closures that returns that value (`Fn() -> Value`).
+
+If you are designing a trait, you can also have two methods that do the same thing, but where one takes a value and he other a closure that computes the value. A real-life example of this pattern is in `Result` with [`unwrap_or`] and [`unwrap_or_else`]:
+
+[`unwrap_or`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or
+[`unwrap_or_else`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or_else
+
+```rust
+let res: Result<i32, String> = Err("oh noes");
+res.unwrap_or(42) // just returns `42`
+res.unwrap_or_else(|msg| msg.len() > 12) // will call the closure
+```
+
+#### Lazy tricks
+
+##### [`lazy_static!`]
+
+[`lazy_static!`]: https://crates.io/crates/lazy_static
+
+**TODO.** Crate that allows you to easily compute and cache a value on first use.
+
+##### Letting `Deref` do all the work
+
+**TODO.** Idea: Wrapper type with an implementation of [`Deref`] that contains the logic to actually compute a value.
+
+[`Deref`]: https://doc.rust-lang.org/std/ops/trait.Deref.html
 
 ### Custom traits for input parameters
 
@@ -274,10 +339,10 @@ For some reason (probably brevity), a lot of lifetimes are called `'a`, `'b`, or
 
 ## Case Studies
 
-**t.b.d.**
-
 Possible Rust libraries that some nice tricks in their APIs:
 
 - [hyper](https://crates.io/crates/hyper): session types (see above)
 - [diesel](https://crates.io/crates/diesel): encodes SQL queries as types, uses traits with complex associated types
 - [futures](https://crates.io/crates/futures): very abstract and well documented crate
+
+**TODO:** Expand this.
