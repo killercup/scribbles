@@ -175,21 +175,22 @@ That is, everything a user can use in a `for` loop, they can also give to your f
 
 [`IntoIterator`]: https://doc.rust-lang.org/std/iter/trait.IntoIterator.html
 
-##### Returning iterators
+##### Returning/implementing iterators
 
-If you want to return something your users can use as an iterator, the best practice is to define a new type that implements `Iterator`. This may become easier once `impl Trait` is stabilized (see [the tracking issue][rust-34511]).
+If you want to return something your users can use as an iterator, the best practice is to define a new type that implements `Iterator`. This may become easier once `impl Trait` is stabilized (see [the tracking issue][rust-34511]). You can find a bit more information about this in the [`futures` tutorial][returning-futures] (as returning a `Future` and an `Iterator` has similar characteristics).
 
-**TODO.** Expand this.
+If you find yourself implementing a method on a type to return some of the type's data as an `Iterator`, you should also consider implementing [`IntoIterator`] on that type. (This only works when there is only _one_ obvious way to iterate over your type's data.)
 
 [rust-34511]: https://github.com/rust-lang/rust/issues/34511
+[returning-futures]: https://github.com/alexcrichton/futures-rs/blob/f78905e584d06e69e5237ca12745ccd3d6f4a73a/TUTORIAL.md#returning-futures
 
-##### Implementing `Iterator` on your types
+##### `Iterator`-like traits
 
-**TODO.**
+There are a few libraries that implement traits like `Iterator`, e.g.:
 
-##### Very similar: `futures::Stream`
+- `futures::Stream`: As written in the [`futures` tutorial][futures-tut-stream], where `Iterator::next` returns `Option<Self::Item>`, `Stream::poll` returns an async result of `Option<Self::Item>` (or an error).
 
-As written in the [`futures` tutorial][futures-tut-stream], where `Iterator::next` returns `Option<Self::Item>`, `Stream::poll` returns an async result of `Option<Self::Item>` (or an error).
+**TODO:** Add more.
 
 [futures-tut-stream]: https://github.com/alexcrichton/futures-rs/blob/f78905e584d06e69e5237ca12745ccd3d6f4a73a/TUTORIAL.md#the-stream-trait
 
