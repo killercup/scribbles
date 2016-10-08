@@ -190,8 +190,6 @@ There are a few libraries that implement traits like `Iterator`, e.g.:
 
 - `futures::Stream`: As written in the [`futures` tutorial][futures-tut-stream], where `Iterator::next` returns `Option<Self::Item>`, `Stream::poll` returns an async result of `Option<Self::Item>` (or an error).
 
-**TODO:** Add more.
-
 [futures-tut-stream]: https://github.com/alexcrichton/futures-rs/blob/f78905e584d06e69e5237ca12745ccd3d6f4a73a/TUTORIAL.md#the-stream-trait
 
 #### Take closures
@@ -211,17 +209,12 @@ res.unwrap_or_else(|msg| msg.len() > 12) // will call the closure
 
 #### Lazy tricks
 
-##### [`lazy_static!`]
+- [`lazy_static!`]: A crate that allows you to easily compute and cache a value on first use.
+- _Letting `Deref` do all the work:_ Wrapper type with an implementation of [`Deref`] that contains the logic to actually compute a value. The crate [`lazy`] implements a macro to do that for you (it requires unstable features, though).
 
 [`lazy_static!`]: https://crates.io/crates/lazy_static
-
-**TODO.** Crate that allows you to easily compute and cache a value on first use.
-
-##### Letting `Deref` do all the work
-
-**TODO.** Idea: Wrapper type with an implementation of [`Deref`] that contains the logic to actually compute a value.
-
 [`Deref`]: https://doc.rust-lang.org/std/ops/trait.Deref.html
+[`lazy`]: https://crates.io/crates/lazy
 
 ### Custom traits for input parameters
 
@@ -345,5 +338,3 @@ Possible Rust libraries that some nice tricks in their APIs:
 - [hyper](https://crates.io/crates/hyper): session types (see above)
 - [diesel](https://crates.io/crates/diesel): encodes SQL queries as types, uses traits with complex associated types
 - [futures](https://crates.io/crates/futures): very abstract and well documented crate
-
-**TODO:** Expand this.
