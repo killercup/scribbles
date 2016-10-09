@@ -338,3 +338,9 @@ Possible Rust libraries that some nice tricks in their APIs:
 - [hyper](https://crates.io/crates/hyper): session types (see above)
 - [diesel](https://crates.io/crates/diesel): encodes SQL queries as types, uses traits with complex associated types
 - [futures](https://crates.io/crates/futures): very abstract and well documented crate
+
+## Other design patterns
+
+What I tried to cover here are design patterns for _interfaces_, i.e. APIs exposed to the user. While I believe that some of these patterns are only applicable to writing libraries, many also apply to writing generic application code.
+
+You can find more information on this topic in the [Rust Design Patterns](https://github.com/rust-unofficial/patterns) repository.
