@@ -179,8 +179,6 @@ That is, everything a user can use in a `for` loop, they can also give to your f
 
 If you want to return something your users can use as an iterator, the best practice is to define a new type that implements `Iterator`. This may become easier once `impl Trait` is stabilized (see [the tracking issue][rust-34511]). You can find a bit more information about this in the [`futures` tutorial][returning-futures] (as returning a `Future` and an `Iterator` has similar characteristics).
 
-If you find yourself implementing a method on a type to return some of the type's data as an `Iterator`, you should also consider implementing [`IntoIterator`] on that type. (This only works when there is only _one_ obvious way to iterate over your type's data.)
-
 [rust-34511]: https://github.com/rust-lang/rust/issues/34511
 [returning-futures]: https://github.com/alexcrichton/futures-rs/blob/f78905e584d06e69e5237ca12745ccd3d6f4a73a/TUTORIAL.md#returning-futures
 
@@ -215,6 +213,19 @@ res.unwrap_or_else(|msg| msg.len() > 12) // will call the closure
 [`lazy_static!`]: https://crates.io/crates/lazy_static
 [`Deref`]: https://doc.rust-lang.org/std/ops/trait.Deref.html
 [`lazy`]: https://crates.io/crates/lazy
+
+### Convenience traits
+
+Here are some traits you should try implement to make using your types easier/more consistent for your users:
+
+- Implement or derive the 'usual' traits like `Debug`, `Hash`, `PartialEq`, `PartialOrd`, `Eq`, `Ord`
+- Implement or derive [`Default`] instead of writing a `new` method without arguments
+- If you find yourself implementing a method on a type to return some of the type's data as an `Iterator`, you should also consider implementing [`IntoIterator`] on that type. (This only works when there is only _one_ obvious way to iterate over your type's data. Also see section on iterators above.)
+- If your custom data type can be thought of in a similar fashion as a primitive data type `T` from `std`, consider implementing [`Deref<Target=T>`][`Deref`].
+- Instead of writing a constructor method that takes a string and creates a new instance of your data type, implement [`FromStr`].
+
+[`Default`]: https://doc.rust-lang.org/std/default/trait.Default.html
+[`FromStr`]: https://doc.rust-lang.org/std/str/trait.FromStr.html
 
 ### Custom traits for input parameters
 
