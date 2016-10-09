@@ -331,6 +331,19 @@ You should try to write good documentation on this, though, as understanding lif
 
 For some reason (probably brevity), a lot of lifetimes are called `'a`, `'b`, or something similarly meaningless. If you know the resource for whose lifetime your references are valid, you can probably find a better name, though. For examples, if you read a file into memory and are working with references to that memory, call those lifetimes `'file`. Or if you are processing a TCP request and are parsing its data, you can call its lifetime `'req`.
 
+#### Put finalizer code in `drop`
+
+Rust's ownership rules work for more than just memory: If your data type represents an external resource (e.g., a TCP connection), you can use the [`Drop`] trait to close/deallocate/clean up the resource when it goes out of scope. You can use this the same way as you would use finalizers (or `try … catch … finally`) in other languages.
+
+Real-life examples of this are:
+
+- The reference count types `Rc` and `Arc` use `Drop` to decrease their reference count (and deallocate the inner data if the count hits zero).
+- `MutexGuard` uses `Drop` to release its lock on a `Mutex`.
+- The diesel crate implements `Drop` to close database connections (e.g. [in SQLite][diesel-sqlite-drop]).
+
+[`Drop`]: https://doc.rust-lang.org/std/ops/trait.Drop.html
+[diesel-sqlite-drop]: https://github.com/diesel-rs/diesel/blob/9ea449c480739253766bd097e7b06d038fe16590/diesel/src/sqlite/connection/raw.rs#L73
+
 ## Case Studies
 
 Possible Rust libraries that some nice tricks in their APIs:
