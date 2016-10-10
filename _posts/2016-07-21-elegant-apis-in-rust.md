@@ -46,6 +46,86 @@ fn min(lhs: i32, rhs: i32) -> i32 {
 
 To enforce that every public API item is documented, use `#![deny(missing_docs)]`. You might also be interested in my post suggesting [conventions for formatting Rust documentation]({% post_url 2016-08-17-machine-readable-inline-markdown-code-cocumentation %}).
 
+### Don't "stringly type" your API
+
+Coming from dynamically typed languages, you might be tempted to use strings with specific values in various places.
+
+For example: You want a function to print some input text in a color, so you use a parameter `color` of type `&str`. That also means you expect your users to write one of the names from a limited number of color names (like `["red", "green", "blue", "light golden rod yellow"]`). 
+
+This is **not** what you should do in Rust! If you know _all_ possible variants beforehand, use an `enum`. This way, you don't need to parse/pattern match the string -- and deal with possible errors -- but can be sure that a user of your API can only ever supply valid inputs.
+
+```rust
+enum Color { Red, Green, Blue, LightGoldenRodYellow }
+
+fn color_me(input: &str, color: Color) { /* ... */ }
+
+fn main() {
+    color_me("surprised", Color::Blue);
+}
+```
+
+#### A module full of constants
+
+Alternatively, if you have a more complex value you want to express, where there are a lot of variants of, you can define a new `struct` and then define a bunch of constants with common values. If you put the constants into a public module, your users can access them using similar syntax as when using an enum variant.
+
+```rust
+mod output_options {
+    pub struct OutputOptions { /* ... */ }
+    
+    impl OutputOptions { fn new(/* ... */) -> OutputOptions { /* ... */ } }
+    
+    const DEFAULT: OutputOptions = OutputOptions { /* ... */ };
+    const SLIM: OutputOptions = OutputOptions { /* ... */ };
+    const PRETTY: OutputOptions = OutputOptions { /* ... */ };
+}
+
+fn output(f: &Foo, opts: OutputOptions) { /* ... */ }
+
+fn main() {
+    let foo = Foo::new();
+    
+    output(foo, output_options::PRETTY);
+}
+```
+
+#### Actually parsing a string with `FromStr`
+
+There may still be cases where users of your API actually have strings, e.g. from reading environment variables or by taking *their* user input -- i.e., they didn't write (static) strings themselves in their code to give to your API (which is what we try to prevent). In those cases it makes sense to have a look at what the [`FromStr`] trait can give you, which abstracts over the concept of parsing a string into a Rust data type.
+
+[`FromStr`]: https://doc.rust-lang.org/std/str/trait.FromStr.html
+
+If all you want to do is map a string with an enum variant name to the right enum variant, you can adapt [this macro](https://play.rust-lang.org/?gist=c5610c31b8469422e57c23721cba09f8&version=nightly&backtrace=0) (from [this tweet](https://twitter.com/killercup/status/773432184199847940); there might also be a crate for that).
+
+Depending on your API, you could also decide to have your users deal with parsing the string. If you supply the right types and implementations, it shouldn't be difficult (but needs to be documented nonetheless).
+
+```rust
+// Option A: You do the parsing
+fn output_a(f: &Foo, color: &str) -> Result<Bar, ParseError> {
+    // This shadows the `options` name with the parsed type
+    let color: Color = try!(options.parse());
+
+    f.to_bar(&color)
+}
+
+// Option B: User does the parsing
+fn output_b(f: &Foo, color: &Color) -> Bar {
+    f.to_bar(color)
+}
+
+fn main() {
+    let foo = Foo::new();
+
+    // Option A: You do the parsing, user needs to deal with API error
+    output_a(foo, "Green").expect("Error :(");
+
+    // Option B: User has correct type, no need to deal with error here
+    output_b(foo, Color::Green);
+
+    // Option B: User has string, needs to parse and deal with parse error
+    output_b(foo, "Green".parse().except("Parse error!"));
+}
+```
+
 ### Error handling
 
 The official book has an [awesome chapter](https://doc.rust-lang.org/1.12.0/book/error-handling.html) on error handling.
@@ -62,7 +142,7 @@ A common case where this is used is `Result<T, E>` types, where the error case (
 [fmt-result]: https://doc.rust-lang.org/std/fmt/type.Result.html
 [serde-json-result]: https://github.com/serde-rs/json/blob/e5f9ca89c6de1a7bf86aff0283bcd83845b05576/json/src/error.rs#L258
 
-### Liberal usage of `Into<T>`, `AsRef<T>`, `FromStr`, and similar
+### Liberal usage of `Into<T>`, `AsRef<T>`, and similar
 
 It's good practice to never have `&String` or `&Vec<T>` as input parameters and instead use `&str` and `&[T]` as they allow more types to be passed in. (Basically, everything that `deref`s to a (string) slice).
 
@@ -225,7 +305,6 @@ Here are some traits you should try implement to make using your types easier/mo
 - Instead of writing a constructor method that takes a string and creates a new instance of your data type, implement [`FromStr`].
 
 [`Default`]: https://doc.rust-lang.org/std/default/trait.Default.html
-[`FromStr`]: https://doc.rust-lang.org/std/str/trait.FromStr.html
 
 ### Custom traits for input parameters
 
