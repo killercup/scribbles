@@ -301,7 +301,7 @@ Here are some traits you should try implement to make using your types easier/mo
 - Implement or derive the 'usual' traits like `Debug`, `Hash`, `PartialEq`, `PartialOrd`, `Eq`, `Ord`
 - Implement or derive [`Default`] instead of writing a `new` method without arguments
 - If you find yourself implementing a method on a type to return some of the type's data as an `Iterator`, you should also consider implementing [`IntoIterator`] on that type. (This only works when there is only _one_ obvious way to iterate over your type's data. Also see section on iterators above.)
-- If your custom data type can be thought of in a similar fashion as a primitive data type `T` from `std`, consider implementing [`Deref<Target=T>`][`Deref`].
+- If your custom data type can be thought of in a similar fashion as a primitive data type `T` from `std`, consider implementing [`Deref<Target=T>`][`Deref`]. But *please*  don't overdo this -- `Deref` is not meant to emulate inheritance!
 - Instead of writing a constructor method that takes a string and creates a new instance of your data type, implement [`FromStr`].
 
 [`Default`]: https://doc.rust-lang.org/std/default/trait.Default.html
