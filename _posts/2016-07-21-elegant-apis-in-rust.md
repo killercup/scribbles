@@ -66,17 +66,17 @@ fn main() {
 
 #### A module full of constants
 
-Alternatively, if you have a more complex value you want to express, where there are a lot of variants of, you can define a new `struct` and then define a bunch of constants with common values. If you put the constants into a public module, your users can access them using similar syntax as when using an enum variant.
+Alternatively, if you have a more complex value you want to express you can define a new `struct` and then define a bunch of constants with common values. If you put the constants into a public module, your users can access them using similar syntax as when using an enum variant.
 
 ```rust
-mod output_options {
+pub mod output_options {
     pub struct OutputOptions { /* ... */ }
     
     impl OutputOptions { fn new(/* ... */) -> OutputOptions { /* ... */ } }
     
-    const DEFAULT: OutputOptions = OutputOptions { /* ... */ };
-    const SLIM: OutputOptions = OutputOptions { /* ... */ };
-    const PRETTY: OutputOptions = OutputOptions { /* ... */ };
+    pub const DEFAULT: OutputOptions = OutputOptions { /* ... */ };
+    pub const SLIM: OutputOptions = OutputOptions { /* ... */ };
+    pub const PRETTY: OutputOptions = OutputOptions { /* ... */ };
 }
 
 fn output(f: &Foo, opts: OutputOptions) { /* ... */ }
