@@ -410,7 +410,7 @@ More information:
 
 - The article ["Beyond Memory Safety With Types"](https://insanitybit.github.io/2016/05/30/beyond-memory-safety-with-types) describes how this technique can be used to implement a nice and type safe interface for the IMAP protocol.
 - The paper ["Session types for Rust" (PDF)](http://munksgaard.me/laumann-munksgaard-larsen.pdf) by Thomas Bracht Laumann Jespersen, Philip Munksgaard, and Ken Friis Larsen (2015). [DOI](http://dx.doi.org/10.1145/2808098.2808100).
-- Andrew Hobden's post ["Pretty State Machine Patterns in Rust"](https://hoverbear.org/2016/10/12/rust-state-machine-pattern/) showing a several variants of how to implement state machines in Rust's type system (one `enum` for all states, explicit `struct`s, and transitions using `Into`).
+- Andrew Hobden's post ["Pretty State Machine Patterns in Rust"](https://hoverbear.org/2016/10/12/rust-state-machine-pattern/) shows several ways how one can implement state machines in Rust's type system: Using one `enum` for all states, explicit `struct`s, a base `struct` generic over state `struct`s, and transitions using `Into`.
 
 ### Use lifetimes well
 
