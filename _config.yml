@@ -1,11 +1,13 @@
 title: "Pascal's Scribbles"
 description: >
-    Some notes. Think of this as an alternative to a bunch of Gists.
+  Posts on programming topics, with a few crazy ideas thrown in.
 url: "https://scribbles.pascalhertleif.de"
-author:
+author: &default_author
   name: Pascal Hertleif
   twitter: killercup
   github: killercup
+twitter: # this site's twitter account
+  username: killercup
 imprint_url: https://pascalhertleif.de/impressum/
 license_url: https://creativecommons.org/licenses/by-nc/4.0/
 feedback_url: https://github.com/killercup/scribbles/issues
@@ -18,7 +20,7 @@ defaults:
       type: "posts"
     values:
       layout: "post"
-      author: Pascal Hertleif
+      author: *default_author
 timezone: "Europe/Berlin"
 
 # Markdown rendering
