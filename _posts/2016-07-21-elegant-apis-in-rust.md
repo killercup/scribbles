@@ -5,6 +5,7 @@ categories:
 - writing
 - incomplete
 ---
+The existence of libraries with nice, user-friendly interfaces is one of the most important factors when choosing a programming language. Here are some tips on how to write libraries with APIs in Rust. (Many of the points also apply to other languages.)
 
 ## Contents
 {:.no_toc}
