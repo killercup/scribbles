@@ -40,7 +40,28 @@ One nice thing about all things virtual DOM is that it also abstracts how compon
 
 The abstract idea is this: UI components can have attributes and children (i.e., an array of more UI components). A plain string is also considered a UI component and is rendered as a simple text node.
 
-Imagine a pseudo-Rust macro called `ui!` that matches like this: `($type:ident $label:expr? {$($key:ident => $val:expr),*}? [$($subcomponent:tt),*]?) => {...}` (disregarding text nodes for now).
+For example: Your UI library gives you a bunch of functions with the signature `(attributes, children) -> VirtualUiNode`, and also exports the virtual DOM helper functions to update a tree of these `VirtualUiNodes`.
+
+I can image it having an API like this:
+
+```rust
+fn render(name: &str) -> VirtualUiNode {
+    div(map!["class" => "alert alert--info"], [
+        p(map![], format!("Hi, {}", name)),
+        p(map![], [
+            a(map!["class" => "alert__close"], "x"),
+        ]),
+    ])
+}
+
+fn main() {
+    let initial = render("Lorem");
+    let renderer = vdom::Renderer::new(initial);
+    
+    let next = render("Ipsum");
+    renderer.update(next);
+}
+```
 
 ## Render targets
 
@@ -50,7 +71,7 @@ Imagine a pseudo-Rust macro called `ui!` that matches like this: `($type:ident $
 
 Looking at [one of the examples](https://github.com/pcwalton/libui-rs/blob/13299d28f69f8009be8e08e453a9b0024f153a60/ui/examples/controlgallery.rs), the code looks quite imperative.
 
-Assuming that most libui components can have attributes and sub-components, one could imagine defining the same UI like this:
+Imagine a pseudo-Rust macro called `ui!` that matches like this: `($type:ident $label:expr? {$($key:ident => $val:expr),*}? [$($subcomponent:tt),*]?) => {...}` (disregarding text nodes for now). Assuming that most libui components can have attributes and sub-components, one could imagine defining the same UI like this:
 
 ```rust
 fn run() {
