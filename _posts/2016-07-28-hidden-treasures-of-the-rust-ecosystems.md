@@ -9,6 +9,7 @@ categories:
 
 - You can call `"text".parse::<T>()` on all types `T` that `impl std::str::FromStr for T`
 - You can `.collect()` into a `Result<T, E> where T: FromIterator`
+- Formatting syntax (as in `format!("{:#?}", vec!["lorem"])`) is really powerful (it includes compile-time left pad!), you should read [the `fmt` docs](https://doc.rust-lang.org/std/fmt/index.html).
 
 ## Wonders of Rust documentation
 
