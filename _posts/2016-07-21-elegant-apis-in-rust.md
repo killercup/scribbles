@@ -26,6 +26,44 @@ The existence of libraries with nice, user-friendly interfaces is one of the mos
 
 ## Techniques
 
+### Consistent names
+
+There are a few Rust RFCs that describe the naming scheme of the standard library. You should follow them to make your library's API feel familiar to users.
+
+- [RFC 199] explains that you should use `mut`, `move`, or `ref` as suffixes differentiate methods based on the mutability of their parameters.
+- [RFC 344] defines some interesting conventions, like
+	- how to refer to types in method names (e.g., `&mut [T]` becomes `mut_slice`, and `*mut T` becomes `mut_ptr`),
+	- how to call methods that return iterators,
+	- that getters methods should called `field_name` while setter methods should be `set_field_name`,
+	- and how to name traits ("Prefer (transitive) verbs, nouns, and then adjectives; avoid grammatical suffixes (like able)", but also "if there is a single method that is the dominant functionality of the trait, consider using the same name for the trait itself").
+- [RFC 430] describes some general casing conventions (_tl;dr_ `CamelCase` for type-level stuff, `snake_case` for value-level stuff).
+- [RFC 445] wants you to add an `Ext` suffix to extension traits.
+
+[RFC 199]: https://github.com/rust-lang/rfcs/blob/1f5d3a9512ba08390a2226aa71a5fe9e277954fb/text/0199-ownership-variants.md
+[RFC 344]: https://github.com/rust-lang/rfcs/blob/1f5d3a9512ba08390a2226aa71a5fe9e277954fb/text/0344-conventions-galore.md
+[RFC 430]: https://github.com/rust-lang/rfcs/blob/1f5d3a9512ba08390a2226aa71a5fe9e277954fb/text/0430-finalizing-naming-conventions.md
+[RFC 445]: https://github.com/rust-lang/rfcs/blob/1f5d3a9512ba08390a2226aa71a5fe9e277954fb/text/0445-extension-trait-conventions.md
+
+#### More method name conventions
+
+In addition to what [RFC 199] and [RFC 344] (see above) define, there are a few more conventions around what method names to choose, which seem to not be represented in RFCs (yet). These are mostly documented in the [old Rust style guidelines][naming-conversions] and in [@llogiq]'s post [Rustic Bits]. Here's a summary:
+
+[naming-conversions]: https://doc.rust-lang.org/1.12.0/style/style/naming/conversions.html
+[@llogiq]: https://twitter.com/llogiq
+[Rustic Bits]: https://llogiq.github.io/2016/02/11/rustic.html
+
+Method name  | Parameters           | Notes   | Examples
+-------------|----------------------|---------|----------
+`new`        | ≥ 1                  | Constructor, also cf. [`Default`] | `Box::new`, `std::net::Ipv4Addr::new`
+`from_...`   | (none)               | cf. [conversion traits] | `String::from_utf8_lossy`
+`as_...`     | `&self`              | Free conversion, gives a view into data | `str::as_bytes`, `uuid::Uuid::as_bytes`
+`to_...`     | `&self`              | Expensive conversion | `str::to_string`, `std::path::Path::to_str`
+`into_...`   | `self` (*consumes*)  | Potentially expensive conversion, cf. [conversion traits] | `std::fs::File::into_raw_fd`
+`is_...`     | `&self` (or none)    | Should probably return a `bool` | `slice::is_empty`, `Result::is_ok`, `std::path::Path::is_file`
+`has_...`    | `&self` (or none)    | Should probably return a `bool` | `regex_syntax::Expr::has_bytes`
+
+[conversion traits]: #use-conversion-traits
+
 ### Doc tests
 
 Write documentation with example code showing how to use your API and get automatic tests for free – Two birds, one stone. You can read more about in the [documentation chapter](https://doc.rust-lang.org/1.12.0/book/documentation.html#documentation-as-tests) of the official book.
@@ -143,7 +181,7 @@ A common case where this is used is `Result<T, E>` types, where the error case (
 [fmt-result]: https://doc.rust-lang.org/std/fmt/type.Result.html
 [serde-json-result]: https://github.com/serde-rs/json/blob/e5f9ca89c6de1a7bf86aff0283bcd83845b05576/json/src/error.rs#L258
 
-### Liberal usage of `Into<T>`, `AsRef<T>`, and similar
+### Use conversion traits
 
 It's good practice to never have `&String` or `&Vec<T>` as input parameters and instead use `&str` and `&[T]` as they allow more types to be passed in. (Basically, everything that `deref`s to a (string) slice).
 
@@ -367,6 +405,8 @@ let my_database = client
 #### Extending traits
 
 So far, we've extended the methods available on a type by defining and implementing our own trait. You can also define traits that _extend other traits_ (`trait MyTrait: BufRead + Debug {}`). The most prominent example for this is the [itertools](https://crates.io/crates/itertools) crate, which adds a long list of methods to `std`'s Iterators.
+
+FYI: [RFC 445] wants you to add an `Ext` suffix to extension traits.
 
 ### Builder pattern
 
