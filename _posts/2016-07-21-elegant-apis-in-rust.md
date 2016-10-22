@@ -482,7 +482,7 @@ Real-life examples of this are:
 
 ## Case Studies
 
-Possible Rust libraries that some nice tricks in their APIs:
+Possible Rust libraries that use some nice tricks in their APIs:
 
 - [hyper](https://crates.io/crates/hyper): session types (see above)
 - [diesel](https://crates.io/crates/diesel): encodes SQL queries as types, uses traits with complex associated types
