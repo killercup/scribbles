@@ -56,9 +56,9 @@ In addition to what [RFC 199] and [RFC 344] (see above) define, there are a few 
 
 Method name  | Parameters           | Notes   | Examples
 -------------|----------------------|---------|----------
-`new`        | ≥ 1                  | Constructor, also cf. [`Default`] | `Box::new`, `std::net::Ipv4Addr::new`
-`from_...`   | (none)               | cf. [conversion traits] | `String::from_utf8_lossy`
 `new`        | no self, usually ≥ 1[^new] | Constructor, also cf. [`Default`] | `Box::new`, `std::net::Ipv4Addr::new`
+`with_...`   | no self, ≥ 1         | Alternative constructors | `Vec::with_capacity`, `regex::Regex::with_size_limit`
+`from_...`   | 1                    | cf. [conversion traits] | `String::from_utf8_lossy`
 `as_...`     | `&self`              | Free conversion, gives a view into data | `str::as_bytes`, `uuid::Uuid::as_bytes`
 `to_...`     | `&self`              | Expensive conversion | `str::to_string`, `std::path::Path::to_str`
 `into_...`   | `self` (*consumes*)  | Potentially expensive conversion, cf. [conversion traits] | `std::fs::File::into_raw_fd`
