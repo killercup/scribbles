@@ -4,17 +4,20 @@
 
 table {
   width: 100%;
+  display: block;
+  overflow-x: scroll;
   border-collapse: collapse;
   margin: 1.75rem 0;
 
-  & td,
-  & th {
+  td,
+  th {
     vertical-align: top;
     border: 1px solid #ccc;
     line-height: 1.25rem;
     padding: 0.8333rem;
   }
-  & thead th {
+
+  thead th {
     font-size: 0.833rem;
     font-weight: bold;
   }

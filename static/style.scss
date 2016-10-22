@@ -39,6 +39,14 @@ footer.article-footer {
   margin: 3rem 0;
 }
 
+.post-content {
+  -webkit-hyphens: auto;
+}
+
+code {
+  -webkit-hyphens: none;
+}
+
 .highlight {
   code {
     font-weight: normal;
