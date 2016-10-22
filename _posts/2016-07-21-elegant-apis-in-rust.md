@@ -282,9 +282,9 @@ While Rust does not have 'laziness' in the sense of lazy evaluation of expressio
 
 #### Use Iterators
 
-One of the most amazing constructs in the standard library is `Iterator`, a trait that allows generator-like iteration of values where you only need to implement a `next` method[^2]. Rust's iterators are lazy in that you explicitly need to call a consumer to start iterating through values. Just writing `"hello".chars().filter(char::is_whitespace)` won't _do_ anything until you call something like `.collect::<String>()` on it.
+One of the most amazing constructs in the standard library is `Iterator`, a trait that allows generator-like iteration of values where you only need to implement a `next` method[^iterators-in-other-langs]. Rust's iterators are lazy in that you explicitly need to call a consumer to start iterating through values. Just writing `"hello".chars().filter(char::is_whitespace)` won't _do_ anything until you call something like `.collect::<String>()` on it.
 
-[^2]: In that regard, Rust's Iterators are very similar to the `Iterator` interface in Java or the `Iteration` protocol in Python (as well as many others).
+[^iterators-in-other-langs]: In that regard, Rust's Iterators are very similar to the `Iterator` interface in Java or the `Iteration` protocol in Python (as well as many others).
 
 ##### Iterators as parameters
 
@@ -365,9 +365,9 @@ The Rust way to implement a kind of "function overloading" is by using a generic
 
 ### Extension traits
 
-It's a good practice to use types and traits defined in the standard library, as those are known by many Rust programmers, well-tested, and nicely documented. And while Rust's standard library tends to offer types with semantic meaning[^1], the methods implemented on these types might not be enough for your API. Luckily, Rust's "orphan rules" allow you implement a trait for a (generic) type if at least one of them is defined in the current crate.
+It's a good practice to use types and traits defined in the standard library, as those are known by many Rust programmers, well-tested, and nicely documented. And while Rust's standard library tends to offer types with semantic meaning[^result-vs-either], the methods implemented on these types might not be enough for your API. Luckily, Rust's "orphan rules" allow you implement a trait for a (generic) type if at least one of them is defined in the current crate.
 
-[^1]: For examples, `std` has an `Result` type (with `Ok` and `Err` variants) which should be used to handle errors, instead of an `Either` type (with `Left` and `Right` variants) which does not imply that meaning.
+[^result-vs-either]: For examples, `std` has an `Result` type (with `Ok` and `Err` variants) which should be used to handle errors, instead of an `Either` type (with `Left` and `Right` variants) which does not imply that meaning.
 
 #### Decorating results
 
