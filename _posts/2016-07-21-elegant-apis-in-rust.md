@@ -46,16 +46,19 @@ There are a few Rust RFCs that describe the naming scheme of the standard librar
 
 #### More method name conventions
 
-In addition to what [RFC 199] and [RFC 344] (see above) define, there are a few more conventions around what method names to choose, which seem to not be represented in RFCs (yet). These are mostly documented in the [old Rust style guidelines][naming-conversions] and in [@llogiq]'s post [Rustic Bits]. Here's a summary:
+In addition to what [RFC 199] and [RFC 344] (see above) define, there are a few more conventions around what method names to choose, which seem to not be represented in RFCs (yet). These are mostly documented in the [old Rust style guidelines][naming-conversions] and in [@llogiq]'s post [Rustic Bits] as well as [clippy's][clippy] [`wrong_self_convention`] lint. Here's a summary:
 
 [naming-conversions]: https://doc.rust-lang.org/1.12.0/style/style/naming/conversions.html
 [@llogiq]: https://twitter.com/llogiq
 [Rustic Bits]: https://llogiq.github.io/2016/02/11/rustic.html
+[clippy]: https://github.com/Manishearth/rust-clippy
+[`wrong_self_convention`]: https://github.com/Manishearth/rust-clippy/blob/55e67bfc105ef6abf0997584e0e84cc939f35dc6/clippy_lints/src/methods.rs#L88-L110
 
 Method name  | Parameters           | Notes   | Examples
 -------------|----------------------|---------|----------
 `new`        | ≥ 1                  | Constructor, also cf. [`Default`] | `Box::new`, `std::net::Ipv4Addr::new`
 `from_...`   | (none)               | cf. [conversion traits] | `String::from_utf8_lossy`
+`new`        | no self, usually ≥ 1[^new] | Constructor, also cf. [`Default`] | `Box::new`, `std::net::Ipv4Addr::new`
 `as_...`     | `&self`              | Free conversion, gives a view into data | `str::as_bytes`, `uuid::Uuid::as_bytes`
 `to_...`     | `&self`              | Expensive conversion | `str::to_string`, `std::path::Path::to_str`
 `into_...`   | `self` (*consumes*)  | Potentially expensive conversion, cf. [conversion traits] | `std::fs::File::into_raw_fd`
@@ -63,6 +66,7 @@ Method name  | Parameters           | Notes   | Examples
 `has_...`    | `&self` (or none)    | Should probably return a `bool` | `regex_syntax::Expr::has_bytes`
 
 [conversion traits]: #use-conversion-traits
+[^new]: If you can construct your type without any parameters, you should implement [`Default`] on it, and use that instead of `new`. An exception to this is `new` on "container" types, like `Vec` or `HashMap`, where it makes sense to initialize an empty container.
 
 ### Doc tests
 
