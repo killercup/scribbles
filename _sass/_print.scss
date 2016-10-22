@@ -1,0 +1,29 @@
+@media print {
+  html {
+    font-size: 9pt;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5 {
+    page-break-after: avoid;
+  }
+
+  figure,
+  img,
+  ol,
+  table,
+  ul {
+    page-break-inside: avoid;
+  }
+
+  img {
+    max-width: 100% !important;
+  }
+
+  @page {
+    margin: 2cm;
+  }
+}
