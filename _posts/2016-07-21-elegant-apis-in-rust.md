@@ -95,7 +95,9 @@ Coming from dynamically typed languages, you might be tempted to use strings wit
 
 For example: You want a function to print some input text in a color, so you use a parameter `color` of type `&str`. That also means you expect your users to write one of the names from a limited number of color names (like `["red", "green", "blue", "light golden rod yellow"]`). 
 
-This is **not** what you should do in Rust! If you know _all_ possible variants beforehand, use an `enum`. This way, you don't need to parse/pattern match the string -- and deal with possible errors -- but can be sure that a user of your API can only ever supply valid inputs.
+This is **not** what you should do in Rust! If you know _all_ possible variants beforehand, use an `enum`. This way, you don't need to parse/pattern match the string -- and deal with possible errors -- but can be sure that a user of your API can only ever supply valid inputs[^illegal-states].
+
+[^illegal-states]: There is a slogan of "making illegal states unrepresentable" in other strongly typed languages. While I first heard this when talking to people about Haskell, it is also the title of [this article](http://fsharpforfunandprofit.com/posts/designing-with-types-making-illegal-states-unrepresentable/) by *F# for fun and profit*, and [this talk](https://www.youtube.com/watch?v=IcgmSRJHu_8) by Richard Feldman presented at elm-conf 2016.
 
 ```rust
 enum Color { Red, Green, Blue, LightGoldenRodYellow }
