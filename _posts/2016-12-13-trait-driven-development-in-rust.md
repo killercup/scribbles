@@ -23,7 +23,7 @@ trait Foo {
 
 [^other-associated-items]: Other associated items you can define in a trait are type aliases, and constants (unstable as of Rust 1.13).
 
-This means it can be—in theory—called like `Foo::bar(21, 21)`. In praxis, you need to implement the trait on a type to be able to call it:
+This means it can be—in theory—called like `Foo::bar(21, 21)`. In practice, you need to implement the trait on a type to be able to call it:
 
 ```rust
 trait Foo {
