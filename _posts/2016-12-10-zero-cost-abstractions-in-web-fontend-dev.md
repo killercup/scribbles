@@ -25,7 +25,7 @@ This can be very powerful, like iterators that compile to machine instructions e
 
 ## The problem of bloat
 
-Knowing this, it is sometimes quite hard to see what web frontend development ist like.
+Knowing this, it is sometimes quite hard to see what web frontend development is like.
 
 Let's say you want to build a new static website for you gardening business. Easy: Add the bootstrap CSS framework for alignment and the navigation bar, some new shiny JavaScript gallery that also brings some images and CSS code, and then, when you decide to really embrace modern web standards, include several polyfills for stuff like `picture` tags, smooth scrolling, and the Fetch API. This, of course, all adds up, and you'll end up with a lot of stuff that gets loaded if though the current page doesn't need it. If you think this is bad, try to imagine what those fancy $40 WordPress themes include, or how many JavaScript needs to be included for a state-of-the-art single-page app.
 
