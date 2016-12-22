@@ -142,7 +142,7 @@ A lot of the displays I use are older Cinema Displays that have DVI-D cables. Bu
 1. that USB-C-to-DisplayPort adapter as well as an DisplayPort-to-DVI adapter,
 2. or a USB-C-to-DVI adapter
 
-with me _everywhere_! Why am I even considering the first option? Because USB-C-to-DVI adapter are new and there are a ton of reviews that say only 30 Hz are supported for everything above 720p. DVI seems to as much of a conspiracy as HDMI.
+with me _everywhere_! Why am I even considering the first option? Because USB-C-to-DVI adapter are new and there are a ton of reviews that say only 30 Hz are supported for everything above 720p. DVI seems to be as much of a conspiracy as HDMI.
 
 [dvi-specs]: https://en.wikipedia.org/w/index.php?title=Digital_Visual_Interface&oldid=755496857#Digital
 
