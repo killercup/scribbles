@@ -177,7 +177,7 @@ So, looks like I'll still need 2–3 cables.
 
 ### Charging
 
-I'll buy another Apple power adapter and either one of their USB-C charging cables (2 m), or one of the shorter, [recommended][usb-cables] cables once they are available in Germany.
+I'll buy another Apple power adapter and either one of their USB-C charging cables (2 m), or one of the shorter, [recommended][usb-cables] cables once they are available in Germany. Also, I'll not pay Apple 25€ for an extension cable but just buy a 10€ one from some other manufacturer. I trust they figured out how to make simple, white 230V power cords by now.
 
 ### 4k display
 
