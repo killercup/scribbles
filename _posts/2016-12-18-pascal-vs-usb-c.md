@@ -175,8 +175,10 @@ $10 on [amazon.com][acom-aukey-dp]).
 | [Dell 470-ABRY DA200][dell470]             | 1    | 1       | 1        | No             | VGA       | [67€][ade-dell470]   | [$60][acom-dell470]   | Looks nice, quite small |
 | [i-tec USB C Travel Docking Station][itec] | 1    | 2       | 1        | 60 W           | USB-C 3.1 | [57€][ade-itec]      | N/A                   | Larger than Dell but still light, never heard of this brand |
 | ProLink-Adapter USB Typ C                  | 1    | 1       | 1        | Yes (??? W)    |           | [45€][ade-prolink]   | N/A                   | Looks cheap, badly translated description |
-| AUKEY USB C Hub                            | 1    | 4       | **0**    | [55 W][aukey-hub-review] | | [38€][ade-aukey-hub] | [$43][acom-aukey-hub] | I don't think those USB ports are going to be fast |
+| AUKEY USB C Hub                            | 1    | 4       | 0        | [55 W][aukey-hub-review] | | [38€][ade-aukey-hub] | [$43][acom-aukey-hub] | I don't think those USB ports are going to be fast |
 | [Cable Matters USB-C Multiport][cm-multi]  | 1    | 1       | 1        | No             | VGA       | [50€][ade-cm-multi]  | [$50][acom-cm-multi]  | Looks ugly, needs Ethernet driver |
+| [Anker Premium USB-C Hub (HDMI)][anker-h]  | 1    | 2       | 0        | Yes (??? W)    |           | [48€][ade-anker-h]   | [$40][acom-anker-h]   | People have problems with WiFi and HDMI |
+| [Anker Premium USB-C Hub (RJ45)][anker-e]  | 0    | 2       | 1        | Yes (??? W)    |           | [46€][ade-anker-e]   | [$50][acom-anker-e]   | Same as above but with Ethernet instead of HDMI |
 
 [dell470]: http://accessories.euro.dell.com/sna/productdetail.aspx?c=de&l=de&s=dhs&cs=dedhs1&sku=470-ABRY
 [ade-dell470]: https://www.amazon.de/gp/product/B012DT6KW2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B012DT6KW2&linkCode=as2&tag=killercup-21
@@ -190,6 +192,12 @@ $10 on [amazon.com][acom-aukey-dp]).
 [cm-multi]: http://www.cablematters.com/pc-686-114-usb-c-to-hdmi-vga-ethernet-usb-multiport-4k-uhd-adapter-thunderbolt-3-port-compatible.aspx
 [ade-cm-multi]: https://www.amazon.de/gp/product/B01C316EIK/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01C316EIK&linkCode=as2&tag=killercup-21
 [acom-cm-multi]: https://www.amazon.com/gp/product/B01C316EIK/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01C316EIK&linkId=44582ece95c717dd883113d141785789
+[anker-h]: https://de.anker.com/products/A8342041
+[ade-anker-h]: https://www.amazon.de/gp/product/B01AT27SKS/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01AT27SKS&linkCode=as2&tag=killercup-21
+[acom-anker-h]: https://www.amazon.com/gp/product/B01D0WE99C/ref=as_li_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01D0WE99C&linkId=cb06b05de8c2e3ac615c984487d134b6
+[anker-e]: https://de.anker.com/products/A8302041
+[ade-anker-e]: https://www.amazon.de/gp/product/B01D0XTF9U/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01D0XTF9U&linkCode=as2&tag=killercup-21
+[acom-anker-e]: https://www.amazon.com/gp/product/B01D0XTF9U/ref=as_li_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01D0XTF9U&linkId=0d6e595966c1e5950dd0af49926518e5
 
 I'll probably try both the Dell and the i-tec.
 
