@@ -68,7 +68,9 @@ According to [Wikipedia][usb-c-alternate-modes], USB-C supports DisplayPort up t
 
 [dp-versions]: https://en.wikipedia.org/w/index.php?title=DisplayPort&oldid=755497571#Resolution_and_refresh_frequency_support_for_DisplayPort
 
-If I understand the Wikipedia page correctly, it also says that while using DisplayPort alternate mode, it is *always* possible to additionally use PowerDelivery and USB 2.0 over a USB-C cable. Furthermore it allows an additional USB 3.1 connection if the DisplayPort mode only uses 2 lanes. I have no idea when that is the case, though. (4k @ 60 Hz over DP 1.2 uses up to 21.6Gb/s of bandwidth already!)
+If I understand the Wikipedia page correctly, it also says that while using DisplayPort alternate mode, it is *always* possible to additionally use PowerDelivery and USB 2.0 over a USB-C cable. *Spoiler alert:* I'd really like to have this but there are currently no adapters that have USB Type C on one side and DisplayPort as well as another Type C port for Power Delivery on the other side.
+
+Furthermore it allows an additional USB 3.1 connection if the DisplayPort mode only uses 2 lanes. I have no idea when that is the case, though. (4k @ 60 Hz over DP 1.2 uses up to 21.6Gb/s of bandwidth already!)
 
 ### Deep dive into HDMI alternate mode
 
@@ -92,26 +94,36 @@ If you know the USB-C layout, this sounds like it pretty much uses the whole thi
 Damn, that sounds… bad. But let's backtrack a bit. What are these abbreviations we just read?
 
 TMDS
-:	Transition Minimized Differential Signaling
-:	"interleaves video, audio and auxiliary data"
+:  Transition Minimized Differential Signaling
+:  "interleaves video, audio and auxiliary data"
 
 DDC
-:	Display Data Channel
+:  Display Data Channel
 
 CEC
-:	Consumer Electronic Control
+:  Consumer Electronic Control
 
 HEC
-:	HDMI Ethernet Channel
+:  HDMI Ethernet Channel
 
 ARC
-:	Audio Return Channel
+:  Audio Return Channel
 
 Okay, of those we can probably get rid of HEC and ARC, as we want to do Ethernet over RJ-45 (i.e., another port on the adapter), and while an audio return channel (i.e. audio input over HDMI) is nice, I'd be surprised if the MacBook knows how to handle it. Sadly, the same is probably true for CEC -- which I'd like to have! Adjusting my AV receiver's volume without using the remote would be amazing.
 
 What does that leave us with? The hope to at least have HDMI, ethernet, and maybe even USB 3.0 (5Gb/s)!
 
-What's crazy is this: There are adapters that have all these ports. HDMI, ethernet, *multiple* USB 3.0 (USB-A) ports, even SD card slots, and \*gasp\* VGA. How does that work? Has anyone tested this and measured what throughput they get over the USB-A ports?
+#### It's a conspiracy!
+
+What's crazy is this: There are adapters that have all these ports. HDMI, ethernet, *multiple* USB 3.0 (USB-A) ports, even SD card slots, and \*gasp\* VGA[^hdmi-vga]. How does that work? Has anyone tested this and measured what throughput they get over the USB-A ports?
+
+[^hdmi-vga]: Like Dell's "470-ABRY DA200" adapter. Even Dell itself [mentions][dell470] that you can only use one of HDMI and VGA at the same time, though.
+
+Or, and here's a crazy idea: These are actually active adapters using _DisplayPort_ alternate mode and convert to HDMI! You want proof? Here the product description of i-Tec's "USB C Travel Docking Station" (from [their website][itec]):
+
+> Hardware requirements: notebook, tablet, PC or smartphone with OS Windows, Mac or Google with a free USB-C port with "DisplayPort Alternate Mode" and "Power Delivery" support or Thunderbolt 3 port
+
+No HDMI alternate mode mentioned anywhere. I'm fairly certain this description is plain wrong, though. A bit earlier it says this is "1x HDMI, max. resolution 1920x1080 / 60Hz" and "it allows to transfer video and stereo audio". Surely, they did not build a converter from DisplayPort to HDMI, _and_ added an external sound card, _and_ convert all that to an HDMI compatible TMDS stream, when they could just use HDMI alternate mode. They wouldn't, would they?
 
 ### MHL
 
@@ -123,7 +135,14 @@ There is also an MHL alternate mode over USB-C which seems to support everything
 
 ### DVI
 
-A lot of the displays I use are older Cinema Displays that have DVI-D cables. But that's okay, single-link DVI-D is supported when using HDMI over USB-C (according to [Wikipedia][usb-c-alternate-modes]). And [apparently][dvi-specs] single-link is all we need: It supports 1920 × 1200 @ 60 Hz (or "WUXGA" if you want to sound crazy).
+A lot of the displays I use are older Cinema Displays that have DVI-D cables. But that's okay, single-link DVI-D is supported when using HDMI over USB-C (according to [Wikipedia][usb-c-alternate-modes]). And [apparently][dvi-specs] single-link is all we need: It supports 1920×1200 @ 60 Hz (or "WUXGA" if you want to sound crazy).
+
+**Oh!** This is _not_ 1080p, this is a bit more: It's 120px higher, as the display's aspect ratio is 16:10 instead of 16:9. So, if there are adapters from HDMI to single-link DVI-D, does that mean HDMI 1.4b can also transfer 1920×1200 at full 60 Hz? I _really_ hope so! Otherwise I will either be dragging
+
+1. that USB-C-to-DisplayPort adapter as well as an DisplayPort-to-DVI adapter,
+2. or a USB-C-to-DVI adapter
+
+with me _everywhere_! Why am I even considering the first option? Because USB-C-to-DVI adapter are new and there are a ton of reviews that say only 30 Hz are supported for everything above 720p. DVI seems to as much of a conspiracy as HDMI.
 
 [dvi-specs]: https://en.wikipedia.org/w/index.php?title=Digital_Visual_Interface&oldid=755496857#Digital
 
