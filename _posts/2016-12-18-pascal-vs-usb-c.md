@@ -68,7 +68,7 @@ According to [Wikipedia][usb-c-alternate-modes], USB-C supports DisplayPort up t
 
 [dp-versions]: https://en.wikipedia.org/w/index.php?title=DisplayPort&oldid=755497571#Resolution_and_refresh_frequency_support_for_DisplayPort
 
-If I understand the Wikipedia page correctly, it also says that while using DisplayPort alternate mode, it is *always* possible to additionally use PowerDelivery and USB 2.0 over a USB-C cable. *Spoiler alert:* I'd really like to have this but there are currently no adapters that have USB Type C on one side and DisplayPort as well as another Type C port for Power Delivery on the other side.
+If I understand the Wikipedia page correctly, it also says that while using DisplayPort alternate mode, it is *always* possible to additionally use PowerDelivery and USB 2.0 over a USB-C cable. *Spoiler alert:* I'd really like to have this but there are currently no adapters that have USB Type C on one side and DisplayPort as well as another Type C port for Power Delivery on the other side. The closest I could find was the [Arc Hub][arc] (see table below for specs) but it ships early 2017 and there are no reviews available yet.
 
 Furthermore it allows an additional USB 3.1 connection if the DisplayPort mode only uses 2 lanes. I have no idea when that is the case, though. (4k @ 60 Hz over DP 1.2 uses up to 21.6Gb/s of bandwidth already!)
 
@@ -199,6 +199,7 @@ $10 on [amazon.com][acom-aukey-dp]).
 | [Anker Premium USB-C Hub (HDMI)][anker-h]  | 1    | 2       | 0        | Yes (??? W)    |           | [48€][ade-anker-h]   | [$40][acom-anker-h]   | People have problems with WiFi and HDMI |
 | [Anker Premium USB-C Hub (RJ45)][anker-e]  | 0    | 2       | 1        | Yes (??? W)    |           | [46€][ade-anker-e]   | [$50][acom-anker-e]   | Same as above but with Ethernet instead of HDMI |
 | [HooToo USB-C Hub HT-UC001][hootoo]        | 1    | 3       | 0        | 60 W           | SDXC      | [65€][ade-hootoo]    | [$80][acom-hootoo]    | Space grey aluminium
+| [Arc Hub][arc]                             | 1    | 2       | 0        | 90 W           | USB-C, Mini DisplayPort | N/A    | N/A                   | $105 pre-order, ships early 2017, 4k @ 60 Hz via Mini DisplayPort
 
 [dell470]: http://accessories.euro.dell.com/sna/productdetail.aspx?c=de&l=de&s=dhs&cs=dedhs1&sku=470-ABRY
 [ade-dell470]: https://www.amazon.de/gp/product/B012DT6KW2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B012DT6KW2&linkCode=as2&tag=killercup-21
@@ -221,6 +222,7 @@ $10 on [amazon.com][acom-aukey-dp]).
 [hootoo]: http://www.hootoo.com/ht-uc001-usb-type-c-hub-charging-hdmi-apple-pd.html
 [ade-hootoo]: https://www.amazon.de/gp/product/B01KF3GTCY/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01KF3GTCY&linkCode=as2&tag=killercup-21
 [acom-hootoo]: https://www.amazon.com/gp/product/B01K7C53K2/ref=as_li_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01K7C53K2&linkId=fecc8f7dccfc692d4f8c6b942b39812e
+[arc]: https://www.bourgedesign.com
 
 I'll probably try both the Dell and the i-tec.
 
