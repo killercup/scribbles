@@ -11,7 +11,7 @@ Sadly, that means that I'll need adapters to connect all the hardware I currentl
 
 How hard can it be to find some adapter-y dock-y things[^adapters-n-docks] that I can actually afford? Let's find out!
 
-[^adapters-n-docks]: What is an adapter and what is dock? I'm using these terms pretty loosely. One way to differentiate might be to say an adapters is passive, while a dock has chips that actively transforms protocols for other physical ports. Or, a dock is large and expensive while you can buy a cheaper adapter that fits in your pocket. Or, a dock has more ports that are faster. For USB-C, these seem mostly equivalent, assuming that turning one USB-C connection with multiple alternate modes into a bunch of ports is not an "active" transformation as the host computer does all the hard work. Thus, a thing that has USB-C on one side, and HDMI or DisplayPort or the other, is an adapter. It gets fuzzy when a adapter has an ethernet port, as that most certainly means it has a dedicated chip for doing network stuff (that could also be USB 3.0 ethernet thing). Does this mean it becomes a dock? I'll say no. So, I'll settle on a simpler way to differentiate docks and adapters here: Docks are expensive and use Thunderbolt 3. That should make everything clear…
+[^adapters-n-docks]: What is an adapter and what is dock? I'm using these terms pretty loosely. One way to differentiate might be to say an adapters is passive, while a dock has chips that actively transforms protocols for other physical ports. Or, a dock is large and expensive while you can buy a cheaper adapter that fits in your pocket. Or, a dock has more ports that are faster. For USB-C, these seem mostly equivalent, assuming that turning one USB-C connection with multiple alternate modes into a bunch of ports is not an "active" transformation as the host computer does all the hard work. Thus, a thing that has USB-C on one side, and HDMI or DisplayPort or the other, is an adapter. It gets fuzzy when an adapter has an ethernet port, as that most certainly means it has a dedicated chip for doing network stuff (that could also be USB 3.0 ethernet thing). Does this mean it becomes a dock? I'll say no. So, I'll settle on a simpler way to differentiate docks and adapters here: Docks are expensive. And good docks use Thunderbolt 3. That should make everything clear…
 
 ## Contents
 {:.no_toc}
@@ -201,7 +201,6 @@ $10 on [amazon.com][acom-aukey-dp]).
 | [Anker Premium USB-C Hub (HDMI)][anker-h]  | 1    | 2       | 0        | Yes (??? W)    |           | [48€][ade-anker-h]   | [$40][acom-anker-h]   | People have problems with WiFi and HDMI |
 | [Anker Premium USB-C Hub (RJ45)][anker-e]  | 0    | 2       | 1        | Yes (??? W)    |           | [46€][ade-anker-e]   | [$50][acom-anker-e]   | Same as above but with Ethernet instead of HDMI |
 | [HooToo USB-C Hub HT-UC001][hootoo]        | 1    | 3       | 0        | 60 W           | SDXC      | [65€][ade-hootoo]    | [$80][acom-hootoo]    | Space grey aluminium
-| [Arc Hub][arc]                             | 1    | 2       | 0        | 90 W           | USB-C, Mini DisplayPort | N/A    | N/A                   | $105 pre-order, ships early 2017, 4k @ 60 Hz via Mini DisplayPort
 
 [dell470]: http://accessories.euro.dell.com/sna/productdetail.aspx?c=de&l=de&s=dhs&cs=dedhs1&sku=470-ABRY
 [ade-dell470]: https://www.amazon.de/gp/product/B012DT6KW2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B012DT6KW2&linkCode=as2&tag=killercup-21
@@ -224,15 +223,31 @@ $10 on [amazon.com][acom-aukey-dp]).
 [hootoo]: http://www.hootoo.com/ht-uc001-usb-type-c-hub-charging-hdmi-apple-pd.html
 [ade-hootoo]: https://www.amazon.de/gp/product/B01KF3GTCY/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01KF3GTCY&linkCode=as2&tag=killercup-21
 [acom-hootoo]: https://www.amazon.com/gp/product/B01K7C53K2/ref=as_li_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01K7C53K2&linkId=fecc8f7dccfc692d4f8c6b942b39812e
-[arc]: https://www.bourgedesign.com
 
 I'll probably try both the Dell and the i-tec.
+
+### USB-C docks
+
+There are a bunch of docks using USB-C but not Thunderbolt 3. I think buying any of these USB-C dock is silly, because they are all expensive, but can't support enough throughput to really get everything across the wire (like multiple _fast_ USB connections as well as 4k @ 60Hz). Nevertheless, they might work for you, so here are some:
+
+- [Arc Hub][arc], no Ethernet, but apparently 4k @ 60Hz using Mini DisplayPort. $105 pre-order, ships early 2017.
+- CalDigit's "USB-C Dock" ([marketing][caldigit], [193€][ade-caldigit], [$150][acom-caldigit]) at first looks like it just _has_ to use Thunderbolt 3 to make everything work, but it is only said to be "compatible with Thunderbolt 3". Furthermore, the marketing site compares it to OWC's USB-C dock. To add to the mystery, it apparently supports HDMI 2.0, but has problems with driving a 4k display on a Mac that CalDigit blames on macOS missing support for MST (Multi Transport Stream). According [this document][apple-HT206587] by Apple, MacBook Pros since 2013 support MTS. At least the dock seems to support 90 W power delivery which is pretty nice.
+- OWC's USB-C Dock ([marketing][owc-usbc], [195€][ade-owc-usbc], [$150][acom-owc-usbc]) has a bunch of USB-A ports, Ethernet, HDMI, an SD slot, as well as audio in/out and 80 W power delivery. But there is a far better successor with Thunderbolt 3 coming in February 2017.
+
+[arc]: https://www.bourgedesign.com
+[caldigit]: http://www.caldigit.com/usb-3-1-usb-c-dock/
+[ade-caldigit]: https://www.amazon.de/gp/product/B0198DS952/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B0198DS952&linkCode=as2&tag=killercup-21
+[acom-caldigit]: https://www.amazon.com/gp/product/B01AX6J7P4/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01AX6J7P4&linkId=dae6bb0a83da48d009a4c0195ce8ae83
+[apple-HT206587]: https://support.apple.com/en-us/HT206587
+[owc-usbc]: https://www.owcdigital.com/products/usb-c-dock/
+[ade-owc-usbc]: https://www.amazon.de/gp/product/B013J7TCW2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B013J7TCW2&linkCode=as2&tag=killercup-21
+[acom-owc-usbc]: https://www.amazon.com/gp/product/B013J7TCW2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B013J7TCW2&linkId=0f7134602c5914c7ab209e5e4f303694
 
 ### Thunderbolt 3 docks
 
 There's three I know of, and not one of them is shipping right now:
 
-- [OWC's Thunderbolt 3 dock][owc] has basically everything incl. a SD card reader and a sound card, but costs $279 and ships in February 2017.
+- [OWC's Thunderbolt 3 dock][owc-tb3] has basically everything incl. a SD card reader and a sound card, but costs $279 and ships in February 2017.
 - Plugable's Flagship Thunderbolt 3 dock [TBT3-UDV] does about the same as the OWC, looks cheaper, ships Q1 2017.
 - Belkin's Thunderbolt 3 [Express Dock HD][belkin-tb3] looks quite pretty, includes a 170 W power adapter (delivering up to 85 W to the computer[^belkin-cable]), but has neither audio-in nor a delivery date. It is rumored to cost around €400.
 
@@ -240,6 +255,6 @@ There's three I know of, and not one of them is shipping right now:
 
 I won't be buying any of those in the short term but will be looking forward to reviews when they finally ship.
 
-[owc]: https://www.owcdigital.com/products/thunderbolt/thunderbolt-3-dock-overview
+[owc-tb3]: https://www.owcdigital.com/products/thunderbolt/thunderbolt-3-dock-overview
 [TBT3-UDV]: http://plugable.com/thunderbolt-3/
 [belkin-tb3]: http://www.belkin.com/us/p/F4U095au/
