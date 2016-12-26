@@ -9,7 +9,9 @@ I'm gonna buy a 15″ MacBook with 4 Thunderbolt 3 Ports because
 (c) I really like the premise of USB-C with alternate modes and Thunderbolt 3 with 40Gb/s.
 Sadly, that means that I'll need adapters to connect all the hardware I currently own.
 
-How hard can it be to find some adapter-y dock-y things that I can actually afford? Let's find out!
+How hard can it be to find some adapter-y dock-y things[^adapters-n-docks] that I can actually afford? Let's find out!
+
+[^adapters-n-docks]: What is an adapter and what is dock? I'm using these terms pretty loosely. One way to differentiate might be to say an adapters is passive, while a dock has chips that actively transforms protocols for other physical ports. Or, a dock is large and expensive while you can buy a cheaper adapter that fits in your pocket. Or, a dock has more ports that are faster. For USB-C, these seem mostly equivalent, assuming that turning one USB-C connection with multiple alternate modes into a bunch of ports is not an "active" transformation as the host computer does all the hard work. Thus, a thing that has USB-C on one side, and HDMI or DisplayPort or the other, is an adapter. It gets fuzzy when a adapter has an ethernet port, as that most certainly means it has a dedicated chip for doing network stuff (that could also be USB 3.0 ethernet thing). Does this mean it becomes a dock? I'll say no. So, I'll settle on a simpler way to differentiate docks and adapters here: Docks are expensive and use Thunderbolt 3. That should make everything clear…
 
 ## Contents
 {:.no_toc}
