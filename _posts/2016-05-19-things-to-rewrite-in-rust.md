@@ -13,6 +13,7 @@ Some people wrote posts about stuff they want to see rewritten in Rust[^1], but 
 - [Butteraugli](https://github.com/google/butteraugli) – a tool for measuring differences between images (C++, [Go port](https://github.com/jasonmoo/go-butteraugli))
 - [FLIF](https://github.com/FLIF-hub/FLIF) – Free Lossless Image Format (C++)
   - FLIF's "Maniac" encoding ([part](https://github.com/FLIF-hub/FLIF/tree/0f0041079dba5195ea88235ba6ff1656b16dfc47/src/maniac) of FLIF's repo)
+  - **[@panicbit](https://github.com/panicbit) is working on [it](https://github.com/panicbit/flif-rs)**
 - [story-graph](https://github.com/incrediblesound/story-graph) – The Graph that Generates Stories (JavaScript)
 - A virtual DOM thingy with adaptors for libui and CLI [as described in this note]({% post_url 2016-07-23-impl-virtual-dom-cli-libui %})
 - [A Twitter bot]({% post_url 2016-07-16-twitter-bot-driven-twitter-bot %})
