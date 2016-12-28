@@ -70,6 +70,8 @@ Thinking more about it, I had an epiphany: *Guides are like integration tests!* 
 
 So, let's make writing guides as easy as writing integration tests![^cargo-tests]
 
+(Some part of the usual API docs, like top-level crate and module documentation, may also be used to describe more general, integration-level things. I'd argue that those are just guides in disguise, though. :))
+
 [^cargo-tests]: Rust's package manager Cargo makes it really easy to put a bunch of source files in a `tests/` directory and treat each of these files as an application that depends on your library.
 
 ## Merging two worlds
