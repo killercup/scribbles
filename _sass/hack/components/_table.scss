@@ -3,22 +3,32 @@
  */
 
 table {
+	$border-width: 1px;
+
   width: 100%;
   display: block;
   overflow-x: scroll;
   border-collapse: collapse;
-  margin: 1.75rem 0;
+  margin: $lh 0;
 
   td,
   th {
     vertical-align: top;
-    border: 1px solid #ccc;
-    line-height: 1.25rem;
-    padding: 0.8333rem;
+    border: $border-width solid $bright-grey;
+    line-height: $lh;
+    padding: ($lh / 2);
+    padding: calc(#{$lh / 2} - #{$border-width}) ($lh / 2);
   }
 
-  thead th {
-    font-size: 0.833rem;
+  thead th,
+  tfoot td	{
     font-weight: bold;
   }
+
+	tfoot tr:first-child td {
+	  $border-width: 2px;
+
+		border-top-width: $border-width;
+    padding-top: calc(#{$lh / 2} - #{$border-width});
+	}
 }
