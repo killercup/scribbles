@@ -33,10 +33,10 @@ I try to help out people who come to [diesel's][diesel] [Gitter channel][diesel-
 
 Some tricky cases (with answers):
 
-- *How do you add multiple predicates to a `where` clause?*
+- > How do you add multiple predicates to a `where` clause?
 
 	Calling `.filter` twice `AND`s both predicates together. (You can find it in the description of [`FilterDsl`].)
-- *I saw `.or` used in an example. What can I use it with?*
+- > I saw `.or` used in an example. What can I use it with?
 
 	You can call `.or` on everything that:
 	1. can be turned into an expression, and where 

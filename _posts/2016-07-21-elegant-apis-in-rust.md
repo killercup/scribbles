@@ -5,7 +5,7 @@ categories:
 - writing
 - incomplete
 ---
-The existence of libraries with nice, user-friendly interfaces is one of the most important factors when choosing a programming language. Here are some tips on how to write libraries with APIs in Rust. (Many of the points also apply to other languages.)
+The existence of libraries with nice, user-friendly interfaces is one of the most important factors when choosing a programming language. Here are some tips on how to write libraries with nice APIs in Rust. (Many of the points also apply to other languages.)
 
 ## Contents
 {:.no_toc}
@@ -28,14 +28,14 @@ The existence of libraries with nice, user-friendly interfaces is one of the mos
 
 ### Consistent names
 
-There are a few Rust RFCs that describe the naming scheme of the standard library. You should follow them to make your library's API feel familiar to users.
+There are a few Rust RFCs that describe the naming scheme of the standard library. You should follow them to make your library's API feel familiar for users.
 
-- [RFC 199] explains that you should use `mut`, `move`, or `ref` as suffixes differentiate methods based on the mutability of their parameters.
+- [RFC 199] explains that you should use `mut`, `move`, or `ref` as suffixes to differentiate methods based on the mutability of their parameters.
 - [RFC 344] defines some interesting conventions, like
 	- how to refer to types in method names (e.g., `&mut [T]` becomes `mut_slice`, and `*mut T` becomes `mut_ptr`),
 	- how to call methods that return iterators,
-	- that getters methods should called `field_name` while setter methods should be `set_field_name`,
-	- and how to name traits ("Prefer (transitive) verbs, nouns, and then adjectives; avoid grammatical suffixes (like able)", but also "if there is a single method that is the dominant functionality of the trait, consider using the same name for the trait itself").
+	- that getters methods should be called `field_name` while setter methods should be `set_field_name`,
+	- and how to name traits: "Prefer (transitive) verbs, nouns, and then adjectives; avoid grammatical suffixes (like able)", but also "if there is a single method that is the dominant functionality of the trait, consider using the same name for the trait itself".
 - [RFC 430] describes some general casing conventions (_tl;dr_ `CamelCase` for type-level stuff, `snake_case` for value-level stuff).
 - [RFC 445] wants you to add an `Ext` suffix to extension traits.
 
