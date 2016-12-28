@@ -54,6 +54,24 @@ Luckily, a lot of these cases "just work" as I would expect them to work. That's
 - Using custom data types (e.g., making `ToSql` and `FromSql` work for a `Point` struct)
 - A "larger roundtrip": Like the current "Getting Started" guide, but aside from defining a schema and doing some CRUD, also add validation, (de)serialization, and great error handling.
 
+## Guides are integration tests
+
+(This section was added after a [talking to][issue4] [@fasiha]. Thank you for the inspiration!)
+
+[issue4]: https://github.com/killercup/scribbles/issues/4
+[@fasiha]: https://github.com/fasiha
+
+Thinking more about it, I had an epiphany: *Guides are like integration tests!* In fact:
+
+| Unit tests        | Integration tests      |
+| API documentation | Guides and tutorials   |
+| ================= | ====================== |
+| Singular aspects  | The library as a whole |
+
+So, let's make writing guides as easy as writing integration tests![^cargo-tests]
+
+[^cargo-tests]: Rust's package manager Cargo makes it really easy to put a bunch of source files in a `tests/` directory and treat each of these files as an application that depends on your library.
+
 ## Merging two worlds
 
 Here are some ideas on how to make these guides even better:
@@ -75,7 +93,9 @@ I'm thinking about making this work with rustdoc, which already has a lot of the
 
 [mdBook]: https://github.com/azerupi/mdBook
 
-I've also been thinking about making API docs better/more structured by specifying [some guidelines][doc-lints]. Jimmy Cuadra wrote [an RFC][rfc-pr-1713] on the topic, but it was closed as he didn't have to time to revise it. I would love to see a new RFC (with my suggestions), and maybe I'll have some time in the new year to write one.
+I've also been thinking about making API docs better/more structured by specifying [some guidelines][doc-lints]. It will also be interesting to see if enforcing some of these guidelines, like "each public method/function needs an example", can further ensure that all parts of an API are documented and easy to grasp.
+
+Jimmy Cuadra wrote [an RFC][rfc-pr-1713] on the topic, but it was closed as he didn't have to time to revise it. I would love to see a new RFC (with my suggestions); and maybe I'll have some time in the new year to write one.
 
 [doc-lints]: {% post_url 2016-08-17-machine-readable-inline-markdown-code-cocumentation %}
 [rfc-pr-1713]: https://github.com/rust-lang/rfcs/pull/1713
