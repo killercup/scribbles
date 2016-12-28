@@ -58,10 +58,18 @@ Luckily, a lot of these cases "just work" as I would expect them to work. That's
 
 Here are some ideas on how to make these guides even better:
 
-- Treating code as doc tests to make sure the examples in the guide always work
+- Treating code snippets in guides as doc tests to make sure the examples in the guide always work
 - Easy/automatic linking to the API docs
 	- In the prose when mentioning a struct/trait/macro
 	- In code examples when hovering over an item
+- Easily turn guides into example projects and vice versa: A lot of libraries already include an `examples/` directory with code we can build guides on. We can e.g. use literate programming[^rs-md], if we need to manage to
+	- somehow embed all necessary meta data files (like `Cargo.toml`),
+	- restrict the code in the guide to be _additive_ (i.e., we can't easily write a partial implementation and then later replace that; we can however wrap code in modules like `mod try_1 { … }` and `mod try_2 { … }` and so on),
+	- and make rustdoc and [tango] work together nicely.
+
+[^rs-md]: Basically, teach the compiler to treat markdown files as Rust code.
+
+[tango]: https://github.com/pnkfelix/tango
 
 I'm thinking about making this work with rustdoc, which already has a lot of these capabilities. Making rustdoc work as a library, or adding some features of [mdBook] to rustdoc would probably take as 90% of the way.
 
