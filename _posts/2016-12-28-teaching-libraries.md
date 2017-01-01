@@ -97,7 +97,20 @@ I'm thinking about making this work with rustdoc, which already has a lot of the
 
 I've also been thinking about making API docs better/more structured by specifying [some guidelines][doc-lints]. It will also be interesting to see if enforcing some of these guidelines, like "each public method/function needs an example", can further ensure that all parts of an API are documented and easy to grasp.
 
+[doc-lints]: {% post_url 2016-08-17-machine-readable-inline-markdown-code-cocumentation %}
+
 Jimmy Cuadra wrote [an RFC][rfc-pr-1713] on the topic, but it was closed as he didn't have to time to revise it. I would love to see a new RFC (with my suggestions); and maybe I'll have some time in the new year to write one.
 
-[doc-lints]: {% post_url 2016-08-17-machine-readable-inline-markdown-code-cocumentation %}
 [rfc-pr-1713]: https://github.com/rust-lang/rfcs/pull/1713
+
+## An intermediate solution
+
+Another idea might be to write a tool that extracts code blocks from Markdown and saves them as files, thus turning a guide into a compilable project. These Markdown files can for example live in a `docs/` folder so they can automatically be rendered by [Github Pages][gh-pages-docs-folder]. This way, you can design a beautiful landing page for your project, with guide, examples, and all you desire, but at the end of the day will still be able to turn your guide to source code that can be compiled and tested.
+
+Assuming you want to use Jekyll (so Github renders the page for you), I have no idea how to easily omit some lines of code from the output (like lines that start with `#` in rustdoc), or how to automatically add links to the API docs.
+
+[gh-pages-docs-folder]: https://help.github.com/articles/configuring-a-publishing-source-for-github-pages/#publishing-your-github-pages-site-from-a-docs-folder-on-your-master-branch
+
+On the other hand: You can do this today! I wrote a simple proof of concept of this called [waltz].
+
+[waltz]: https://github.com/killercup/waltz
