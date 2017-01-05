@@ -193,14 +193,14 @@ $10 on [amazon.com][acom-aukey-dp]).
 
 | Name                                       | HDMI | USB 3.0 | Ethernet | Power delivery | Others    | amazon.de            | amazon.com            | Notes |
 | ------------------------------------------ | :--: | :-----: | :------: | -------------- | --------- | -------------------: | --------------------: | ----- |
-| [Dell 470-ABRY DA200][dell470]             | 1    | 1       | 1        | No             | VGA       | [67€][ade-dell470]   | [$60][acom-dell470]   | Looks nice, quite small |
-| [i-tec USB C Travel Docking Station][itec] | 1    | 2       | 1        | 60 W           | USB-C 3.1 | [57€][ade-itec]      | N/A                   | Larger than Dell but still light, never heard of this brand |
+| [Dell 470-ABRY DA200][dell470]             | 1    | 1       | 1        | No             | VGA       | [60€][ade-dell470]   | [$60][acom-dell470]   | Looks nice, quite small |
+| [i-tec USB C Travel Docking Station][itec] | 1    | 2       | 1        | 60 W           | USB-C 3.1 | [50€][ade-itec]      | N/A                   | Larger than Dell but still light, never heard of this brand |
 | ProLink-Adapter USB Typ C                  | 1    | 1       | 1        | Yes (??? W)    |           | [45€][ade-prolink]   | N/A                   | Looks cheap, badly translated description |
-| AUKEY USB C Hub                            | 1    | 4       | 0        | [55 W][aukey-hub-review] | | [38€][ade-aukey-hub] | [$43][acom-aukey-hub] | I don't think those USB ports are going to be fast |
-| [Cable Matters USB-C Multiport][cm-multi]  | 1    | 1       | 1        | No             | VGA       | [50€][ade-cm-multi]  | [$50][acom-cm-multi]  | Looks ugly, needs Ethernet driver |
+| AUKEY USB C Hub                            | 1    | 4       | 0        | [55 W][aukey-hub-review] | | [38€][ade-aukey-hub] | [$40][acom-aukey-hub] | I don't think those USB ports are going to be fast |
+| [Cable Matters USB-C Multiport][cm-multi]  | 1    | 1       | 1        | No             | VGA       | [53€][ade-cm-multi]  | [$45][acom-cm-multi]  | Looks ugly, needs Ethernet driver |
 | [Anker Premium USB-C Hub (HDMI)][anker-h]  | 1    | 2       | 0        | Yes (??? W)    |           | [48€][ade-anker-h]   | [$40][acom-anker-h]   | People have problems with WiFi and HDMI |
 | [Anker Premium USB-C Hub (RJ45)][anker-e]  | 0    | 2       | 1        | Yes (??? W)    |           | [46€][ade-anker-e]   | [$50][acom-anker-e]   | Same as above but with Ethernet instead of HDMI |
-| [HooToo USB-C Hub HT-UC001][hootoo]        | 1    | 3       | 0        | 60 W           | SDXC      | [65€][ade-hootoo]    | [$80][acom-hootoo]    | Space grey aluminium
+| [HooToo USB-C Hub HT-UC001][hootoo]        | 1    | 3       | 0        | 60 W           | SDXC      | [65€][ade-hootoo]    | [$82][acom-hootoo]    | Space grey aluminium
 
 [dell470]: http://accessories.euro.dell.com/sna/productdetail.aspx?c=de&l=de&s=dhs&cs=dedhs1&sku=470-ABRY
 [ade-dell470]: https://www.amazon.de/gp/product/B012DT6KW2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B012DT6KW2&linkCode=as2&tag=killercup-21
