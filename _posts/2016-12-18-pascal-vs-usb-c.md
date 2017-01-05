@@ -195,6 +195,7 @@ $10 on [amazon.com][acom-aukey-dp]).
 | ------------------------------------------ | :--: | :-----: | :------: | -------------- | --------- | -------------------: | --------------------: | ----- |
 | [Dell 470-ABRY DA200][dell470]             | 1    | 1       | 1        | No             | VGA       | [60€][ade-dell470]   | [$60][acom-dell470]   | Looks nice, quite small |
 | [i-tec USB C Travel Docking Station][itec] | 1    | 2       | 1        | 60 W           | USB-C 3.1 | [50€][ade-itec]      | N/A                   | Larger than Dell but still light, never heard of this brand |
+| [i-tec USB C Docking Station][itec-2]      | 1    | 3       | 1        | 60 W           | 2⨉USB-C 3.1, SD | [50€][ade-itec2]      | N/A            | Bascially the dock version of the one above |
 | ProLink-Adapter USB Typ C                  | 1    | 1       | 1        | Yes (??? W)    |           | [45€][ade-prolink]   | N/A                   | Looks cheap, badly translated description |
 | AUKEY USB C Hub                            | 1    | 4       | 0        | [55 W][aukey-hub-review] | | [38€][ade-aukey-hub] | [$40][acom-aukey-hub] | I don't think those USB ports are going to be fast |
 | [Cable Matters USB-C Multiport][cm-multi]  | 1    | 1       | 1        | No             | VGA       | [53€][ade-cm-multi]  | [$45][acom-cm-multi]  | Looks ugly, needs Ethernet driver |
@@ -205,8 +206,10 @@ $10 on [amazon.com][acom-aukey-dp]).
 [dell470]: http://accessories.euro.dell.com/sna/productdetail.aspx?c=de&l=de&s=dhs&cs=dedhs1&sku=470-ABRY
 [ade-dell470]: https://www.amazon.de/gp/product/B012DT6KW2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B012DT6KW2&linkCode=as2&tag=killercup-21
 [acom-dell470]: https://www.amazon.com/gp/product/B012DT6KW2/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B012DT6KW2&linkId=16b26e96f07cc42929498d77e738de5d
-[itec]: https://www.i-tec-europe.eu/?t=3&v=424
+[itec]: https://www.i-tec-europe.eu/?lng=en&t=3&v=424
 [ade-itec]: https://www.amazon.de/gp/product/B01M9A5ZQS/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01M9A5ZQS&linkCode=as2&tag=killercup-21
+[itec2]: https://www.i-tec-europe.eu/?lng=en&t=3&v=437
+[ade-itec2]: https://www.amazon.de/gp/product/B01N2UZL1D/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01N2UZL1D&linkCode=as2&tag=killercup-21
 [ade-prolink]: https://www.amazon.de/gp/product/B01L2GVEY6/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01L2GVEY6&linkCode=as2&tag=killercup-21
 [ade-aukey-hub]: https://www.amazon.de/gp/product/B01BXOW3V0/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01BXOW3V0&linkCode=as2&tag=killercup-21
 [acom-aukey-hub]: https://www.amazon.com/gp/product/B01LYBZFV5/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01LYBZFV5&linkId=58918b33147beec562477d30f45bfd37
@@ -224,11 +227,11 @@ $10 on [amazon.com][acom-aukey-dp]).
 [ade-hootoo]: https://www.amazon.de/gp/product/B01KF3GTCY/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01KF3GTCY&linkCode=as2&tag=killercup-21
 [acom-hootoo]: https://www.amazon.com/gp/product/B01K7C53K2/ref=as_li_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01K7C53K2&linkId=fecc8f7dccfc692d4f8c6b942b39812e
 
-I'll probably try both the Dell and the i-tec.
+I'll probably try both the Dell and the larger i-tec.
 
 ### USB-C docks
 
-There are a bunch of docks using USB-C but not Thunderbolt 3. I think buying any of these USB-C dock is silly, because they are all expensive, but can't support enough throughput to really get everything across the wire (like multiple _fast_ USB connections as well as 4k @ 60Hz). Nevertheless, they might work for you, so here are some:
+There are a bunch of docks using USB-C but _not_ Thunderbolt 3. With the exception of the already mentioned [i-tec dock][itec2], buying one of the following are hard to justify – they are all too expensive compared to the adapters listed above, but can't support enough throughput to really get everything across the wire (like multiple _fast_ USB connections as well as 4k @ 60Hz). Nevertheless, they might work for you, so here are some:
 
 - [Arc Hub][arc], no Ethernet, but apparently 4k @ 60Hz using Mini DisplayPort. $105 pre-order, ships early 2017.
 - CalDigit's "USB-C Dock" ([marketing][caldigit], [193€][ade-caldigit], [$150][acom-caldigit]) at first looks like it just _has_ to use Thunderbolt 3 to make everything work, but it is only said to be "compatible with Thunderbolt 3". Furthermore, the marketing site compares it to OWC's USB-C dock. To add to the mystery, it apparently supports HDMI 2.0, but has problems with driving a 4k display on a Mac that CalDigit blames on macOS missing support for MST (Multi Transport Stream). According [this document][apple-HT206587] by Apple, MacBook Pros since 2013 support MTS. At least the dock seems to support 90 W power delivery which is pretty nice.
