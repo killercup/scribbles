@@ -195,7 +195,7 @@ $10 on [amazon.com][acom-aukey-dp]).
 | ------------------------------------------ | :--: | :-----: | :------: | -------------- | --------- | -------------------: | --------------------: | ----- |
 | [Dell 470-ABRY DA200][dell470]             | 1    | 1       | 1        | No             | VGA       | [60€][ade-dell470]   | [$60][acom-dell470]   | Looks nice, quite small |
 | [i-tec USB C Travel Docking Station][itec] | 1    | 2       | 1        | 60 W           | USB-C 3.1 | [50€][ade-itec]      | N/A                   | Larger than Dell but still light, never heard of this brand |
-| [i-tec USB C Docking Station][itec-2]      | 1    | 3       | 1        | 60 W           | 2⨉USB-C 3.1, SD | [50€][ade-itec2]      | N/A            | Bascially the dock version of the one above |
+| [i-tec USB C Docking Station][itec2]      | 1    | 3       | 1        | 60 W           | 2⨉USB-C 3.1, SD | [68€][ade-itec2]      | N/A            | Bascially the dock version of the one above |
 | ProLink-Adapter USB Typ C                  | 1    | 1       | 1        | Yes (??? W)    |           | [45€][ade-prolink]   | N/A                   | Looks cheap, badly translated description |
 | AUKEY USB C Hub                            | 1    | 4       | 0        | [55 W][aukey-hub-review] | | [38€][ade-aukey-hub] | [$40][acom-aukey-hub] | I don't think those USB ports are going to be fast |
 | [Cable Matters USB-C Multiport][cm-multi]  | 1    | 1       | 1        | No             | VGA       | [53€][ade-cm-multi]  | [$45][acom-cm-multi]  | Looks ugly, needs Ethernet driver |
