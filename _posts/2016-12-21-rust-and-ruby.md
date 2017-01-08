@@ -4,6 +4,8 @@ categories:
 - rust
 - programming
 - incomplete
+discussions:
+  "/r/rust": "https://www.reddit.com/r/rust/comments/5kee6x/"
 ---
 I hear a lot of people new to Rust are Ruby programmers. I'm kinda the opposite. While I've been semi-involved with Ruby (mostly Rails) projects from time to time since at least 2011, I've never been _that much_ into Ruby the language. Rust, on the other handy, I've been _loving_ since 2014.
 

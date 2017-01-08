@@ -2,6 +2,10 @@
 title: Teaching libraries through good documentation
 categories:
 - rust
+discussions:
+  "Twitter": "https://twitter.com/killercup/status/814104683266576384"
+  "Twitter (re: waltz)": "https://twitter.com/killercup/status/815697459171258368"
+  "Github Issue #4": "https://github.com/killercup/scribbles/issues/4"
 ---
 How do you teach people how to use a complex framework or library[^framework-or-library]? Here's what comes to mind: Tutorials (guides), API documentation, great error messages, or forums/chats. Maybe video tutorials, and books, too. Since guides are one of the most effective ways to get people started, I've been musing about them for a while.
 

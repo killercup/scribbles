@@ -19,8 +19,17 @@ layout: default
   </div>
 
   <footer class="article-footer">
-    Thanks for reading.
-    <a href="{{ site.url }}">Back to index</a>.
-    <a href="{{site.feedback_url}}">Tell me how wrong I am</a>.
+    <p>
+      Thanks for reading.
+      <a href="{{site.feedback_url}}">Tell me how wrong I am!</a>
+    </p>
+    {% if page.discussions.size > 0 %}
+    <p>
+      This post has been discussed on {% for link in page.discussions %}{% unless forloop.first %}{% if forloop.last %} and {% else %}, {% endif %}{% endunless %}<a href="{{ link[1] }}">{{ link[0] }}</a>{% endfor %}.
+    </p>
+    {% endif %}
+    <p>
+      <a href="{{ site.url }}">Back to index</a>.
+    </p>
   </footer>
 </article>

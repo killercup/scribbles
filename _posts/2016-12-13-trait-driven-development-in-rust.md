@@ -2,6 +2,8 @@
 title: Trait Driven Development in Rust
 categories:
 - rust
+discussions:
+  "/r/rust": "https://www.reddit.com/r/rust/comments/5iarzx/"
 ---
 Actually, the title is a lie: We are just focusing on traits here, but writing Rust can also easily be Test Driven, or Data Driven, or Documentation Driven, or `[A-Z][a-z]*` Driven.
 

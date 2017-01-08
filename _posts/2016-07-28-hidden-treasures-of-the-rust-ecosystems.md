@@ -3,6 +3,8 @@ title: Hidden treasures of the Rust ecosystem
 categories:
 - rust
 - list
+discussions:
+  "/r/rust": "https://www.reddit.com/r/rust/comments/4v0uvt/"
 ---
 
 ## The secret life of `std`

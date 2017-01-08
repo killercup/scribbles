@@ -2,6 +2,8 @@
 title: README-driven Development
 categories:
 - tech
+discussions:
+  "Twitter": "https://twitter.com/killercup/status/767452830210859010"
 ---
 Like most other `(\w)DD` techniques[^1], "README-driven Development" wants to guide your approach to software development. This approach works best for small, self-contained projects or libraries, whose API surface is no larger than what fits on a bunch of post-it notes. And of course for projects that you might not want to write _right now_ but just thought about in the shower that seemed like a good idea.
 

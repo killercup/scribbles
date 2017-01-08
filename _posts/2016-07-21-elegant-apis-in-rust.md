@@ -4,6 +4,10 @@ categories:
 - rust
 - writing
 - incomplete
+discussions:
+  "Twitter (1)": "https://twitter.com/killercup/status/784391981673881600"
+  "Twitter (2)": "https://twitter.com/killercup/status/785496842964443136"
+  "/r/rust": "https://www.reddit.com/r/rust/comments/5koh1k/"
 ---
 The existence of libraries with nice, user-friendly interfaces is one of the most important factors when choosing a programming language. Here are some tips on how to write libraries with nice APIs in Rust. (Many of the points also apply to other languages.)
 

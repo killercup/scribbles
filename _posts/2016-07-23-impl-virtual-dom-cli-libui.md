@@ -3,7 +3,8 @@ title: Virtual DOM for CLI and libui
 categories:
   - rust
   - idea
-published: true
+discussions:
+  "Twitter (@lqd)": "https://twitter.com/lqd/status/760223190182465538"
 ---
 
 Among [other things]({% post_url 2016-05-19-things-to-rewrite-in-rust %}), I want to easily write UIs in Rust. (What I describe below could also be done in any other language though.)

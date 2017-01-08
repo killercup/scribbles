@@ -2,6 +2,8 @@
 title: "Pascal vs. USB-C"
 categories:
 - tech
+discussions:
+  "Twitter": "https://twitter.com/killercup/status/810599973419151368"
 ---
 I'm gonna buy a 15″ MacBook with 4 Thunderbolt 3 Ports because
 (a) I need new laptop,
