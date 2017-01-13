@@ -5,6 +5,8 @@ categories:
 discussions:
   "Twitter": "https://twitter.com/killercup/status/810599973419151368"
 ---
+**Update:** Got the laptop, and some adapters. Updated the post below with concrete tests and benchmarks where appropriate.
+
 I'm gonna buy a 15″ MacBook with 4 Thunderbolt 3 Ports because
 (a) I need new laptop,
 (b) I want to continue to use macOS (without hassle), and
@@ -129,6 +131,10 @@ Or, and here's a crazy idea: These are actually active adapters using _DisplayPo
 
 No HDMI alternate mode mentioned anywhere. I'm fairly certain this description is plain wrong, though. A bit earlier it says this is "1x HDMI, max. resolution 1920x1080 / 60Hz" and "it allows to transfer video and stereo audio". Surely, they did not build a converter from DisplayPort to HDMI, _and_ added an external sound card, _and_ convert all that to an HDMI compatible TMDS stream, when they could just use HDMI alternate mode. They wouldn't, would they?
 
+#### Update with benchmarks
+
+Using the i-tech dock (see below), I can connect my TV (1920×1080 @ 60 Hz) over HDMI, and still use Ethernet as well as two USB 3 ports without any problems (one just connects to the USB 3 hub in my main display, with mouse and keyboard connected). Benchmarking two external USB 3 drives (one 2.5″ 2TB HDD from Segate, and one Sandisk SSD with a separate SATA 3 to USB 3 adapter), I can't find any difference between connected the drives using an Apple USB-C-to-A adapter and connecting them to the dock (with HDMI and Ethernet also connected). Both drives are not _that_ fast, though: The SSD's top speed was 235 MB/s which is still well below the theoretical top speed of 5 GB/s (625 MB/s) of USB 3. Oh, and did I mention my 4k display also works with this dock (@ 30 Hz, of course)?
+
 ### MHL
 
 Oh, you thought I was done talking about displays? Sorry!
@@ -148,6 +154,8 @@ A lot of the displays I use are older Cinema Displays that have DVI-D cables. Bu
 
 with me _everywhere_! Why am I even considering the first option? Because USB-C-to-DVI adapter are new and there are a ton of reviews that say only 30 Hz are supported for everything above 720p. DVI seems to be as much of a conspiracy as HDMI.
 
+**Update:** Using the i-tech dock's HDMI port (see below) and an (Apple?) HDMI-to-DVI adapter, I can use the old Cinema Display with 1920×1200 @ 60 Hz without any problems.
+
 [dvi-specs]: https://en.wikipedia.org/w/index.php?title=Digital_Visual_Interface&oldid=755496857#Digital
 
 ### Ethernet
@@ -155,6 +163,8 @@ with me _everywhere_! Why am I even considering the first option? Because USB-C-
 Ethernet seems to work fine, but there are chipsets that don't need any special drivers on macOS (good) and there ones that do (less good).
 
 In theory, I could also use a USB 3.0 to Ethernet adapter (there are a lot of those).
+
+**Update:** The Ethernet ports of both the i-tech dock and the Dell adapter (see below) work perfectly with macOS Sierra, without installing any drivers.
 
 ### Power delivery
 
@@ -191,13 +201,19 @@ $10 on [amazon.com][acom-aukey-dp]).
 [ade-aukey-dp]: https://www.amazon.de/gp/product/B01AR81YXQ/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01AR81YXQ&linkCode=as2&tag=killercblog-21
 [acom-aukey-dp]: https://www.amazon.com/AUKEY-DisplayPort-Adapter-MacBook-Chromebook/dp/B01AT2V26E/ref=as_li_ss_tl?ie=UTF8&qid=1482091574&sr=8-1&keywords=AUKEY+USB+C+displayport&linkCode=ll1&tag=pascahertl-20&linkId=33c0ed89fdc129ef6c0d5c050fe0b7cd
 
+**Update:** I ended up buying [this][itech-dp] DisplayPort adapter from i-tech instead ([20€ on amazon.de][ade-itech-dp], I also got their dock, see below), which worked perfectly. The first cable I tried didn't work with my 4k display (probably a hardware defect), but the second one I tried (from Delock, [10€ on amazon.de][ade-dp-cable]) works like charm.
+
+[itech-dp]: https://www.i-tec-europe.eu/?lng=en&t=3&v=422
+[ade-itech-dp]: https://www.amazon.de/gp/product/B01M1DEJ8Z/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01M1DEJ8Z&linkCode=as2&tag=killercup-21
+[ade-dp-cable]: https://www.amazon.de/gp/product/B001TGVSDM/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B001TGVSDM&linkCode=as2&tag=killercup-21
+
 ### USB-C adapters
 
 | Name                                       | HDMI | USB 3.0 | Ethernet | Power delivery | Others    | amazon.de            | amazon.com            | Notes |
 | ------------------------------------------ | :--: | :-----: | :------: | -------------- | --------- | -------------------: | --------------------: | ----- |
-| [Dell 470-ABRY DA200][dell470]             | 1    | 1       | 1        | No             | VGA       | [60€][ade-dell470]   | [$60][acom-dell470]   | Looks nice, quite small |
-| [i-tec USB C Travel Docking Station][itec] | 1    | 2       | 1        | 60 W           | USB-C 3.1 | [50€][ade-itec]      | N/A                   | Larger than Dell but still light, never heard of this brand |
-| [i-tec USB C Docking Station][itec2]      | 1    | 3       | 1        | 60 W           | 2⨉USB-C 3.1, SD | [68€][ade-itec2]      | N/A            | Bascially the dock version of the one above |
+| [Dell 470-ABRY DA200][dell470]             | 1    | 1       | 1        | No             | VGA       | [66€][ade-dell470]   | [$60][acom-dell470]   | Looks nice, quite small |
+| [i-tec USB C Travel Docking Station][itec] | 1    | 2       | 1        | 60 W           | USB-C 3.1 | [48€][ade-itec]      | N/A                   | Larger than Dell but still light, never heard of this brand |
+| [i-tec USB C Docking Station][itec2]       | 1    | 3       | 1        | 60 W           | 2⨉USB-C 3.1, SD | [65€][ade-itec2]      | N/A            | Bascially the dock version of the one above |
 | ProLink-Adapter USB Typ C                  | 1    | 1       | 1        | Yes (??? W)    |           | [45€][ade-prolink]   | N/A                   | Looks cheap, badly translated description |
 | AUKEY USB C Hub                            | 1    | 4       | 0        | [55 W][aukey-hub-review] | | [38€][ade-aukey-hub] | [$40][acom-aukey-hub] | I don't think those USB ports are going to be fast |
 | [Cable Matters USB-C Multiport][cm-multi]  | 1    | 1       | 1        | No             | VGA       | [53€][ade-cm-multi]  | [$45][acom-cm-multi]  | Looks ugly, needs Ethernet driver |
@@ -229,7 +245,13 @@ $10 on [amazon.com][acom-aukey-dp]).
 [ade-hootoo]: https://www.amazon.de/gp/product/B01KF3GTCY/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B01KF3GTCY&linkCode=as2&tag=killercup-21
 [acom-hootoo]: https://www.amazon.com/gp/product/B01K7C53K2/ref=as_li_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01K7C53K2&linkId=fecc8f7dccfc692d4f8c6b942b39812e
 
-I'll probably try both the Dell and the larger i-tec.
+#### What I bought
+
+I treated myself to both the Dell adapter and the i-tech dock. While the Dell is indeed very small and perfect to throw into a backpack next to the charger, the i-tech has the right size for the MacBook to rest on it and ellivate it a few centimeters, putting the keyboard and screen at a nice angle and allowing better airflow. Every feature of both adapters works perfectly with the MacBook, without the need to install any drivers.
+
+The i-tech dock's power delivery works exactly as advertised, and the MacBook is able to draw 60 W. This suffices for basically everything I do, though I haven't tested it with gaming. The i-tech's HDMI port is able to connect to my 4k display and output what the display calls "2160p", which is 3840×2160 @ 30 Hz. I haven't tested the Dell with it, but my "1080p" (1920×1080 @ 60 Hz) TV worked fine. So, I ended up connecting two USB C cables at home, one for the dock, the other one for the DisplayPort adapter.
+
+**WiFi problems:** Some people mention having problems using WiFi when some USB C adapters are connected. I can confirm this when using the i-tec dock – at least when using power delivery. I'll contect i-tec to see what they say about this.
 
 ### USB-C docks
 
