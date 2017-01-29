@@ -1,5 +1,5 @@
 ---
-title: "Cargo Sweeten: Ensure awesome Rust libraries"
+title: "Idea: cargo-giftwrap - giving the gift awesome Rust libraries"
 categories:
 - rust
 - idea
@@ -12,24 +12,24 @@ Here are some things in Rust's ecosystem that I really like:
 
 I would like to add something to that.
 
-## My ideas so far
+## My thoughts so far
 
 - [Good practices for crates](https://pascalhertleif.de/artikel/good-practices-for-writing-rust-libraries/)
 - [Elegant APIs in Rust]({% post_url 2016-07-21-elegant-apis-in-rust %})
 - [Doc string style]({% post_url 2016-08-17-machine-readable-inline-markdown-code-cocumentation %})
 - [Writing guides with doc tests]({% post_url 2016-12-28-teaching-libraries %})
 
-## Cargo Sweeten
+## cargo-giftwrap
 
-A new `cargo sweeten` subcommand that automatically tries to ensure the Rust library it is executed in is top-notch, i.e.:
+My idea is this: A new `cargo giftwrap` subcommand that automatically tries to ensure the Rust library it is executed in is top-notch, i.e.:
 
 - `Cargo.toml` has
 	- well-formatted authors
 	- license
 	- descriptions
 	- repository OR website OR documentation (more is better)
-	- Readme fiel name
-	- keywords
+	- Readme file name
+	- keywords and categories
 - `.gitignore` and `.editorconfig`
 - `README.md` with
 	- Code example(s)
@@ -43,4 +43,8 @@ A new `cargo sweeten` subcommand that automatically tries to ensure the Rust lib
 - Has `examples/` with code that builds and/or `docs/` with guides
 - Is formatted with `rustfmt` (`diff == 0`)
 
-Running `cargo sweeten` will check which of these requirements are and try to add what is missing in an interactive manner.
+Running `cargo giftwrap` will check which of these requirements are and try to add what is missing in an interactive manner. (Ideally, you would run this as a pre-publish hook.)
+
+## So far, this is just an idea
+
+If you want to make it real: That's awesome! Get right on it! (Mentioning me on GitHub, or sending me an email would be great.)
