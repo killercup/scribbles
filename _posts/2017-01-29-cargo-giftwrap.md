@@ -3,6 +3,8 @@ title: "Idea: cargo-giftwrap - giving the gift awesome Rust libraries"
 categories:
 - rust
 - idea
+discussions:
+  "Twitter": "https://twitter.com/killercup/status/825667449668382721"
 ---
 Here are some things in Rust's ecosystem that I really like:
 
@@ -21,7 +23,7 @@ I would like to add something to that.
 
 ## cargo-giftwrap
 
-My idea is this: A new `cargo giftwrap` subcommand that automatically tries to ensure the Rust library it is executed in is top-notch, i.e.:
+My idea is this: A new `cargo giftwrap`[^naming] subcommand that automatically tries to ensure the Rust library it is executed in is top-notch, i.e.:
 
 - `Cargo.toml` has
 	- well-formatted authors
@@ -48,3 +50,11 @@ Running `cargo giftwrap` will check which of these requirements are and try to a
 ## So far, this is just an idea
 
 If you want to make it real: That's awesome! Get right on it! (Mentioning me on GitHub, or sending me an email would be great.)
+
+
+
+[^naming]: Naming is [hard]. If you don't like "giftwrap", [Matthias Endler][mre] [suggests][mre-names] "tidy", "neat", or "lector".
+
+[hard]: {% post_url 2017-01-20-programming-wisdom %}
+[mre]: https://github.com/mre
+[mre-names]: https://twitter.com/matthiasendler/status/825707332218847235
