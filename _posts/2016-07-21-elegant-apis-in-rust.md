@@ -442,11 +442,15 @@ This works really well in Rust as your methods can move your data into a new typ
 Here's an arbitrary example about mailing a package:
 
 ```rust
-let package = Package::new(); // -> OpenPackage
-package.insert([stuff, padding, padding]); // -> OpenPackage
-package.seal_up(); // -> ClosedPackage
-// package.insert([more_stuff]); // ERROR: No method `insert` on `ClosedPackage`
-package.send(address, postage); // -> DeliveryTracking
+let p: OpenPackage = Package::new();
+let p: OpenPackage = package.insert([stuff, padding, padding]);
+
+let p: ClosedPackage = package.seal_up();
+
+// let p: OpenPackage = package.insert([more_stuff]);
+//~^ ERROR: No method named `insert` on `ClosedPackage`
+
+let p: DeliveryTracking = package.send(address, postage);
 ```
 
 A good real-life example was given by /u/ssokolow [in this thread on /r/rust](https://www.reddit.com/r/rust/comments/568yvh/typesafe_unions_in_c_and_rust/d8hcwfs):
