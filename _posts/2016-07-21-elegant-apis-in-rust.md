@@ -329,9 +329,11 @@ If you are designing a trait, you can also have two methods that do the same thi
 [`unwrap_or_else`]: https://doc.rust-lang.org/std/result/enum.Result.html#method.unwrap_or_else
 
 ```rust
-let res: Result<i32, String> = Err("oh noes");
-res.unwrap_or(42) // just returns `42`
-res.unwrap_or_else(|msg| msg.len() > 12) // will call the closure
+let res: Result<i32, &str> = Err("oh noes");
+res.unwrap_or(42); // just returns `42`
+
+let res: Result<i32, &str> = Err("oh noes");
+res.unwrap_or_else(|msg| msg.len() as i32); // will call the closure
 ```
 
 #### Lazy tricks
