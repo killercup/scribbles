@@ -15,3 +15,7 @@ This is what type systems are for: Statically preventing things from being wrong
 > There are two hard things in computer science: cache invalidation, naming things, and off-by-one errors.
 
 Quote from Jeff Atwood's [tweet](https://twitter.com/codinghorror/status/506010907021828096), which credits the original quote (without the "off-by-one") to Phil Karlton.
+
+> Replaced "clean code" with "predictable code" because 'clean' is subjective and a platitude.
+
+André Staltz [on Twitter](https://twitter.com/andrestaltz/status/826438154232201216).
