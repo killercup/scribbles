@@ -5,6 +5,7 @@ categories:
 - idea
 discussions:
   "Twitter": "https://twitter.com/killercup/status/825667449668382721"
+  "Github Issue #8": "https://github.com/killercup/scribbles/issues/8"
 ---
 Here are some things in Rust's ecosystem that I really like:
 
