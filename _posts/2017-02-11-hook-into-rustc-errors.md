@@ -3,6 +3,9 @@ title: A way to customize Rust error messages
 categories:
 - rust
 - idea
+discussions:
+  "Twitter": "https://twitter.com/killercup/status/830495467356246017"
+  "/r/rust": "https://www.reddit.com/r/rust/comments/5tgyy2/"
 ---
 Rust's error messages are pretty amazing. There is no way to format library-specific errors, though. I'm suggesting a way to implement this on stable Rust.
 
