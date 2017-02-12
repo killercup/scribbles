@@ -56,9 +56,11 @@ to these Rust types
 `(Uuid, String, String)`
 ```
 
+Which basically wants to say: "Your table has two columns (with timestamps in them) which you forgot to add to your Rust struct."
+
 I omitted the namespaces when I added the "SQL types" and "Rust types" annotations. This makes it easier to read, but also reminds people of what `FromSqlRow` does. (You should note, though, that the two `Uuid` types are _not_ the same.)
 
-And maybe even:
+When the column types are the problem (instead of forgetting about some columns), we might even render something like this:
 
 ```
 The following SQL type to Rust type conversions are available:
