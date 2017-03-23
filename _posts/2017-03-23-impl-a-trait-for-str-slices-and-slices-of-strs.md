@@ -122,16 +122,16 @@ So, the `&` is the problem, right?
 First of all, let's repeat our trait signature again, so you don't have to scroll up:
 
 ```rust
-trait ToFoo<'a> {
-    fn to_foo(&'a self) -> Vec<String>;
+trait ToFoo {
+    fn to_foo(&self) -> Vec<String>;
 }
 ```
 
 Now, let's implement our trait for `str` instead of `&str`. By the way: `str` is a type that we don't know the size of -- but let's not get hung up on that now.
 
 ```rust
-impl<'a> ToFoo<'a> for str {
-    fn to_foo(&'a self) -> Vec<String> { unimplemented!() }
+impl ToFoo for str {
+    fn to_foo(&self) -> Vec<String> { unimplemented!() }
 }
 ```
 
@@ -140,18 +140,15 @@ See, we're only ever using `&str` anyway, as our method is taking `&self`. No ne
 Next: Implement the trait for each `T` where a _reference_ to it implements `AsRef<[&str]>`:
 
 ```rust
-impl<'a, 'b, T> ToFoo<'a> for T where
-    &'a T: AsRef<[&'b str]>,
-    T: 'a,
-{
-    fn to_foo(&'a self) -> Vec<String> { unimplemented!() }
+impl<'a, T> ToFoo for T where T: AsRef<[&'a str]> {
+    fn to_foo(&self) -> Vec<String> { unimplemented!() }
 }
 ```
 
 It took me quite a while to get to this point. Now, we can use it like this:
 
 ```rust
-fn foo<'a, T: ToFoo<'a> + ?Sized>(x: &'a T) {
+fn foo<'a, T: ToFoo + ?Sized>(_x: &'a T) {
     unimplemented!()
 }
 ```
