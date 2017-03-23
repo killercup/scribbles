@@ -85,7 +85,7 @@ Sadly, as of Rust 1.16[^rust-version] we would need to write implementations for
 
 Also, shouldn't it be trivial to represent some `&[_, n]` as slice? And there are places where that works! Why not here? /u/dbaupp gave a great explanation for this [on Reddit][r1]: It's because we want to use a `&self` method on `&[&str]`, which means we are dealing with a `&&[&str]`. And since we are starting with `&[&str; 1]`, we can only rely on coercion for the reference, not the inner `[&str; 1]`.
 
-We could implement `ToFoo` on `[&str]` however, to leverage the fact that the reference in `&["foo"]` will trigger deref coercions, so it find our `impl`. Sadly, that that not work for functions or method that take a `&T` where `T: ToFoo` (like `foo(&["lorem"])` or even `ToFoo::to_foo(&["yay"])`) -- which is exactly what we want to use this for...
+We could implement `ToFoo` on `[&str]` however, to leverage the fact that the reference in `&["foo"]` will trigger deref coercions, which means it finds our `impl`. Sadly, that does not work for functions or method that take a `&T where T: ToFoo`. So while we can do `["lorem"].to_foo()`, we can't do `foo(&["lorem"])` or even `ToFoo::to_foo(&["yay"])` -- which is exactly what we want to use this for...
 
 [r1]: https://www.reddit.com/r/rust/comments/6134oc/how_to_implement_a_trait_for_str_and_str/dfblrm9/
 
