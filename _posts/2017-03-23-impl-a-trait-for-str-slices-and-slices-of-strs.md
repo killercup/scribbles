@@ -68,7 +68,11 @@ But wait -- this doesn't compile!
 no method named `to_foo` found for type `&[&'static str; 1]` in the current scope
 ```
 
-Sadly, we implemented our trait on a slice (that `&[_]` thing), but gave it a `&[_; 1]`. The difference? `&[_; 1]` is a reference to an array with a known size. Sadly, as of Rust 1.16[^rust-version] we would need to write implementations for _all_ array types we want to support. So, one for `&[_; 1]`, another for `&[_; 2]`, and so on. We could do that in a macro, but it'll just generate a whole bunch of code and not be very elegant. Also, it should be trivial to represent some `&[_, n]` as slice, right?
+Sadly, we implemented our trait on a slice (that `&[_]` thing), but gave it a `&[_; 1]`. The difference? `&[_; 1]` is a reference to an array with a known size.
+
+We have two options: Either add `[..]` (create slice with open range, i.e., all elements) to the parameter, or implement the trait this array type. The first option is perfectly valid if it is you who writes writes that `foo(&["bar"][..])`, but what I am aiming for here is to present a nice API to the user of this theoretical library; and I don't to tell people to add some magic characters at the end of their argument.
+
+Sadly, as of Rust 1.16[^rust-version] we would need to write implementations for _all_ array types we want to support. So, one for `&[_; 1]`, another for `&[_; 2]`, and so on. We could do that in a macro, but it'll just generate a whole bunch of code and not be very elegant. Also, it should be trivial to represent some `&[_, n]` as slice, right?
 
 [^rust-version]: rustc 1.16.0 (30cf806ef 2017-03-10)
 
