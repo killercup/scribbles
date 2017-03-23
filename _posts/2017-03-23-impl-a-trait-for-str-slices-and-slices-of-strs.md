@@ -8,6 +8,10 @@ discussions:
 
 Rust has a pretty powerful type system, but some things are not that easy to express. Follow me on a journey where we try to implement a bit of method overloading by using traits with funny constraints and discover some interesting ways to convince Rust that everything is fine.
 
+**tl;dr** "Man this is some type system abuse if I I've ever seen it. I absolutely love it! It'll be useful to know this if I ever need it." (/u/mgattozzi [on Reddit][r2])
+
+[r2]: https://www.reddit.com/r/rust/comments/6134oc/how_to_implement_a_trait_for_str_and_str/dfbjhvu/
+
 **Note:** This post assumes a general understanding of Rust. There will also be some hairy type signatures -- don't be afraid of those! Just skip the parts you don't understand.
 
 So, let's get started! Our goal is this: We want to have a function that can take both string slices as well a slice of string slices:
