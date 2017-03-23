@@ -58,9 +58,9 @@ fn main() {
 }
 ```
 
-Sorry about the whole `'a` noise[^lifetimes]!
+Sorry about the whole `'a` noise[^lifetimes]! Please ignore this for a minute!
 
-[^lifetimes]: If you are not used to Rust: Usually, you don't have to be that explicit and write these annotations everywhere. One of Rust's defining features is that it is able to ensure that references to `x` (`&x`) are valid only as long as the resource `x` is valid (and it has some pretty nice inference rules for that). The `'a` syntax allows us to give name to these life times so we can, for example, define references `&'a x` and `&'b y` and specify that `'a` is valid for (at least) as long as `'b` by writing `'a: 'b`.
+[^lifetimes]: If you are not used to Rust: This is not how most Rust code looks. What are these "tick a" things for? I'm glad you asked! One of Rust's defining features is that it is able to ensure that references to `x` (`&x`) are valid only as long as the resource `x` is valid. This prevents some pretty serious bugs! The `'a` syntax allows us to give name to these life times so we can, for example, define references `&'a x` and `&'b y` and specify that `'a` is valid for (at least) as long as `'b` by writing `'a: 'b`. And usually, it has some pretty nice inference rules for that; in trait definitions however, Rust requires us to be explicit.
 
 But wait -- this doesn't compile!
 
