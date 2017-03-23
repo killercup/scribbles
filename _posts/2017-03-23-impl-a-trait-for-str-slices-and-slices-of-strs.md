@@ -28,14 +28,16 @@ We do this by implementing a new trait[^traits] `ToFoo` for both types, so our `
 [tdd]: {% post_url 2016-12-13-trait-driven-development-in-rust %}
 
 ```rust
-pub trait ToFoo {
+trait ToFoo {
     fn to_foo(&self) -> Vec<String>;
 }
 ```
 
 ## First try
 
-Sounds easy enough, right? Let's write it down:
+Sounds easy enough, right? Let's write it down ([playpen][play1]):
+
+[play1]: https://play.rust-lang.org/?gist=a29484d0546d76e09fd3b789df4bf77b&version=stable&backtrace=0
 
 ```rust
 trait ToFoo<'a> {
@@ -85,7 +87,9 @@ pub trait AsRef<T> where T: ?Sized {
 }
 ```
 
-Note that it is not `... for &T` but `... for T` and then has a method that takes `&self`. Okay, here's a simplified new version:
+Note that it is not `... for &T` but `... for T` and then has a method that takes `&self`. Okay, here's a simplified new version ([playpen][play2]):
+
+[play2]: https://play.rust-lang.org/?gist=9bc7e3895ea82f5842fea82c6d689bb5&version=stable&backtrace=0
 
 ```rust
 trait ToFoo {}
@@ -145,7 +149,9 @@ impl<'a, T> ToFoo for T where T: AsRef<[&'a str]> {
 }
 ```
 
-It took me quite a while to get to this point. Now, we can use it like this:
+It took me quite a while to get to this point. Now, we can use it like this ([playpen][play3]):
+
+[play3]: https://play.rust-lang.org/?gist=82e565d5c1e97f5a8f3635d2672a8beb&version=stable&backtrace=0
 
 ```rust
 fn foo<'a, T: ToFoo + ?Sized>(_x: &'a T) {
