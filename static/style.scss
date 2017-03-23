@@ -113,3 +113,32 @@ code {
   }
 }
 
+.highlight {
+  .k {
+    // font-weight: normal;
+    color: $grey-600;
+  }
+
+  .nd {
+    font-weight: normal;
+  }
+
+  .n {
+    color: $grey-900;
+    // font-weight: bold;
+  }
+}
+
+.language-rust {
+  .highlight {
+    // Hide some of rouges problems with highlighting life times
+    .err {
+      // Life time tick as well as following identifier, but also `?Sized`
+      &, & + .n {
+        color: #000080; // color of types
+        background-color: transparent;
+        font-weight: normal;
+      }
+    }
+  }
+}
