@@ -72,15 +72,18 @@ But wait -- this doesn't compile!
 no method named `to_foo` found for type `&[&'static str; 1]` in the current scope
 ```
 
-Sadly, we implemented our trait on a slice (that `&[_]` thing), but gave it a `&[_; 1]`. The difference? `&[_; 1]` is a reference to an array with a known size.
+Sadly, we implemented our trait on a slice (that `&[_]` thing), but gave it a `&[_; 1]`. The difference? `&[_; 1]` is a reference to an array with a known size. We have two options:
 
-We have two options: Either add `[..]` (create slice with open range, i.e., all elements) to the parameter, or implement the trait this array type. The first option is perfectly valid if it is you who writes writes that `foo(&["bar"][..])`, but what I am aiming for here is to present a nice API to the user of this theoretical library; and I don't to tell people to add some magic characters at the end of their argument.
+1. Use `&["foo"][..]` to create a slice with an open range, i.e., all elements.
+2. Implement `ToFoo` for this array type.
 
-Sadly, as of Rust 1.16[^rust-version] we would need to write implementations for _all_ array types we want to support. So, one for `&[_; 1]`, another for `&[_; 2]`, and so on. We could do that in a macro, but it'll just generate a whole bunch of code and not be very elegant.
+The first option is perfectly valid if it is you who writes writes that `foo(&["bar"][..])`, but what I am aiming for here is to present a nice API to the user of this theoretical library. And I don't want to tell people to add some magic characters at the end of their argument if I don't have to!
+
+Sadly, as of Rust 1.16[^rust-version] we would need to write implementations for _all_ array types we want to support where the type also contains the length of the array! So, one for `&[_; 1]`, another for `&[_; 2]`, and so on. We could do that in a macro, but it'll just generate a whole bunch of code and it not be very elegant.
 
 [^rust-version]: rustc 1.16.0 (30cf806ef 2017-03-10)
 
-Also, it should be trivial to represent some `&[_, n]` as slice, right? And there are places where that works. Why not here? /u/dbaupp gave a great explanation for this [on Reddit][r1]: It's because we want to use a `&self` method on `&[&str]`, which means we are dealing with a `&&[&str]`. And since we are starting with `&[&str; 1]`, we can only rely on coercion for the reference, not the inner `[&str; 1]`.
+Also, shouldn't it be trivial to represent some `&[_, n]` as slice? And there are places where that works! Why not here? /u/dbaupp gave a great explanation for this [on Reddit][r1]: It's because we want to use a `&self` method on `&[&str]`, which means we are dealing with a `&&[&str]`. And since we are starting with `&[&str; 1]`, we can only rely on coercion for the reference, not the inner `[&str; 1]`.
 
 We could implement `ToFoo` on `[&str]` however, to leverage the fact that the reference in `&["foo"]` will trigger deref coercions, so it find our `impl`. Sadly, that that not work for functions or method that take a `&T` where `T: ToFoo` (like `foo(&["lorem"])` or even `ToFoo::to_foo(&["yay"])`) -- which is exactly what we want to use this for...
 
