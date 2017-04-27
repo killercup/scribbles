@@ -505,3 +505,8 @@ Possible Rust libraries that use some nice tricks in their APIs:
 What I tried to cover here are design patterns for _interfaces_, i.e. APIs exposed to the user. While I believe that some of these patterns are only applicable to writing libraries, many also apply to writing generic application code.
 
 You can find more information on this topic in the [Rust Design Patterns](https://github.com/rust-unofficial/patterns) repository.
+
+**Update 2017-04-27:** Since writing that post, [@brson] of the Rust Libs Team has published a pretty comprehensive [Rust API Guidelines] document that includes my advice here and a lot more.
+
+[@brson]: https://github.com/brson
+[Rust API Guidelines]: https://github.com/brson/rust-api-guidelines
