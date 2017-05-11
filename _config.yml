@@ -10,7 +10,9 @@ twitter: # this site's twitter account
   username: killercup
 imprint_url: https://pascalhertleif.de/impressum/
 license_url: https://creativecommons.org/licenses/by-nc/4.0/
-feedback_url: https://github.com/killercup/scribbles/issues
+feedback_url: https://github.com/killercup/scribbles/issues/new
+repository_url: https://github.com/killercup/scribbles
+post_revisions_url: https://github.com/killercup/scribbles/commits/gh-pages/
 
 # Posts
 permalink: "/:title.html"
