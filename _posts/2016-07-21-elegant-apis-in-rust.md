@@ -11,6 +11,10 @@ discussions:
 ---
 The existence of libraries with nice, user-friendly interfaces is one of the most important factors when choosing a programming language. Here are some tips on how to write libraries with nice APIs in Rust. (Many of the points also apply to other languages.)
 
+[You can also watch my talk at Rustfest 2017 about this!][rustfest-talk]
+
+[rustfest-talk]: https://www.youtube.com/watch?v=0zOg8_B71gE
+
 ## Contents
 {:.no_toc}
 
