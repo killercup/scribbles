@@ -83,12 +83,16 @@ The generated code will probably look something like this:
 /// Geographical coordinates
 #[derive(Debug, Serialize, Deserialize, Faker)]
 struct Geo {
-  #[serde(validate(min=-90.0, max=90.0))]
+  #[validate(min=-90.0, max=90.0)]
   latitude: f64,
-  #[serde(validate(min=-180.0, max=180.0))]
+  #[validate(min=-180.0, max=180.0)]
   longitude: f64,
 }
 ```
+
+### Bonus Formats
+
+JSON Schema allows specifying a `format`
 
 ### Open questions
 
