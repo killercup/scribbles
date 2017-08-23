@@ -1,5 +1,5 @@
 ---
-title: "Diesel: Treat View as Table"
+title: "Diesel.rs Trick: Treat View as Table"
 categories:
 - rust
 ---
@@ -20,11 +20,12 @@ We take extra care
 to only allow you
 to query fields from tables
 that are part of the query
-(either as from or as join).
+(either as `FROM` or as `JOIN`).
 But currently, this is limited in some ways.
 E.g., we don't have a way
 to join the same table twice
-(as there is no type-level aliasing).
+(as there is no automatic type-level aliasing
+for the types that represent the database tables).
 
 To work around that,
 and similar problems,
@@ -93,7 +94,11 @@ table! {
 
 Voilà!
 You can now query this like a table.
-Postgres even allows you to call insert, update, and delete on simple views like this.
+Postgres even allows you to call insert, update, and delete on [simple views] like this.
+(You can accomplish similar functionality
+by using `INSTEAD OF` triggers on SQLite.)
+
+[simple views]: https://www.postgresql.org/docs/9.6/static/sql-createview.html#SQL-CREATEVIEW-UPDATABLE-VIEWS
 
 This also works great for aggregate queries,
 or to abstract over database-specific operations
