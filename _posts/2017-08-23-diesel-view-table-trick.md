@@ -115,15 +115,16 @@ pub struct FollowsWithNames {
 }
 ```
 
-As you can see, two records are associated with 
-`#[derive(Associations)]` and `#[belongs_to]`.
-After that you can load the followers for the user
+As you can see,
+two records are associated with `#[derive(Associations)]` and `#[belongs_to]`.
+After that
+you can load the followers for the user
 using the `belonging_to`:
 
 ```rust
-let user = (users::find(1).first(&connection))?;
+let user = users::find(1).first(&connection)?;
 let followers = FollowsWithNames::belonging_to(&user)
-  .load::<FollowsWithNames>(&connection);
+    .load::<FollowsWithNames>(&connection)?;
 ```
 
 Postgres even allows you to call insert, update, and delete on [simple views] like this.
@@ -135,3 +136,9 @@ by using `INSTEAD OF` triggers on SQLite.)
 This also works great for aggregate queries,
 or to abstract over database-specific operations
 your application doesn't need to care about.
+
+- - -
+
+Thanks to [@keyridan] for adding the associations example to this post!
+
+[@keyridan]: https://github.com/keyridan
