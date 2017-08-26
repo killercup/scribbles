@@ -94,6 +94,39 @@ table! {
 
 Voilà!
 You can now query this like a table.
+Let's describe their structures:
+
+```rust
+#[derive(Debug, Queryable, Identifiable, Associations)]
+pub struct User {
+    pub id: i32,
+    pub name: String,
+}
+
+#[derive(Debug, Queryable, Identifiable, Associations)]
+#[table_name = "follows_with_names"]
+#[primary_key(follower_id, followee_id)]
+#[belongs_to(User, foreign_key = "followee_id")]
+pub struct FollowsWithNames {
+    pub follower_id: i32,
+    pub follower: String,
+    pub followee_id: i32,
+    pub followee: String,
+}
+```
+
+As you can see,
+two records are associated with `#[derive(Associations)]` and `#[belongs_to]`.
+After that
+you can load the followers for the user
+using the `belonging_to`:
+
+```rust
+let user = users::find(1).first(&connection)?;
+let followers = FollowsWithNames::belonging_to(&user)
+    .load::<FollowsWithNames>(&connection)?;
+```
+
 Postgres even allows you to call insert, update, and delete on [simple views] like this.
 (You can accomplish similar functionality
 by using `INSTEAD OF` triggers on SQLite.)
@@ -103,3 +136,9 @@ by using `INSTEAD OF` triggers on SQLite.)
 This also works great for aggregate queries,
 or to abstract over database-specific operations
 your application doesn't need to care about.
+
+- - -
+
+Thanks to [@keyridan] for adding the associations example to this post!
+
+[@keyridan]: https://github.com/keyridan
