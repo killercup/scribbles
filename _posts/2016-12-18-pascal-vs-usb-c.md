@@ -257,11 +257,13 @@ The i-tech dock's power delivery works exactly as advertised, and the MacBook is
 
 There are a bunch of docks using USB-C but _not_ Thunderbolt 3. With the exception of the already mentioned [i-tec dock][itec2], buying one of the following are hard to justify – they are all too expensive compared to the adapters listed above, but can't support enough throughput to really get everything across the wire (like multiple _fast_ USB connections as well as 4k @ 60Hz). Nevertheless, they might work for you, so here are some:
 
-- [Arc Hub][arc], no Ethernet, but apparently 4k @ 60Hz using Mini DisplayPort. $105 pre-order, ships early 2017.
+- [Arc Hub][arc], no Ethernet, but ~~apparently 4k @ 60Hz using Mini DisplayPort~~ two video outputs (HDMI and MiniDisplayport) that offer up 2560x1440 @ 60Hz/4k @ 30Hz, and you can only use one at a time ([more on that][issue-10] -- thanks [@anton48]). $105 pre-order, ships early 2017.
 - CalDigit's "USB-C Dock" ([marketing][caldigit], [193€][ade-caldigit], [$150][acom-caldigit]) at first looks like it just _has_ to use Thunderbolt 3 to make everything work, but it is only said to be "compatible with Thunderbolt 3". Furthermore, the marketing site compares it to OWC's USB-C dock. To add to the mystery, it apparently supports HDMI 2.0, but has problems with driving a 4k display on a Mac that CalDigit blames on macOS missing support for MST (Multi Transport Stream). According [this document][apple-HT206587] by Apple, MacBook Pros since 2013 support MTS. At least the dock seems to support 90 W power delivery which is pretty nice.
 - OWC's USB-C Dock ([marketing][owc-usbc], [195€][ade-owc-usbc], [$150][acom-owc-usbc]) has a bunch of USB-A ports, Ethernet, HDMI, an SD slot, as well as audio in/out and 80 W power delivery. But there is a far better successor with Thunderbolt 3 coming in February 2017.
 
 [arc]: https://www.bourgedesign.com
+[issue-10]: https://github.com/killercup/scribbles/issues/10
+[@anton48]: https://github.com/anton48
 [caldigit]: http://www.caldigit.com/usb-3-1-usb-c-dock/
 [ade-caldigit]: https://www.amazon.de/gp/product/B0198DS952/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&camp=1638&creative=6742&creativeASIN=B0198DS952&linkCode=as2&tag=killercup-21
 [acom-caldigit]: https://www.amazon.com/gp/product/B01AX6J7P4/ref=as_li_qf_sp_asin_il_tl?ie=UTF8&tag=pascahertl-20&camp=1789&creative=9325&linkCode=as2&creativeASIN=B01AX6J7P4&linkId=dae6bb0a83da48d009a4c0195ce8ae83
