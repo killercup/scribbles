@@ -2,6 +2,8 @@
 title: "Diesel.rs Trick: Treat View as Table"
 categories:
 - rust
+discussions:
+  "Twitter": https://twitter.com/killercup/status/900439564917014528
 ---
 
 [Diesel] is a type-safe query builder for Rust.
