@@ -218,9 +218,13 @@ In my experience, it really pays off to use a lot of structs. Some scenarios:
 
 These were my five tips for writing small CLI applications in Rust (writing nice libraries is [another topic][elegant APIs]). If you have more tips, let me know!
 
+If you want to dig a little deeper, I'd suggest looking at how to [multi-platform build Rust binaries releases][trust], how to use [`clap`] to get [autocompletion for CLI args], and how to write integration test for your CLI apps (upcoming post).
+
 
 [Rust]: https://www.rust-lang.org/
 [`structopt`]: https://docs.rs/structopt
-[`clap`]: https://docs.rs/clap
+[`clap`]: https://clap.rs
 [`error-chain`]: https://docs.rs/error-chain
 [elegant APIs]: {% post_url 2016-07-21-elegant-apis-in-rust %}
+[trust]: https://github.com/japaric/trust
+[autocompletion for CLI args]: https://blog.clap.rs/complete-me/
