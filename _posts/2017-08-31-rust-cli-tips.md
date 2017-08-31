@@ -46,7 +46,7 @@ fn main() {
 }
 ```
 
-This is _very_ concise - but also very powerful!
+This is _very_ concise - but also very powerful! (It uses [`clap`] behind the scenes.)
 
 ```
 $ cargo run -- --help
@@ -57,7 +57,7 @@ Pascal Hertleif <killercup@gmail.com>
 Do fancy things
 
 USAGE:
-    limericks [OPTIONS] <source>
+    fancify [OPTIONS] <source>
 
 FLAGS:
     -h, --help       Prints help information
@@ -69,6 +69,21 @@ OPTIONS:
 
 ARGS:
     <source>    The source, possibly unfancy
+```
+
+Or:
+
+```
+$ cargo run -- whatever --levl
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/fancify whatever --levl`
+error: Found argument '--levl' which wasn't expected, or isn't valid in this context
+        Did you mean --level?
+
+USAGE:
+    fancify <source> --level <level>
+
+For more information try --help
 ```
 
 ## Error handling
@@ -143,7 +158,7 @@ Or:
 $ touch whatever
 $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
-     Running `target/debug/limericks`
+     Running `target/debug/fancify`
 Error: Already fancy enough: Source level 255 above target level 42
 ```
 
@@ -206,5 +221,6 @@ These were my five tips for writing small CLI applications in Rust (writing nice
 
 [Rust]: https://www.rust-lang.org/
 [`structopt`]: https://docs.rs/structopt
+[`clap`]: https://docs.rs/clap
 [`error-chain`]: https://docs.rs/error-chain
 [elegant APIs]: {% post_url 2016-07-21-elegant-apis-in-rust %}
