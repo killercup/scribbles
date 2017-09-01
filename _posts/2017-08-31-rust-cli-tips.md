@@ -213,6 +213,66 @@ In my experience, it really pays off to use a lot of structs. Some scenarios:
 - Pass the same 3 parameters to a bunch of functions? Give them a name and maybe even turn some of these functions into methods.
 - See yourself writing a lot of boilerplate code? See if you can write a struct/enum and use a derive.
 
+## Bonus: Logging
+
+And a bonus round: Some logging with [`loggerv`]! (It's really simple, but usually suffices for CLI apps. No need to go all in with streaming JSON logs to logstash for now.)
+
+```rust
+#[macro_use] extern crate log;
+extern crate loggerv;
+
+#[macro_use] extern crate error_chain;
+extern crate structopt;
+#[macro_use] extern crate structopt_derive;
+use structopt::StructOpt;
+
+/// Do fancy things
+#[derive(StructOpt, Debug)]
+#[structopt(name = "fancify")]
+struct Cli {
+    /// Enable logging, use multiple `v`s to increase verbosity
+    #[structopt(short = "v", long = "verbose")]
+    verbosity: u64,
+}
+
+quick_main!(|| -> Result<()> {
+    let args = Cli::from_args();
+
+    loggerv::init_with_verbosity(args.verbosity)?;
+
+    // ...
+    let thing = "foobar";
+    debug!("Thing happened: {}", thing);
+    // ...
+
+    info!("It's all good!");
+    Ok(())
+});
+
+error_chain! {
+    foreign_links {
+        Log(::log::SetLoggerError);
+    }
+}
+```
+
+Sweet! Let's run it three time with more of less verbosity!
+
+```
+$ cargo run
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/fancify`
+$ cargo run -- -v
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/fancify -v`
+fancify: It's all good!
+$ cargo run -- -vv
+    Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
+     Running `target/debug/fancify -vv`
+fancify: Thing happened: foobar
+fancify: It's all good!
+```
+
 ## Conclusion
 {:.no_toc}
 
@@ -225,6 +285,7 @@ If you want to dig a little deeper, I'd suggest looking at how to [multi-platfor
 [`structopt`]: https://docs.rs/structopt
 [`clap`]: https://clap.rs
 [`error-chain`]: https://docs.rs/error-chain
+[`loggerv`]: https://docs.rs/loggerv
 [elegant APIs]: {% post_url 2016-07-21-elegant-apis-in-rust %}
 [trust]: https://github.com/japaric/trust
 [autocompletion for CLI args]: https://blog.clap.rs/complete-me/
