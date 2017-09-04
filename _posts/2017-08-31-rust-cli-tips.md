@@ -88,7 +88,9 @@ For more information try --help
 
 ## Error handling
 
-Just use [`error-chain`]. Honestly, it's that good.
+Just use [`error-chain`]. Honestly, it's that good. It might appear to be a bit magical[^macro-magic] at first, but in 90% of my code it was really straightforward to use.
+
+[^macro-magic]: If you are afraid of macro-heavy code, you can use [cargo-expand] to see what concrete code the macro generates.
 
 Let's pick up our example from before but assume we don't have any CLI options, so we'll hardcode them somehow.
 
@@ -285,6 +287,7 @@ If you want to dig a little deeper, I'd suggest looking at how to [multi-platfor
 [`structopt`]: https://docs.rs/structopt
 [`clap`]: https://clap.rs
 [`error-chain`]: https://docs.rs/error-chain
+[cargo-expand]: https://crates.io/crates/cargo-expand
 [`loggerv`]: https://docs.rs/loggerv
 [elegant APIs]: {% post_url 2016-07-21-elegant-apis-in-rust %}
 [trust]: https://github.com/japaric/trust
