@@ -25,8 +25,8 @@ I find it a very rewarding exercise.
 (Or maybe I'm just one of those people who like to geek out about neat concepts.)
 
 Recently, I came across this task:
-Counting the individual words in a text.
-It seems like a good "deep end" problem to me.
+Count the individual words in a given text.
+The solution I found seemed like a good "deep end" problem to me.
 It's short and yet full of different concepts.
 
 Here's what I'd write (in Rust):
@@ -74,7 +74,7 @@ I tried to add a lot of links):
 
 - - -
 
-Note that most of these concepts are no special to Rust.
+Note that most of these concepts are not special to Rust.
 I've just written this in Rust because it's the language I currently use the most in my free time,
 and also because it's a language that exposes you to a lot of interesting concepts.
 
