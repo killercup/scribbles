@@ -274,16 +274,25 @@ There are a bunch of docks using USB-C but _not_ Thunderbolt 3. With the excepti
 
 ### Thunderbolt 3 docks
 
-There's three I know of, and not one of them is shipping right now:
+These use Thunderbolt 3, which means: Much more throughput (up to two ports offering 4k @ 60 Hz, or more data connectivity), and higher prices.
 
-- [OWC's Thunderbolt 3 dock][owc-tb3] has basically everything incl. a SD card reader and a sound card, but costs $279 and ships in February 2017.
-- Plugable's Flagship Thunderbolt 3 dock [TBT3-UDV] does about the same as the OWC, looks cheaper, ships Q1 2017.
-- Belkin's Thunderbolt 3 [Express Dock HD][belkin-tb3] looks quite pretty, includes a 170 W power adapter (delivering up to 85 W to the computer[^belkin-cable]), but has neither audio-in nor a delivery date. It is rumored to cost around €400.
+- [OWC's Thunderbolt 3 dock][owc-tb3] has basically everything incl. a SD card reader and a sound card. It costs [$299][acom-owc-tb3] or [350€][ade-owc-tb3].
+- Plugable's Flagship Thunderbolt 3 dock [TBT3-UDV] does about the same as the OWC, but is a bit cheaper: [$190][acom-TBT3-UDV] or [219€][ade-TBT3-UDV].
+- Belkin's Thunderbolt 3 [Express Dock HD][belkin-tb3] looks quite pretty, includes a 170 W power adapter (delivering up to 85 W to the computer[^belkin-cable]). It costs [$300][acom-belkin-tb3] or [300€][ade-belkin-tb3].
+- Kensington's [SD4600P USB-C Docking Station][sd4600p] seems similar to the other docks, and has both HDMI and DisplayPort. [@anton48][] [confirmed][sd4600p-works] 4k @ 60 Hz works (thanks!). It costs [$165][acom-sd4600p] or [200€][ade-sd4600p].
 
 [^belkin-cable]: 85 W and Thunderbolt 3… wait a second! This sounds like a new cable that is better than the rest! Or maybe it's just the default Belkin Thunderbolt 3 cable with a "85 W" label pasted over the original "60 W" one.
 
-I won't be buying any of those in the short term but will be looking forward to reviews when they finally ship.
-
 [owc-tb3]: https://www.owcdigital.com/products/thunderbolt/thunderbolt-3-dock-overview
+[acom-owc-tb3]: https://www.amazon.com/OWC-Port-Thunderbolt-Dock-Space/dp/B01N51P3BB/ref=sr_1_3?ie=UTF8&qid=1505651385&sr=8-3&tag=killercup-21
+[ade-owc-tb3]: https://www.amazon.de/gp/product/B01N51P3BB/ref=s9_acsd_hps_bw_c_x_3_w?ie=UTF8&tag=killercup-21
 [TBT3-UDV]: http://plugable.com/thunderbolt-3/
+[acom-TBT3-UDV]: https://www.amazon.com/Plugable-Thunderbolt-Compatible-Supports-DisplayPort/dp/B06ZYR66QB/ref=sr_1_3?ie=UTF8&qid=1505651385&sr=8-3&tag=killercup-21
+[ade-TBT3-UDV]: https://www.amazon.de/gp/product/B0722Q4ZCP/ref=s9_acsd_hps_bw_c_x_3_w?ie=UTF8&tag=killercup-21
 [belkin-tb3]: http://www.belkin.com/us/p/F4U095au/
+[acom-belkin-tb3]: https://www.amazon.com/dp/B01MZ2ATGK/ref=sr_1_3?ie=UTF8&qid=1505651385&sr=8-3&tag=killercup-21
+[ade-belkin-tb3]: https://www.amazon.de/gp/product/B01MQU5UBN/ref=s9_acsd_hps_bw_c_x_3_w?ie=UTF8&tag=killercup-21
+[sd4600p]: https://www.kensington.com/us/us/4491/k38231ww/sd4600p-usbc-universal-dock-with-power
+[acom-sd4600p]: https://www.amazon.com/Kensington-Delivery-Charging-Precision-K38231WW/dp/B01FMP3B5S/ref=s9_acsd_hps_bw_c_x_3_w?ie=UTF8&tag=killercup-21
+[ade-sd4600p]: https://www.amazon.de/Kensington-SD4600P-Universal-Dockingstation-Stromversorgung-Datenübertragung/dp/B01FMP3B5S/ref=s9_acsd_hps_bw_c_x_3_w?ie=UTF8&tag=killercup-21
+[sd4600p-works]: https://github.com/killercup/scribbles/issues/10#issuecomment-329409956
