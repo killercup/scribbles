@@ -260,6 +260,7 @@ There are a bunch of docks using USB-C but _not_ Thunderbolt 3. With the excepti
 - [Arc Hub][arc], no Ethernet, but ~~apparently 4k @ 60Hz using Mini DisplayPort~~ two video outputs (HDMI and MiniDisplayport) that offer up 2560x1440 @ 60Hz/4k @ 30Hz, and you can only use one at a time ([more on that][issue-10] -- thanks [@anton48]). $105 pre-order, ships early 2017.
 - CalDigit's "USB-C Dock" ([marketing][caldigit], [193€][ade-caldigit], [$150][acom-caldigit]) at first looks like it just _has_ to use Thunderbolt 3 to make everything work, but it is only said to be "compatible with Thunderbolt 3". Furthermore, the marketing site compares it to OWC's USB-C dock. To add to the mystery, it apparently supports HDMI 2.0, but has problems with driving a 4k display on a Mac that CalDigit blames on macOS missing support for MST (Multi Transport Stream). According [this document][apple-HT206587] by Apple, MacBook Pros since 2013 support MTS. At least the dock seems to support 90 W power delivery which is pretty nice.
 - OWC's USB-C Dock ([marketing][owc-usbc], [195€][ade-owc-usbc], [$150][acom-owc-usbc]) has a bunch of USB-A ports, Ethernet, HDMI, an SD slot, as well as audio in/out and 80 W power delivery. But there is a far better successor with Thunderbolt 3 coming in February 2017.
+- Kensington's [SD4600P USB-C Docking Station][sd4600p] seems similar to the other docks, and has both HDMI and DisplayPort. [@anton48][] [observed][sd4600p-works] that 4k @ 60 Hz works (thanks!), but not when simultaneously using USB 3 (when using a 4k screen it only offers USB 2.0). It costs [$165][acom-sd4600p] or [200€][ade-sd4600p].
 
 [arc]: https://www.bourgedesign.com
 [issue-10]: https://github.com/killercup/scribbles/issues/10
@@ -279,7 +280,6 @@ These use Thunderbolt 3, which means: Much more throughput (up to two ports off
 - [OWC's Thunderbolt 3 dock][owc-tb3] has basically everything incl. a SD card reader and a sound card. It costs [$299][acom-owc-tb3] or [350€][ade-owc-tb3].
 - Plugable's Flagship Thunderbolt 3 dock [TBT3-UDV] does about the same as the OWC, but is a bit cheaper: [$190][acom-TBT3-UDV] or [219€][ade-TBT3-UDV].
 - Belkin's Thunderbolt 3 [Express Dock HD][belkin-tb3] looks quite pretty, includes a 170 W power adapter (delivering up to 85 W to the computer[^belkin-cable]). It costs [$300][acom-belkin-tb3] or [300€][ade-belkin-tb3].
-- Kensington's [SD4600P USB-C Docking Station][sd4600p] seems similar to the other docks, and has both HDMI and DisplayPort. [@anton48][] [confirmed][sd4600p-works] 4k @ 60 Hz works (thanks!). It costs [$165][acom-sd4600p] or [200€][ade-sd4600p].
 
 [^belkin-cable]: 85 W and Thunderbolt 3… wait a second! This sounds like a new cable that is better than the rest! Or maybe it's just the default Belkin Thunderbolt 3 cable with a "85 W" label pasted over the original "60 W" one.
 
