@@ -207,12 +207,14 @@ It's one level more abstract than the standard library, hides an allocation of a
 
 I know could put the function bodies just inside the main code, but giving these little code blocks names and getting the option of reusing them is really powerful. It also makes the `main` function a tad more abstract and easier to read (no need to see through all the implementation details). Furthermore (but this tends to not really shine in small CLI apps) it makes things easily unit-testable.
 
+And by the way: In most small CLI tools, performance is not that important. Feel free to prefer `.clone()` to sprinkling your code with lifetime parameters.
+
 ## Lots of structs
 
 In my experience, it really pays off to use a lot of structs. Some scenarios:
 
-- Have the choice between using `serder_json::Value` with a bunch of `match`es or a struct with `#[derive(Deserialize)]`? Choose the struct, get performance, nice errors, and documentation about the shape you expect.
-- Pass the same 3 parameters to a bunch of functions? Give them a name and maybe even turn some of these functions into methods.
+- Have the choice between using `serde_json::Value` with a bunch of `match`es or a struct with `#[derive(Deserialize)]`? Choose the struct, get performance, nice errors, and documentation about the shape you expect.
+- Pass the same 3 parameters to a bunch of functions? Group them in a (tuple) struct, give the group a name, and maybe even turn some of these functions into methods.
 - See yourself writing a lot of boilerplate code? See if you can write a struct/enum and use a derive.
 
 ## Bonus: Logging
