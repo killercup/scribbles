@@ -88,7 +88,7 @@ For more information try --help
 
 ## Error handling
 
-Just use [`error-chain`]. Honestly, it's that good. It might appear to be a bit magical[^macro-magic] at first, but in 90% of my code it was really straightforward to use.
+Right now, you can probably just use [`error-chain`]. It's a good library. It might appear to be a bit magical[^macro-magic] at first, but in 90% of my code it was really straightforward to use. Towards the end of 2017, the [`failure`] crate was published, which takes a different approach to error-chain, and solves some of the usual issues with it. As it's still very new, so I'll not recommend it just yet, but in the future, I might update this post to do so.
 
 [^macro-magic]: If you are afraid of macro-heavy code, you can use [cargo-expand] to see what concrete code the macro generates.
 
@@ -289,6 +289,7 @@ If you want to dig a little deeper, I'd suggest looking at how to [multi-platfor
 [`structopt`]: https://docs.rs/structopt
 [`clap`]: https://clap.rs
 [`error-chain`]: https://docs.rs/error-chain
+[`failure`]: https://boats.gitlab.io/failure/
 [cargo-expand]: https://crates.io/crates/cargo-expand
 [`loggerv`]: https://docs.rs/loggerv
 [elegant APIs]: {% post_url 2016-07-21-elegant-apis-in-rust %}
