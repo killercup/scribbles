@@ -144,6 +144,12 @@ Oh god, do I miss rustc's error messages. Rubocop is nice and all, but rustc jus
 
 [clippy]: https://github.com/Manishearth/rust-clippy
 
+### First-class functions
+
+_Update, 17 Dec 2017_: I wrote a post on [Passing Functions as Parameters in Ruby][ruby-ufcs].
+
+[ruby-ufcs]: {% post_url 2017-12-17-ruby-ufcs %}
+
 ## Adapting Ruby-isms
 
 What I learned by this: A surprisingly large number of Ruby features can be adapted using Rust's macros.
