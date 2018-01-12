@@ -88,7 +88,7 @@ Write documentation with example code showing how to use your API and get automa
 /// ```rust
 /// assert_eq!(min( 0,   14),    0);
 /// assert_eq!(min( 0, -127), -127);
-/// assert_eq!(min(42,  666),  666);
+/// assert_eq!(min(42,  666),   42);
 /// ```
 fn min(lhs: i32, rhs: i32) -> i32 {
 	if lhs < rhs { lhs } else { rhs }
