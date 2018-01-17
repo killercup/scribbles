@@ -25,26 +25,46 @@ test output
 :	whatever your test harness outputs
 :	we want to unify this across different test frameworks, e.g. so IDEs can depend on a JSON output format
 
+## Goals
+
+- Allow people to author test frameworks in a flexible way
+- Continue to ship test framework with rust
+	- keep `#[test]` and `#[bench]`
+	- add compiletest?
+- support "unusual" test frameworks
+	- e.g. port criterion, quickcheck, fuzz
+
 ## Open issues
 
-- how to define tests
+- how to write test frameworks
+	- like proc-macros
 	- support fancy stuff like macros in rspec style
 - what to output
 	- see above, we want human readable output as well as json
 	- json should be "the same" across test frameworks
 		- as in: a common parser should work
 		- there might be special fields that are safe to ignore
-- ship test framework with rust
-- support "unusual" tests, e.g. quickcheck, fuzz
-- allow to define test cases at runtime
+- allow to define test cases at runtime ("dynamic tests")
 	- have a test registry that gets seeded with test functions to run
 	- but also allow to register new/more tests at runtime by injecting the registry into tests
-		- e.g. `#[test] fn foo(r: &TestRegistry) { for file in glob("fixtures/") { r.start_test(f.filename()); ... r.end_test(f.filename(), status); } }`
+		- something like
+
+		  ```rust
+		  #[test]
+		  fn foo(r: &TestRegistry) {
+		      for f in glob("fixtures/") {
+		          r.run_test(f.filename(), || { /* test code */ });
+		       }
+		  }
+		  ```
+		  
+		  (assuming we extend the default `#[test]` so that it supports injecting the `TestRegistry`)
 
 ## Current design work
 
 - [forum thread][internals-thread]
 - [Manish's eRFC][erfc]
+
 
 [internals-thread]: https://internals.rust-lang.org/t/past-present-and-future-for-rust-testing/6354
 [erfc]: https://gist.github.com/Manishearth/a3b561406f5fe21357e4e3408e0cec49
