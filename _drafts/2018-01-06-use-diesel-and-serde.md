@@ -18,6 +18,16 @@ but both will help you write more maintainable code in the long run.
 [Serde]: https://serde.rs
 [serde-json]: https://github.com/serde-rs/json
 
+<!--
+
+## Notes
+
+I like custom derives because they enable so much.
+serde, diesel, structopt are ways to write maintainable code
+because they make a lot of data transformations descriptive.
+
+-->
+
 ## Let's output some JSON
 
 Let's start with small an example.
@@ -130,3 +140,10 @@ to parse a JSON string and turn it into a `Person`.
 [`serde_json::to_string`]: https://docs.rs/serde_json/1.0.9/serde_json/fn.to_string.html
 
 Using a type here has a lot of advantages.
+
+## Aiming for highly maintainable code
+
+
+[poodr]: http://www.poodr.com "Sandi Metz' book Practical Object-Oriented Design in Ruby (POODR)"
+[niko-talk]: https://www.youtube.com/watch?v=_jMSrMex6R0 "Niko Matsakis on 'Diving Into Rust For The First Time'"
+[steve-declarative-imperative]: https://twitter.com/steveklabnik/status/958378927449427969
