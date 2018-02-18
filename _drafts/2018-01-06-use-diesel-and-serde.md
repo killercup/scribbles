@@ -5,14 +5,21 @@ categories:
 ---
 [Diesel] is a query builder and ORM for using SQL-based databases in Rust.
 [Serde] is a library for serializing and deserializing in Rust.
-On top of this core library,
+On top of the core Serde library,
 multiple format-specific libraries exist,
 e.g., [serde-json], which allows you to read/write JSON.
-It may sound like these libraries do pretty different things,
-but let me tell you about one peculiar thing they have in common:
-At first, it seems complex to use them
-– especially as there are conceptually more lightweight alternatives –
-but both will help you write more maintainable code in the long run.
+From this description alone,
+it may sound like these libraries do pretty different things.
+Let me tell you about one peculiar thing they have in common:
+At first, it seems complex to use them,
+but in contrast conceptually more lightweight alternatives
+both will help you write more maintainable code in the long run.
+
+The reason is that these libraries want you to write descriptive code;
+so that they can produce the procedural parsing code for you.
+For many people,
+this seems at odds with how they typically write code,
+especially when learning a new language or tool.
 
 [Diesel]: https://diesel.rs
 [Serde]: https://serde.rs
