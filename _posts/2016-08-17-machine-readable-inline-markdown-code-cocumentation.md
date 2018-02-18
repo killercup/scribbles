@@ -42,6 +42,9 @@ Aborts
 Undefined Behavior
 : Describes for which inputs the function behavior is not defined
 
+Platform-specific behavior
+: Describe different behavior of function or module depending on the target platform
+
 ### Specific machine readable sections
 
 This is aimed at documenting functions and methods, but should also work for documenting type parameters and lifetime parameters of `struct`s, `enum`s, and `trait`s.
