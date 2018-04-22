@@ -13,6 +13,7 @@ license_url: https://creativecommons.org/licenses/by-nc/4.0/
 feedback_url: https://github.com/killercup/scribbles/issues/new
 repository_url: https://github.com/killercup/scribbles
 post_revisions_url: https://github.com/killercup/scribbles/commits/gh-pages/
+remote_theme: killercup/jekyll-theme-scribbles
 
 # Posts
 permalink: "/:title.html"
