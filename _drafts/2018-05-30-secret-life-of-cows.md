@@ -65,9 +65,24 @@ Indeed, in Rust we can! This is what `Cow` is all about.
 
 ## What is a Cow anyway
 
-"Cow" is an abbreviation that in Rust stands for "clone on write"[^clone].
+In Rust, the abbreviation "Cow" stands for "clone on write"[^clone].
 It is an enum with two states: `Borrowed` and `Owned`.
 This means you can use it to abstract over
 whether you own the data or just have a reference to it.
+This is especially useful when you want to _return_ a type
+from a function that may or may not need to allocate.
+
+With that in mind, let's look at [the actual definition of `Cow`][std::borrow::Cow]:
+
+```rust
+enum Cow<'a, B: ToOwned + ?Sized + 'a> {
+    /// Borrowed data.
+    Borrowed(&'a B),
+    /// Owned data.
+    Owned(<B as ToOwned>::Owned),
+}
+```
+
+[std::borrow::Cow]: https://doc.rust-lang.org/1.26.1/std/borrow/enum.Cow.html
 
 [^clone]: Yes, that's right: _Clone_ on write, not _copy_ on write. That's because in Rust, the `Copy` trait is guaranteed to by a simple `memcpy` operation, while `Clone` can also do custom logic (like recursively clone a `HashMap<String, String>`.
