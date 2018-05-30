@@ -83,6 +83,45 @@ enum Cow<'a, B: ToOwned + ?Sized + 'a> {
 }
 ```
 
+As you can see, it takes some convincing to have Rust accept this type
+in a way we can work with it.
+Let's go through it one by one.
+
+- `'a` is the lifetime that we need our data to be valid for.
+  For the `Owned` case it's not very interesting
+  (to Cow own the data -- it's valid until the Cow goes out of scope),
+  but in case the Cow contains `Borrowed` data,
+  this lifetime is a restriction set by the data we refer to.
+  We cannot have a Cow to refers to already freed memory,
+  and rustc will us when that is possible by mentioning that the Cow outlives it's `'a`.
+- `ToOwned` is a trait that defines a method to convert borrowed data into owned data
+  (by cloning it and giving us ownership of the new allocation, most likely).
+  The type we receive from this method is an associated type on the trait,
+  and it's name is `Owned` (yep, the same name as the Cow variant, sorry).
+  This allows us to refer to it in `Owned(<B as ToOwned>::Owned)`.
+
+  To make this a bit more concrete, let's assume we have a Cow that's storing a `&str` (in the `Borrowed` case).
+  The `ToOwned` implementation of `str` has `type Owned = String`, so `<&str as ToOwned>::Owned == String`.
+- `?Sized` is a funny one.
+  By default, Rust requires types to be of a known size.
+  But that doesn't have to be the case:
+  `[u8]` is an array of bytes, but we don't know its length.
+  You'd never use it directly, but if you have a reference to it, the reference itself can contain the length.
+  (See what I wrote above about slices!)
+  Since a Cow should be able to contain a `&[u8]`, we need to say "we don't require this to be `Sized`" -- which is exactly what the `?Sized` syntax does.
+
+Alright, so far so good!
+Let me just point out one thing though:
+If you want to store a `&'input str` in a Cow (Using `Cow::Borrowed(&'input str)` for example), what is the concrete type of the Cow?
+(The generic one is `Cow<'a, T>`.)
+
+Right! `Cow<'input, str>`!
+The type definition for the `Borrowed` variant contains `&'a T`,
+so our generic type is the type we refer to.
+This also means that `ToOwned` doesn't need to be implemented for references,
+but for concrete types, like `str` and `Path`.
+
+
 [std::borrow::Cow]: https://doc.rust-lang.org/1.26.1/std/borrow/enum.Cow.html
 
 [^clone]: Yes, that's right: _Clone_ on write, not _copy_ on write. That's because in Rust, the `Copy` trait is guaranteed to by a simple `memcpy` operation, while `Clone` can also do custom logic (like recursively clone a `HashMap<String, String>`.
