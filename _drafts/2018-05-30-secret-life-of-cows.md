@@ -144,3 +144,56 @@ but in case of functions and types that either contain or return
 new data or static defaults known at compiletime
 it can be enough.
 
+## Examples of Cows in the Wild
+
+Knowing Cows in theory is fine and dandy,
+but the examples we've seen so far
+only give you a small glance at when they can be used in practice.
+Sadly, as it turns out, not many Rust APIs expose Cows.
+Maybe, because they are seen as a thing you can introduce when you have a performance bottleneck,
+or maybe it's because people don't want to add lifetime annotations to their `struct`s
+(and they don't want to or can't use `Cow<'static, T>`).
+
+One example for improving program performance by using a Cow is
+[this part][regex-redux-cow] of the Regex Redux micro-benchmark.
+The trick is to store a reference to the data a first
+and replace it with owned data during the loop's iterations.
+
+[regex-redux-cow]: https://github.com/TeXitoi/benchmarksgame-rs/blob/f78f21bffc68cb42dd9311694913ea798535e674/src/regex_redux.rs#L72-L79
+
+A great example for how you can use the super powers of Cows
+in you own structs
+to refer to input data instead of coyping it over
+is serde's `#[serde(borrow)]` attribute.
+If you have a struct like
+
+```rust
+#[derive(Debug, Deserialize)]
+struct Foo<'input> {
+    bar: Cow<'input, str>,
+}
+```
+
+Serde will by default fill that `bar` Cow with an owned `String` ([playground][p1]).
+If you however write it like
+
+```rust
+#[derive(Debug, Deserialize)]
+struct Foo<'input> {
+    #[serde(borrow)]
+    bar: Cow<'input, str>,
+}
+```
+
+Serde will try to create a borrowed version of the Cow ([playground][p2]).
+
+This will only work, however, when the input string doesn't need to be adjusted.
+So, for example,
+when you deserialize a JSON string that has escaped quotes in it
+(`"\"Espaced strings contain backslashs\", he said."`)
+Serde will have to allocate a new string to store the unescaped representation,
+and will thus give you a `Cow::Owned` ([playground][p3]).
+
+[p1]: http://play.rust-lang.org/?gist=c3997391e5bcb2834674c9c3e49e2f0c&version=stable&mode=debug
+[p2]: http://play.rust-lang.org/?gist=2247b7e6431010122f0a779531a8ff89&version=stable&mode=debug
+[p3]: http://play.rust-lang.org/?gist=31491f2a3e9124f61d03972c9a1dad39&version=stable&mode=debug
