@@ -5,7 +5,7 @@ categories:
 ---
 
 A lot of people at RustFest Paris mentioned Cows.
-But still, the bovine super powers of Rust's standard library [appaer][1] to be a well-kept secret.
+But still, the bovine super powers of Rust's standard library [appear][1] to be a well-kept secret.
 This post will dig into this very useful pointer type
 and tries to present it in a way that is easy to understand,
 even if you're not a Rust programmer.
@@ -32,7 +32,7 @@ this is in some regards even more important:
 Ensuring all these properties is a great way to write fast programs.
 Let's look at how we can do this in Rust:
 
-If you know what you will do with you data,
+If you know what you will do with your data,
 you can probably figure out how to best store it.
 If you for example always iterate through a known list of values, an array (or a `Vec`) is the way to go.
 If you need to look up values by known keys, and don't care about the order they are stored in, a hash map sounds good.
