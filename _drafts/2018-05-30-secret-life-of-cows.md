@@ -1,13 +1,13 @@
 ---
-title: The secret life of Cows
+title: The Secret Life of Cows
 categories:
 - rust
 ---
 
-A lot of people at RustFest Paris mentioned CoWs.
-But nevertheless the bovine super powers of Rust's standard library are [apparently][1] to be a well-kept secret.
-This post wants to dig into them
-and present them in a way that is easy to understand,
+A lot of people at RustFest Paris mentioned Cows.
+But still, the bovine super powers of Rust's standard library [appaer][1] to be a well-kept secret.
+This post will dig into this very useful pointer type
+and tries to present it in a way that is easy to understand,
 even if you're not a Rust programmer.
 
 [1]: https://twitter.com/KevinHoffman/status/1001075501358776322
@@ -23,10 +23,12 @@ It's essential to know which piece of data is represented in which way.
 
 In systems programming languages,
 this is in some regards even more important:
-You want to know _exactly_ where your data lives,
-that it is efficiently stored,
-that it is removed as soon as you stop using it,
-and that you don't copy it around needlessly.
+
+1. You want to know _exactly_ where your data lives,
+2. that it is efficiently stored,
+3. that it is removed as soon as you stop using it,
+4. and that you don't copy it around needlessly.
+
 Ensuring all these properties is a great way to write fast programs.
 Let's look at how we can do this in Rust:
 
