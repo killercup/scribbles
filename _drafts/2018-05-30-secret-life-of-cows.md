@@ -135,6 +135,7 @@ you'll have to specify the lifetime of the referece the `Cow` can include:
 `struct Foo<'a> { bar: Cow<'a, str> }`.
 This means that everytime you now _use_ `Foo` that lifetime will be tracked,
 and everytime you take or return `Foo` you might just need to annotate it.
+
 One easy way around this is to use `'static'`:
 You can omit the lifetime annotation on your strcut,
 but your Cow can only contain references to static memory.
@@ -189,11 +190,12 @@ Serde will try to create a borrowed version of the Cow ([playground][p2]).
 
 This will only work, however, when the input string doesn't need to be adjusted.
 So, for example,
-when you deserialize a JSON string that has escaped quotes in it
-(`"\"Espaced strings contain backslashs\", he said."`)
+when you deserialize a JSON string that has escaped quotes in it[^json-quotes]
 Serde will have to allocate a new string to store the unescaped representation,
 and will thus give you a `Cow::Owned` ([playground][p3]).
 
 [p1]: http://play.rust-lang.org/?gist=c3997391e5bcb2834674c9c3e49e2f0c&version=stable&mode=debug
 [p2]: http://play.rust-lang.org/?gist=2247b7e6431010122f0a779531a8ff89&version=stable&mode=debug
 [p3]: http://play.rust-lang.org/?gist=31491f2a3e9124f61d03972c9a1dad39&version=stable&mode=debug
+
+[^json-quotes]: `"\"Espaced strings contain backslashes\", he said."`
