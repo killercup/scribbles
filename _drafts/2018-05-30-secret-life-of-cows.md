@@ -12,7 +12,7 @@ even if you're not a Rust programmer.
 
 [1]: https://twitter.com/KevinHoffman/status/1001075501358776322
 
-## Organizing data
+## Organizing Data
 
 This is what it all comes down to:
 People want to have a good, precise way to organize their data.
@@ -65,7 +65,7 @@ Do we always need to copy it over with the characters swapped out?
 Or can we be clever and return some pointer to the original string if there was no replacement needed?
 Indeed, in Rust we can! This is what `Cow` is all about.
 
-## What is a Cow anyway
+## What is a Cow Anyway
 
 In Rust, the abbreviation "Cow" stands for "clone on write"[^clone].
 It is an enum with two states: `Borrowed` and `Owned`.
