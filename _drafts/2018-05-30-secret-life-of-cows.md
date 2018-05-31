@@ -127,4 +127,20 @@ so our generic type is the type we refer to.
 This also means that `ToOwned` doesn't need to be implemented for references,
 but for concrete types, like `str` and `Path`.
 
+Let me note something about that lifetime the Cow carries with it real quick:
+If you want to replace the type of `bar` in
+`struct Foo { bar: String }`
+with a `Cow`,
+you'll have to specify the lifetime of the referece the `Cow` can include:
+`struct Foo<'a> { bar: Cow<'a, str> }`.
+This means that everytime you now _use_ `Foo` that lifetime will be tracked,
+and everytime you take or return `Foo` you might just need to annotate it.
+One easy way around this is to use `'static'`:
+You can omit the lifetime annotation on your strcut,
+but your Cow can only contain references to static memory.
+This might sound less useful than a generic lifetime
+-- that's because it is --
+but in case of functions and types that either contain or return
+new data or static defaults known at compiletime
+it can be enough.
 
