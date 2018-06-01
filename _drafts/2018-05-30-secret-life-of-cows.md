@@ -138,8 +138,8 @@ If you want to replace the type of `bar` in
 with a `Cow`,
 you'll have to specify the lifetime of the reference the `Cow` can include:
 `struct Foo<'a> { bar: Cow<'a, str> }`.
-This means that everytime you now _use_ `Foo` that lifetime will be tracked,
-and everytime you take or return `Foo` you might just need to annotate it.
+This means that every time you now _use_ `Foo` that lifetime will be tracked,
+and every time you take or return `Foo` you might just need to annotate it.
 
 One easy way around this is to use `'static'`:
 You can omit the lifetime annotation on your struct,
@@ -147,7 +147,7 @@ but your Cow can only contain references to static memory.
 This might sound less useful than a generic lifetime
 -- that's because it is --
 but in case of functions and types that either contain or return
-new data or static defaults known at compiletime
+new data or static defaults known at compile-time
 it can be enough.
 
 ## Examples of Cows in the Wild
@@ -169,7 +169,7 @@ and replace it with owned data during the loop's iterations.
 
 A great example for how you can use the super powers of Cows
 in your own structs
-to refer to input data instead of coyping it over
+to refer to input data instead of copying it over
 is [Serde's][serde] `#[serde(borrow)]` attribute.
 If you have a struct like
 
@@ -205,4 +205,4 @@ and will thus give you a `Cow::Owned` ([playground][p3]).
 [p2]: http://play.rust-lang.org/?gist=2247b7e6431010122f0a779531a8ff89&version=stable&mode=debug
 [p3]: http://play.rust-lang.org/?gist=31491f2a3e9124f61d03972c9a1dad39&version=stable&mode=debug
 
-[^json-quotes]: `"\"Espaced strings contain backslashes\", he said."`
+[^json-quotes]: `"\"Escaped strings contain backslashes\", he said."`
