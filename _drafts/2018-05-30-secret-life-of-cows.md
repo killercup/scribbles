@@ -18,13 +18,15 @@ This is what it all comes down to:
 People want to have a good, precise way to organize their data.
 And they want their programming language to support them.
 That's why a lot of newer languages include a bunch of data structures
+optimized for different use cases,
 and that is also why software developers are dealing with API documentation so often.
 It's essential to know which piece of data is represented in which way.
 
 In systems programming languages,
-this is in some regards even more important:
+this is in some regards even more important.
+You want to know:
 
-1. You want to know _exactly_ where your data lives,
+1. _exactly_ where your data lives,
 2. that it is efficiently stored,
 3. that it is removed as soon as you stop using it,
 4. and that you don't copy it around needlessly.
@@ -41,10 +43,13 @@ This is just to give you a few examples -- there are books on this topic and you
 
 [crossbeam-deque]: https://crates.io/crates/crossbeam-deque
 
-Making sure our data gets removed from memory so we don't use up too much memory and slow down the system is easy in Rust.
+Luckily, in Rust it is easy to
+make sure our data gets removed from memory
+as soon as possible
+(so we don't use up too much memory and slow down the system).
 Rust uses the ownership model of automatically `drop`ping resources when they go out of scope,
 so it doesn't need to periodically run a garbage collector to free memory.
-You can still waste memory, of course, but allocating too much of it manually,
+You can still waste memory, of course, by allocating too much of it manually,
 or by building reference cycles and leaking it.
 
 One important step towards being a responsible citizen in regard to memory usage is to not copy data more than necessary.
@@ -60,7 +65,7 @@ and the length of the remaining string that we care about.
 (Carrying the length with us is a convention in Rust.)
 
 But what about a more complicated function?
-Let's image we want to replace some characters in a string.
+Let's imagine we want to replace some characters in a string.
 Do we always need to copy it over with the characters swapped out?
 Or can we be clever and return some pointer to the original string if there was no replacement needed?
 Indeed, in Rust we can! This is what `Cow` is all about.
@@ -98,12 +103,12 @@ Let's go through it one by one.
   (to Cow own the data -- it's valid until the Cow goes out of scope),
   but in case the Cow contains `Borrowed` data,
   this lifetime is a restriction set by the data we refer to.
-  We cannot have a Cow to refers to already freed memory,
-  and rustc will us when that is possible by mentioning that the Cow outlives it's `'a`.
+  We cannot have a Cow that refers to already freed memory,
+  and rustc will us know when that is possible by mentioning that the Cow outlives its `'a`.
 - `ToOwned` is a trait that defines a method to convert borrowed data into owned data
   (by cloning it and giving us ownership of the new allocation, most likely).
   The type we receive from this method is an associated type on the trait,
-  and it's name is `Owned` (yep, the same name as the Cow variant, sorry).
+  and its name is `Owned` (yep, the same name as the Cow variant, sorry).
   This allows us to refer to it in `Owned(<B as ToOwned>::Owned)`.
 
   To make this a bit more concrete, let's assume we have a Cow that's storing a `&str` (in the `Borrowed` case).
@@ -131,13 +136,13 @@ Let me note something about that lifetime the Cow carries with it real quick:
 If you want to replace the type of `bar` in
 `struct Foo { bar: String }`
 with a `Cow`,
-you'll have to specify the lifetime of the referece the `Cow` can include:
+you'll have to specify the lifetime of the reference the `Cow` can include:
 `struct Foo<'a> { bar: Cow<'a, str> }`.
 This means that everytime you now _use_ `Foo` that lifetime will be tracked,
 and everytime you take or return `Foo` you might just need to annotate it.
 
 One easy way around this is to use `'static'`:
-You can omit the lifetime annotation on your strcut,
+You can omit the lifetime annotation on your struct,
 but your Cow can only contain references to static memory.
 This might sound less useful than a generic lifetime
 -- that's because it is --
@@ -157,16 +162,18 @@ or maybe it's because people don't want to add lifetime annotations to their `st
 
 One example for improving program performance by using a Cow is
 [this part][regex-redux-cow] of the Regex Redux micro-benchmark.
-The trick is to store a reference to the data a first
+The trick is to store a reference to the data at first
 and replace it with owned data during the loop's iterations.
 
 [regex-redux-cow]: https://github.com/TeXitoi/benchmarksgame-rs/blob/f78f21bffc68cb42dd9311694913ea798535e674/src/regex_redux.rs#L72-L79
 
 A great example for how you can use the super powers of Cows
-in you own structs
+in your own structs
 to refer to input data instead of coyping it over
-is serde's `#[serde(borrow)]` attribute.
+is [Serde's][serde] `#[serde(borrow)]` attribute.
 If you have a struct like
+
+[serde]: https://serde.rs
 
 ```rust
 #[derive(Debug, Deserialize)]
