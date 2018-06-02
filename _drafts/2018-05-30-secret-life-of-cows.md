@@ -4,12 +4,18 @@ categories:
 - rust
 ---
 
-A lot of people at RustFest Paris mentioned Cows.
-But still, the bovine super powers of Rust's standard library [appear][1] to be a well-kept secret.
-This post will dig into this very useful pointer type
-and tries to present it in a way that is easy to understand,
-even if you're not a Rust programmer.
+A lot of people at RustFest Paris mentioned Cows
+-- which may be surprising if you've never seen [`std::borrow::Cow`][std::borrow::Cow]!
 
+`Cow` in this context stands for "Clone on Write" and
+is a type that allows you to reuse data if it is not modified.
+Somehow, these bovine super powers of Rust's standard library [appear][1] to be a well-kept secret.
+This post will dig into this very useful pointer type by
+explaining why in systems programming languages you need such fine control,
+explain Cow's in detail,
+and compare them to other ways of organizing your data.
+
+[std::borrow::Cow]: https://doc.rust-lang.org/1.26.1/std/borrow/enum.Cow.html
 [1]: https://twitter.com/KevinHoffman/status/1001075501358776322
 
 ## Contents
@@ -89,7 +95,6 @@ from a function that may or may not need to allocate.
 
 ### A std Example
 
-[std::borrow::Cow]: https://doc.rust-lang.org/1.26.1/std/borrow/enum.Cow.html
 Let's look at an example.
 Say you have a `Path` and want to convert it to a string.
 Sadly, not every filesystem path is a valid UTF-8
