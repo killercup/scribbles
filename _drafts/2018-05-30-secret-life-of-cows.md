@@ -55,7 +55,18 @@ without any dynamic memory allocation.
 If you want to store data of a size only known at runtime
 (say the text content of a file),
 you need to use a type that dynamically allocates memory (on the heap),
-for example `String`, or `Vec`.
+for example [`String`], or [`Vec`].
+You can explicitly allocate a data type on the heap by wrapping it in a [`Box`].
+
+(If you're unfamiliar with the notion of "Stack and Heap",
+you can find a good explanation in
+[this chapter][rust-book-ownership]
+of the official Rust book.)
+
+[rust-book-ownership]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch04-01-what-is-ownership.html
+[`String`]: https://doc.rust-lang.org/1.26.1/std/string/struct.String.html
+[`Vec`]: https://doc.rust-lang.org/1.26.1/std/vec/struct.Vec.html
+[`Box`]: https://doc.rust-lang.org/1.26.1/std/boxed/struct.Box.html
 
 Note: Creating a new (not-empty) `String` means allocating memory,
 which is a somewhat costly operation.
@@ -68,11 +79,13 @@ and doing so can speed up performance-critical parts of your code significantly.
 
 If you know what you will do with your data,
 you can probably figure out how to best store it.
-If you for example always iterate through a known list of values, an array (or a `Vec`) is the way to go.
-If you need to look up values by known keys, and don't care about the order they are stored in, a hash map sounds good.
+If you for example always iterate through a known list of values, an array (or a [`Vec`]) is the way to go.
+If you need to look up values by known keys, and don't care about the order they are stored in, a [hash map] sounds good.
 If you need a stack to put data onto from different threads, you can use [crossbeam-deque].
 This is just to give you a few examples -- there are books on this topic and you should read them.
+A `Cow` doesn't really help you here per-se, but you can use it _inside_ your data structures.
 
+[hash map]: https://doc.rust-lang.org/1.26.1/std/collections/struct.HashMap.html
 [crossbeam-deque]: https://crates.io/crates/crossbeam-deque
 
 ### Dropping Data
@@ -81,10 +94,12 @@ Luckily, in Rust it is easy to
 make sure our data gets removed from memory
 as soon as possible
 (so we don't use up too much memory and slow down the system).
-Rust uses the ownership model of automatically `drop`ping resources when they go out of scope,
+Rust uses the ownership model of automatically [dropping][rust-book-memory-and-allocation] resources when they go out of scope,
 so it doesn't need to periodically run a garbage collector to free memory.
 You can still waste memory, of course, by allocating too much of it manually,
 or by building reference cycles and leaking it.
+
+[rust-book-memory-and-allocation]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch04-01-what-is-ownership.html#memory-and-allocation
 
 ### No Needless Copying
 
@@ -121,7 +136,7 @@ from a function that may or may not need to allocate.
 ### A std Example
 
 Let's look at an example.
-Say you have a `Path` and want to convert it to a string.
+Say you have a [`Path`] and want to convert it to a string.
 Sadly, not every filesystem path is a valid UTF-8
 (Rust strings are guaranteed to by UTF-8 encoded).
 Rust has a handy function to get a string regardless:
@@ -131,6 +146,7 @@ it will return a reference to the original data,
 otherwise it will create a new string
 where invalid characters are replaced with the `�` character.
 
+[`Path`]: https://doc.rust-lang.org/1.26.1/std/path/struct.Path.html
 [`Path::to_string_lossy`]: https://doc.rust-lang.org/1.26.1/std/path/struct.Path.html#method.to_string_lossy
 
 ```rust
@@ -161,28 +177,33 @@ As you can see, it takes some convincing to have Rust accept this type
 in a way we can work with it.
 Let's go through it one by one.
 
-- `'a` is the lifetime that we need our data to be valid for.
+- `'a` is the [lifetime][rust-book-lifetime] that we need our data to be valid for.
   For the `Owned` case it's not very interesting
   (to Cow own the data -- it's valid until the Cow goes out of scope),
   but in case the Cow contains `Borrowed` data,
   this lifetime is a restriction set by the data we refer to.
   We cannot have a Cow that refers to already freed memory,
   and rustc will us know when that is possible by mentioning that the Cow outlives its `'a`.
-- `ToOwned` is a trait that defines a method to convert borrowed data into owned data
+- [`ToOwned`] is a trait that defines a method to convert borrowed data into owned data
   (by cloning it and giving us ownership of the new allocation, most likely).
-  The type we receive from this method is an associated type on the trait,
+  The type we receive from this method is an [associated type][rust-book-advanced-traits] on the trait,
   and its name is `Owned` (yep, the same name as the Cow variant, sorry).
   This allows us to refer to it in `Owned(<B as ToOwned>::Owned)`.
 
   To make this a bit more concrete, let's assume we have a Cow that's storing a `&str` (in the `Borrowed` case).
   The `ToOwned` implementation of `str` has `type Owned = String`, so `<&str as ToOwned>::Owned == String`.
-- `?Sized` is a funny one.
+- [`?Sized`][rust-book-sized] is a funny one.
   By default, Rust requires types to be of a known size.
   But that doesn't have to be the case:
   `[u8]` is an array of bytes, but we don't know its length.
   You'd never use it directly, but if you have a reference to it, the reference itself can contain the length.
   (See what I wrote above about slices!)
   Since a Cow should be able to contain a `&[u8]`, we need to say "we don't require this to be `Sized`" -- which is exactly what the `?Sized` syntax does.
+
+[rust-book-lifetime]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch10-03-lifetime-syntax.html
+[`ToOwned`]: https://doc.rust-lang.org/1.26.1/std/borrow/trait.ToOwned.html
+[rust-book-advanced-traits]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch19-03-advanced-traits.html
+[rust-book-sized]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch19-04-advanced-types.html#dynamically-sized-types--sized
 
 Alright, so far so good!
 Let me just point out one thing though:
@@ -204,7 +225,7 @@ you'll have to specify the lifetime of the reference the `Cow` can include:
 This means that every time you now _use_ `Foo` that lifetime will be tracked,
 and every time you take or return `Foo` you might just need to annotate it.
 
-One easy way around this is to use `'static'`:
+One easy way around this is to use [`'static'`][rust-book-static-lifetime]:
 You can omit the lifetime annotation on your struct,
 but your Cow can only contain references to static memory.
 This might sound less useful than a generic lifetime
@@ -212,6 +233,8 @@ This might sound less useful than a generic lifetime
 but in case of functions and types that either contain or return
 new data or static defaults known at compile-time
 it can be enough.
+
+[rust-book-static-lifetime]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch10-03-lifetime-syntax.html#the-static-lifetime
 
 ## Cows in the Wild
 
