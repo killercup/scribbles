@@ -45,6 +45,10 @@ You want to know:
 
 Ensuring all these properties is a great way to write fast programs.
 Let's look at how we can do this in Rust:
+Let's look at how we can do this in Rust.
+
+### Where Does Our Data Live
+
 
 If you know what you will do with your data,
 you can probably figure out how to best store it.
@@ -55,6 +59,8 @@ This is just to give you a few examples -- there are books on this topic and you
 
 [crossbeam-deque]: https://crates.io/crates/crossbeam-deque
 
+### Dropping Data
+
 Luckily, in Rust it is easy to
 make sure our data gets removed from memory
 as soon as possible
@@ -63,6 +69,8 @@ Rust uses the ownership model of automatically `drop`ping resources when they go
 so it doesn't need to periodically run a garbage collector to free memory.
 You can still waste memory, of course, by allocating too much of it manually,
 or by building reference cycles and leaking it.
+
+### No Needless Copying
 
 One important step towards being a responsible citizen in regard to memory usage is to not copy data more than necessary.
 If you for example have a function that removes whitespace at the beginning of a string,
@@ -188,7 +196,7 @@ but in case of functions and types that either contain or return
 new data or static defaults known at compile-time
 it can be enough.
 
-## Examples of Cows in the Wild
+## Cows in the Wild
 
 Knowing Cows in theory is fine and dandy,
 but the examples we've seen so far
@@ -198,12 +206,16 @@ Maybe, because they are seen as a thing you can introduce when you have a perfor
 or maybe it's because people don't want to add lifetime annotations to their `struct`s
 (and they don't want to or can't use `Cow<'static, T>`).
 
+### Benchmarks
+
 One example for improving program performance by using a Cow is
 [this part][regex-redux-cow] of the Regex Redux micro-benchmark.
 The trick is to store a reference to the data at first
 and replace it with owned data during the loop's iterations.
 
 [regex-redux-cow]: https://github.com/TeXitoi/benchmarksgame-rs/blob/f78f21bffc68cb42dd9311694913ea798535e674/src/regex_redux.rs#L72-L79
+
+### Serde
 
 A great example for how you can use the super powers of Cows
 in your own structs
