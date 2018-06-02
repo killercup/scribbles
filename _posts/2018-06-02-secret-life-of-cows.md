@@ -299,3 +299,7 @@ and will thus give you a `Cow::Owned` ([playground][p3]).
 [p3]: http://play.rust-lang.org/?gist=31491f2a3e9124f61d03972c9a1dad39&version=stable&mode=debug
 
 [^json-quotes]: `"\"Escaped strings contain backslashes\", he said."`
+
+- - - -
+
+Thanks to Robert Balicki, Alex Kitchens, and Matt Brubeck for reviewing this post!
