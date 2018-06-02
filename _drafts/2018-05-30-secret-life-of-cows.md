@@ -32,7 +32,8 @@ And they want their programming language to support them.
 That's why a lot of newer languages include a bunch of data structures
 optimized for different use cases,
 and that is also why software developers are dealing with API documentation so often.
-It's essential to know which piece of data is represented in which way.
+To ensure that your code has the performance characteristics you expect,
+it is essential to know which piece of data is represented in which way.
 
 In systems programming languages,
 this is in some regards even more important.
@@ -44,11 +45,26 @@ You want to know:
 4. and that you don't copy it around needlessly.
 
 Ensuring all these properties is a great way to write fast programs.
-Let's look at how we can do this in Rust:
 Let's look at how we can do this in Rust.
 
 ### Where Does Our Data Live
 
+It is quite explicit where your data lives.
+By default, primitive types and structs containing primitive types are allocated on the stack,
+without any dynamic memory allocation.
+If you want to store data of a size only known at runtime
+(say the text content of a file),
+you need to use a type that dynamically allocates memory (on the heap),
+for example `String`, or `Vec`.
+
+Note: Creating a new (not-empty) `String` means allocating memory,
+which is a somewhat costly operation.
+A language like Rust gives you quite a few options to
+skip some allocations,
+and doing so can speed up performance-critical parts of your code significantly.
+(Spoiler: `Cow` is one of these options.)
+
+### Structuring Data
 
 If you know what you will do with your data,
 you can probably figure out how to best store it.
@@ -75,6 +91,7 @@ or by building reference cycles and leaking it.
 One important step towards being a responsible citizen in regard to memory usage is to not copy data more than necessary.
 If you for example have a function that removes whitespace at the beginning of a string,
 you could create a new string that just contains the characters after the leading whitespace.
+(Remember: A new string means a new memory allocation.)
 Or, you could return a _slice_ of the original string, that starts after the leading whitespace.
 The second options requires that we keep the original data around,
 because our new slice is just referencing it internally.
