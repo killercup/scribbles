@@ -9,14 +9,17 @@ A lot of people at RustFest Paris mentioned Cows
 
 `Cow` in this context stands for "Clone on Write" and
 is a type that allows you to reuse data if it is not modified.
-Somehow, these bovine super powers of Rust's standard library [appear][1] to be a well-kept secret.
+Somehow, these bovine super powers of Rust's standard library
+[appear][kevins-tweet] to be a well-kept secret
+even though they are [not new][llogiqs-post].
 This post will dig into this very useful pointer type by
 explaining why in systems programming languages you need such fine control,
 explain Cow's in detail,
 and compare them to other ways of organizing your data.
 
 [std::borrow::Cow]: https://doc.rust-lang.org/1.26.1/std/borrow/enum.Cow.html
-[1]: https://twitter.com/KevinHoffman/status/1001075501358776322
+[kevins-tweet]: https://twitter.com/KevinHoffman/status/1001075501358776322
+[llogiqs-post]: https://llogiq.github.io/2015/07/10/cow-redux.html
 
 ## Contents
 {:.no_toc}
