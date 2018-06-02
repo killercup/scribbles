@@ -12,6 +12,12 @@ even if you're not a Rust programmer.
 
 [1]: https://twitter.com/KevinHoffman/status/1001075501358776322
 
+## Contents
+{:.no_toc}
+
+1. Table of contents
+{:toc}
+
 ## Organizing Data
 
 This is what it all comes down to:
