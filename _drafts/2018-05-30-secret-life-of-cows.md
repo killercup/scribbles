@@ -87,9 +87,36 @@ from a function that may or may not need to allocate.
 
 [^clone]: Yes, that's right: _Clone_ on write, not _copy_ on write. That's because in Rust, the `Copy` trait is guaranteed to by a simple `memcpy` operation, while `Clone` can also do custom logic (like recursively clone a `HashMap<String, String>`.
 
-With that in mind, let's look at [the actual definition of `Cow`][std::borrow::Cow]:
+### A std Example
 
 [std::borrow::Cow]: https://doc.rust-lang.org/1.26.1/std/borrow/enum.Cow.html
+Let's look at an example.
+Say you have a `Path` and want to convert it to a string.
+Sadly, not every filesystem path is a valid UTF-8
+(Rust strings are guaranteed to by UTF-8 encoded).
+Rust has a handy function to get a string regardless:
+[`Path::to_string_lossy`].
+When the path is valid UTF-8 already,
+it will return a reference to the original data,
+otherwise it will create a new string
+where invalid characters are replaced with the `�` character.
+
+[`Path::to_string_lossy`]: https://doc.rust-lang.org/1.26.1/std/path/struct.Path.html#method.to_string_lossy
+
+```rust
+use std::borrow::Cow;
+use std::path::Path;
+
+let path = Path::new("foo.txt");
+match path.to_string_lossy() {
+    Cow::Borrowed(_str_ref) => println!("path was valid UTF-8"),
+    Cow::Owned(_new_string) => println!("path was not valid UTF-8"),
+}
+```
+
+### A Beefy Definition
+
+With that in mind, let's look at [the actual definition of `Cow`][std::borrow::Cow]:
 
 ```rust
 enum Cow<'a, B: ToOwned + ?Sized + 'a> {
