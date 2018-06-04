@@ -189,11 +189,9 @@ fn render_select<C: Choice>(options: &[C], selected: usize) -> CliSection {
 
 <blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/killercup">@killercup</a> your vdom/libui post was cool, but to me vdom is also a poorer version of immediate-mode GUI APIs which would be even simpler :)</p>&mdash; Rémy Rakić (@lqd) <a href="https://twitter.com/lqd/status/760223190182465538">August 1, 2016</a></blockquote>
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/lqd">@lqd</a> interesting. do you have an example for nice immediate-mode GUI code?</p>&mdash; Pascal (@killercup) <a href="https://twitter.com/killercup/status/760224634855911424">August 1, 2016</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/lqd">@lqd</a> interesting. do you have an example for nice immediate-mode GUI code?</p>&mdash; Pascal (@killercup) <a href="https://twitter.com/killercup/status/760224634855911424">August 1, 2016</a></blockquote>
 
-<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/killercup">@killercup</a> 1) <a href="https://t.co/zd9I0owlpf">https://t.co/zd9I0owlpf</a> 2) <a href="https://t.co/JgrbdaZGSw">https://t.co/JgrbdaZGSw</a> (page 34) 3) <a href="https://t.co/9lldQFUlWR">https://t.co/9lldQFUlWR</a> 4) surely on <a href="https://twitter.com/handmade_hero">@handmade_hero</a> as well</p>&mdash; Rémy Rakić (@lqd) <a href="https://twitter.com/lqd/status/760229545010163715">August 1, 2016</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
-
-<script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-conversation="none" data-lang="en"><p lang="en" dir="ltr"><a href="https://twitter.com/killercup">@killercup</a> 1) <a href="https://t.co/zd9I0owlpf">https://t.co/zd9I0owlpf</a> 2) <a href="https://t.co/JgrbdaZGSw">https://t.co/JgrbdaZGSw</a> (page 34) 3) <a href="https://t.co/9lldQFUlWR">https://t.co/9lldQFUlWR</a> 4) surely on <a href="https://twitter.com/handmade_hero">@handmade_hero</a> as well</p>&mdash; Rémy Rakić (@lqd) <a href="https://twitter.com/lqd/status/760229545010163715">August 1, 2016</a></blockquote>
 
 ### React Fibre
 

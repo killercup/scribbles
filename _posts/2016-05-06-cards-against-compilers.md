@@ -5,7 +5,7 @@ source: https://twitter.com/_Caro_N/status/727688154627506177
 
 First seen in this tweet:
 
-<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Cards against compilers! <a href="https://t.co/ZK6nvOgQ7Q">pic.twitter.com/ZK6nvOgQ7Q</a></p>&mdash; Ⓒⓐⓡⓞ (@_Caro_N) <a href="https://twitter.com/_Caro_N/status/727688154627506177">May 4, 2016</a></blockquote> <script async src="//platform.twitter.com/widgets.js" charset="utf-8"></script>
+<blockquote class="twitter-tweet" data-lang="en"><p lang="en" dir="ltr">Cards against compilers! <a href="https://t.co/ZK6nvOgQ7Q">pic.twitter.com/ZK6nvOgQ7Q</a></p>&mdash; Ⓒⓐⓡⓞ (@_Caro_N) <a href="https://twitter.com/_Caro_N/status/727688154627506177">May 4, 2016</a></blockquote>
 
 There [seems](https://twitter.com/_Caro_N/status/728749777999925248) to be a PDF out there somewhere from CPP Con, but I couldn't find it.
 
