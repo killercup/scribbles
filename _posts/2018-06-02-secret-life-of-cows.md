@@ -252,6 +252,69 @@ Maybe, because they are seen as a thing you can introduce when you have a perfor
 or maybe it's because people don't want to add lifetime annotations to their `struct`s
 (and they don't want to or can't use `Cow<'static, T>`).
 
+### Mixed Static and Dynamic Strings
+
+One very cool use-case for Cows is
+when dealing with functions that
+either return static strings (i.e., strings you literally write in your source code)
+or dynamic strings that get put together at run time.
+The [Programming Rust] book by Jim Blandy and Jason Orendorff
+contains an example like this:
+
+[Programming Rust]: http://shop.oreilly.com/product/0636920040385.do
+
+```rust
+use std::borrow::Cow;
+
+fn describe(error: &Error) -> Cow<'static, str> {
+    match *error {
+        Error::NotFound => "Error: Not found".into(),
+        Error::Custom(e) => format!("Error: {}", e).into(),
+    }
+}
+```
+
+**Small aside:**
+See how we are using the [`Into`] trait here
+to make constructing cows super concise?
+`Into` is the inverse of [`From`]
+and is implemented for all types that implement `From`.
+So, the compiler knows that we want a `Cow<'static, str>`,
+and gave it a `String` or a `&'static str`.
+Lucky for us,
+`impl<'a> From<&'a str> for Cow<'a, str>`
+and `impl<'a> From<String> for Cow<'a, str>`
+are in the standard library,
+so rustc can find and call these!
+
+[`Into`]: https://doc.rust-lang.org/1.26.1/std/convert/trait.Into.html
+[`From`]: https://doc.rust-lang.org/1.26.1/std/convert/trait.From.html
+
+Why is this a very cool example?
+Reddit user [0x7CFE][/u/0x7CFE] put it like [this][reddit-e03032q]:
+
+[/u/0x7CFE]: https://www.reddit.com/user/0x7CFE
+[reddit-e03032q]: https://www.reddit.com/r/rust/comments/8o1pxh/the_secret_life_of_cows/e03032q/
+
+> The most important thing is that since `Cow<'static, str>` derefs[^deref] to `&str`
+> it may act as a drop-in replacement everywhere, where `&str` is expected.
+> So, if last error variant was added to an already existing code base,
+> all would just work without any major refactoring.
+> 
+> In other languages like C++ you'd probably have to decide,
+> [either] to return allocating version like `std::string` everywhere
+> or get rid of the details and suffer from poor ergonomics,
+> where you'd need to use such [a] method.
+> Even worse, error entry with extra details may be very rare
+> and yet, you'd need to make everything allocate just to stick it all in.
+> 
+> Rust provides a solution that is zero cost for cases where extra details are not needed.
+> It's a brilliant example of "pay only for what you use" principle in action.
+
+[^deref]: Thanks to an implementation of the [`Deref`] trait, you can use a reference to a `Cow<'static, str>` in place of a `&str`. That means, a `Cow<'static, str>` can be seen a reference to a string without having to convert it.
+
+[`Deref`]: https://doc.rust-lang.org/1.26.1/std/ops/trait.Deref.html
+
 ### Benchmarks
 
 One example for improving program performance by using a Cow is
