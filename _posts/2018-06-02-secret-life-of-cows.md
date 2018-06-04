@@ -14,7 +14,7 @@ Somehow, these bovine super powers of Rust's standard library
 even though they are [not new][llogiqs-post].
 This post will dig into this very useful pointer type by
 explaining why in systems programming languages you need such fine control,
-explain Cow's in detail,
+explain Cows in detail,
 and compare them to other ways of organizing your data.
 
 [std::borrow::Cow]: https://doc.rust-lang.org/1.26.1/std/borrow/enum.Cow.html
@@ -140,8 +140,8 @@ from a function that may or may not need to allocate.
 
 Let's look at an example.
 Say you have a [`Path`] and want to convert it to a string.
-Sadly, not every filesystem path is a valid UTF-8
-(Rust strings are guaranteed to by UTF-8 encoded).
+Sadly, not every filesystem path is valid UTF-8
+(Rust strings are guaranteed to be UTF-8 encoded).
 Rust has a handy function to get a string regardless:
 [`Path::to_string_lossy`].
 When the path is valid UTF-8 already,
