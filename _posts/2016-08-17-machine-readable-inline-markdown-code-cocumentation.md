@@ -45,6 +45,12 @@ Undefined Behavior
 Platform-specific behavior
 : Describe different behavior of function or module depending on the target platform
 
+See also
+: List of links to other pages that are relevant to this one
+: Might make use of [intra doc links] to refer to other Rust items
+
+[intra doc links]: https://github.com/rust-lang/rfcs/pull/1946
+
 ### Specific machine readable sections
 
 This is aimed at documenting functions and methods, but should also work for documenting type parameters and lifetime parameters of `struct`s, `enum`s, and `trait`s.
@@ -120,6 +126,10 @@ All conventions listed above should be checked by lints.
 ///            Bar::with_label("lorem"))
 /// ```
 ///
+/// # See also
+///
+/// - [`Bar::from_foo`]
+/// - [Foobar](https://en.m.wikipedia.org/wiki/Foobar)
 fn fooify<'floof, T>(label: T, magic: Foo<'floof>) -> Result<Bar<'floof>, i32>
     where T: Into<FooLabel>
 {
