@@ -11,7 +11,7 @@ You are using `rustdoc` to render the documentation of a library.
 Without much work you'll end up with about 100k HTML files
 that are about 10kB each.
 As it turns out,
-this number of small files is very annoying for any kind of file system performance:
+this number of small files is very annoying for any kind of file system performance.
 Best case: making copies/backups is slow.
 Worst case: You're using an anti virus software and it takes ages.
 
@@ -307,7 +307,7 @@ it would be easy to offer the index and archives files as downloads
 and instead of generating documentation locally,
 we could just download it.
 
-There, of course,
+There are, of course,
 a few issues to consider:
 We need to assert that the toolchain and used cargo features
 match with what we need.
