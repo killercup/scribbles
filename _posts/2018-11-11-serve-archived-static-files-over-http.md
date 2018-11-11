@@ -3,6 +3,8 @@ title: Serve archived static files over HTTP
 categories:
 - tools
 - rust
+discussions:
+  "Twitter": https://twitter.com/killercup/status/1061676996852363270
 ---
 Say you want to store a huge number of very small files
 that you will only access over HTTP.
