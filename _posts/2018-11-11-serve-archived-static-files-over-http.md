@@ -29,6 +29,12 @@ some well-designed and discoverable software.
 
 [static-filez]: https://github.com/killercup/static-filez
 
+## Contents
+{:.no_toc}
+
+1. Table of contents
+{:toc}
+
 ## Storing and serving compressed data
 
 The way you use static-filez is twofold:
@@ -73,7 +79,7 @@ called [Index 1,600,000,000 Keys with Automata and Rust][transducers].
 In it, Gallant describes the [fst] crate,
 which supports building and storing index maps
 in a very efficient way.
-I uses
+It uses
 -- as the name suggests --
 finite state transducers,
 i.e.,
@@ -146,7 +152,7 @@ This means 4 GB for the archive in general,
 and 4 GB max size per file.
 Here are some ways to change these limits.
 
-### Increase addressable archive size bye enforce write alignment
+### Increase addressable archive size by enforcing write alignment
 
 If we align the start of each file written to the archive
 by `2^n` bytes,
@@ -159,7 +165,7 @@ This of course introduces zero-ed gaps in the archive files.
 
 ### Using more bits for addressing
 
-Instead of splitting the 64-bit integer into two 32bit integers,
+Instead of splitting the 64 bit integer into two 32 bit integers,
 we might as split it into chunks of varying size,
 for example 40 bit and 24 bit
 -- shifting the limits to 1 TB archives containing files up to 16 MB.
