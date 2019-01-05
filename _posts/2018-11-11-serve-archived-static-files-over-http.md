@@ -175,6 +175,15 @@ This can of course be combined with the alignment option described above,
 to yield `2^36 * 2^4 = 1 TB` archive files
 containing 4 byte aligned files up to `2^28 = 268 MB`.
 
+### Store the length in the archive
+
+As [pointed out](https://github.com/killercup/static-filez/issues/6#issuecomment-437738087)
+by [Josh](https://github.com/coder543),
+we could also store the length of the data at the start of the data block.
+That means no bit fiddling in the index file,
+but to build the slice of the data
+we'll have to read and parse the first 8 bytes in the archive file.
+
 ### Patching fst to allow other value types
 
 The fst docs [mention][fst-limits] that in the future,
@@ -364,3 +373,12 @@ The archive file is _just_ the file contents right now;
 with no way to even get the path of the file.
 If this was a use case,
 it would be trivial to add the path before the file content.
+
+### Using tar for the archive
+
+After reading up on archive formats,
+I noticed that we might actually be able to use the well known `.tar.gz` format,
+with one requirement:
+Each block of file content will need to be its own GZIP stream.
+(Little known fact: GZIP files can be composed of different stream
+where each stream can be its own self-contained GZIP file.)
