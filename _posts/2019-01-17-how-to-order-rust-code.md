@@ -68,6 +68,57 @@ right next to the functions they are needed for.
 > [I] love to read types upfront
 > (if you know the set of fields, you know all potential methods that can exists)
 
+### Where to put `use` statements?
+
+To use an item (type, trait, function, etc.) that is not in scope
+you can either refer to it by its full path
+(e.g., `std::collections::HashMap`)
+or import it using
+`use std::collections::HashMap;`
+after which you can refer it as just `HashMap`.
+The issue is:
+Where to put these `use` statements?
+
+One typical approach is to put them all at the top of the file.
+This "wall of imports"
+is what you also see in many other programming languages.
+This is a good idea if the only location you can put import statements
+is at the root level
+and especially if the file contains one "main item"
+(e.g., if `foo.java` contains import statements followed by `class Foo { … }`).
+In Rust, however,
+you don't often have just one item at the root level.
+You have a `foo.rs`
+that contains a `struct Foo { … }`,
+various `impl Bar for Foo { … }` blocks,
+possibly some free functions,
+and in many cases even unit tests.
+So, we should rethink where to put these `use` lines!
+
+One approach I've taken previously is
+to keep `use`s as close to the area they are needed as possible.
+If I have a function that reads five files,
+I add a `use std::fs::File;` at the beginning _of that function._
+Sadly,
+this breaks down when you want to import a type
+to use it in a function's/method's signature or as a field type in a struct:
+In that case,
+the use `use` needs to be on the level _above_ the usage point
+(i.e., on the level of the function/trait/struct definition).
+Additionally,
+if you have `use std::sync::Arc` above one struct,
+it becomes available in the general scope.
+So, your next struct that uses `Arc`
+doesn't need to have a second instance of that `use` line.
+
+This all lead me to the point where
+I often just go back to collecting `use`s at the top of the file.
+I will however not write single `use` lines for all the items I want to use,
+but instead
+
+- only import the module when I use various items but each of them only a few times (e.g. `use std::sync;` and refer to `sync::Arc` and `sync::Mutex`.)
+- make use of Rust's nested imports (e.g. `use std::{error::Error, fs, io::{self, Read}};)`.
+
 ### Split public and private interfaces
 
 When the entry file of a package or module[^1] gets to long,
