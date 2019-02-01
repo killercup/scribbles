@@ -3,89 +3,119 @@ title: The Extractor pattern
 categories:
 - rust
 ---
-A very good questions.
-There are no nasty code generation or unsafe shenanigans as far as I know,
-just good old Rust traits.
-It uses something often called "extractor pattern".
-You can find a high-level overview on the usage
-[here](https://actix.rs/docs/extractors/)
-but you have probably already seen that.
+Let's assume we receive some kind of data:
 
-Let's dig into the docs!
-(I believe it's helpful to see how I came to understand this
-by clicking through the API docs.
-Skip the next 3 paragraphs if you only care about the "magic" way
-actix-web allows you to extract data from requests.)
+```rust
+struct Blob { header: String, content: Vec<u8>, }
 
-The example you linked to contains
-`App::new().resource("/{name}/{id}/index.html", |r| r.with(index))`.
-Typing `App::resource` into the doc search
-gives use the [right method](https://docs.rs/actix-web/0.7.17/actix_web/struct.App.html#method.resource) it seems.
-The interesting part here is the closure type
-(`FnOnce(&mut Resource<S>) -> R`)
-because it tells use the `r` is a reference to a `Resource`.
-Clicking on that
-and scrolling down
-leads us to [`Resource::with`](https://docs.rs/actix-web/0.7.17/actix_web/dev/struct.Resource.html#method.with).
-Nice. But now it gets complicated.
+let incoming_data = Blob {
+    header: "Lorem ipsum\nDolor sit amet".into(),
+    content: r#"{"text": "Hello world"}"#.into()
+};
+```
 
-The full signature for `with` is:
+We can write custom functions
+that try to get some of the information
+out of this `Blob`:
 
-    pub fn with<T, F, R>(&mut self, handler: F) where
-        F: WithFactory<T, S, R>,
-        R: Responder + 'static,
-        T: FromRequest<S> + 'static,
-
-Let's unwrap that a bit.
-The parameter we give to `with` has to be something that implements the `WithFactory` trait.
-But now it gets weird:
-This trait is private!
-So, from the docs,
-we can only infer that it has three type parameters.
-The first is something that implements `FromRequest`,
-the second (`S`) is probably some state (guessing from the name only),
-and the last one is something that implements `Responder`.
-So I'd guess we are dealing with something that
-takes some data from a request,
-some state,
-and returns something new
-that can be used as a response.
-Sounds useful in the context of a web framework.
-
-The part we are interested in is [`FromRequest`](https://docs.rs/actix-web/0.7.17/actix_web/trait.FromRequest.html).
-This is a trait that abstracts over extracting data from a request structure
-(its two methods are `from_request` and `extract`!).
-
-This is a long docs page.
-The part you ask about is almost at the bottom in the "Implementors" section.
-For example,
-[`impl<T, S> FromRequest<S> for Form<T>`](https://docs.rs/actix-web/0.7.17/actix_web/trait.FromRequest.html#impl-FromRequest%3CS%3E-18),
-or [`impl<T, S> FromRequest<S> for Path<T>`](https://docs.rs/actix-web/0.7.17/actix_web/trait.FromRequest.html#impl-FromRequest%3CS%3E-20).
-And this is basically all there is to it!
-These types allow you to use them in a context
-where you want to extract data from a request!
-
-The concrete usage of that
-and the way that the obscure `WithFactory` comes into play is also quite interesting.
-I wrote above that "no code generation magic" was used
--- I might have lied a bit.
-To support *multiple* parameters/extractors in the functions you pass to `with`
-the `WithFactory` trait must be implemented for functions/closures
-that have multiple parameters.
-For that, the actix developers use [a macro](https://github.com/actix/actix-web/blob/0745a1a9f8d43840454c6aae24df5e2c6f781c36/src/with.rs#L291-L306) internally
-to generate implementations of `WithFactory`
-for functions that take tuples of up to 10 fields that implement `FromRequest`.
-
-I couldn't find this documented in the API docs,
-but the website contains user documentation, too,
-and as mentioned above has a page on [Extractors](https://actix.rs/docs/extractors/)
-with [this section](https://actix.rs/docs/extractors/#multiple-extractors)
-showing an example of using a function with multiple extractors.
-So, all in all,
-this means that you can write `.with(index)` and have this functions:
-
-    fn index((path, query): (Path<(u32, String)>, Query<Info>)) -> String {
-        format!("Welcome {}!", query.username)
+```rust
+fn get_topic(input: &Blob) -> String {
+    if let Some(line) = input.header.lines().next() {
+        line.to_string()
+    } else {
+        String::from("[no topic set]")
     }
+}
+```
 
-I hope this explained the pattern well enough!
+This is easy enough to use:
+
+```rust
+let topic = get_topic(&incoming_data);
+println!("{:?}", topic);
+```
+
+This works but is quite imperative:
+For every piece of data we want,
+we have to call a function (or method) like this.
+
+It would be super neat if we could instead write a list of the data we need,
+and have these functions called for us.
+This is what the extractor pattern is all about.
+
+Since this pattern makes heavy use of generic programming
+and introducing abstractions,
+we'll look at it step by step.
+
+Let's start with something that looks simple:
+A function called `extract`.
+This is what we'll call internally eventually,
+but for now we'll do it explicitly.
+
+It is not a _typical_ function, though:
+In addition to the blob we also need to specify a type parameter.
+
+```rust
+let topic = extract::<Topic>(&incoming_data).unwrap();
+println!("{:?}", topic);
+
+fn extract<E: Extractor>(input: &Blob) -> Result<E::Target, Error> {
+    E::extract_from(input)
+}
+```
+
+```rust
+trait Extractor {
+    type Target;
+    
+    fn extract_from(input: &Blob) -> Result<Self::Target, Error>;
+}
+type Error = Box<dyn std::error::Error>;
+```
+
+```rust
+struct Topic;
+
+impl Extractor for Topic {
+    type Target = String;
+    
+    fn extract_from(input: &Blob) -> Result<Self::Target, Error> {
+        if let Some(line) = input.header.lines().next() {
+            Ok(line.to_string())
+        } else {
+            Err(String::from("no topic set").into())
+        }
+    }
+}
+```
+
+```rust
+let message = extract::<Json<Message>>(&incoming_data).unwrap();
+println!("{:?}", message);
+
+#[derive(Debug, serde_derive::Deserialize)]
+struct Message {
+    text: String,
+}
+
+struct Json<T> { target: std::marker::PhantomData<T> }
+
+impl<T: serde::de::DeserializeOwned> Extractor for Json<T> {
+    type Target = T;
+    
+    fn extract_from(input: &Blob) -> Result<Self::Target, Error> {
+        let res = serde_json::from_slice(&input.content)?;
+        Ok(res)
+    }
+}
+```
+
+<!--
+
+Goal: `fn foo(topic: Topic, message: Json<Message>) {}`
+
+Issues:
+- Type to impl extract on is type of parameter
+- Generic impls for function only with macros
+
+-->
