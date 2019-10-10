@@ -102,3 +102,31 @@ you can then quickly get the socket(s) available.
 [.socket]: https://www.freedesktop.org/software/systemd/man/systemd.socket.html
 [socket activation]: http://0pointer.de/blog/projects/socket-activation.html
 [listenfd]: https://crates.io/crates/listenfd
+
+## Limiting Capabilities
+
+By default,
+your services run in an environment similar to just executing them with bash
+as the correct user.
+That is convenient to get stuff running,
+but might be a bit much if you're security conscious.
+They are, however, a bunch of neat things you can set
+to limit what your process can do.
+Here's a few examples:
+
+```
+[Service]
+PrivateTmp=yes
+InaccessibleDirectories=/home
+ReadOnlyDirectories=/var
+CapabilityBoundingSet=~CAP_SYS_PTRACE
+DeviceAllow=/dev/null rw
+TemporaryFileSystem=/var:ro
+BindReadOnlyPaths=/var/foo/data
+```
+
+More in [this post][security]
+and the docs for [systemd.exec].
+
+[security]: http://0pointer.de/blog/projects/security.html
+[systemd.exec]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html
