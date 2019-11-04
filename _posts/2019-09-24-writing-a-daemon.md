@@ -49,6 +49,9 @@ The easiest to test with is:
 /bin/systemd-notify --ready
 ```
 
+(Note that you'll also need to set `NotifyAccess=all` in your Service section
+to allow sending status updates from subprocesses.)
+
 In a real service,
 you'd call [sd_notify] (or [rust-notify] in Rust)
 with a string starting with `READY=1`.
@@ -59,9 +62,15 @@ You can, for example, append `STATUS=Good to go!`.
 Sending `RELOADING=1` and `STOPPING=1`
 will tell systemd that the service is reloading or exiting respectively.
 
+If your service is running in `Notify` mode,
+its [environment variables] contain `NOTIFY_SOCKET`
+which is set to the path to the notify socket
+(e.g. `/run/systemd/notify`).
+
 [systemd-notify]: https://www.freedesktop.org/software/systemd/man/systemd-notify.html
 [sd_notify]: https://www.freedesktop.org/software/systemd/man/sd_notify.html
 [rust-notify]: https://docs.rs/systemd/0.4.0/systemd/daemon/fn.notify.html
+[environment variables]: https://www.freedesktop.org/software/systemd/man/systemd.exec.html#Environment%20variables%20in%20spawned%20processes
 
 ### Health
 
@@ -78,6 +87,9 @@ less then every 5 seconds.
 [journald] allows structured log messages,
 and using [slog-journald] (for example)
 can set common [fields][journal-fields] automatically.
+
+If systemd runs your service with journald set up,
+its [environment variables] contain `JOURNAL_STREAM`.
 
 [journald]: https://www.freedesktop.org/software/systemd/man/systemd-journald.service.html
 [journal-fields]: https://www.freedesktop.org/software/systemd/man/systemd.journal-fields.html
