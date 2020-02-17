@@ -199,15 +199,32 @@ Let's go through it one by one.
   To make this a bit more concrete, let's assume we have a Cow that's storing a `&str` (in the `Borrowed` case).
   The `ToOwned` implementation of `str` has `type Owned = String`, so `<&str as ToOwned>::Owned == String`.
 - [`?Sized`][rust-book-sized] is a funny one.
-  By default, Rust requires types to be of a known size.
-  But that doesn't have to be the case:
-  `[u8]` is an array of bytes, but we don't know its length.
-  You'd never use it directly, but if you have a reference to it, the reference itself can contain the length.
-  (See what I wrote above about slices!)
-  Since a Cow should be able to contain a `&[u8]`, we need to say "we don't require this to be `Sized`" -- which is exactly what the `?Sized` syntax does.
+  By default, Rust expects all types to be of a known size,
+  which it expresses by having an implicit constraint on the [`Sized` marker trait].
+  You can explicitly opt-out of this by adding a "constraint" on `?Sized`.
+
+  The thing is: Not all possible types have a known size.
+  For example, `[u8]` is an array of bytes somewhere in memory, but we don't know its length.
+  In your application code you won't see a type like this directly,
+  you'll see it behind _references_ instead.
+  And note: In Rust, the reference itself can contain the length.
+  (See what I wrote [above](#no-needless-copying) about slices!)
+
+  But how does that relate to Cow again?
+  You see, the `B` in Cow's definition is behind a reference:
+  Once directly visible in the `Borrowed` variante,
+  and the second type hidden in the [`ToOwned::Owned`] (which is of type [`Borrow<Self>`]).
+  Since a Cow should be able to contain a `&[u8]`,
+  its definition need to work for `&'a B` where `B = [u8]`.
+  That in turn means need to say:
+  "we don't require this to be `Sized`, we know it's behind a reference anyway"
+  -- which is exactly what the `?Sized` syntax does.
 
 [rust-book-lifetime]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch10-03-lifetime-syntax.html
+[`Sized` marker trait]: https://doc.rust-lang.org/1.41.0/std/marker/trait.Sized.html
 [`ToOwned`]: https://doc.rust-lang.org/1.26.1/std/borrow/trait.ToOwned.html
+[`ToOwned::Owned`]: https://doc.rust-lang.org/1.41.0/std/borrow/trait.ToOwned.html#associatedtype.Owned
+[`Borrow<Self>`]: https://doc.rust-lang.org/1.41.0/std/borrow/trait.Borrow.html
 [rust-book-advanced-traits]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch19-03-advanced-traits.html
 [rust-book-sized]: https://doc.rust-lang.org/1.26.1/book/second-edition/ch19-04-advanced-types.html#dynamically-sized-types--sized
 
