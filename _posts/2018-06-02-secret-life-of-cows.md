@@ -5,6 +5,7 @@ categories:
 discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/8o1pxh/the_secret_life_of_cows/"
   "Twitter": "https://twitter.com/killercup/status/1002950105400475649"
+  "Twitter again two years later": "https://twitter.com/mgattozzi/status/1229422594371268609"
 ---
 
 A lot of people at RustFest Paris mentioned Cows
@@ -386,3 +387,7 @@ and will thus give you a `Cow::Owned` ([playground][p3]).
 - - - -
 
 Thanks to Robert Balicki, Alex Kitchens, and Matt Brubeck for reviewing this post!
+And also thanks to Brad Gibson for [asking][issue18] about a better explanation on the `?Sized` business
+-- which took me less than two years to resolve!
+
+[issue18]: https://github.com/killercup/scribbles/issues/18
