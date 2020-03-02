@@ -5,7 +5,7 @@ categories:
 ---
 
 One suprising feature of type inference in languages like Rust
-is defining functions with gneric return types.
+is defining functions with generic return types.
 The idea is that by specifying at some later point in the code
 which type you want your function to return,
 the compiler can go back and fill in the blanks.
@@ -77,10 +77,10 @@ impl<A, E, V> FromIterator<Result<A, E>> for Result<V, E> where
 ```
 
 This means:
-You can construct a `Result` containing
+You can construct a [`Result`] containing
 any type of container of items `A`
 by collecting items that are `Result`s of type `A`.
-(The first `Err`or will make the outer `Result` be an `Err`or.)
+(The first `Err` will make the outer `Result` be an `Err`.)
 Here's an example, see [the docs][`FromIterator for Result`] for another one:
 
 ```rust
@@ -94,4 +94,5 @@ by collecting `Result<A, E>`s and specifying `T`.
 
 [`Iterator::collect`]: https://doc.rust-lang.org/1.41.1/std/iter/trait.Iterator.html#method.collect
 [`FromIterator` implemtators]: https://doc.rust-lang.org/1.41.1/std/iter/trait.FromIterator.html#implementors
+[`Result`]: https://doc.rust-lang.org/1.41.1/std/result/enum.Result.html
 [`FromIterator for Result`]: https://doc.rust-lang.org/1.41.1/std/iter/trait.FromIterator.html#method.from_iter-14
