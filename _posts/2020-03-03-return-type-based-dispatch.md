@@ -18,7 +18,7 @@ fn new<T: Default>() -> T {
 }
 ```
 
-# You pick the output
+## You pick the output
 
 It has no value parameters, but one type parameter, `T`.
 That `T` is its return type and also used in the function body.
