@@ -38,7 +38,7 @@ You can think of it as allowing
 better inlining across dependency boundaries
 (but it's of course more complicated that that).
 
-Rust can use multiple inker flavors,
+Rust can use multiple linker flavors,
 and the one we want is "optimize across all crates", which is called "fat".
 To set this, add the [`lto`] flag to your profile:
 
