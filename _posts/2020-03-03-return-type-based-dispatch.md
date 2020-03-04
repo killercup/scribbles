@@ -2,6 +2,8 @@
 title: Return-type based dispatch
 categories:
 - rust
+discussions:
+  "Twitter": "https://twitter.com/killercup/status/1234776754750984193"
 ---
 
 One surprising feature of type inference in languages like Rust
