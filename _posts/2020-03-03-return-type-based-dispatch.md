@@ -4,7 +4,7 @@ categories:
 - rust
 ---
 
-One suprising feature of type inference in languages like Rust
+One surprising feature of type inference in languages like Rust
 is defining functions with generic return types.
 The idea is that by specifying at some later point in the code
 which type you want your function to return,
@@ -54,7 +54,7 @@ You can read this type signature as
 
 Like above,
 we call this by specifying what kind of output type want.
-[Looking][`FromIterator` implemtators] at some of the types `FromIterator` is implemented for
+[Looking][`FromIterator` implementors] at some of the types `FromIterator` is implemented for
 is pretty revealing of the use cases.
 You can get:
 
