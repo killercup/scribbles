@@ -97,7 +97,7 @@ and will explode horribly if you enable this!
 One thing many Rust programs do is allocate memory.
 And they don't just do this themselves but actually use an (external) library for that:
 an allocator.
-Current Rust binaries us the default system allocator by default,
+Current Rust binaries use the default system allocator by default,
 previously they included their own with the standard library.
 (This change has lead to smaller binaries and better debug-abiliy
 which made some people quite happy).
