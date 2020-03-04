@@ -9,6 +9,8 @@ Here's some small things you can do to increase the runtime speed of a Rust proj
 – practically without changing any code!
 
 Please remember that the following suggestions **do not** replace actual profiling and optimizations!
+I also think it goes without saying that the only way to detect if any of this helps
+is having benchmarks that represent how your application behaves under real usage.
 
 ## Tweaking our `release` profile
 
@@ -81,7 +83,7 @@ panic = "abort"
 ```
 
 Please note that some libraries might depend on unwinding
-and will explode horribly if you enable this.
+and will explode horribly if you enable this!
 
 ## Using a different allocator
 
@@ -90,8 +92,8 @@ And they don't just do this themselves but actually use an (external) library fo
 an allocator.
 Current Rust binaries us the default system allocator by default,
 previously they included their own with the standard library.
-(This lead to smaller binaries and better debug-abiliy
-which make some people quite happy).
+(This change has lead to smaller binaries and better debug-abiliy
+which made some people quite happy).
 
 Sometimes your system's allocator is not the best pick, though.
 Not to worry, we can change it!
@@ -155,7 +157,8 @@ Please read [the docs][pgo].
 
 Now this is where you need to actually adjust your code
 and fix all those `clone()` calls.
-Also: A topic for another post!
+Sadly, this is a topic for another post!
+(While you wait another year for me to write it, you can read about [cows]!)
 
 
 [Cargo workspace]: https://doc.rust-lang.org/1.41.1/book/ch14-03-cargo-workspaces.html
@@ -172,3 +175,4 @@ Also: A topic for another post!
 [`mimalloc` features]: https://github.com/purpleprotocol/mimalloc_rust/blob/c6bf4578d3258a0b6a28696196ede6d50e5ee8c2/Cargo.toml#L25-L28
 [stack unwinding]: https://doc.rust-lang.org/1.41.1/nomicon/unwinding.html
 [pgo]: https://doc.rust-lang.org/1.41.1/rustc/profile-guided-optimization.html
+[cows]: {% post_url 2018-06-02-secret-life-of-cows %}
