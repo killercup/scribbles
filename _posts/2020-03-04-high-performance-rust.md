@@ -66,11 +66,15 @@ codegen-units = 1
 By default, Rust wants to build a binary that works on as many machines
 of the target architecture as possible.
 However, you might actually have a pretty new CPU with cool new features!
-Let's [enable][`target-cpu`] those:
+To [enable][`target-cpu`] those, we add
 
-```toml
-target-cpu = "native"
+```console
+-C target-cpu=native
 ```
+
+as a "Rust flag",
+i.e. the environment variable `RUSTFLAGS`
+or the target's `rustflags` field in your [`.cargo/config`].
 
 ### Aborting
 
@@ -179,3 +183,4 @@ Sadly, this is a topic for another post!
 [stack unwinding]: https://doc.rust-lang.org/1.41.1/nomicon/unwinding.html
 [pgo]: https://doc.rust-lang.org/1.41.1/rustc/profile-guided-optimization.html
 [cows]: {% post_url 2018-06-02-secret-life-of-cows %}
+[`.cargo/config`]: https://doc.rust-lang.org/1.41.1/cargo/reference/config.html
