@@ -167,6 +167,13 @@ and fix all those `clone()` calls.
 Sadly, this is a topic for another post!
 (While you wait another year for me to write it, you can read about [cows]!)
 
+**Edit:** People keep asking for those actual tips on how to optimize Rust code.
+And luckily ~~I tricked them~~ they had some good material for me to link to:
+
+- The very convenient [`cargo flamegraph`](https://github.com/flamegraph-rs/flamegraph) (also works as a standalone tool)
+- Christopher Sebastian recently published [How To Write Fast Rust Code](https://likebike.com/posts/How_To_Write_Fast_Rust_Code.html)
+- Robin Freyler's [Fastware Workshop](http://troubles.md/posts/rustfest-2018-workshop/) from RustFest 2018
+
 
 [Cargo workspace]: https://doc.rust-lang.org/1.41.1/book/ch14-03-cargo-workspaces.html
 [link-time optimization]: https://llvm.org/docs/LinkTimeOptimization.html
