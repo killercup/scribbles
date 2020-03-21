@@ -6,27 +6,28 @@ categories:
 ---
 
 I think I've come to terms with the fact that
-my (new-ish) job will continue to contain sysadmin work.
+my job will always contain sysadmin work.
 Maybe because I'm not too bad at ssh-ing into a Linux box
 and messing with it long enough
 to have a bunch of interdependent services working;
 or maybe because I kinda want to be able to make sure my stuff runs correctly.
+(And I have own my personal and very specific definition of "correctly".)
 Thus,
 I started looking into how to make this less error-prone.
 I don't want to manually edit files, restart a thing and pray that it still runs.
-I also don't want the current working state be an accidental result of pressing the right buttons
-but instead of correct, reproducible configuration.
+I also don't want the current working state to be an accidental result of pressing the right buttons
+instead of a correct, reproducible configuration.
 Ideally, I even want to have this documented in version control.
 
 On top of all that I also wanted to start using Linux on my desktop again
 (after living Mac-only for a while),
 and I'd really appreciate if I could take the advantages of this server provisioning setup with me.
-So: I looked into NixOS.
+Long story short: I looked into NixOS.
 
 (There are a lot of considerations and trade-offs for and against other approaches
 but this is not the post to discuss them.)
 
-# The idea
+## The idea
 
 The premise of NixOS is to have a declarative way of setting up your system.
 You define what you want your system to be,
@@ -39,7 +40,7 @@ and that you whole machine's configuration can be easily put into a git repo.
 
 [arch-setup]: https://github.com/mmozeiko/arch-setup
 
-# The Nix Language
+## The Nix Language
 
 NixOS is a Linux distributions based on the `nix` package manager.
 For maximum confusion,
@@ -61,3 +62,15 @@ and has string interpolation without common footguns.
 It also features control flow constructs,
 curried functions,
 and lazy evaluation.
+
+## The package manager and its store
+
+## Constructing environments
+
+### Aside: Package-specific FSH environments
+
+## NixOS on the desktop
+
+### Limits of my current setup
+
+### Developing software on NixOS
