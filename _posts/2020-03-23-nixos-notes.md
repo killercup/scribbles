@@ -63,7 +63,24 @@ It also features control flow constructs,
 curried functions,
 and lazy evaluation.
 
+Most of the `nix`-related tooling works by evaluating Nix expressions.
+
 ## The package manager and its store
+
+The `nix` package manager has a pretty unique design.
+First off, packages are defined as a Nix expression.
+Evaluating it returns the full dependency tree,
+including all build- and runtime dependencies.
+`nix` puts the output (a directory with files)
+of each built package into its store,
+identified by the hash of all inputs and the package name.
+
+To be able to execute a program from a package,
+`nix` creates symlinks to add it (user or system) profiles.
+If necessary, the package also includes wrappers to load the necessary dependencies
+using their full paths.
+This means that adding packages is pretty much an atomic operation
+and doesn't change any system files.
 
 ## Constructing environments
 
