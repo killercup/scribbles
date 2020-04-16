@@ -28,14 +28,49 @@ entries:
     Book covering a lot of different data structures and algorithms.
     "Its aim is to systematically explain how to write efficient programs and,
     also, the approaches and tools for determining why the program isn’t efficient enough."
+- title: Amos' Intro to Rust
+  type: series
+  author: Amos Wenger
+  parts:
+  - title: A half-hour to learn Rust
+    url: https://fasterthanli.me/blog/2020/a-half-hour-to-learn-rust/
+    archive: 20200416203813
+    updated: 2020-01-27
+    summary: Whirlwind tour through Rust as a language.
+  - title: Declarative memory management 
+    url: https://fasterthanli.me/blog/2019/declarative-memory-management/
+    archive: 20200416202910
+    updated: 2019-09-19
+    pages: 60
+    summary: |
+      Introducing the complexities of memory management and
+      the ways Rust tries to represent them in a nice roundabout way.
+  - title: Working with strings in Rust 
+    author: Amos Wenger
+    url: https://fasterthanli.me/blog/2020/working-with-strings-in-rust/
+    archive: 20200416203533
+    updated: 2020-02-19
+    summary: |
+      Following the memory management post,
+      this looks at how strings are actually pretty complicated
+      and what Rust does about them.
 - title: Reading files the hard way
   type: series
   author: Amos Wenger
   summary: |
     Writing files seems like a solved problem.
     But that doesn't mean we can't solve it again from scratch.
-  niches: POSIX; File Systems
-  _incomplete: true
+  niches: POSIX; File Systems; syscalls
+  parts:
+  - title: Part 1 (node.js, C, rust, strace)
+    url: https://fasterthanli.me/blog/2019/reading-files-the-hard-way/
+    archive: 20200416203146
+  - title: Part 2 (x86 asm, linux kernel) 
+    url: https://fasterthanli.me/blog/2019/reading-files-the-hard-way-2/
+    archive: 20200416203148
+  - title: Part 3 (ftrace, disk layouts, ext4)
+    url: https://fasterthanli.me/blog/2019/reading-files-the-hard-way-3/
+    archive: 20200416203157
 - title: Making our own ping
   type: series
   author: Amos Wenger
@@ -85,11 +120,43 @@ entries:
 - title: Making our own executable packer
   type: series
   author: Amos Wenger
-  _incomplete: true
   parts:
   - title: What's in a Linux executable?
     url: https://fasterthanli.me/blog/2020/whats-in-a-linux-executable/
-    archive: 20200416134722
+    archive: 20200416203931
+  - title: Running an executable without exec
+    url: https://fasterthanli.me/blog/2020/running-an-executable-without-exec/
+    archive: 20200416203942
+  - title: Position-independent code
+    url: https://fasterthanli.me/blog/2020/position-independent-code/
+    archive: 20200416203931
+  - title: ELF relocations
+    url: https://fasterthanli.me/blog/2020/elf-relocations/
+    archive: 20200416203942
+  - title: The simplest shared library
+    url: https://fasterthanli.me/blog/2020/the-simplest-shared-library/
+    archive: 20200416203942
+  - title: Loading multiple ELF objects 
+    url: https://fasterthanli.me/blog/2020/loading-multiple-elf-objects/
+    archive: 20200416203946
+  - title: Dynamic symbol resolution
+    url: https://fasterthanli.me/blog/2020/dynamic-symbol-resolution/
+    archive: 20200416203951
+  - title: Dynamic linker speed and correctness
+    url: https://fasterthanli.me/blog/2020/dynamic-linker-speed-and-correctness/
+    archive: 20200416203951
+  - title: GDB scripting and Indirect functions
+    url: https://fasterthanli.me/blog/2020/gdb-scripting-and-indirect-functions/
+    archive: 20200416203954
+  - title: Safer memory-mapped structures
+    url: https://fasterthanli.me/blog/2020/safer-memory-mapped-structures/
+    archive: 20200416204004
+  - title: More ELF relocations
+    url: https://fasterthanli.me/blog/2020/more-elf-relocations/
+    archive: 20200416204015
+  - title: A no_std Rust binary
+    url: https://fasterthanli.me/blog/2020/a-no-std-rust-binary/
+    archive: 20200414220553
 - title: Parsing
   type: series
   author: Aleksey Kladov
@@ -121,6 +188,7 @@ entries:
   url: https://github.com/frankmcsherry/blog/blob/81e9555bbee110954f2c3d35caf86ea7e7612fa6/posts/2018-05-19.md
   summary: Building a datalog engine in Rust.
   niches: Datalog
+  pages: 20
 - title: Non-lexical lifetimes
   type: series
   author: Niko Matsakis
