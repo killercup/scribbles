@@ -106,6 +106,7 @@ entries:
   url: https://leanpub.com/javascriptallongesix/read
   archive: 20200416145246
   updated: 2019-04-26
+  pages: 530
   niches: Functional programming; Obscure JavaScript
 - title: Crafting Interpreters
   type: book
@@ -113,6 +114,7 @@ entries:
   url: http://craftinginterpreters.com/contents.html
   archive: 20200411062649
   updated: 2020-04-05
+  pages: 800
 - title: A relatively simple Datalog engine in Rust
   type: post
   author: Frank McSherry
@@ -208,7 +210,7 @@ I'll do my best to add summaries, and to update this list semi-regularly.
 ## "[{{entry.title}}]({{entry.url}})" by {{entry.author}}
 
 ({% if entry.pages %}~{{entry.pages}} pages; {% endif -%}
-[archive.org snapshot](https://web.archive.org/web/{{entry.archive}}/{{entry.url}}))
+[archived](https://web.archive.org/web/{{entry.archive}}/{{entry.url}}))
 
 {{entry.summary}}
 
