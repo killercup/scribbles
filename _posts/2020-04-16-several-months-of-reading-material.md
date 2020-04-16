@@ -113,6 +113,60 @@ entries:
   url: http://craftinginterpreters.com/contents.html
   archive: 20200411062649
   updated: 2020-04-05
+- title: A relatively simple Datalog engine in Rust
+  type: post
+  author: Frank McSherry
+  url: https://github.com/frankmcsherry/blog/blob/81e9555bbee110954f2c3d35caf86ea7e7612fa6/posts/2018-05-19.md
+  summary: Building a datalog engine in Rust.
+  niches: Datalog
+- title: Non-lexical lifetimes
+  type: series
+  author: Niko Matsakis
+  summary: |
+    One of the main features of the Rust language is the concept of ownership and lifetimes.
+    This series of posts by Niko Matsakis, one of the designers of the Rust language,
+    is about the theory and practical implementation
+    of a revamped and more complete way of this
+    in the Rust compiler.
+    It starts in early 2016 and goes all the way to after they feature landed
+    (end of 2018).
+  parts:
+  - title: Introduction
+    url: https://smallcultfollowing.com/babysteps/blog/2016/04/27/non-lexical-lifetimes-introduction/
+    archive: 20200416170054
+  - title: Non-lexical lifetimes based on liveness
+    url: http://smallcultfollowing.com/babysteps/blog/2016/05/04/non-lexical-lifetimes-based-on-liveness/
+    archive: 20190917065228
+  - title: Adding the outlives relation
+    url: https://smallcultfollowing.com/babysteps/blog/2016/05/09/non-lexical-lifetimes-adding-the-outlives-relation/
+    archive: 20200416170116
+  - title: Using liveness and location
+    url: https://smallcultfollowing.com/babysteps/blog/2017/02/21/non-lexical-lifetimes-using-liveness-and-location/
+    archive: 20200416170119
+  - title: Nested method calls via two-phase borrowing
+    url: https://smallcultfollowing.com/babysteps/blog/2017/03/01/nested-method-calls-via-two-phase-borrowing/
+    archive: 20200416170122
+  - title: Draft RFC and prototype available
+    url: https://smallcultfollowing.com/babysteps/blog/2017/07/11/non-lexical-lifetimes-draft-rfc-and-prototype-available/
+    archive: 20200416170125
+  - title: An alias-based formulation of the borrow checker
+    url: https://smallcultfollowing.com/babysteps/blog/2018/04/27/an-alias-based-formulation-of-the-borrow-checker/
+    archive: 20200416170128
+  - title: MIR-based borrow check (NLL) status update
+    url: https://smallcultfollowing.com/babysteps/blog/2018/06/15/mir-based-borrow-check-nll-status-update/
+    archive: 20200416170132
+  - title: MIR-based borrowck is almost here
+    url: https://smallcultfollowing.com/babysteps/blog/2018/10/31/mir-based-borrowck-is-almost-here/
+    archive: 20200416170139
+  - title: Interprocedural conflicts
+    url: https://smallcultfollowing.com/babysteps/blog/2018/11/01/after-nll-interprocedural-conflicts/
+    archive: 20200416170144
+  - title: Polonius and region errors
+    url: https://smallcultfollowing.com/babysteps/blog/2019/01/17/polonius-and-region-errors/
+    archive: 20200416170147
+  - title: Polonius and the case of the hereditary harrop predicate
+    url: https://smallcultfollowing.com/babysteps/blog/2019/01/21/hereditary-harrop-region-constraints/
+    archive: 20200416170150
 ---
 It seems especially recently I've come across more and more
 _long-form_ texts (think: hour-long blog posts; free books; series of posts).
@@ -123,13 +177,16 @@ And while I will probably never have enough time to read them all,
 I decided to at least collect some of them here for future reference.
 I'll do my best to add summaries, and to update this list semi-regularly.
 
+## Contents
+{:.no_toc}
+
 1. Table of contents
 {:toc}
 
 {% for entry in page.entries %}
 {%- if entry._incomplete -%}{% continue %}{%- endif -%}
 {% case entry.type %}
-{% when 'book' %}
+{% when 'book' or 'post' %}
 
 ## "[{{entry.title}}]({{entry.url}})" by {{entry.author}}
 
@@ -153,11 +210,9 @@ I'll do my best to add summaries, and to update this list semi-regularly.
 {% if entry.updated %}Last updated I saw: {{ entry.updated }}{% endif %}
 
 {% for part in entry.parts %}
-1. [{{part.title}}]({{part.url}})
+1. [{{part.title}}]({{part.url}}) ([archived](https://web.archive.org/web/{{part.archive}}/{{part.url}})){% if part.summary %}
 
-    {% if part.summary %}{{part.summary}}{% endif %}
-
-    ([archive.org snapshot](https://web.archive.org/web/{{part.archive}}/{{part.url}}))
+    {{part.summary}}{% endif %}
 {%- endfor -%}
 
 {% else %}
