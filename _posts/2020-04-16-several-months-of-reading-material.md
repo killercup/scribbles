@@ -167,6 +167,23 @@ entries:
   - title: Polonius and the case of the hereditary harrop predicate
     url: https://smallcultfollowing.com/babysteps/blog/2019/01/21/hereditary-harrop-region-constraints/
     archive: 20200416170150
+- title: Shifgrethor
+  type: series
+  author: Without Boats
+  summary: "A proposed API for a GC in Rust."
+  parts:
+  - title: Garbage collection as a Rust library
+    url: https://boats.gitlab.io/blog/post/shifgrethor-i/
+    archive: 20200416172628
+  - title: Notes on tracing garbage collectors
+    url: https://boats.gitlab.io/blog/post/shifgrethor-ii/
+    archive: 20200416172630
+  - title: Rooting
+    url: https://boats.gitlab.io/blog/post/shifgrethor-iii/
+    archive: 20200416172636
+  - title: Tracing
+    url: https://boats.gitlab.io/blog/post/shifgrethor-iv/
+    archive: 20200416172639
 ---
 It seems especially recently I've come across more and more
 _long-form_ texts (think: hour-long blog posts; free books; series of posts).
