@@ -1,0 +1,166 @@
+---
+title: Long-form Texts on Interesting Details of Computers
+entries:
+- title: Learn Rust With Entirely Too Many Linked Lists
+  type: book
+  url: https://rust-unofficial.github.io/too-many-lists/index.html
+  author: Alexis Beingessner
+  archive: 20200416132847
+  pages: 180
+  updated: 2019-03-21
+  niches: Linked lists, Rust, Smart Pointers
+  summary: |
+    The premise of this book is that
+    writing a linked list is a beginner's exercise in C
+    but quite difficult to get right in Rust.
+    So it takes that as an opportunity to do just what the title says:
+    It teaches you Rust by implementing a linked list type in Rust,
+    in five (as of April 2020) different ways.
+- title: Programming Algorithms
+  type: book
+  url: https://leanpub.com/progalgs/read
+  author: Vsevolod Domkin
+  pages: 300
+  archive: 20200416131734
+  updated: 2020-04-16
+  niches: Creating data structures; Algorithms; Lisp
+  summary: |
+    Book covering a lot of different data structures and algorithms.
+    "Its aim is to systematically explain how to write efficient programs and,
+    also, the approaches and tools for determining why the program isn’t efficient enough."
+- title: Reading files the hard way
+  type: series
+  author: Amos Wenger
+  summary: |
+    Writing files seems like a solved problem.
+    But that doesn't mean we can't solve it again from scratch.
+  niches: POSIX; File Systems
+  _incomplete: true
+- title: Making our own ping
+  type: series
+  author: Amos Wenger
+  parts:
+  - title: A short (and mostly wrong) history of computer networking 
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping/
+    archive: 20200416134726
+  - title: Windows dynamic libraries, calling conventions, and transmute
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-2/
+    archive: 20200416145917
+  - title: FFI-safe types in Rust, newtypes and MaybeUninit
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-3/
+    archive: 20200416145936
+  - title: Designing and implementing a safer API on top of LoadLibrary
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-4/
+    archive: 20200416145936
+  - title: A simple ping library, parsing strings into IPv4 address
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-5/
+    archive: 20200416145942
+  - title: The builder pattern, and a macro that keeps FFI code DRY
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-6/
+    archive: 20200416145943
+  - title: Finding the default network interface through WMI
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-7/
+    archive: 20200416145943
+  - title: Binding C APIs with variable-length structs and UTF-16
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-8/
+    archive: 20200416150009
+  - title: Consuming Ethernet frames with the nom crate
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-9/
+    archive: 20200416150006
+  - title: Improving error handling - panics vs. proper errors
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-10/
+    archive: 20200416150009
+  - title: Parsing IPv4 packets, including numbers smaller than bytes
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-11/
+    archive: 20200416150021
+  - title: Parsing and serializing ICMP packets with cookie-factory.
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-12/
+    archive: 20200416150207
+  - title: Crafting ARP packets to find a remote host's MAC address
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-13/
+    archive: 20200416150054
+  - title: Crafting ICMP-bearing IPv4 packets with the help of bitvec
+    url: https://fasterthanli.me/blog/2019/making-our-own-ping-14/
+    archive: 20200416150207
+- title: Making our own executable packer
+  type: series
+  author: Amos Wenger
+  _incomplete: true
+  parts:
+  - title: What's in a Linux executable?
+    url: https://fasterthanli.me/blog/2020/whats-in-a-linux-executable/
+    archive: 20200416134722
+- title: Parsing
+  type: series
+  author: Aleksey Kladov
+  parts:
+  - title: Simple but Powerful Pratt Parsing
+    url: https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html
+    archive: 20200416155208
+  - title: From Pratt to Dijkstra
+    url: https://matklad.github.io/2020/04/15/from-pratt-to-dijkstra.html
+    archive: 20200416155220
+- title: JavaScript Allongé
+  type: book
+  author: Reg “raganwald” Braithwaite
+  url: https://leanpub.com/javascriptallongesix/read
+  archive: 20200416145246
+  updated: 2019-04-26
+  niches: Functional programming; Obscure JavaScript
+- title: Crafting Interpreters
+  type: book
+  author: Robert Nystrom
+  url: http://craftinginterpreters.com/contents.html
+  archive: 20200411062649
+  updated: 2020-04-05
+---
+It seems especially recently I've come across more and more
+_long-form_ texts (think: hour-long blog posts; free books; series of posts).
+I especially like the ones that go into the very fine details of some niche topic
+and maybe also ramble a bit about completely unrelated but
+highly entertaining asides.
+And while I will probably never have enough time to read them all,
+I decided to at least collect some of them here for future reference.
+I'll do my best to add summaries, and to update this list semi-regularly.
+
+1. Table of contents
+{:toc}
+
+{% for entry in page.entries %}
+{%- if entry._incomplete -%}{% continue %}{%- endif -%}
+{% case entry.type %}
+{% when 'book' %}
+
+## "[{{entry.title}}]({{entry.url}})" by {{entry.author}}
+
+({% if entry.pages %}~{{entry.pages}} pages; {% endif -%}
+[archive.org snapshot](https://web.archive.org/web/{{entry.archive}}/{{entry.url}}))
+
+{{entry.summary}}
+
+{% if entry.niches %}Niches: {{entry.niches}}{% endif %}
+
+{% if entry.updated %}Last updated I saw: {{ entry.updated }}{% endif %}
+
+{% when 'series' %}
+
+## "{{entry.title}}" by {{entry.author}}
+
+{{entry.summary}}
+
+{% if entry.niches %}Niches: {{entry.niches}}{% endif %}
+
+{% if entry.updated %}Last updated I saw: {{ entry.updated }}{% endif %}
+
+{% for part in entry.parts %}
+1. [{{part.title}}]({{part.url}})
+
+    {% if part.summary %}{{part.summary}}{% endif %}
+
+    ([archive.org snapshot](https://web.archive.org/web/{{part.archive}}/{{part.url}}))
+{%- endfor -%}
+
+{% else %}
+<!-- Pascal screwed up. There is no way to handle type `{{entry.type}}` -->
+{% endcase %}
+{% endfor %}
