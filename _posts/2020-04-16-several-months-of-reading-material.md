@@ -254,6 +254,40 @@ entries:
   - title: Tracing
     url: https://boats.gitlab.io/blog/post/shifgrethor-iv/
     archive: 20200416172639
+- title: Stacked Borrows
+  type: series
+  _incomplete: true
+  summary: "borrowing and ownership magic"
+  parts:
+  - title: 'Stacked Borrows: An Aliasing Model For Rust'
+    url: https://www.ralfj.de/blog/2018/08/07/stacked-borrows.html
+    archive: 20200417142605
+  - title: 'Stacked Borrows Implemented'
+    url: https://www.ralfj.de/blog/2018/11/16/stacked-borrows-implementation.html
+    archive: 20200417142616
+  - title: 'Barriers and Two-phase Borrows in Stacked Borrows'
+    url: https://www.ralfj.de/blog/2018/12/26/stacked-borrows-barriers.html
+    archive: 20200417142618
+  - title: 'Stacked Borrows 2'
+    url: https://www.ralfj.de/blog/2019/04/30/stacked-borrows-2.html
+    archive: 20200417142407
+  - title: 'Putting the stack back into Stacked Borrows'
+    url: https://www.ralfj.de/blog/2019/05/21/stacked-borrows-2.1.html
+    archive: 20200417142500
+  - title: 'Stacked Borrows: An Aliasing Model for Rust (the paper)'
+    url: https://www.ralfj.de/blog/2019/11/18/stacked-borrows-paper.html
+    archive: 20200417142510
+- title: How Rust optimizes async/await
+  type: series
+  author: Tyler Mandry
+  _incomplete: true
+  parts:
+  - title: Part I
+    url: https://tmandry.gitlab.io/blog/posts/optimizing-await-1/
+    archive: 20200417142143
+  - title: 'Part II: Program analysis'
+    url: https://tmandry.gitlab.io/blog/posts/optimizing-await-2/
+    archive: 20200417142149
 ---
 It seems especially recently I've come across more and more
 _long-form_ texts (think: hour-long blog posts; free books; series of posts).
