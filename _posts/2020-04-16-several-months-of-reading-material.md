@@ -280,7 +280,6 @@ entries:
 - title: How Rust optimizes async/await
   type: series
   author: Tyler Mandry
-  _incomplete: true
   parts:
   - title: Part I
     url: https://tmandry.gitlab.io/blog/posts/optimizing-await-1/
@@ -288,6 +287,46 @@ entries:
   - title: 'Part II: Program analysis'
     url: https://tmandry.gitlab.io/blog/posts/optimizing-await-2/
     archive: 20200417142149
+- title: Writing an OS in Rust
+  author: Philipp Oppermann
+  type: series
+  parts:
+  - title: A Freestanding Rust Binary
+    url: https://os.phil-opp.com/freestanding-rust-binary/
+    archive: 20200419114640
+  - title: A Minimal Rust Kernel
+    url: https://os.phil-opp.com/minimal-rust-kernel/
+    archive: 20200419114644
+  - title: VGA Text Mode
+    url: https://os.phil-opp.com/vga-text-mode/
+    archive: 20200419114648
+  - title: Testing
+    url: https://os.phil-opp.com/testing/
+    archive: 20200419114651
+  - title: CPU Exceptions
+    url: https://os.phil-opp.com/cpu-exceptions/
+    archive: 20200419114838
+  - title: Double Faults
+    url: https://os.phil-opp.com/double-fault-exceptions/
+    archive: 20200419114841
+  - title: Hardware Interrupts
+    url: https://os.phil-opp.com/hardware-interrupts/
+    archive: 20200419114844
+  - title: Introduction to Paging
+    url: https://os.phil-opp.com/paging-introduction/
+    archive: 20200419115000
+  - title: Paging Implementation
+    url: https://os.phil-opp.com/paging-implementation/
+    archive: 20200419115003
+  - title: Heap Allocation
+    url: https://os.phil-opp.com/heap-allocation/
+    archive: 20200419115006
+  - title: Allocator Designs
+    url: https://os.phil-opp.com/allocator-designs/
+    archive: 20200419115009
+  - title: Async/Await
+    url: https://os.phil-opp.com/async-await/
+    archive: 20200419115012
 ---
 It seems especially recently I've come across more and more
 _long-form_ texts (think: hour-long blog posts; free books; series of posts).
