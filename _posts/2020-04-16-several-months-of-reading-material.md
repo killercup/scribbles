@@ -257,6 +257,7 @@ entries:
 - title: Stacked Borrows
   type: series
   _incomplete: true
+  author: Ralf Jung
   summary: "borrowing and ownership magic"
   parts:
   - title: 'Stacked Borrows: An Aliasing Model For Rust'
@@ -277,6 +278,24 @@ entries:
   - title: 'Stacked Borrows: An Aliasing Model for Rust (the paper)'
     url: https://www.ralfj.de/blog/2019/11/18/stacked-borrows-paper.html
     archive: 20200417142510
+- title: Rayon/Parallel Iterators
+  type: series
+  author: Niko Matsakis
+  _incomplete: true
+  summary: "borrowing and ownership magic"
+  parts:
+  - title: 'Rayon: data parallelism in Rust'
+    url: https://smallcultfollowing.com/babysteps/blog/2015/12/18/rayon-data-parallelism-in-rust/
+    archive: 20200423162646
+  - title: 'Parallel Iterators Part 1: Foundations'
+    url: https://smallcultfollowing.com/babysteps/blog/2016/02/19/parallel-iterators-part-1-foundations/
+    archive: 20200423162647
+  - title: 'Parallel Iterators Part 2: Producers'
+    url: https://smallcultfollowing.com/babysteps/blog/2016/02/25/parallel-iterators-part-2-producers/
+    archive: 20200423162653
+  - title: 'Parallel iterators, part 3: Consumers'
+    url: https://smallcultfollowing.com/babysteps/blog/2016/11/14/parallel-iterators-part-3-consumers/
+    archive: 20200423162650
 - title: How Rust optimizes async/await
   type: series
   author: Tyler Mandry
