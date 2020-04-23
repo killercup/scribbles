@@ -8,7 +8,7 @@ entries:
   archive: 20200416132847
   pages: 180
   updated: 2019-03-21
-  niches: Linked lists, Rust, Smart Pointers
+  niches: [data structures, linked lists, rust, smart pointers]
   summary: |
     The premise of this book is that
     writing a linked list is a beginner's exercise in C
@@ -23,7 +23,7 @@ entries:
   pages: 300
   archive: 20200416131734
   updated: 2020-04-16
-  niches: Creating data structures; Algorithms; Lisp
+  niches: [data structures, algorithms, lisp]
   summary: |
     Book covering a lot of different data structures and algorithms.
     "Its aim is to systematically explain how to write efficient programs and,
@@ -31,6 +31,7 @@ entries:
 - title: Amos' Intro to Rust
   type: series
   author: Amos Wenger
+  niches: [rust]
   parts:
   - title: A half-hour to learn Rust
     url: https://fasterthanli.me/blog/2020/a-half-hour-to-learn-rust/
@@ -60,7 +61,7 @@ entries:
   summary: |
     Writing files seems like a solved problem.
     But that doesn't mean we can't solve it again from scratch.
-  niches: POSIX; File Systems; syscalls
+  niches: [POSIX, file systems, syscalls]
   parts:
   - title: Part 1 (node.js, C, rust, strace)
     url: https://fasterthanli.me/blog/2019/reading-files-the-hard-way/
@@ -160,6 +161,7 @@ entries:
 - title: Parsing
   type: series
   author: Aleksey Kladov
+  niches: [parsers]
   parts:
   - title: Simple but Powerful Pratt Parsing
     url: https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html
@@ -174,7 +176,7 @@ entries:
   archive: 20200416145246
   updated: 2019-04-26
   pages: 530
-  niches: Functional programming; Obscure JavaScript
+  niches: [functional programming, obscure JavaScript]
 - title: Crafting Interpreters
   type: book
   author: Robert Nystrom
@@ -187,7 +189,7 @@ entries:
   author: Frank McSherry
   url: https://github.com/frankmcsherry/blog/blob/81e9555bbee110954f2c3d35caf86ea7e7612fa6/posts/2018-05-19.md
   summary: Building a datalog engine in Rust.
-  niches: Datalog
+  niches: [datalog]
   pages: 20
   archive: 20200423163205
 - title: Non-lexical lifetimes
@@ -259,7 +261,7 @@ entries:
   type: series
   _incomplete: true
   author: Ralf Jung
-  niches: compilers, memory management
+  niches: [compilers, memory management]
   parts:
   - title: 'Stacked Borrows: An Aliasing Model For Rust'
     url: https://www.ralfj.de/blog/2018/08/07/stacked-borrows.html
@@ -282,9 +284,9 @@ entries:
 - title: Rayon/Parallel Iterators
   type: series
   author: Niko Matsakis
-  niches: concurrency
+  niches: [concurrency]
   parts:
-  - title: 'Rayon: data parallelism in Rust'
+  - title: 'Rayon: Data parallelism in Rust'
     url: https://smallcultfollowing.com/babysteps/blog/2015/12/18/rayon-data-parallelism-in-rust/
     archive: 20200423162646
   - title: 'Parallel Iterators Part 1: Foundations'
@@ -293,13 +295,13 @@ entries:
   - title: 'Parallel Iterators Part 2: Producers'
     url: https://smallcultfollowing.com/babysteps/blog/2016/02/25/parallel-iterators-part-2-producers/
     archive: 20200423162653
-  - title: 'Parallel iterators, part 3: Consumers'
+  - title: 'Parallel Iterators, part 3: Consumers'
     url: https://smallcultfollowing.com/babysteps/blog/2016/11/14/parallel-iterators-part-3-consumers/
     archive: 20200423162650
 - title: How Rust optimizes async/await
   type: series
   author: Tyler Mandry
-  niches: compilers, memory layout
+  niches: [compilers, memory layout]
   parts:
   - title: Part I
     url: https://tmandry.gitlab.io/blog/posts/optimizing-await-1/
@@ -353,9 +355,9 @@ entries:
   author: Bodil Stokke
   url: https://bodil.lol/parser-combinators/
   summary: |
-    Assuming you Rust, this teaches you the fundamentals of parser combinators
+    Assuming you know Rust, this teaches you the fundamentals of parser combinators
     in a very hands-on way.
-  niches: parsers
+  niches: [parsers]
   pages: 60
   archive: 20200423162949
 ---
@@ -386,7 +388,7 @@ I'll do my best to add summaries, and to update this list semi-regularly.
 
 {{entry.summary}}
 
-{% if entry.niches %}Niches: {{entry.niches}}{% endif %}
+{% if entry.niches %}Niches: {{entry.niches | join: "; "}}{% endif %}
 
 {% if entry.updated %}Last update I saw: {{ entry.updated }}{% endif %}
 
@@ -396,7 +398,7 @@ I'll do my best to add summaries, and to update this list semi-regularly.
 
 {{entry.summary}}
 
-{% if entry.niches %}Niches: {{entry.niches}}{% endif %}
+{% if entry.niches %}Niches: {{entry.niches | join: "; "}}{% endif %}
 
 {% if entry.updated %}Last update I saw: {{ entry.updated }}{% endif %}
 
