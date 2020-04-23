@@ -189,6 +189,7 @@ entries:
   summary: Building a datalog engine in Rust.
   niches: Datalog
   pages: 20
+  archive: 20200423163205
 - title: Non-lexical lifetimes
   type: series
   author: Niko Matsakis
@@ -346,6 +347,16 @@ entries:
   - title: Async/Await
     url: https://os.phil-opp.com/async-await/
     archive: 20200419115012
+- title: Learning Parser Combinators With Rust
+  type: post
+  author: Bodil Stokke
+  url: https://bodil.lol/parser-combinators/
+  summary: |
+    Assuming you Rust, this teaches you the fundamentals of parser combinators
+    in a very hands-on way.
+  niches: parsers
+  pages: 60
+  archive: 20200423162949
 ---
 It seems especially recently I've come across more and more
 _long-form_ texts (think: hour-long blog posts; free books; series of posts).
@@ -359,7 +370,7 @@ I'll do my best to add summaries, and to update this list semi-regularly.
 ## Contents
 {:.no_toc}
 
-1. Table of contents
+- Table of contents
 {:toc}
 
 {% for entry in page.entries %}
