@@ -259,7 +259,7 @@ entries:
   type: series
   _incomplete: true
   author: Ralf Jung
-  summary: "borrowing and ownership magic"
+  niches: compilers, memory management
   parts:
   - title: 'Stacked Borrows: An Aliasing Model For Rust'
     url: https://www.ralfj.de/blog/2018/08/07/stacked-borrows.html
@@ -282,8 +282,7 @@ entries:
 - title: Rayon/Parallel Iterators
   type: series
   author: Niko Matsakis
-  _incomplete: true
-  summary: "borrowing and ownership magic"
+  niches: concurrency
   parts:
   - title: 'Rayon: data parallelism in Rust'
     url: https://smallcultfollowing.com/babysteps/blog/2015/12/18/rayon-data-parallelism-in-rust/
@@ -300,6 +299,7 @@ entries:
 - title: How Rust optimizes async/await
   type: series
   author: Tyler Mandry
+  niches: compilers, memory layout
   parts:
   - title: Part I
     url: https://tmandry.gitlab.io/blog/posts/optimizing-await-1/
@@ -310,6 +310,7 @@ entries:
 - title: Writing an OS in Rust
   author: Philipp Oppermann
   type: series
+  niches: operating systems, assembler
   parts:
   - title: A Freestanding Rust Binary
     url: https://os.phil-opp.com/freestanding-rust-binary/
@@ -387,7 +388,7 @@ I'll do my best to add summaries, and to update this list semi-regularly.
 
 {% if entry.niches %}Niches: {{entry.niches}}{% endif %}
 
-{% if entry.updated %}Last updated I saw: {{ entry.updated }}{% endif %}
+{% if entry.updated %}Last update I saw: {{ entry.updated }}{% endif %}
 
 {% when 'series' %}
 
@@ -397,7 +398,7 @@ I'll do my best to add summaries, and to update this list semi-regularly.
 
 {% if entry.niches %}Niches: {{entry.niches}}{% endif %}
 
-{% if entry.updated %}Last updated I saw: {{ entry.updated }}{% endif %}
+{% if entry.updated %}Last update I saw: {{ entry.updated }}{% endif %}
 
 {% for part in entry.parts %}
 1. [{{part.title}}]({{part.url}}) ([archived](https://web.archive.org/web/{{part.archive}}/{{part.url}})){% if part.summary %}
