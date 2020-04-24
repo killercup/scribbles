@@ -9,7 +9,9 @@ discussions:
 
 [Rust] is a great language to write small command line tools in. While it gives you some tools for common tasks, allows nice abstractions, it also has a type system and approach to API design that lead you to write robust code. Let me show you some techniques to make this a nice experience.
 
-**Update:** I published a crate (Rust library) that contains a lot of what this post describes: [quicli].
+**Update (Jan 2018):** I published a crate (Rust library) that contains a lot of what this post describes: [quicli].
+
+**Update (April 2020):** Changed failure for anyhow.
 
 [quicli]: https://github.com/killercup/quicli
 
@@ -92,70 +94,63 @@ For more information try --help
 
 ## Error handling
 
-Right now, you can probably just use [`error-chain`]. It's a good library. It might appear to be a bit magical[^macro-magic] at first, but in 90% of my code it was really straightforward to use. Towards the end of 2017, the [`failure`] crate was published, which takes a different approach to error-chain, and solves some of the usual issues with it. As it's still very new, so I'll not recommend it just yet, but in the future, I might update this post to do so.
+_This was updated April 2020._
 
-[^macro-magic]: If you are afraid of macro-heavy code, you can use [cargo-expand] to see what concrete code the macro generates.
+In many CLI applications, error handling doesn't have to be complicated.
+All you need is a library like [`anyhow`]
+that let's you bubble up basically all error types
+and optionally add some context (descriptions) to them.
 
-Let's pick up our example from before but assume we don't have any CLI options, so we'll hardcode them somehow.
+[`anyhow`]: https://docs.rs/anyhow/1.0.28/anyhow/
 
 ```rust
-#[macro_use] extern crate error_chain;
-
 use std::fs::File;
+use anyhow::Context;
 
-// Short macro to define a main function that allows you to use `?`
-quick_main!(|| -> Result<()> {
+// Anyhow exports a type alias for a Result with its own error type.
+// Having main return this makes it print the error as well as a list of causes.
+fn main() -> anyhow::Result<()> {
     // Let's say this is user input
     let source = "./whatever";
     let level = "42";
 
-    // And now, let's convert this to formats that are useful to us
-    let source = File::open(source) // can return io::Error
-        .chain_err(|| format!("Can't open `{}`", source))?;
+    // Opening a file can fail, but the error message is something like
+    // "OS error 2: No such file or directory"…
+    let source = File::open(source)
+        // …so, let's add a bit of context to it:
+        .with_context(|| format!("Can't open `{}`", source))?;
 
     let level = level.parse()?; // can return a ParseIntError
+    let source_fanciness = get_fanciness(&source)?; // returns generic error as well
 
-    let source_fanciness = get_fanciness(&source)?; // can return CantDetermineFanciness
+    // An assert that returns an Error
+    anyhow::ensure!(source_fanciness < level, "source is already fancy");
 
-    // And now for something cool: An assert that returns an Error
-    ensure!(source_fanciness < level, ErrorKind::AlreadyFancy(source_fanciness, level));
-
-    // ...
+    // Everything is fine, and main returns an empty "okay"
     Ok(())
-});
-
-fn get_fanciness(_source: &File) -> Result<u8> {
-    Ok(255) // Let's assume all inputs are fancy
 }
 
-// Let's define some errors here
-error_chain! {
-    errors {
-        CantDetermineFanciness {
-            description("unable to determine fanciness from source")
-        }
-        AlreadyFancy(source_level: u8, target_level: u8) {
-            description("already fancy enough")
-            display("Already fancy enough: Source level {} above target level {}", source_level, target_level)
-        }
-    }
-    foreign_links {
-        Io(::std::io::Error);
-        InvalidNumber(::std::num::ParseIntError);
-    }
+fn get_fanciness(_source: &File) -> anyhow::Result<u8> {
+    Ok(255) // Let's assume all inputs are fancy
 }
 ```
 
-Wow, that's a lot of code. But I think it's quite clear: It has a main function that shows the control flow, followed by a helper function, followed but a full list of possible errors.
+This looks easy enough, right?
+There's a lot of ways to enhance the way you deal with errors,
+for example by writing your own error types.
+But for quick CLI tools, this is most often not necessary.
 
-And error-chain's `quick_main!` macro gives us nice output on errors:
+By th way,
+here is what the error output looks like:
 
 ```
 $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.61 secs
      Running `target/debug/fancify`
 Error: Can't open `./whatever`
-Caused by: No such file or directory (os error 2)
+
+Caused by:
+    No such file or directory (os error 2)
 ```
 
 Or:
@@ -165,7 +160,7 @@ $ touch whatever
 $ cargo run
     Finished dev [unoptimized + debuginfo] target(s) in 0.0 secs
      Running `target/debug/fancify`
-Error: Already fancy enough: Source level 255 above target level 42
+Error: source is already fancy
 ```
 
 ## Many small crates
@@ -186,13 +181,15 @@ extern crate serde_yaml as yaml;
 extern crate comrak;
 ```
 
+_Note from the future (April 2020): Since the introduction of Rust 2018, you don't need to write `extern crate` anymore. Yay!_
+
 ## Many small helper functions
 
 I tend to write a lot of small functions. Here's an example of such a "small helper function":
 
 ```rust
 fn open(path: &str) -> Result<File> {
-    File::open(path).chain_err(|| format!("Can't open `{}`", path))
+    File::open(path).with_context(|| format!("Can't open `{}`", path))
 }
 ```
 
