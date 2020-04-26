@@ -28,31 +28,57 @@ entries:
     Book covering a lot of different data structures and algorithms.
     "Its aim is to systematically explain how to write efficient programs and,
     also, the approaches and tools for determining why the program isn’t efficient enough."
-- title: Amos' Intro to Rust
+- title: Aspects of Rust
   type: series
-  author: Amos Wenger
+  author: multiple people
   niches: [rust]
+  summary: |
+    Several stand-alone posts by various people whose only connection is that
+    they cover nice aspects of Rust.
   parts:
   - title: A half-hour to learn Rust
     url: https://fasterthanli.me/blog/2020/a-half-hour-to-learn-rust/
     archive: 20200416203813
     updated: 2020-01-27
-    summary: Whirlwind tour through Rust as a language.
+    summary: Whirlwind tour through Rust as a language by Amos Wenger.
+  - title: Typed Key Pattern
+    url: https://matklad.github.io/2018/05/24/typed-key-pattern.html
+    archive: 20200426170858
+    summary: By Aleksey Kladov.
+  - title: The Secret Life of Cows
+    url: https://deterministic.space/secret-life-of-cows.html
+    archive: 20200426171212
+    summary: The Clone-on-Write smart pointer explained by yours truly.
+  - title: Newtype Index Pattern
+    url: https://matklad.github.io/2018/06/04/newtype-index-pattern.html
+    archive: 20200426170901
+    summary: By Aleksey Kladov.
+  - title: "How to implement a trait for `&str` and `&[&str]`"
+    url: https://deterministic.space/return-type-based-dispatch.html
+    archive: 20200426171311
+    summary: Some musing on traits and borrows by yours truly.
   - title: Declarative memory management 
     url: https://fasterthanli.me/blog/2019/declarative-memory-management/
     archive: 20200416202910
     updated: 2019-09-19
     pages: 60
     summary: |
-      Introducing the complexities of memory management and
+      By Amos Wenger. Introducing the complexities of memory management and
       the ways Rust tries to represent them in a nice roundabout way.
-  - title: Working with strings in Rust 
+  - title: Return-type based dispatch
+    url: https://deterministic.space/return-type-based-dispatch.html
+    archive: 20200426171311
+    summary: |
+      By yours. By specifying at some later point in the code which type you
+      want your function to return, the compiler can go back and fill in the
+      blanks.
+  - title: Working with strings in Rust
     author: Amos Wenger
     url: https://fasterthanli.me/blog/2020/working-with-strings-in-rust/
     archive: 20200416203533
     updated: 2020-02-19
     summary: |
-      Following the memory management post,
+      By Amos Wenger. Following the memory management post,
       this looks at how strings are actually pretty complicated
       and what Rust does about them.
 - title: Reading files the hard way
