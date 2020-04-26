@@ -157,12 +157,21 @@ entries:
     archive: 20200416204015
   - title: A no_std Rust binary
     url: https://fasterthanli.me/blog/2020/a-no-std-rust-binary/
-    archive: 20200414220553
+    archive: 20200426170253
+  - title: Thread-local storage
+    url: https://fasterthanli.me/blog/2020/thread-local-storage/
+    archive: 20200426170407
 - title: Parsing
   type: series
   author: Aleksey Kladov
   niches: [parsers]
+  summary: |
+    Not a real series of articles but a collection of posts by someone whose
+    Github bio reads "Stuck writing parsers".
   parts:
+  - title: Modern Parser Generator
+    url: https://matklad.github.io/2018/06/06/modern-parser-generator.html
+    archive: 20200426170539
   - title: Simple but Powerful Pratt Parsing
     url: https://matklad.github.io/2020/04/13/simple-but-powerful-pratt-parsing.html
     archive: 20200416155208
