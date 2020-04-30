@@ -395,6 +395,25 @@ entries:
   niches: [parsers]
   pages: 60
   archive: 20200423162949
+- title: Manish vs. ASCII
+  type: series
+  author: Manish Goregaokar
+  summary: |
+    Several posts on why assuming text is ASCII is unhelpful.
+  niches: [unicode]
+  parts:
+  - title: "Let’s Stop Ascribing Meaning to Code Points"
+    url: https://manishearth.github.io/blog/2017/01/14/stop-ascribing-meaning-to-unicode-code-points/
+    archive: 20200430223156
+    summary: "tl;dr you should not index into a Unicode text, like, ever."
+  - title: "Breaking Our Latin-1 Assumptions"
+    url: https://manishearth.github.io/blog/2017/01/15/breaking-our-latin-1-assumptions/
+    archived: 20200430223205
+    summary: "Examples for scripts/languages that really don't work if you assume you have ASCII text."
+  - title: "Picking Apart the Crashing iOS String"
+    url: https://manishearth.github.io/blog/2018/02/15/picking-apart-the-crashing-ios-string/
+    archive: 20200430223226
+    summary: "Fun analysis of a Unicode rendering bug that crashed iOS devices."
 ---
 It seems especially recently I've come across more and more
 _long-form_ texts (think: hour-long blog posts; free books; series of posts).
