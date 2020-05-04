@@ -186,7 +186,7 @@ entries:
     archive: 20200426170253
   - title: Thread-local storage
     url: https://fasterthanli.me/blog/2020/thread-local-storage/
-    archive: 20200426170407
+    archive: 20200504104021
 - title: Parsing
   type: series
   author: Aleksey Kladov
