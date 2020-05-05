@@ -414,6 +414,17 @@ entries:
     url: https://manishearth.github.io/blog/2018/02/15/picking-apart-the-crashing-ios-string/
     archive: 20200430223226
     summary: "Fun analysis of a Unicode rendering bug that crashed iOS devices."
+- title: The Wayland Protocol
+  type: book
+  url: https://wayland-book.com/
+  archive: 20200505182132
+  author: Drew DeVault
+  niches: [wayland, graphics, protocols, unix]
+  pages: 156
+  summary: |
+    "Wayland is the next-generation display server for Unix-like systems[…] This
+    book will help you establish a firm understanding of the concepts, design,
+    and implementation of [it]".
 ---
 It seems especially recently I've come across more and more
 _long-form_ texts (think: hour-long blog posts; free books; series of posts).
