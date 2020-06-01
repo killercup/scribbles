@@ -15,6 +15,17 @@ The existence of libraries with nice, user-friendly interfaces is one of the mos
 
 [rustfest-talk]: https://www.youtube.com/watch?v=0zOg8_B71gE
 
+**Update 2017-04-27:** Since writing that post,
+[@brson] of the Rust Libs Team has published a pretty comprehensive
+[Rust API Guidelines] document that includes my advice here and a lot more.
+
+**Update 2020-06-01:** This post is quite a few years old by now!
+Most of the patterns are still valid and actively used in Rust today,
+but the language has also evolved quite a bit and enabled new patterns
+that are not discussed here.
+I've updated some of syntax and crate recommendations
+but otherwise kept the post as it was in 2016.
+
 ## Contents
 {:.no_toc}
 
@@ -155,7 +166,7 @@ Depending on your API, you could also decide to have your users deal with parsin
 // Option A: You do the parsing
 fn output_a(f: &Foo, color: &str) -> Result<Bar, ParseError> {
     // This shadows the `options` name with the parsed type
-    let color: Color = try!(options.parse());
+    let color: Color = options.parse()?;
 
     f.to_bar(&color)
 }
@@ -181,9 +192,11 @@ fn main() {
 
 ### Error handling
 
-The official book has an [awesome chapter](https://doc.rust-lang.org/1.12.0/book/error-handling.html) on error handling.
+The official book has an [awesome chapter](https://doc.rust-lang.org/1.43.0/book/ch09-02-recoverable-errors-with-result.html) on error handling.
 
-There are a few crates to reduce the boilerplate needed for good error types, e.g., [quick-error](https://crates.io/crates/quick-error), and [error-chain](https://crates.io/crates/error-chain).
+There are a few crates to reduce the boilerplate needed for good error handling,
+e.g., [anyhow](https://crates.io/crates/anyhow) (dynamic error type with methods for annotating and chaining errors),
+and [thiserror](https://crates.io/crates/thiserror) (makes creating custom error types easy).
 
 ### Public type aliases
 
@@ -509,8 +522,6 @@ Possible Rust libraries that use some nice tricks in their APIs:
 What I tried to cover here are design patterns for _interfaces_, i.e. APIs exposed to the user. While I believe that some of these patterns are only applicable to writing libraries, many also apply to writing generic application code.
 
 You can find more information on this topic in the [Rust Design Patterns](https://github.com/rust-unofficial/patterns) repository.
-
-**Update 2017-04-27:** Since writing that post, [@brson] of the Rust Libs Team has published a pretty comprehensive [Rust API Guidelines] document that includes my advice here and a lot more.
 
 [@brson]: https://github.com/brson
 [Rust API Guidelines]: https://github.com/brson/rust-api-guidelines
