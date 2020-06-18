@@ -69,8 +69,8 @@ entries:
     url: https://deterministic.space/return-type-based-dispatch.html
     archive: 20200426171311
     summary: |
-      By yours. By specifying at some later point in the code which type you
-      want your function to return, the compiler can go back and fill in the
+      By yours truly. By specifying at some later point in the code which type
+      you want your function to return, the compiler can go back and fill in the
       blanks.
   - title: Working with strings in Rust
     author: Amos Wenger
@@ -81,6 +81,37 @@ entries:
       By Amos Wenger. Following the memory management post,
       this looks at how strings are actually pretty complicated
       and what Rust does about them.
+- title: Learn Rust the Dangerous Way
+  type: series
+  author: Cliff L. Biffle
+  niches: [rust, systems programming, memory management]
+  summary: |
+    Rust explained for low-level developers without a CS background.
+    If you've been writing firmwares or kernels or game engines
+    and want to dip your toes into Rust, this a good start.
+    Full index of series [here](https://cliffle.com/p/dangerust/).
+  parts:
+  - title: Why Learn Rust the Dangerous Way?
+    url: https://cliffle.com/p/dangerust/0/
+    archive: 20200618094401
+  - title: "You Can't Write C in Just Any Ol' Language"
+    url: https://cliffle.com/p/dangerust/1/
+    archive: 20200618094447
+  - title: References Available Upon Request
+    url: https://cliffle.com/p/dangerust/2/
+    archive: 20200618094458
+  - title: Measure What You Optimize
+    url: https://cliffle.com/p/dangerust/3/
+    archive: 20200618094503
+  - title: A More Perfect Union
+    url: https://cliffle.com/p/dangerust/4/
+    archive: 20200618094533
+  - title: Making Safe Things From Unsafe Parts
+    url: https://cliffle.com/p/dangerust/5/
+    archive: 20200618094538
+  - title: Let The Compiler Do The Work
+    url: https://cliffle.com/p/dangerust/6/
+    archive: 20200618094544
 - title: Reading files the hard way
   type: series
   author: Amos Wenger
