@@ -41,6 +41,10 @@ entries:
     archive: 20200416203813
     updated: 2020-01-27
     summary: Whirlwind tour through Rust as a language by Amos Wenger.
+  - title: Diving into Rust with a CLI
+    url: https://kbknapp.dev/rust-cli/
+    archive: 20200624084218
+    summary: Small tutorial by Kevin Knapp on how to write a XKCD downloader tool in Rust.
   - title: Typed Key Pattern
     url: https://matklad.github.io/2018/05/24/typed-key-pattern.html
     archive: 20200426170858
@@ -81,6 +85,15 @@ entries:
       By Amos Wenger. Following the memory management post,
       this looks at how strings are actually pretty complicated
       and what Rust does about them.
+- title: Command Line Applications in Rust
+  author: Pascal Hertleif
+  url: https://rust-cli.github.io/book/print.html
+  archive: 20200624083756
+  pages: 45
+  updated: 2020-06-12
+  summary: |
+    A tutorial on how to write CLI apps in Rust, learning many aspects of the
+    ecosystem along the way.
 - title: Learn Rust the Dangerous Way
   type: series
   author: Cliff L. Biffle
