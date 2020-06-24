@@ -85,6 +85,11 @@ entries:
       By Amos Wenger. Following the memory management post,
       this looks at how strings are actually pretty complicated
       and what Rust does about them.
+  - title: Writing Non-Trivial Macros in Rust
+    url: http://adventures.michaelfbryan.com/posts/non-trivial-macros/
+    archive: 20200624084806
+    summary: |
+      By Michael F. Bryan.
 - title: Command Line Applications in Rust
   author: Pascal Hertleif
   url: https://rust-cli.github.io/book/print.html
