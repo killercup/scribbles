@@ -5,6 +5,7 @@ categories:
 discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/fdbszu/cheap_tricks_for_highperformance_rust/"
   "Twitter": "https://twitter.com/killercup/status/1235127402520604672"
+  "Reddit again": "https://www.reddit.com/r/rust/comments/he8zky/cheap_tricks_for_highperformance_rust/"
 ---
 So you're writing Rust but it's not fast enough?
 Even though you're using `cargo build --release`?
