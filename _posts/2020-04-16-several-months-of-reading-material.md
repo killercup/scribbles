@@ -91,6 +91,7 @@ entries:
     summary: |
       By Michael F. Bryan.
 - title: Command Line Applications in Rust
+  type: book
   author: Pascal Hertleif
   url: https://rust-cli.github.io/book/print.html
   archive: 20200624083756
