@@ -475,6 +475,73 @@ entries:
     "Wayland is the next-generation display server for Unix-like systems[…] This
     book will help you establish a firm understanding of the concepts, design,
     and implementation of [it]".
+- title: Programming Feedback for Advanced Beginners
+  type: series
+  author: Robert Heaton
+  summary: |
+    "Specific, actionable ways to make your code cleaner." Targeting
+    intermediate programmers who are looking for entertaining writing they can
+    learn something from.
+
+    Full index of series [here](https://robertheaton.com/pfab/).
+  parts:
+  - title: "Programming Feedback for Advanced Beginners #0"
+    url: https://robertheaton.com/2019/11/08/programming-feedback-for-advanced-beginners-0/
+    archive: 20200124163258
+  - title: "Define your boundaries"
+    url: https://robertheaton.com/2019/11/11/pfab1/
+    archive: 20200514081403
+  - title: "How to structure your programs"
+    url: https://robertheaton.com/2019/11/30/pfab2-how-to-structure-your-programs/
+    archive: 20200722100710
+  - title: "How to rigorously analyze your journey to work"
+    url: https://robertheaton.com/2019/12/07/pfab3-analyze-commute/
+    archive: 20200420013909
+  - title: "Exception handling and coping with failure"
+    url: https://robertheaton.com/2019/12/14/pfab4-exception-handling-dealing-with-failure/
+    archive: 20200514081403
+  - title: "How to make your programs shorter"
+    url: https://robertheaton.com/2019/12/21/ppab5-how-to-make-your-programs-shorter/
+    archive: 20200420014641
+  - title: "Real-world debugging practice"
+    url: https://robertheaton.com/2019/12/28/pfab6-real-world-debugging-practice/
+    archive: 20200420022451
+  - title: "How to write a library"
+    url: https://robertheaton.com/2020/01/04/pfab7-how-to-write-a-library/
+    archive: 20200514081403
+  - title: "Input validation - tradeoffs between convenience and surprise"
+    url: https://robertheaton.com/2020/01/26/pfab8-input-validation/
+    archive: 20200620023529
+  - title: "Batch vs Stream processing"
+    url: https://robertheaton.com/2020/02/08/pfab9-batch-vs-stream-processing/
+    archive: 20200514081403
+  - title: "First-class functions and dependency injection"
+    url: https://robertheaton.com/2020/02/23/pfab10-first-class-functions-dependency-injection/
+    archive: 20200514081403
+  - title: "Separating logic and data"
+    url: https://robertheaton.com/2020/03/07/pfab11-separating-logic-and-data/
+    archive: 20200523211150
+  - title: "Systems design for advanced beginners"
+    url: https://robertheaton.com/2020/04/06/systems-design-for-advanced-beginners/
+    archive: 20200721134054
+  - title: "When code is too clever to be clean"
+    url: https://robertheaton.com/2020/04/19/pfab13-when-code-is-too-clever-to-be-clean/
+    archive: 20200525215035
+  - title: "Evil `eval`"
+    url: https://robertheaton.com/2020/05/03/pfab14-evil-eval/
+    archive: 20200606185502
+  - title: "Don't overwork your functions"
+    url: https://robertheaton.com/2020/05/17/pfab15-dont-overwork-your-functions/
+    archive: 20200525051606
+  - title: "How to make your code faster and why you often shouldn't bother"
+    url: https://robertheaton.com/pfab16-how-to-make-your-code-faster/
+    archive: 20200621085446
+  - title: "pre-computation sounds like cheating but isn't"
+    url: https://robertheaton.com/pfab17-precomputation-sounds-like-cheating-but-isnt/
+    archive: 20200717182014
+  - title: "Adventures in shrinking serialized data"
+    url: https://robertheaton.com/pfab18-shrinking-serialized-data/
+    archive: 20200722101312
 ---
 It seems especially recently I've come across more and more
 _long-form_ texts (think: hour-long blog posts; free books; series of posts).
