@@ -118,7 +118,7 @@ Or, you could return a _slice_ of the original string, that starts after the lea
 The second options requires that we keep the original data around,
 because our new slice is just referencing it internally.
 This means that instead of copying however many bytes your string contains,
-we just write to numbers:
+we just write two numbers:
 A pointer to the point in the original string after the leading whitespace,
 and the length of the remaining string that we care about.
 (Carrying the length with us is a convention in Rust.)
