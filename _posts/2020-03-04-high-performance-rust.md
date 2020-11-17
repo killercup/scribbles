@@ -16,6 +16,11 @@ Please remember that the following suggestions **do not** replace actual profili
 I also think it goes without saying that the only way to detect if any of this helps
 is having benchmarks that represent how your application behaves under real usage.
 
+If you'd like to read about performance optimizations that take a bit longer
+but actually are about improving your code,
+[have a look at this small online book](https://nnethercote.github.io/perf-book/)
+by Nicholas Nethercote.
+
 ## Tweaking our `release` profile
 
 Let's first of all enable some more optimizations
