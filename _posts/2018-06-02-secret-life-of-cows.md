@@ -190,7 +190,7 @@ Let's go through it one by one.
   but in case the Cow contains `Borrowed` data,
   this lifetime is a restriction set by the data we refer to.
   We cannot have a Cow that refers to already freed memory,
-  and rustc will us know when that is possible by mentioning that the Cow outlives its `'a`.
+  and rustc will let us know when that is possible by mentioning that the Cow outlives its `'a`.
 - [`ToOwned`] is a trait that defines a method to convert borrowed data into owned data
   (by cloning it and giving us ownership of the new allocation, most likely).
   The type we receive from this method is an [associated type][rust-book-advanced-traits] on the trait,
@@ -213,10 +213,10 @@ Let's go through it one by one.
 
   But how does that relate to Cow again?
   You see, the `B` in Cow's definition is behind a reference:
-  Once directly visible in the `Borrowed` variante,
+  Once directly visible in the `Borrowed` variant,
   and the second type hidden in the [`ToOwned::Owned`] (which is of type [`Borrow<Self>`]).
   Since a Cow should be able to contain a `&[u8]`,
-  its definition need to work for `&'a B` where `B = [u8]`.
+  its definition needs to work for `&'a B` where `B = [u8]`.
   That in turn means need to say:
   "we don't require this to be `Sized`, we know it's behind a reference anyway"
   -- which is exactly what the `?Sized` syntax does.
