@@ -16,7 +16,7 @@ Today I want to talk about how Bevy uses Rust traits to let users very convenien
 
 ## How to bevy
 
-Bevy really wants you to use its entity component system architecture
+Bevy really wants you to use its entity-component-system architecture
 to structure your games.
 What is boils down to is writing functions ("systems")
 that use queries to fetch and update components and resources.
@@ -105,11 +105,11 @@ What is the issue?
 After two hours and too much coffee we realize that
 we wrote `.after("imput")`.
 
-How can we make sure that a simple typo won't break or game again?
+How can we make sure that a simple typo won't break our game again?
 
 ## Get me out of this stringly-typed mess
 
-So far we've used string to define and refer to labels,
+So far we've used strings to define and refer to labels,
 but if you look at the definition of the `label`, `before`, and `after` methods [here][`ParallelSystemDescriptorCoercion`]
 you will see they actually accept anything that implements [`SystemLabel`].
 
