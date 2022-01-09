@@ -5,18 +5,19 @@ categories:
 - bevy
 ---
 Out of curiosity I've recently started following the development of [Bevy],
-a game engine written in [Rust] that.
+a game engine written in [Rust].
 Today I want to talk about how Bevy uses Rust traits to let users very conveniently label elements.
 
 **Note:** The implementation we arrive at is actually very generic
 -- you can easily apply it to any other Rust project.
+
 
 [Bevy]: https://bevyengine.org/
 [Rust]: https://www.rust-lang.org/
 
 ## How to bevy
 
-Bevy really wants you to use its entity-component-system architecture
+Bevy really wants you to use its entity-component-system (ECS) architecture
 to structure your games.
 What is boils down to is writing functions ("systems")
 that use queries to fetch and update components and resources.
@@ -34,7 +35,7 @@ use bevy::prelude::*;
 
 fn main() {
     App::new()
-        .add_plugins(MinimalPlugins)
+        .add_plugins(DefaultPlugins)
         .add_system(clock)
         .run();
 }
@@ -63,7 +64,7 @@ use bevy::prelude::*;
 
 fn main() {
     App::new()
-        .add_plugins(DefaultPlugins)
+        .add_plugins(MinimalPlugins)
         .add_startup_system(setup_world.label("world"))
         .add_startup_system(spawn_player.before("world"))
         .run();
@@ -89,31 +90,36 @@ and declare it wants to run `after("world")`.
 Well, long story short, that [`after`][`ParallelSystemDescriptorCoercion`] method turns your system function into a [`ParallelSystemDescriptor`]
 with metadata that the scheduler can pick up and build a graph from.
 
-[`ParallelSystemDescriptorCoercion`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/trait.ParallelSystemDescriptorCoercion.html
-[`ParallelSystemDescriptor`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/struct.ParallelSystemDescriptor.html
-
 Feel free to play with this!
 Change it to `before("world")`,
 change the order in which the systems are added,
 add more systems, etc.
 
 Imagine this:
-By now we have a whole game built using dozens of systems.
+It's a bit later in the month and
+we have a whole game built using dozens of systems.
 But for some reason the player movement seems a bit broken,
 like it's rendering one frame too late.
 What is the issue?
-After two hours and too much coffee we realize that
+After two hours and too much coffee we realize[^warn] that
 we wrote `.after("imput")`.
 
 How can we make sure that a simple typo won't break our game again?
+
+
+[^warn]: To be fair, with the `LogPlugin` Bevy prints a *warning* on start-up about an unknown label.
+But our example immediately starts printing a lot of other things,
+and I guess in this imaginary scenario drinking all this coffee didn't make us more alert after all.
+
+
+[`ParallelSystemDescriptorCoercion`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/trait.ParallelSystemDescriptorCoercion.html
+[`ParallelSystemDescriptor`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/struct.ParallelSystemDescriptor.html
 
 ## Get me out of this stringly-typed mess
 
 So far we've used strings to define and refer to labels,
 but if you look at the definition of the `label`, `before`, and `after` methods [here][`ParallelSystemDescriptorCoercion`]
 you will see they actually accept anything that implements [`SystemLabel`].
-
-[`SystemLabel`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/trait.SystemLabel.html
 
 If you go to Bevy's API docs you can see [`SystemLabel`] is a trait and defined as 
 
@@ -156,6 +162,8 @@ Which we can use just like our string previously:
 .add_startup_system(move_player.after(System::Input))
 ```
 
+
+[`SystemLabel`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/trait.SystemLabel.html
 [`SystemLabel` derive macro]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/derive.SystemLabel.html
 
 ## Some notes on the magic
@@ -200,6 +208,13 @@ That means you will have to explicitly derive `StageLabel`
 if you want to use your type to refer to a stage;
 you can't use a `SystemLabel` or any other label for that.
 
+This is another safety guarantee:
+We already saw that you can mess up your stringy labels by making typos,
+but you can also type everything correctly
+and still refer to a "stage label" in place of a "system label".
+If you use custom types instead of strings, however,
+the compiler will not let you confuse them.
+
 In true Rust fashion all of these labels are implemented using macros.
 The macro is called [`define_label`]
 and it's used [here][label.rs]
@@ -207,6 +222,7 @@ to create all the label traits for the scheduler.
 
 The derive macros are a bit more manual,
 and they live in the `bevy_ecs_macros` crate [here][macros].
+
 
 [`define_label`]: https://docs.rs/bevy/0.6.0/bevy/utils/macro.define_label.html
 [label.rs]: https://github.com/bevyengine/bevy/blob/e56685370ba82003af60a491667fac209a0f7897/crates/bevy_ecs/src/schedule/label.rs#L4-L7
