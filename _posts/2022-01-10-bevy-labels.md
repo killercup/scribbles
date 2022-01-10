@@ -1,8 +1,11 @@
 ---
-title: How Bevy uses Rust traits for labelling
+title: How Bevy uses Rust traits for labeling
 categories:
 - rust
 - bevy
+discussions:
+  "Reddit": "https://www.reddit.com/r/rust/comments/s0fg3m/how_bevy_uses_rust_traits_for_labeling/"
+  "Twitter": "https://twitter.com/killercup/status/1480460379960528896"
 ---
 Out of curiosity I've recently started following the development of [Bevy],
 a game engine written in [Rust].
