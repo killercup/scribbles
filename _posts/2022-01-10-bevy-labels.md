@@ -58,7 +58,7 @@ If you want to specify that some systems have to run before others,
 you have to annotate this.
 
 Here's another, slightly more complex example.
-Not that to not be immediately presented with a wall of text,
+Note that to not be immediately presented with a wall of text,
 we have changed the `add_system` to `add_startup_system`.
 This means the system is only run once, at start-up.
 
