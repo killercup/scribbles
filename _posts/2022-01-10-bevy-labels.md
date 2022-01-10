@@ -69,7 +69,7 @@ fn main() {
     App::new()
         .add_plugins(MinimalPlugins)
         .add_startup_system(setup_world.label("world"))
-        .add_startup_system(spawn_player.before("world"))
+        .add_startup_system(spawn_player.after("world"))
         .run();
 }
 
@@ -153,16 +153,16 @@ In the end we arrive at something like this:
 
 ```rust
 #[derive(Debug, Clone, PartialEq, Eq, Hash, SystemLabel)]
-enum System {
-    Input,
+enum Setup {
+    World,
 }
 ```
 
 Which we can use just like our string previously:
 
 ```rust
-.add_startup_system(mouse_input.label(System::Input))
-.add_startup_system(move_player.after(System::Input))
+.add_startup_system(setup_world.label(Setup::World))
+.add_startup_system(spawn_player.after(Setup::World))
 ```
 
 
