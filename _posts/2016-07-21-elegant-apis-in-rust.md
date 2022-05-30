@@ -459,18 +459,19 @@ You can encode a state machine in the type system.
 
 This works really well in Rust as your methods can move your data into a new type and you can no longer access the old state afterwards.
 
-Here's an arbitrary example about mailing a package:
+Here's an arbitrary example about mailing a package
+(the type annotations are not necessary and are only added for clarity here):
 
 ```rust
-let p: OpenPackage = Package::new();
-let p: OpenPackage = package.insert([stuff, padding, padding]);
+let package: OpenPackage = Package::new();
+let package: OpenPackage = package.insert([stuff, padding, padding]);
 
-let p: ClosedPackage = package.seal_up();
+let package: ClosedPackage = package.seal_up();
 
-// let p: OpenPackage = package.insert([more_stuff]);
+// let package: OpenPackage = package.insert([more_stuff]);
 //~^ ERROR: No method named `insert` on `ClosedPackage`
 
-let p: DeliveryTracking = package.send(address, postage);
+let package: DeliveryTracking = package.send(address, postage);
 ```
 
 A good real-life example was given by /u/ssokolow [in this thread on /r/rust](https://www.reddit.com/r/rust/comments/568yvh/typesafe_unions_in_c_and_rust/d8hcwfs):
