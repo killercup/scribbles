@@ -3,6 +3,7 @@ title: The Rust features that make Bevy’s systems work
 categories:
 - rust
 - bevy
+canonical: https://blog.logrocket.com/rust-bevy-entity-component-system/
 discussions:  
 ---
 
