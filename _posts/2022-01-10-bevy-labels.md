@@ -30,6 +30,9 @@ and how they might be combined.
 **Aside:** These "systems functions" are super interesting in themselves:
 They are just regular Rust functions with specific parameters
 and through type-system magic (read: traits) Bevy knows how to call them.
+I wrote a separate article on them [here][ecs post].
+
+[ecs post]: {% post_url 2022-09-15-bevy-ecs-rust-type-system %}
 
 Here's a simple Bevy 0.6 app:
 
