@@ -15,6 +15,8 @@ This pattern is very generic and you can apply it to your own Rust projects. To 
 
 **This post is for you if** you are interested in type system tricks and are familiar with Rust. You can see it as a follow-up to my previous post on [the implementation of Bevy's labels](https://deterministic.space/bevy-labels.html).
 
+**Note:** This post uses Bevy version 0.8.
+
 ## The user-facing API of Bevy’s system functions
 
 First off, let's look at how Bevy's API is used so that we can work backward from it to recreate it ourselves.
