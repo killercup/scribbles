@@ -4,7 +4,7 @@ categories:
 - rust
 - bevy
 canonical: https://blog.logrocket.com/rust-bevy-entity-component-system/
-discussions:  
+discussions:
 ---
 
 [Bevy](https://bevyengine.org/) is a game engine written in [Rust](https://www.rust-lang.org/) that is known for featuring a very ergonomic entity-component-system. In the ECS pattern *entities* are unique things (e.g. objects in a game world) that are made up of *components*. *Systems* process these entities and control the behavior of the application. What makes Bevy’s API so elegant is that users can write regular functions in Rust, and Bevy will know how to call them by their type signature, dispatching the correct data.
@@ -97,7 +97,7 @@ Now we have a trait for our systems, but to implement it on functions we need to
 
 > **Rust type system tricks:**
 > Rust uses “traits” for abstracting over behavior.
-> Functions implement some traits like `[FnMut](https://doc.rust-lang.org/1.62.1/std/ops/trait.FnMut.html)` automatically.
+> Functions implement some traits like [`FnMut`](https://doc.rust-lang.org/1.62.1/std/ops/trait.FnMut.html) automatically.
 > We can implement traits for all types that fulfill a “constraint”.
 
 Let’s use this:
@@ -133,7 +133,7 @@ struct App {
 }
 ```
 
-Our `add_system` method now also needs to accept anything that implements the `System` trait, and then put it into that list. The argument type is now generic: We use `S` as a placeholder for anything that implements `System`; and since Rust wants us to make sure that it is a thing valid for the entirety of the program, we are also asked to add `'``static`.
+Our `add_system` method now also needs to accept anything that implements the `System` trait, and then put it into that list. The argument type is now generic: We use `S` as a placeholder for anything that implements `System`; and since Rust wants us to make sure that it is a thing valid for the entirety of the program, we are also asked to add `'static`.
 And while we’re at it, let’s also add a method to actually run the app!
 
 ```rust
@@ -252,9 +252,9 @@ Our challenge is now this — get all three:
 
 This is a good place to look at Bevy’s code. When you start digging in, you’ll see:
 
-- Functions do not implement `[System](https://docs.rs/bevy/0.8.0/bevy/ecs/system/trait.System.html)`, but `[SystemParamFunction](https://docs.rs/bevy/0.8.0/bevy/ecs/system/trait.SystemParamFunction.html)`!
-- `[add_system](https://docs.rs/bevy/0.8.0/bevy/app/struct.App.html#method.add_system)` does not take an `impl System`, but an `impl` `[IntoSystemDescriptor](https://docs.rs/bevy/0.8.0/bevy/ecs/schedule/trait.IntoSystemDescriptor.html)`. This in turn uses a `[IntoSystem](https://docs.rs/bevy/0.8.0/bevy/ecs/system/trait.IntoSystem.html)` trait.
-- And actually, the thing that does implement `System` is `[FunctionSystem](https://docs.rs/bevy/0.8.0/bevy/ecs/system/struct.FunctionSystem.html)`, a struct.
+- Functions do not implement [`System`](https://docs.rs/bevy/0.8.0/bevy/ecs/system/trait.System.html), but [`SystemParamFunction`](https://docs.rs/bevy/0.8.0/bevy/ecs/system/trait.SystemParamFunction.html)!
+- [`add_system`](https://docs.rs/bevy/0.8.0/bevy/app/struct.App.html#method.add_system) does not take an `impl System`, but an [`impl IntoSystemDescriptor`](https://docs.rs/bevy/0.8.0/bevy/ecs/schedule/trait.IntoSystemDescriptor.html). This in turn uses a [`IntoSystem`](https://docs.rs/bevy/0.8.0/bevy/ecs/system/trait.IntoSystem.html) trait.
+- And actually, the thing that does implement `System` is [`FunctionSystem`](https://docs.rs/bevy/0.8.0/bevy/ecs/system/struct.FunctionSystem.html), a struct.
 
 Let’s take inspiration from that and make our `System` trait simple again. The code from above gets to continue on as a new trait called `SystemParamFunction`.
 We’ll also introduce an `IntoSystem` trait which our `add_system` function will accept:
@@ -305,7 +305,7 @@ trait SystemParamFunction<Params: SystemParam>: 'static {
 
 (As you can see, `SystemParamFunction` is the generic trait we called `System` in the last chapter.)
 
-**Note:** As you can see, we’re not doing anything with the function parameters yet. We’ll just keep them around so everything is generic and then “store” them in the `[PhantomData](https://doc.rust-lang.org/1.62.1/core/marker/struct.PhantomData.html)` type.
+**Note:** As you can see, we’re not doing anything with the function parameters yet. We’ll just keep them around so everything is generic and then “store” them in the [`PhantomData`](https://doc.rust-lang.org/1.62.1/core/marker/struct.PhantomData.html) type.
 
 To fulfill the constraint from `IntoSystem` that its output has to be a `System`, we now implement the trait on our new type:
 
@@ -401,7 +401,7 @@ TODO: fetching params
 
 You can [find the full code from this post here](https://play.rust-lang.org/?version=stable&mode=debug&edition=2021&gist=3f79222eaafc289088e730cff4cb658a) — press play and you’ll see this output (and some more). Feel free to play with it, try some combinations of systems, and maybe add some other things!
 
-We’ll end this post here. Maybe in a follow-up, we’ll talk all about fetching the parameters from a `World`. For now, if you want to look at how Bevy does it, check out the `[SystemParamFetch](https://docs.rs/bevy/0.8.0/bevy/ecs/system/trait.SystemParamFetch.html#)` trait.
+We’ll end this post here. Maybe in a follow-up, we’ll talk all about fetching the parameters from a `World`. For now, if you want to look at how Bevy does it, check out the [`SystemParamFetch`](https://docs.rs/bevy/0.8.0/bevy/ecs/system/trait.SystemParamFetch.html#) trait.
 
 ## Bonus: Same pattern, different framework — Extractors in Axum
 
@@ -419,10 +419,10 @@ There is a `post` function that accepts functions (even `async` ones) where all 
 
 But the general principle is the same:
 
-1. The `[Handler](https://docs.rs/axum/0.5.13/axum/handler/trait.Handler.html)` [trait](https://docs.rs/axum/0.5.13/axum/handler/trait.Handler.html) is implemented for functions
-    1. whose parameters implement `[FromRequest](https://docs.rs/axum/0.5.13/axum/extract/trait.FromRequest.html)` and
-    2. whose return type implements `[IntoResponse](https://docs.rs/axum/0.5.13/axum/response/trait.IntoResponse.html)`.
-2. It gets wrapped in a `[MethodRouter](https://docs.rs/axum/0.5.13/axum/routing/struct.MethodRouter.html)` struct
+1. The [`Handler`](https://docs.rs/axum/0.5.13/axum/handler/trait.Handler.html) [trait](https://docs.rs/axum/0.5.13/axum/handler/trait.Handler.html) is implemented for functions
+    1. whose parameters implement [`FromRequest`](https://docs.rs/axum/0.5.13/axum/extract/trait.FromRequest.html) and
+    2. whose return type implements [`IntoResponse`](https://docs.rs/axum/0.5.13/axum/response/trait.IntoResponse.html).
+2. It gets wrapped in a [`MethodRouter`](https://docs.rs/axum/0.5.13/axum/routing/struct.MethodRouter.html) struct
 3. and stored in a `HashMap` on the router.
 4. When called, `FromRequest` is [used](https://github.com/tokio-rs/axum/blob/329bd5f9b4e3747d6601773895a99899169e2ba5/axum/src/handler/mod.rs#L238-L252) to extract the values of the parameters so the underlying function can be called with them. (This is a spoiler for how Bevy works too!)
 
