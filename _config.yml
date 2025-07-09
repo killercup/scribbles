@@ -4,8 +4,9 @@ description: >
 url: "https://deterministic.space"
 author: &default_author
   name: Pascal Hertleif
-  twitter: killercup
   github: killercup
+  mastodon: https://mastodon.social/@killercup
+  bluesky: https://bsky.app/profile/killercup.de
 twitter: # this site's twitter account
   username: killercup
 imprint_url: https://pascalhertleif.de/impressum/
