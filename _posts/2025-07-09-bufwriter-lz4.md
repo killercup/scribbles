@@ -1,0 +1,114 @@
+---
+title: Rust BufWriter and LZ4 Compression
+categories:
+- rust
+discussions:
+---
+Recently, I've been working on a Rust project again.
+It deals with bioinformatics data, which can be quite large,
+so I got to play with profiling and optimizing the code.
+I've done some of this in past, but this time it was _actually_ useful.
+In this post, I want to talk about a small optimization
+in working with LZ4 compression
+that made a big difference in runtime performance.
+
+This tool mainly reads in a BAM file
+(which contains aligned genome sequence data),
+does some processing on it,
+and outputs the results in various formats,
+chosen by the user.
+One of the formats is the internal data structure used by the tool,
+which is convient for debugging and testing.
+Since this is Rust, all I had to do was add some `#[derive(Serialize, Deserialize)]` annotations,
+choose a good format (I picked [MessagePack](https://msgpack.org/)),
+and thanks to [serde](https://serde.rs/),
+we have a data format.
+Concretely, I made an enum with all the possible structures I want to output,
+(which includes header fields)
+and serialize and write each structure separately,
+so that they are concatenated in the output file.
+To read it back in,
+I wrote a little helper function[^rmp-stream] that
+keeps deserializing these enum values until it reaches the end of the file.
+So far, so good.
+
+## Compression with LZ4
+
+However, the output file was quite large
+-- it's pretty much everything I have in RAM.
+I wanted to compress it,
+but I also knew that compression is expensive,
+and for my debug output I don't really need to squeeze every byte out of it.
+I chose [LZ4](https://lz4.github.io/lz4/), via the `lz4` crate.
+Its [`Encoder`](https://docs.rs/lz4/1.28.1/lz4/struct.Encoder.html)
+implements `Write`,
+so we can just wrap our writer in it and continue to use it as before:
+
+```rust
+let file = std::fs::File::create("output.msgpack.lz4")?;
+let encoder = lz4::EncoderBuilder::new().level(4).build(file)?;
+```
+
+Pretty early in my Rust journey,
+I learned that file I/O is not buffered by default,
+so it's a good idea to wrap the `file` in a `BufWriter`:
+
+```rust
+let file = std::fs::File::create("output.msgpack.lz4")?;
+let file_buffered = std::io::BufWriter::new(file);
+let encoder = lz4::EncoderBuilder::new().level(4).build(file_buffered)?;
+```
+
+This then creates a chain like this:
+
+```
+MessagePack Serializer -> LZ4 Encoder -> BufWriter -> File
+```
+
+## Profiling
+
+When profiling the code (with [samply](https://github.com/mstange/samply/)),
+I noticed that the overhead from LZ4 was quite high.
+Even after lowering the compression level to 0,
+I wasn't happy.
+This was slower than the BGZIP compression I use for BCF files!
+And that is based on Deflate, which, while optimized heavily,
+is not an algorithm that should play in the same league as LZ4.
+What is going on here?
+
+I saw that there were **many** stacks with calls to `LZ4F_compressUpdateImpl`.
+Looking at [the implementation](https://github.com/lz4/lz4/blob/v1.10.0/lib/lz4frame.c#L977)
+with the samples per line,
+I see a lot of calls to `LZ4F_selectCompression`, `LZ4F_compressBound_internal`,
+`memcpy` (if the temporary block buffer has space and LZ4 wants to buffer),
+`LZ4F_makeBlock`, which writes the block header and checksum,
+and finally `XXH32_update`, which computes the checksum for the block.
+Why is this being called so much and why are there so many blocks being made?
+
+LZ4 is a block-based compression algorithm,
+which means that it compresses data in chunks.
+The chunks we are giving it are the serialized MessagePack data,
+which is around 250 bytes each.
+This means that for every 250 byte chunk,
+we're calling calling into LZ4 and ask it to compress it.
+And for every 250 byte chunk,
+it does the entire round checks and compression, and checksumming.
+
+## Swap the buffer
+
+Knowing that LZ4 works with blocks internally,
+I had the idea that I could swap the way I use the buffer:
+Instead of buffering writing to the file system,
+I could buffer writing to the LZ4 encoder.
+
+```rust
+let file = std::fs::File::create("output.msgpack.lz4")?;
+let encoder = lz4::EncoderBuilder::new().level(4).build(file)?;
+let encoder_buffered = std::io::BufWriter::new(encoder);
+```
+
+And indeed, this works!
+In my initial benchmark, this made this part of the code 1.83 times faster.
+An amazing result for basically just swapping two lines of code.
+
+[^rmp-stream]: `serde_json` includes a [`StreamDeserializer`](https://docs.rs/serde_json/1.0.140/serde_json/struct.StreamDeserializer.html) but  `rmp_serde` does not, so I wrote one myself. It's not as feature-complete (I think), but you can find it [here](https://github.com/3Hren/msgpack-rust/issues/317#issuecomment-3012814957).
