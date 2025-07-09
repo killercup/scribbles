@@ -3,6 +3,8 @@ title: Rust BufWriter and LZ4 Compression
 categories:
 - rust
 discussions:
+  "Bluesky": https://bsky.app/profile/killercup.de/post/3ltkhuwpt6k2x
+  "Mastodon": "https://mastodon.social/@killercup/114824754816997562"
 ---
 Recently, I've been working on a Rust project again.
 It deals with bioinformatics data, which can be quite large,
