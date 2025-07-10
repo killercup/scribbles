@@ -5,6 +5,7 @@ categories:
 discussions:
   "Bluesky": https://bsky.app/profile/killercup.de/post/3ltkhuwpt6k2x
   "Mastodon": "https://mastodon.social/@killercup/114824754816997562"
+  "Reddit": "https://www.reddit.com/r/rust/comments/1lw5r9x/bufwriter_and_lz4_compression/"
 ---
 Recently, I've been working on a Rust project again.
 It deals with bioinformatics data, which can be quite large,
