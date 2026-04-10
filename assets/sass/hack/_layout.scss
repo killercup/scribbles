@@ -1,0 +1,30 @@
+p {
+  margin: 0 0 1.75rem;
+}
+
+.container {
+  max-width: $max-width;
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.container-fluid {
+  margin: 0 auto;
+  padding: 0 1rem;
+}
+
+.inner {
+  padding: 1rem;
+}
+
+.inner2x {
+  padding: 2rem;
+}
+
+.pull-left {
+  float: left;
+}
+
+.pull-right {
+  float: right;
+}

@@ -1,0 +1,14 @@
+# Cloudflare Pages configuration
+# https://developers.cloudflare.com/pages/
+
+name = 'scribbles'
+compatibility_date = "2026-04-10"
+
+[assets]
+directory = "public"
+
+[build]
+command = "hugo"
+
+[build.environment]
+HUGO_VERSION = "0.160.1"

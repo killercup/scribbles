@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8"/>
+  <meta name="viewport" content="width=device-width, initial-scale=1"/>
+  {{- partial "head_meta.html" . }}
+  <link rel="stylesheet" href="/style.css">
+</head>
+<body>
+  <div class="hack container">
+    {{- block "main" . }}{{ end }}
+  </div>
+  <footer class="container site-footer">
+    <nav>
+      <p>
+        <a href="{{ "feed.xml" | absURL }}">RSS feed</a>
+        {{- with site.Params.mastodon }} /
+        <a rel="me" href="{{ . }}">Follow me on Mastodon</a>{{ end }}
+        {{- with site.Params.bluesky }} /
+        <a rel="me" href="{{ . }}">Follow me on Bluesky</a>{{ end }}
+      </p>
+      <p>
+        <a href="{{ site.Params.license_url }}" rel="license">&copy; Copyright {{ now.Year }} {{ site.Params.author }}</a>
+        /
+        <a href="{{ site.Params.imprint_url }}">Imprint</a>
+      </p>
+    </nav>
+  </footer>
+</body>
+</html>

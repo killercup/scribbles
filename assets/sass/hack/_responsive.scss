@@ -1,0 +1,32 @@
+@media screen and (max-width: 768px) {
+  .form-group {
+    & label {
+      display: block;
+      border-bottom: none;
+      width: 100%;
+    }
+  }
+
+  .form-group.form-textarea label:after {
+    display: none;
+  }
+
+  .form-control {
+    width: 100%;
+  }
+
+  textarea.form-control {
+    border-left: none;
+    padding: .5rem 0;
+  }
+
+  pre::-webkit-scrollbar {
+    height: 3px;
+  }
+}
+
+@media screen and (max-width: 480px) {
+  .form {
+    width: 100%;
+  }
+}

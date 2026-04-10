@@ -1,0 +1,42 @@
+{{ define "main" }}
+<article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">{{ .Title }}</h1>
+    <p class="post-meta">
+      Created <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "Jan 2, 2006" }}</time>
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"> by {{ site.Params.author }}</span></span>
+      and published in <a href="{{ site.BaseURL }}">{{ site.Title }}</a>.
+      {{- with .Params.categories }}
+        Labeled as {{ range $i, $cat := . }}{{ if $i }}{{ if eq $i (sub (len $.Params.categories) 1) }} and {{ else }}, {{ end }}{{ end }}<em>{{ $cat }}</em>{{ end }}.
+      {{- end }}
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    {{ .Content }}
+  </div>
+
+  <footer class="article-footer">
+    <p>
+      Thanks for reading.
+      {{- with site.Params.feedback_url }} <a href="{{ . }}">Comment on this post!</a>{{ end }}
+      {{- with site.Params.post_revisions_url }} <a href="{{ . }}{{ $.File.Path }}">Revision history.</a>{{ end }}
+    </p>
+    {{- with .Params.discussions }}
+    <p>
+      This post has been discussed on
+      {{- $len := len . }}
+      {{- $i := 0 }}
+      {{- range $name, $url := . }}
+        {{- if $i }}{{ if eq $i (sub $len 1) }} and {{ else }}, {{ end }}{{ end -}}
+        <a href="{{ $url }}">{{ $name }}</a>
+        {{- $i = add $i 1 }}
+      {{- end }}.
+    </p>
+    {{- end }}
+    <p>
+      <a href="{{ site.BaseURL }}">Back to index</a>.
+    </p>
+  </footer>
+</article>
+{{ end }}

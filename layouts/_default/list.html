@@ -1,0 +1,14 @@
+{{ define "main" }}
+<article class="page">
+  {{ .Content }}
+
+  <h2>Posts</h2>
+  <ul class="post-list">
+    {{- range site.RegularPages.ByDate.Reverse }}
+    <li>
+      <a class="post-link" href="{{ .RelPermalink }}">{{ .Title }}</a>
+    </li>
+    {{- end }}
+  </ul>
+</article>
+{{ end }}

@@ -1,0 +1,37 @@
+@mixin form-label($color) {
+  color: $color !important;
+  border-color: $color !important;
+}
+
+@mixin button($color, $hover-color) {
+  color: white;
+  background-color: $color;
+  border: 1px solid $color;
+  &:hover, &:focus:not(.btn-ghost) {
+    background-color: $hover-color;
+    border-color: $hover-color;
+  }
+}
+
+@mixin alert($color) {
+  color: $color;
+  border-color: $color;
+}
+
+@mixin button-ghost($color, $hover-color) {
+  border-color: $color;
+  color: $color;
+
+  &:hover, &:focus {
+    border-color: $hover-color;
+    color: $hover-color;
+    z-index: 2;
+  }
+}
+
+@mixin button-ghost-dark($hover-color) {
+  &:hover, &:focus {
+    border-color: $hover-color;
+    color: $hover-color;
+  }
+}
