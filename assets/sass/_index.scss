@@ -25,14 +25,16 @@
 
  .post-content {
    margin: 3rem 0;
+   hyphens: auto;
  }
-
- .post-content {
-   -webkit-hyphens: auto;
+ 
+ #TableOfContents {
+     padding: 0 1.4rem 0;
+     border: 1px solid $grey-300;
  }
 
  code {
-   -webkit-hyphens: none;
+   hyphens: none;
  }
 
  .highlight {

@@ -1,4 +1,5 @@
 {{ define "main" }}
+
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ .Title }}</h1>
@@ -12,6 +13,8 @@
     </p>
   </header>
 
+  {{ .TableOfContents }}
+
   <div class="post-content" itemprop="articleBody">
     {{ .Content }}
   </div>
@@ -24,7 +27,7 @@
     </p>
     {{- with .Params.discussions }}
     <p>
-      This post has been discussed on
+      This post has been discussed on&nbsp;
       {{- $len := len . }}
       {{- $i := 0 }}
       {{- range $name, $url := . }}

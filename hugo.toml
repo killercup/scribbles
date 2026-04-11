@@ -32,6 +32,10 @@ title = "Pascal's Scribbles"
   [markup.highlight]
     style = "github"
     noClasses = false
+  [markup.tableOfContents]
+     endLevel = 3
+     ordered = true
+     startLevel = 2
 
 [outputs]
   home = ["HTML", "RSS"]
