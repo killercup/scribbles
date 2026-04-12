@@ -1,0 +1,14 @@
+{
+  "$schema": "https://tangled.org/stevedylan.dev/sequoia/raw/main/sequoia.schema.json",
+  "siteUrl": "https://deterministic.space/",
+  "contentDir": "content/posts",
+  "publicDir": "static",
+  "outputDir": "public",
+  "stripDatePrefix": true,
+  "pathTemplate": "{slug}.html",
+  "publicationUri": "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.publication/3mjcd2t6afe25",
+  "publishContent": true,
+  "bluesky": {
+    "enabled": true
+  }
+}
