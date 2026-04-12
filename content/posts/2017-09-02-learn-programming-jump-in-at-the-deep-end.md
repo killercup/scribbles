@@ -6,6 +6,7 @@ categories:
 - rust
 publishDate: 2017-09-02
 updatedAt: 2017-09-02
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvd6rn424"
 ---
 
 There are many different ways to learn something;

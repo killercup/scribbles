@@ -6,6 +6,7 @@ discussions:
   "Twitter": "https://twitter.com/killercup/status/767452830210859010"
 publishDate: 2016-08-21
 updatedAt: 2016-08-21
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvglkek2k"
 ---
 Like most other `(\w)DD` techniques[^1], "README-driven Development" wants to guide your approach to software development. This approach works best for small, self-contained projects or libraries, whose API surface is no larger than what fits on a bunch of post-it notes. And of course for projects that you might not want to write _right now_ but just thought about in the shower that seemed like a good idea.
 

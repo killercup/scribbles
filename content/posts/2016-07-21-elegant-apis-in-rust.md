@@ -10,6 +10,7 @@ discussions:
   "/r/rust": "https://www.reddit.com/r/rust/comments/5koh1k/"
 publishDate: 2016-07-21
 updatedAt: 2016-07-21
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvif3ou22"
 ---
 The existence of libraries with nice, user-friendly interfaces is one of the most important factors when choosing a programming language. Here are some tips on how to write libraries with nice APIs in Rust. (Many of the points also apply to other languages.)
 

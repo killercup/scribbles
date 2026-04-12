@@ -8,6 +8,7 @@ discussions:
   "/r/rust": "https://www.reddit.com/r/rust/comments/5kee6x/"
 publishDate: 2016-12-21
 updatedAt: 2016-12-21
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvf252e24"
 ---
 I hear a lot of people new to Rust are Ruby programmers. I'm kinda the opposite. While I've been semi-involved with Ruby (mostly Rails) projects from time to time since at least 2011, I've never been _that much_ into Ruby the language. Rust, on the other handy, I've been _loving_ since 2014.
 

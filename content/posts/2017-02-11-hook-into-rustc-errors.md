@@ -8,6 +8,7 @@ discussions:
   "/r/rust": "https://www.reddit.com/r/rust/comments/5tgyy2/"
 publishDate: 2017-02-11
 updatedAt: 2017-02-11
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvecb772h"
 ---
 Rust's error messages are pretty amazing. There is no way to format library-specific errors, though. I'm suggesting a way to implement this on stable Rust.
 

@@ -4,6 +4,7 @@ categories:
 - rust
 publishDate: 2017-03-10
 updatedAt: 2017-03-10
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdve4i6r2x"
 ---
 
 A short overview.

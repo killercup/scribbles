@@ -6,6 +6,7 @@ categories:
 - incomplete
 publishDate: 2016-12-10
 updatedAt: 2016-12-10
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvftbhh27"
 ---
 One of the most amazing features of compilers is their ability to not just transform code into machine-readable things but also to _optimize away abstractions_.
 

@@ -4,6 +4,7 @@ categories:
 - idea
 publishDate: 2016-07-16
 updatedAt: 2016-07-16
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvilc3q2y"
 ---
 
 Idea: Create a Markov chain twitter bot fed only with tweets of other Markov chain (or similar) twitter bots.

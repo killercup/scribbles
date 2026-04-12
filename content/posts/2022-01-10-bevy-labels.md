@@ -8,6 +8,7 @@ discussions:
   "Twitter": "https://twitter.com/killercup/status/1480460379960528896"
 publishDate: 2022-01-10
 updatedAt: 2022-01-10
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvaqjmx25"
 ---
 Out of curiosity I've recently started following the development of [Bevy],
 a game engine written in [Rust].

@@ -4,6 +4,7 @@ categories:
 - rust
 publishDate: 2016-09-30
 updatedAt: 2016-09-30
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvfzuqd2l"
 ---
 Some ideas for editor/IDE features to make working on Rust code more pleasant.
 

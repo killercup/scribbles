@@ -3,6 +3,7 @@ title: Cards against compilers
 source: https://twitter.com/_Caro_N/status/727688154627506177
 publishDate: 2016-05-06
 updatedAt: 2016-05-06
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvixavq2y"
 ---
 
 First seen in this tweet:

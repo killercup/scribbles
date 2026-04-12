@@ -5,6 +5,7 @@ categories:
 - incomplete
 publishDate: 2017-01-20
 updatedAt: 2017-01-20
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdveofbt2e"
 ---
 > [The] length of a variable name should be proportional to its scope.
 

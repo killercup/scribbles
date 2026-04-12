@@ -4,6 +4,7 @@ categories:
 - idea
 publishDate: 2016-12-15
 updatedAt: 2016-12-15
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvffshm2w"
 ---
 Some time ago I [forked][biggie-fork] [biggie], a small tool to generate a slideshow from markdown. It's called "biggie" because the slides' text is shown as big as the screen allows.
 

@@ -7,6 +7,7 @@ discussions:
   "/r/rust": "https://www.reddit.com/r/rust/comments/4v0uvt/"
 publishDate: 2016-07-28
 updatedAt: 2016-07-28
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvhlnsu2w"
 ---
 
 ## The secret life of `std`

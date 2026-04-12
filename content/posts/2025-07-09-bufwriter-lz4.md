@@ -8,6 +8,7 @@ discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/1lw5r9x/bufwriter_and_lz4_compression/"
 publishDate: 2025-07-09
 updatedAt: 2025-07-09
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvac5ih27"
 ---
 Recently, I've been working on a Rust project again.
 It deals with bioinformatics data, which can be quite large,

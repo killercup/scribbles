@@ -8,6 +8,7 @@ discussions:
   "Github Issue #8": "https://github.com/killercup/scribbles/issues/8"
 publishDate: 2017-01-29
 updatedAt: 2017-01-29
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdveic4h2t"
 ---
 Here are some things in Rust's ecosystem that I really like:
 

@@ -7,6 +7,7 @@ discussions:
   "Github": "https://github.com/killercup/scribbles/issues/10"
 publishDate: 2016-12-18
 updatedAt: 2016-12-18
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvf7wlu24"
 ---
 **Update:** Got the laptop, and some adapters. Updated the post below with concrete tests and benchmarks where appropriate.
 

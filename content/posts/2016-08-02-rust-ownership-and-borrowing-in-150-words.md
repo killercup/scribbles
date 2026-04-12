@@ -4,6 +4,7 @@ categories:
 - rust
 publishDate: 2016-08-02
 updatedAt: 2016-08-02
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvgyijh2t"
 ---
 Recently, I wrote [on reddit](https://www.reddit.com/r/rust/comments/4vfzvc/list_of_rust_books/d5y8i0o?context=3) that a Rust book won't become obsolete in the next years if it focused on explaining concepts instead of current APIs. At basically the same time, I tried to explain some of Rust's concepts to a friend. I think I came up with a quite concise description (maybe even explanation) of "ownership and borrowing" (the concept that differentiates Rust from most other programming language).
 

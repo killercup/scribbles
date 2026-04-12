@@ -7,6 +7,7 @@ discussions:
   "Twitter": https://twitter.com/killercup/status/845028907036409856
 publishDate: 2017-03-23
 updatedAt: 2017-03-23
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvdwhac2t"
 ---
 
 Rust has a pretty powerful type system, but some things are not that easy to express. Follow me on a journey where we try to implement a bit of method overloading by using traits with funny constraints and discover some interesting ways to convince Rust that everything is fine.

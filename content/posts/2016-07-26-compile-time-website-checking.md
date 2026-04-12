@@ -7,6 +7,7 @@ discussions:
   "Twitter": "https://twitter.com/killercup/status/758050912397041664"
 publishDate: 2016-07-26
 updatedAt: 2016-07-26
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvhyqqr2x"
 ---
 I want a static site generator that enforces a bunch of rules at compile-time so whole classes of errors cannot occur. Similar to [my ideas from last year](https://pascalhertleif.de/artikel/silicon-zucchini/).
 

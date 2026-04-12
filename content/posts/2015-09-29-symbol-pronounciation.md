@@ -2,6 +2,7 @@
 title: Symbol Pronounciation
 publishDate: 2015-09-29
 updatedAt: 2015-09-29
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvjdiiy2y"
 ---
 
 > [...] each glyph has its own monosyllabic name, designed to be pronounced quickly in combination with another glyph to form a rune name. As languages are often read-aloud, this saves the programmer from having to say "dollar sign, question mark"--"bucwut" is much more compact.

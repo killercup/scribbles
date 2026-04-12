@@ -8,6 +8,7 @@ discussions:
   "Reddit again": "https://www.reddit.com/r/rust/comments/he8zky/cheap_tricks_for_highperformance_rust/"
 publishDate: 2020-03-04
 updatedAt: 2020-03-04
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvb4snz2x"
 ---
 So you're writing Rust but it's not fast enough?
 Even though you're using `cargo build --release`?

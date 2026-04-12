@@ -4,6 +4,7 @@ categories:
 - rust
 publishDate: 2016-05-19
 updatedAt: 2016-05-19
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvirbep2h"
 ---
 
 Some people wrote posts about stuff they want to see rewritten in Rust[^1], but that's not this is about. I want to rewrite stuff in Rust to learn more Rust, learn more about the projects and their fields, and, well, just for fun.

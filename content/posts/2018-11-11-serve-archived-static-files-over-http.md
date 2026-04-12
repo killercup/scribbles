@@ -7,6 +7,7 @@ discussions:
   "Twitter": https://twitter.com/killercup/status/1061676996852363270
 publishDate: 2018-11-11
 updatedAt: 2018-11-11
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvc2vkj2x"
 ---
 Say you want to store a huge number of very small files
 that you will only access over HTTP.

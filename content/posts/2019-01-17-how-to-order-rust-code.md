@@ -7,6 +7,7 @@ discussions:
   "Twitter": "https://twitter.com/killercup/status/1086013848807718913"
 publishDate: 2019-01-17
 updatedAt: 2019-01-17
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvbowf424"
 ---
 **Note:**
 This post is about how I arrange the code I write in Rust.

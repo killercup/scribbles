@@ -4,6 +4,7 @@ categories:
 - idea
 publishDate: 2016-07-30
 updatedAt: 2016-07-30
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvh6iiq2y"
 ---
 Have you ever seen the way Github allows you to see rendered diffs for code they can render as HTML? Like [this "rich" diff](https://github.com/killercup/scribbles/commit/dc7d6070ee7645c5afffbc40eacd294bb46ca44c?short_path=37b0d28#diff-37b0d286ed28750e62a9e0b93888457a), as they call it?
 

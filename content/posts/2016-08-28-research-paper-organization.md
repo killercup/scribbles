@@ -5,6 +5,7 @@ categories:
 - idea
 publishDate: 2016-08-28
 updatedAt: 2016-08-28
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvgfoxj2x"
 ---
 I have a directory full of research papers I have read or want to read. They are all named `[last name of primary author][year][first word in title].{pdf,bib}` (there is a PDF and [BibTeX] file for each publication). This works quite well, as this is the same naming schema that [Google Scholar][scholar] uses in their BibTeX citations.
 

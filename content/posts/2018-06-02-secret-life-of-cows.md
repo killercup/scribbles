@@ -8,6 +8,7 @@ discussions:
   "Twitter again two years later": "https://twitter.com/mgattozzi/status/1229422594371268609"
 publishDate: 2018-06-02
 updatedAt: 2018-06-02
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvcaq372t"
 ---
 
 A lot of people at RustFest Paris mentioned Cows

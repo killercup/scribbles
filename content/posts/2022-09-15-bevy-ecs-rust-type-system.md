@@ -7,6 +7,7 @@ canonical: https://blog.logrocket.com/rust-bevy-entity-component-system/
 discussions:
 publishDate: 2022-09-15
 updatedAt: 2022-09-15
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvak4ep27"
 ---
 
 [Bevy](https://bevyengine.org/) is a game engine written in [Rust](https://www.rust-lang.org/) that is known for featuring a very ergonomic entity-component-system. In the ECS pattern *entities* are unique things (e.g. objects in a game world) that are made up of *components*. *Systems* process these entities and control the behavior of the application. What makes Bevy’s API so elegant is that users can write regular functions in Rust, and Bevy will know how to call them by their type signature, dispatching the correct data.

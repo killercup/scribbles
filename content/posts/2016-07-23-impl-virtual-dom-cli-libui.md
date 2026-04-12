@@ -7,6 +7,7 @@ discussions:
   "Twitter (@lqd)": "https://twitter.com/lqd/status/760223190182465538"
 publishDate: 2016-07-23
 updatedAt: 2016-07-23
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvi73up2t"
 ---
 
 Among [other things](/things-to-rewrite-in-rust.html), I want to easily write UIs in Rust. (What I describe below could also be done in any other language though.)

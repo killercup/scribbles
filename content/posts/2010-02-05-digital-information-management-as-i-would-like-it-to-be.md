@@ -4,6 +4,7 @@ categories:
 - idea
 publishDate: 2010-02-05
 updatedAt: 2010-02-05
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvknlyu22"
 ---
 Maybe you already know it, but this blog is about crazy ideas. Here's just another one I thought much about lately.
 
