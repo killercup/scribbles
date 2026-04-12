@@ -2,6 +2,8 @@
 title: Machine Readable Inline Markdown Code Documentation
 categories:
 - rust
+publishDate: 2016-08-17
+updatedAt: 2016-08-17
 ---
 
 In [Rust RFC 1713][rfc-pr-1713], a set of documentation 'tags' is proposed, to document functions in a similar fashion to e.g. JavaDoc or JSDoc. I recently [saw][swift-doc-markup] that Swift uses plain Markdown for documentation. Xcode is able to parse this and show contextual information based on it.

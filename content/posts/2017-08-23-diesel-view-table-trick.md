@@ -4,6 +4,8 @@ categories:
 - rust
 discussions:
   "Twitter": https://twitter.com/killercup/status/900439564917014528
+publishDate: 2017-08-23
+updatedAt: 2017-08-23
 ---
 
 [Diesel] is a type-safe query builder for Rust.

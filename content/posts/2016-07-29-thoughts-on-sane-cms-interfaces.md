@@ -4,6 +4,8 @@ categories:
 - idea
 - webdev
 - incomplete
+publishDate: 2016-07-29
+updatedAt: 2016-07-29
 ---
 When I first [wrote about Silicon Zucchini](https://pascalhertleif.de/artikel/silicon-zucchini/) (the code name for my statically-typed CMS, see also [this note](/compile-time-website-checking.html)), I mentioned that the JSON schema files that are used to validate the content data could also be used to generate an editor interface. I've been thinking about this some more.
 

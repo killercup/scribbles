@@ -1,6 +1,8 @@
 ---
 title: Cards against compilers
 source: https://twitter.com/_Caro_N/status/727688154627506177
+publishDate: 2016-05-06
+updatedAt: 2016-05-06
 ---
 
 First seen in this tweet:

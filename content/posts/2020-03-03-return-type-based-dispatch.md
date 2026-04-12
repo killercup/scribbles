@@ -4,6 +4,8 @@ categories:
 - rust
 discussions:
   "Twitter": "https://twitter.com/killercup/status/1234776754750984193"
+publishDate: 2020-03-03
+updatedAt: 2020-03-03
 ---
 
 One surprising feature of type inference in languages like Rust

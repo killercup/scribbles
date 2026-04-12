@@ -3,6 +3,8 @@ title: Notes on proper systemd services
 categories:
 - systemd
 - linux
+publishDate: 2019-09-24
+updatedAt: 2019-09-24
 ---
 Despite my best efforts,
 I end up logging into Linux servers and checking how they're doing

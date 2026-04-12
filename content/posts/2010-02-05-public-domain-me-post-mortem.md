@@ -1,5 +1,7 @@
 ---
 title: Public Domain Me Post Mortem
+publishDate: 2010-02-05
+updatedAt: 2010-02-05
 ---
 After my death, all my work should be public domain.
 

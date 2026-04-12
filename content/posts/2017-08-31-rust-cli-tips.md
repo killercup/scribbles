@@ -5,6 +5,8 @@ categories:
 discussions:
   "Twitter": https://twitter.com/killercup/status/903275512184918018
   "Reddit": https://www.reddit.com/r/rust/comments/6x82mw/5_tips_for_writing_small_cli_tools_in_rust/
+publishDate: 2017-08-31
+updatedAt: 2017-08-31
 ---
 
 [Rust] is a great language to write small command line tools in. While it gives you some tools for common tasks, allows nice abstractions, it also has a type system and approach to API design that lead you to write robust code. Let me show you some techniques to make this a nice experience.

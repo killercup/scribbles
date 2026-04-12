@@ -6,6 +6,8 @@ discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/8o1pxh/the_secret_life_of_cows/"
   "Twitter": "https://twitter.com/killercup/status/1002950105400475649"
   "Twitter again two years later": "https://twitter.com/mgattozzi/status/1229422594371268609"
+publishDate: 2018-06-02
+updatedAt: 2018-06-02
 ---
 
 A lot of people at RustFest Paris mentioned Cows

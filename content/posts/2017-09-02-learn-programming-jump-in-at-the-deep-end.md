@@ -4,6 +4,8 @@ categories:
 - programming
 - teaching
 - rust
+publishDate: 2017-09-02
+updatedAt: 2017-09-02
 ---
 
 There are many different ways to learn something;

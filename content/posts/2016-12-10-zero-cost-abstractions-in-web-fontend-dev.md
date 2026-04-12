@@ -4,6 +4,8 @@ categories:
 - tech
 - webdev
 - incomplete
+publishDate: 2016-12-10
+updatedAt: 2016-12-10
 ---
 One of the most amazing features of compilers is their ability to not just transform code into machine-readable things but also to _optimize away abstractions_.
 

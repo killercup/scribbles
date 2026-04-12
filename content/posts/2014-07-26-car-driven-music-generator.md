@@ -3,6 +3,8 @@ title: Car-driven music generator
 categories:
 - idea
 source: https://twitter.com/killercup/status/492965034663084032
+publishDate: 2014-07-26
+updatedAt: 2014-07-26
 ---
 
 App that generates music, optimized for usage in a Car. Using speed/acceleration for generator settings. Simple fast beats when driving fast corners, complex rhythms on the highway.

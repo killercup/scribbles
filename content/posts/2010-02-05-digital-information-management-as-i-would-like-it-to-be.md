@@ -2,6 +2,8 @@
 title: Digital Information Management As I Would Like It To Be
 categories:
 - idea
+publishDate: 2010-02-05
+updatedAt: 2010-02-05
 ---
 Maybe you already know it, but this blog is about crazy ideas. Here's just another one I thought much about lately.
 

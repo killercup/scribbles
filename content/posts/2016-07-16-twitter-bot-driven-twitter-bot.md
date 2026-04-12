@@ -2,6 +2,8 @@
 title: Twitter-bot-driven twitter bot
 categories:
 - idea
+publishDate: 2016-07-16
+updatedAt: 2016-07-16
 ---
 
 Idea: Create a Markov chain twitter bot fed only with tweets of other Markov chain (or similar) twitter bots.

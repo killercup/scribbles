@@ -2,6 +2,8 @@
 title: Rich diffs of rendered HTML
 categories:
 - idea
+publishDate: 2016-07-30
+updatedAt: 2016-07-30
 ---
 Have you ever seen the way Github allows you to see rendered diffs for code they can render as HTML? Like [this "rich" diff](https://github.com/killercup/scribbles/commit/dc7d6070ee7645c5afffbc40eacd294bb46ca44c?short_path=37b0d28#diff-37b0d286ed28750e62a9e0b93888457a), as they call it?
 

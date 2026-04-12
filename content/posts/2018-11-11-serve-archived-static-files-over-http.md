@@ -5,6 +5,8 @@ categories:
 - rust
 discussions:
   "Twitter": https://twitter.com/killercup/status/1061676996852363270
+publishDate: 2018-11-11
+updatedAt: 2018-11-11
 ---
 Say you want to store a huge number of very small files
 that you will only access over HTTP.

@@ -2,6 +2,8 @@
 title: Things to rewrite in Rust
 categories:
 - rust
+publishDate: 2016-05-19
+updatedAt: 2016-05-19
 ---
 
 Some people wrote posts about stuff they want to see rewritten in Rust[^1], but that's not this is about. I want to rewrite stuff in Rust to learn more Rust, learn more about the projects and their fields, and, well, just for fun.

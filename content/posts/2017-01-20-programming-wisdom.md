@@ -3,6 +3,8 @@ title: "Programming Wisdom"
 categories:
 - tech
 - incomplete
+publishDate: 2017-01-20
+updatedAt: 2017-01-20
 ---
 > [The] length of a variable name should be proportional to its scope.
 

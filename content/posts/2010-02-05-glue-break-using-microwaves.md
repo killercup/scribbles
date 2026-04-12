@@ -3,6 +3,8 @@ title: Glue You Can Break Using Microwaves
 categories:
 - idea
 - hardware
+publishDate: 2010-02-05
+updatedAt: 2010-02-05
 ---
 I know it sounds crazy, but that's what crazy ideas are about. It may be possible to break the adhesion of a new (imaginary) kind of glue by energizing the glued materials using specific microwaves or some other non-fatal radiation. This way one may develop a glue that can be quite strong but also easily removed.
 

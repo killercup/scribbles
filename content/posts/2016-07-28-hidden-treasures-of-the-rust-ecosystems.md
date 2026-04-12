@@ -5,6 +5,8 @@ categories:
 - list
 discussions:
   "/r/rust": "https://www.reddit.com/r/rust/comments/4v0uvt/"
+publishDate: 2016-07-28
+updatedAt: 2016-07-28
 ---
 
 ## The secret life of `std`

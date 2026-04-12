@@ -2,6 +2,8 @@
 title: Rust Concurrency Libraries
 categories:
 - rust
+publishDate: 2017-03-10
+updatedAt: 2017-03-10
 ---
 
 A short overview.

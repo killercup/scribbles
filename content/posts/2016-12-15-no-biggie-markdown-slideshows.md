@@ -2,6 +2,8 @@
 title: "No biggie Markdown slideshows"
 categories:
 - idea
+publishDate: 2016-12-15
+updatedAt: 2016-12-15
 ---
 Some time ago I [forked][biggie-fork] [biggie], a small tool to generate a slideshow from markdown. It's called "biggie" because the slides' text is shown as big as the screen allows.
 

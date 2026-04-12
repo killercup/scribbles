@@ -2,6 +2,8 @@
 title: Rust IDE Features Wishlist
 categories:
 - rust
+publishDate: 2016-09-30
+updatedAt: 2016-09-30
 ---
 Some ideas for editor/IDE features to make working on Rust code more pleasant.
 

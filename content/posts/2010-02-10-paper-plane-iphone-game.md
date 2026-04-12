@@ -3,6 +3,8 @@ title: Paper Plane iPhone Game
 categories:
 - idea
 - app
+publishDate: 2010-02-10
+updatedAt: 2010-02-10
 ---
 Last summer a friend and I wanted to develop an iPhone game and came up with the following idea. Sad to say, we are both no iPhone developers and had no chance of realizing it. Nevertheless, I think the idea might be quite unique and maybe even cool enough to be actually implemented someday. (If you happen to be a developer and would like to do this, I would very much like you to contact me!)
 

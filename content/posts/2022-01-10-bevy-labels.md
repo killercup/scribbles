@@ -6,6 +6,8 @@ categories:
 discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/s0fg3m/how_bevy_uses_rust_traits_for_labeling/"
   "Twitter": "https://twitter.com/killercup/status/1480460379960528896"
+publishDate: 2022-01-10
+updatedAt: 2022-01-10
 ---
 Out of curiosity I've recently started following the development of [Bevy],
 a game engine written in [Rust].

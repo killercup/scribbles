@@ -6,6 +6,8 @@ categories:
 discussions:
   "Twitter": "https://twitter.com/killercup/status/825667449668382721"
   "Github Issue #8": "https://github.com/killercup/scribbles/issues/8"
+publishDate: 2017-01-29
+updatedAt: 2017-01-29
 ---
 Here are some things in Rust's ecosystem that I really like:
 

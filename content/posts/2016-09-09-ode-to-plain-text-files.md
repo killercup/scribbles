@@ -2,6 +2,8 @@
 title: I <3 plain text files
 categories:
 - tech
+publishDate: 2016-09-09
+updatedAt: 2016-09-09
 ---
 I really enjoy working with plain text files. More software should work with plain text files. It obviously depends on what kind/amount of information you want to store, but I think for a lot of use cases text files are a very good solution.
 

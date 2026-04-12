@@ -3,6 +3,8 @@ title: Research paper organization
 categories:
 - academia
 - idea
+publishDate: 2016-08-28
+updatedAt: 2016-08-28
 ---
 I have a directory full of research papers I have read or want to read. They are all named `[last name of primary author][year][first word in title].{pdf,bib}` (there is a PDF and [BibTeX] file for each publication). This works quite well, as this is the same naming schema that [Google Scholar][scholar] uses in their BibTeX citations.
 

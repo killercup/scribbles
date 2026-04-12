@@ -5,6 +5,8 @@ categories:
 discussions:
   "Twitter": "https://twitter.com/killercup/status/810599973419151368"
   "Github": "https://github.com/killercup/scribbles/issues/10"
+publishDate: 2016-12-18
+updatedAt: 2016-12-18
 ---
 **Update:** Got the laptop, and some adapters. Updated the post below with concrete tests and benchmarks where appropriate.
 
