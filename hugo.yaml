@@ -51,10 +51,6 @@ outputFormats:
     baseName: index
     path: socialweb/notes
     isPlainText: true
-  ActivityPubActor:
-    mediaType: application/activity+json
-    baseName: index
-    isPlainText: true
   ActivityPubOutbox:
     mediaType: application/activity+json
     baseName: outbox

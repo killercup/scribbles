@@ -1,0 +1,19 @@
+{
+  "@context": ["https://www.w3.org/ns/activitystreams", "https://w3id.org/security/v1"],
+  "id": "https://deterministic.space/@blog",
+  "type": "Person",
+  "preferredUsername": "blog",
+  "name": "Pascal's Scribbles",
+  "summary": "Posts on programming topics, with a few crazy ideas thrown in.",
+  "url": "https://deterministic.space",
+  "inbox": "https://deterministic.space/activitypub/inbox",
+  "outbox": "https://deterministic.space/socialweb/outbox.json",
+  "followers": "https://deterministic.space/activitypub/followers",
+  "following": "https://deterministic.space/activitypub/following.json",
+  "icon": {"type": "Image", "mediaType": "image/png", "url": "https://deterministic.space/avatar.png"},
+  "publicKey": {
+    "id": "https://deterministic.space/@blog#main-key",
+    "owner": "https://deterministic.space/@blog",
+    "publicKeyPem": "-----BEGIN PUBLIC KEY-----\nMIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAmf9QnavzR5dt3Z5DLFDz\nia7PUWzMbabx4wJgD1p51XZOapNe+n5Z59TTmYjzrdXMJeES41QoK9rzkevkpyF9\nKyUzU3QxRLDvxHgsS5x3K7R/9W2/uemavUfa3hi8mdr5TVyy/yefcjqbRuflsSSy\n1BB6tLrihxXjBSdhyxr51Zh9NHGwpP4gnigKIHQUUYFCdFjcj795pf8HmWfs2JmF\nB8r+jjXLplFjQ7gtWC7geQOYw5RlE4CcR6K5MAq16gmmlMFWb3LRQfGk13Dzh4PZ\nixyrAJDBd3A96H4DBy4geth0Azj1SY7+zOn226RmYk6vIxhkPj4PNU20W2kpA3Qe\n6wIDAQAB\n-----END PUBLIC KEY-----"
+  }
+}
