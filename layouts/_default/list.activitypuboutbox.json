@@ -1,0 +1,20 @@
+{{- $ap := .Site.Params.activitypub -}}
+{{- $domain := $ap.domain -}}
+{{- $username := $ap.username -}}
+{{- $pages := .Site.RegularPages -}}
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://{{ $domain }}/socialweb/outbox.json",
+  "type": "OrderedCollection",
+  "totalItems": {{ len $pages }},
+  "orderedItems": [
+    {{- range $i, $p := $pages }}
+    {{ if $i }},{{ end }}{
+      "type": "Create",
+      "actor": "https://{{ $domain }}/@{{ $username }}",
+      "published": "{{ $p.Date.Format "2006-01-02T15:04:05Z07:00" }}",
+      "object": "https://{{ $domain }}/socialweb/notes/{{ $p.File.TranslationBaseName }}.json"
+    }
+    {{- end }}
+  ]
+}

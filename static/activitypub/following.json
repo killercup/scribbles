@@ -1,0 +1,7 @@
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://deterministic.space/activitypub/following.json",
+  "type": "OrderedCollection",
+  "totalItems": 0,
+  "orderedItems": []
+}

@@ -1,0 +1,15 @@
+{{- $ap := .Site.Params.activitypub -}}
+{{- $domain := $ap.domain -}}
+{{- $username := $ap.username -}}
+{
+  "@context": "https://www.w3.org/ns/activitystreams",
+  "id": "https://{{ $domain }}/socialweb/notes/{{ .File.TranslationBaseName }}.json",
+  "type": "Article",
+  "attributedTo": "https://{{ $domain }}/@{{ $username }}",
+  "name": {{ .Title | jsonify }},
+  "content": {{ .Summary | plainify | jsonify }},
+  "url": "{{ .Permalink }}",
+  "published": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
+  "to": ["https://www.w3.org/ns/activitystreams#Public"],
+  "cc": ["https://{{ $domain }}/activitypub/followers"]
+}

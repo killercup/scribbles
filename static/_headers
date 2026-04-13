@@ -1,0 +1,8 @@
+/socialweb/*
+  Content-Type: application/activity+json; charset=utf-8
+
+/@blog
+  Content-Type: application/activity+json; charset=utf-8
+
+/.well-known/webfinger
+  Content-Type: application/jrd+json; charset=utf-8

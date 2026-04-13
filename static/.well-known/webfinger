@@ -1,0 +1,9 @@
+{
+  "subject": "acct:blog@deterministic.space",
+  "aliases": ["https://deterministic.space/@blog"],
+  "links": [{
+    "rel": "self",
+    "type": "application/activity+json",
+    "href": "https://deterministic.space/@blog"
+  }]
+}

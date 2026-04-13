@@ -5,6 +5,11 @@ timeZone: Europe/Berlin
 params:
   description: Posts on programming topics, with a few crazy ideas thrown in.
   author: Pascal Hertleif
+  activitypub:
+    domain: deterministic.space
+    username: blog
+    preferred_username: pascals_scribbles
+    avatar_url: https://deterministic.space/avatar.png
   github: killercup
   mastodon: https://mastodon.social/@killercup
   bluesky: https://bsky.app/profile/killercup.de
@@ -30,12 +35,31 @@ markup:
     endLevel: 3
     ordered: true
     startLevel: 2
+mediaTypes:
+  application/activity+json:
+    suffixes: ["json"]
 outputs:
-  home: [HTML, RSS]
+  home: [HTML, RSS, ActivityPubOutbox]
+  page: [HTML, ActivityPubNote]
+  section: [HTML, ActivityPubActor]
 outputFormats:
   RSS:
     mediaType: application/rss+xml
     baseName: feed
+  ActivityPubNote:
+    mediaType: application/activity+json
+    baseName: index
+    path: socialweb/notes
+    isPlainText: true
+  ActivityPubActor:
+    mediaType: application/activity+json
+    baseName: index
+    isPlainText: true
+  ActivityPubOutbox:
+    mediaType: application/activity+json
+    baseName: outbox
+    path: socialweb
+    isPlainText: true
 sitemap:
   filename: sitemap.xml
 services:
