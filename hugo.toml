@@ -1,6 +1,7 @@
 baseURL = "https://deterministic.space"
 languageCode = "en"
 title = "Pascal's Scribbles"
+timeZone = "Europe/Berlin"
 
 [params]
   description = "Posts on programming topics, with a few crazy ideas thrown in."
@@ -13,9 +14,6 @@ title = "Pascal's Scribbles"
   feedback_url = "https://github.com/killercup/scribbles/issues/new"
   repository_url = "https://github.com/killercup/scribbles"
   post_revisions_url = "https://github.com/killercup/scribbles/commits/main/"
-
-[taxonomies]
-  category = "categories"
 
 [permalinks]
   posts = "/:slug"
@@ -54,5 +52,3 @@ title = "Pascal's Scribbles"
 
 [frontmatter]
   date = ["date", ":filename"]
-
-timeZone = "Europe/Berlin"
