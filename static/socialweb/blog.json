@@ -1,8 +1,11 @@
 {
-  "@context": ["https://www.w3.org/ns/activitystreams", "https://w3id.org/security/v1"],
-  "id": "https://deterministic.space/@blog",
+  "@context": [
+    "https://www.w3.org/ns/activitystreams",
+    "https://w3id.org/security/v1"
+  ],
+  "id": "https://deterministic.space/socialweb/blog",
   "type": "Person",
-  "preferredUsername": "blog",
+  "preferredUsername": "pascals_scribbles",
   "name": "Pascal's Scribbles",
   "summary": "Posts on programming topics, with a few crazy ideas thrown in.",
   "url": "https://deterministic.space",
@@ -10,7 +13,11 @@
   "outbox": "https://deterministic.space/socialweb/outbox.json",
   "followers": "https://deterministic.space/activitypub/followers",
   "following": "https://deterministic.space/activitypub/following.json",
-  "icon": {"type": "Image", "mediaType": "image/png", "url": "https://deterministic.space/avatar.png"},
+  "icon": {
+    "type": "Image",
+    "mediaType": "image/png",
+    "url": "https://deterministic.space/avatar.png"
+  },
   "publicKey": {
     "id": "https://deterministic.space/@blog#main-key",
     "owner": "https://deterministic.space/@blog",

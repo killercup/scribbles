@@ -41,7 +41,6 @@ mediaTypes:
 outputs:
   home: [HTML, RSS, ActivityPubOutbox]
   page: [HTML, ActivityPubNote]
-  section: [HTML, ActivityPubActor]
 outputFormats:
   RSS:
     mediaType: application/rss+xml

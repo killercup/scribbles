@@ -11,7 +11,7 @@
     {{- range $i, $p := $pages }}
     {{ if $i }},{{ end }}{
       "type": "Create",
-      "actor": "https://{{ $domain }}/@{{ $username }}",
+      "actor": "https://{{ $domain }}/socialweb/{{ $username }}",
       "published": "{{ $p.Date.Format "2006-01-02T15:04:05Z07:00" }}",
       "object": "https://{{ $domain }}/socialweb/notes/{{ $p.File.TranslationBaseName }}.json"
     }

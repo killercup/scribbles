@@ -1,9 +1,9 @@
 {
   "subject": "acct:blog@deterministic.space",
-  "aliases": ["https://deterministic.space/@blog"],
+  "aliases": ["https://deterministic.space/socialweb/blog.json"],
   "links": [{
     "rel": "self",
     "type": "application/activity+json",
-    "href": "https://deterministic.space/@blog"
+    "href": "https://deterministic.space/socialweb/blog.json"
   }]
 }
