@@ -1,0 +1,45 @@
+baseURL: https://deterministic.space
+languageCode: en
+title: Pascal's Scribbles
+timeZone: Europe/Berlin
+params:
+  description: Posts on programming topics, with a few crazy ideas thrown in.
+  author: Pascal Hertleif
+  github: killercup
+  mastodon: https://mastodon.social/@killercup
+  bluesky: https://bsky.app/profile/killercup.de
+  imprint_url: https://pascalhertleif.de/impressum/
+  license_url: https://creativecommons.org/licenses/by-nc/4.0/
+  feedback_url: https://github.com/killercup/scribbles/issues/new
+  repository_url: https://github.com/killercup/scribbles
+  post_revisions_url: https://github.com/killercup/scribbles/commits/main/
+permalinks:
+  posts: "/:slug"
+uglyURLs:
+  posts: true
+markup:
+  goldmark:
+    renderer:
+      unsafe: true
+    extensions:
+      footnote: true
+  highlight:
+    style: github
+    noClasses: false
+  tableOfContents:
+    endLevel: 3
+    ordered: true
+    startLevel: 2
+outputs:
+  home: [HTML, RSS]
+outputFormats:
+  RSS:
+    mediaType: application/rss+xml
+    baseName: feed
+sitemap:
+  filename: sitemap.xml
+services:
+  rss:
+    limit: 100
+frontmatter:
+  date: ["date", ":filename"]
