@@ -4,8 +4,43 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   {{- partial "head_meta.html" . }}
+  {{- $fontRegular := resources.Get "fonts/Piazzolla-Regular.woff2" | fingerprint }}
+  {{- $fontItalic := resources.Get "fonts/Piazzolla-Italic.woff2" | fingerprint }}
+  {{- $fontSemiBold := resources.Get "fonts/Piazzolla-SemiBold.woff2" | fingerprint }}
+  {{- $fontSemiBoldItalic := resources.Get "fonts/Piazzolla-SemiBoldItalic.woff2" | fingerprint }}
+  <link rel="preload" href="{{ $fontRegular.RelPermalink }}" as="font" type="font/woff2" crossorigin integrity="{{ $fontRegular.Data.Integrity }}"/>
+  <link rel="preload" href="{{ $fontSemiBold.RelPermalink }}" as="font" type="font/woff2" crossorigin integrity="{{ $fontSemiBold.Data.Integrity }}"/>
+  <style>
+    @font-face {
+      font-family: "Piazzolla";
+      src: url("{{ $fontRegular.RelPermalink }}") format("woff2");
+      font-weight: 400;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Piazzolla";
+      src: url("{{ $fontItalic.RelPermalink }}") format("woff2");
+      font-weight: 400;
+      font-style: italic;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Piazzolla";
+      src: url("{{ $fontSemiBold.RelPermalink }}") format("woff2");
+      font-weight: 600;
+      font-style: normal;
+      font-display: swap;
+    }
+    @font-face {
+      font-family: "Piazzolla";
+      src: url("{{ $fontSemiBoldItalic.RelPermalink }}") format("woff2");
+      font-weight: 600;
+      font-style: italic;
+      font-display: swap;
+    }
+  </style>
   {{- $css := resources.Get "style.css" | minify | fingerprint }}
-  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,400;0,8..30,500;0,8..30,600;0,8..30,700;1,8..30,400;1,8..30,500&display=swap"/>
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
   {{- /*
   <script>

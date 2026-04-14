@@ -3,3 +3,9 @@
 
 /.well-known/webfinger
   Content-Type: application/jrd+json; charset=utf-8
+
+/fonts/*
+  Cache-Control: public, max-age=31536000, immutable
+
+/style.min.*.css
+  Cache-Control: public, max-age=31536000, immutable

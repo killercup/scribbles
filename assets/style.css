@@ -96,7 +96,6 @@
     --font-body-weight: 400;
     --font-body-bold: 600;
     --font-heading-weight: 600;
-    --font-heading-heavy: 700;
   }
 
   /* -- Color palettes ----------------------------------------------------- */
@@ -241,7 +240,7 @@
 @layer typography {
   body {
     font-family: var(--font-body, Georgia, serif);
-    font-weight: var(--font-body-weight, 400);
+    font-weight: var(--font-body-weight);
     font-size: var(--text-base);
     font-feature-settings:
       "kern" 1,
@@ -273,7 +272,7 @@
   h5,
   h6 {
     font-family: var(--font-heading, system-ui, sans-serif);
-    font-weight: var(--font-heading-weight, 600);
+    font-weight: var(--font-heading-weight);
     letter-spacing: -0.01em;
     /* Lining figures in headings for a more formal look */
     font-variant-numeric: lining-nums;
@@ -281,7 +280,6 @@
 
   h1 {
     font-size: var(--text-xl);
-    font-weight: var(--font-heading-heavy, 700);
     line-height: 1.12;
     letter-spacing: -0.025em;
   }
@@ -372,7 +370,7 @@
   }
 
   strong {
-    font-weight: var(--font-body-bold, 700);
+    font-weight: var(--font-body-bold);
   }
 
   em {
@@ -1187,7 +1185,7 @@
   h5,
   h6 {
     font-size: var(--text-base);
-    font-weight: var(--font-body-bold, 700);
+    font-weight: var(--font-body-bold);
     line-height: 1.6;
     letter-spacing: normal;
     font-variant-ligatures: none;
