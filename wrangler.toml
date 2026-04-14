@@ -8,6 +8,12 @@ preview_urls = false
 
 [assets]
 directory = "public"
+html_handling = "none"
+not_found_handling = "404-page"
+binding = "ASSETS"
+
+main = "worker.js"
+
 [build]
 command = "hugo"
 
