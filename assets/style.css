@@ -13,65 +13,65 @@
    -------------------------------------------------------------------------- */
 
 @layer reset {
+  *,
+  *::before,
+  *::after {
+    box-sizing: border-box;
+  }
+
+  * {
+    margin: 0;
+  }
+
+  html {
+    hanging-punctuation: first last;
+    interpolate-size: allow-keywords;
+  }
+
+  body {
+    min-height: 100svh;
+    -webkit-font-smoothing: antialiased;
+  }
+
+  img,
+  video,
+  svg,
+  canvas {
+    display: block;
+    max-width: 100%;
+  }
+
+  input,
+  button,
+  textarea,
+  select {
+    font: inherit;
+  }
+
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    text-wrap: balance;
+  }
+
+  p,
+  li {
+    text-wrap: pretty;
+  }
+
+  @media (prefers-reduced-motion: reduce) {
     *,
     *::before,
     *::after {
-        box-sizing: border-box;
+      animation-duration: 0.01ms !important;
+      animation-iteration-count: 1 !important;
+      transition-duration: 0.01ms !important;
+      scroll-behavior: auto !important;
     }
-
-    * {
-        margin: 0;
-    }
-
-    html {
-        hanging-punctuation: first last;
-        interpolate-size: allow-keywords;
-    }
-
-    body {
-        min-height: 100svh;
-        -webkit-font-smoothing: antialiased;
-    }
-
-    img,
-    video,
-    svg,
-    canvas {
-        display: block;
-        max-width: 100%;
-    }
-
-    input,
-    button,
-    textarea,
-    select {
-        font: inherit;
-    }
-
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        text-wrap: balance;
-    }
-
-    p,
-    li {
-        text-wrap: pretty;
-    }
-
-    @media (prefers-reduced-motion: reduce) {
-        *,
-        *::before,
-        *::after {
-            animation-duration: 0.01ms !important;
-            animation-iteration-count: 1 !important;
-            transition-duration: 0.01ms !important;
-            scroll-behavior: auto !important;
-        }
-    }
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -85,118 +85,109 @@
    -------------------------------------------------------------------------- */
 
 @layer tokens {
-    /* -- Font option classes ------------------------------------------------ */
-    .fonts-system {
-        --font-body: "Georgia", "Times New Roman", serif;
-        --font-heading: system-ui, -apple-system, "Segoe UI", sans-serif;
-        --font-body-weight: 400;
-        --font-body-bold: 700;
-        --font-heading-weight: 600;
-        --font-heading-heavy: 700;
+  /* -- Font classes -------------------------------------------------------- */
+  :root {
+    --font-body: "Piazzolla", "Georgia", serif;
+    --font-sans: system-ui, sans-serif;
+    --font-mono:
+      ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
+      "DejaVu Sans Mono", monospace;
+    --font-heading: var(--font-sans);
+    --font-body-weight: 400;
+    --font-body-bold: 600;
+    --font-heading-weight: 600;
+    --font-heading-heavy: 700;
+  }
+
+  /* -- Color palettes ----------------------------------------------------- */
+  :root {
+    --hue: 350;
+    --accent: oklch(0.637 0.255 var(--hue));
+    --accent-light: oklch(0.75 0.18 var(--hue));
+    --accent-soft: oklch(0.75 0.12 var(--hue));
+    --accent-faint: oklch(0.93 0.03 var(--hue));
+    --accent-dark: oklch(0.5 0.2 var(--hue));
+  }
+
+  /* -- Surface & text colors ---------------------------------------------- */
+  /* These adapt to the chosen palette via --hue */
+
+  :root {
+    color-scheme: light dark;
+  }
+
+  [data-theme="light"] {
+    color-scheme: light;
+  }
+
+  [data-theme="dark"] {
+    color-scheme: dark;
+  }
+
+  /* Light mode surfaces */
+  :root {
+    --surface: oklch(0.985 0.005 var(--hue));
+    --surface-raised: oklch(0.965 0.008 var(--hue));
+    --surface-code: oklch(0.955 0.008 var(--hue));
+    --text: oklch(0.2 0.01 var(--hue));
+    --text-secondary: oklch(0.42 0.01 var(--hue));
+    --text-tertiary: oklch(0.55 0.008 var(--hue));
+    --border: oklch(0.87 0.01 var(--hue));
+    --border-light: oklch(0.92 0.008 var(--hue));
+  }
+
+  /* Dark mode — system preference (when no explicit theme set) */
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --accent: var(--accent-light);
+      --surface: oklch(0.15 0.008 var(--hue));
+      --surface-raised: oklch(0.2 0.01 var(--hue));
+      --surface-code: oklch(0.18 0.01 var(--hue));
+      --text: oklch(0.88 0.008 var(--hue));
+      --text-secondary: oklch(0.65 0.01 var(--hue));
+      --text-tertiary: oklch(0.52 0.008 var(--hue));
+      --border: oklch(0.3 0.012 var(--hue));
+      --border-light: oklch(0.25 0.01 var(--hue));
     }
+  }
 
-    /* Monospace — shared across all font options */
-    :root {
-        --font-body: "Piazzolla", "Georgia", serif;
-        --font-heading: "Hanken Grotesk", system-ui, sans-serif;
-        --font-body-weight: 400;
-        --font-body-bold: 600;
-        --font-heading-weight: 600;
-        --font-heading-heavy: 700;
-        --font-mono:
-            ui-monospace, "Cascadia Code", "Source Code Pro", Menlo, Consolas,
-            "DejaVu Sans Mono", monospace;
-    }
+  /* Dark mode — explicit override */
+  [data-theme="dark"] {
+    --accent: var(--accent-light);
+    --surface: oklch(0.15 0.008 var(--hue));
+    --surface-raised: oklch(0.2 0.01 var(--hue));
+    --surface-code: oklch(0.18 0.01 var(--hue));
+    --text: oklch(0.88 0.008 var(--hue));
+    --text-secondary: oklch(0.65 0.01 var(--hue));
+    --text-tertiary: oklch(0.52 0.008 var(--hue));
+    --border: oklch(0.3 0.012 var(--hue));
+    --border-light: oklch(0.25 0.01 var(--hue));
+  }
 
-    /* -- Color palettes ----------------------------------------------------- */
-    :root {
-        --hue: 350;
-        --accent: oklch(0.637 0.255 var(--hue));
-        --accent-light: oklch(0.75 0.18 var(--hue));
-        --accent-soft: oklch(0.75 0.12 var(--hue));
-        --accent-faint: oklch(0.93 0.03 var(--hue));
-        --accent-dark: oklch(0.5 0.2 var(--hue));
-    }
+  /* -- Spacing scale (4pt base) ------------------------------------------ */
 
-    /* -- Surface & text colors ---------------------------------------------- */
-    /* These adapt to the chosen palette via --hue */
+  :root {
+    --space-3xs: 0.25rem; /* 4px */
+    --space-2xs: 0.5rem; /* 8px */
+    --space-xs: 0.75rem; /* 12px */
+    --space-sm: 1rem; /* 16px */
+    --space-md: 1.5rem; /* 24px */
+    --space-lg: 2rem; /* 32px */
+    --space-xl: 3rem; /* 48px */
+    --space-2xl: 4rem; /* 64px */
+    --space-3xl: 6rem; /* 96px */
+  }
 
-    :root {
-        color-scheme: light dark;
-    }
+  /* -- Type scale --------------------------------------------------------- */
 
-    [data-theme="light"] {
-        color-scheme: light;
-    }
-
-    [data-theme="dark"] {
-        color-scheme: dark;
-    }
-
-    /* Light mode surfaces */
-    :root {
-        --surface: oklch(0.985 0.005 var(--hue, 350));
-        --surface-raised: oklch(0.965 0.008 var(--hue, 350));
-        --surface-code: oklch(0.955 0.008 var(--hue, 350));
-        --text: oklch(0.2 0.01 var(--hue, 350));
-        --text-secondary: oklch(0.42 0.01 var(--hue, 350));
-        --text-tertiary: oklch(0.55 0.008 var(--hue, 350));
-        --border: oklch(0.87 0.01 var(--hue, 350));
-        --border-light: oklch(0.92 0.008 var(--hue, 350));
-    }
-
-    /* Dark mode — system preference (when no explicit theme set) */
-    @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) {
-            --accent: var(--accent-light);
-            --surface: oklch(0.15 0.008 var(--hue, 350));
-            --surface-raised: oklch(0.2 0.01 var(--hue, 350));
-            --surface-code: oklch(0.18 0.01 var(--hue, 350));
-            --text: oklch(0.88 0.008 var(--hue, 350));
-            --text-secondary: oklch(0.65 0.01 var(--hue, 350));
-            --text-tertiary: oklch(0.52 0.008 var(--hue, 350));
-            --border: oklch(0.3 0.012 var(--hue, 350));
-            --border-light: oklch(0.25 0.01 var(--hue, 350));
-        }
-    }
-
-    /* Dark mode — explicit override */
-    [data-theme="dark"] {
-        --accent: var(--accent-light);
-        --surface: oklch(0.15 0.008 var(--hue, 350));
-        --surface-raised: oklch(0.2 0.01 var(--hue, 350));
-        --surface-code: oklch(0.18 0.01 var(--hue, 350));
-        --text: oklch(0.88 0.008 var(--hue, 350));
-        --text-secondary: oklch(0.65 0.01 var(--hue, 350));
-        --text-tertiary: oklch(0.52 0.008 var(--hue, 350));
-        --border: oklch(0.3 0.012 var(--hue, 350));
-        --border-light: oklch(0.25 0.01 var(--hue, 350));
-    }
-
-    /* -- Spacing scale (4pt base) ------------------------------------------ */
-
-    :root {
-        --space-3xs: 0.25rem; /* 4px */
-        --space-2xs: 0.5rem; /* 8px */
-        --space-xs: 0.75rem; /* 12px */
-        --space-sm: 1rem; /* 16px */
-        --space-md: 1.5rem; /* 24px */
-        --space-lg: 2rem; /* 32px */
-        --space-xl: 3rem; /* 48px */
-        --space-2xl: 4rem; /* 64px */
-        --space-3xl: 6rem; /* 96px */
-    }
-
-    /* -- Type scale --------------------------------------------------------- */
-
-    :root {
-        --text-xs: 0.75rem; /* 12px */
-        --text-sm: 0.875rem; /* 14px */
-        --text-base: 1.125rem; /* 18px — generous for reading */
-        --text-md: 1.25rem; /* 20px */
-        --text-lg: clamp(1.375rem, 1.25rem + 0.5vw, 1.625rem);
-        --text-xl: clamp(1.75rem, 1.5rem + 1vw, 2.375rem);
-    }
+  :root {
+    --text-xs: 0.75rem; /* 12px */
+    --text-sm: 0.875rem; /* 14px */
+    --text-base: 1.125rem; /* 18px — generous for reading */
+    --text-md: 1.25rem; /* 20px */
+    --text-lg: clamp(1.375rem, 1.25rem + 0.5vw, 1.625rem);
+    --text-xl: clamp(1.75rem, 1.5rem + 1vw, 2.375rem);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -204,43 +195,43 @@
    -------------------------------------------------------------------------- */
 
 @layer layout {
-    body {
-        background-color: var(--surface);
-        color: var(--text);
-        line-height: 1.6;
-    }
+  body {
+    background-color: var(--surface);
+    color: var(--text);
+    line-height: 1.6;
+  }
 
+  .container {
+    --content-width: 42rem; /* ~672px, keeps prose at ~68ch */
+    --toc-width: 12rem;
+    --toc-gap: var(--space-xl);
+    --sidenote-width: 12rem;
+    --sidenote-gap: var(--space-lg);
+
+    max-width: var(--content-width);
+    margin-inline: auto;
+    padding-inline: var(--space-md);
+    padding-block: var(--space-lg);
+  }
+
+  .site-footer {
+    padding-block-start: var(--space-xl);
+    padding-block-end: var(--space-lg);
+  }
+
+  /* On medium screens, add extra top breathing room */
+  @media (min-width: 48rem) {
     .container {
-        --content-width: 42rem; /* ~672px, keeps prose at ~68ch */
-        --toc-width: 12rem;
-        --toc-gap: var(--space-xl);
-        --sidenote-width: 12rem;
-        --sidenote-gap: var(--space-lg);
-
-        max-width: var(--content-width);
-        margin-inline: auto;
-        padding-inline: var(--space-md);
-        padding-block: var(--space-lg);
+      padding-block: var(--space-xl);
     }
+  }
 
-    .site-footer {
-        padding-block-start: var(--space-xl);
-        padding-block-end: var(--space-lg);
+  /* On wide screens, allow content + left margin for TOC */
+  @media (min-width: 72rem) {
+    .post {
+      position: relative;
     }
-
-    /* On medium screens, add extra top breathing room */
-    @media (min-width: 48rem) {
-        .container {
-            padding-block: var(--space-xl);
-        }
-    }
-
-    /* On wide screens, allow content + left margin for TOC */
-    @media (min-width: 72rem) {
-        .post {
-            position: relative;
-        }
-    }
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -248,94 +239,90 @@
    -------------------------------------------------------------------------- */
 
 @layer typography {
-    body {
-        font-family: var(--font-body, Georgia, serif);
-        font-weight: var(--font-body-weight, 400);
-        font-size: var(--text-base);
-        font-feature-settings:
-            "kern" 1,
-            "liga" 1,
-            "calt" 1,
-            "onum" 1,
-            "pnum" 1;
-        font-kerning: normal;
-        font-variant-ligatures: common-ligatures contextual;
-    }
+  body {
+    font-family: var(--font-body, Georgia, serif);
+    font-weight: var(--font-body-weight, 400);
+    font-size: var(--text-base);
+    font-feature-settings:
+      "kern" 1,
+      "liga" 1,
+      "calt" 1,
+      "onum" 1,
+      "pnum" 1;
+    font-kerning: normal;
+    font-variant-ligatures: common-ligatures contextual;
+  }
 
-    code,
-    kbd,
-    pre,
-    samp,
-    [style*="font-family: var(--font-mono)"] {
-        font-variant-ligatures: none;
-        font-feature-settings:
-            "liga" 0,
-            "calt" 0;
-    }
+  code,
+  kbd,
+  pre,
+  samp,
+  [style*="font-family: var(--font-mono)"] {
+    font-variant-ligatures: none;
+    font-feature-settings:
+      "liga" 0,
+      "calt" 0;
+  }
 
-    /* -- Headings ----------------------------------------------------------- */
+  /* -- Headings ----------------------------------------------------------- */
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-weight: var(--font-heading-weight, 600);
-        letter-spacing: -0.01em;
-        /* Lining figures in headings for a more formal look */
-        font-variant-numeric: lining-nums;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-family: var(--font-heading, system-ui, sans-serif);
+    font-weight: var(--font-heading-weight, 600);
+    letter-spacing: -0.01em;
+    /* Lining figures in headings for a more formal look */
+    font-variant-numeric: lining-nums;
+  }
 
-    h1 {
-        font-size: var(--text-xl);
-        font-weight: var(--font-heading-heavy, 700);
-        line-height: 1.12;
-        letter-spacing: -0.025em;
-    }
+  h1 {
+    font-size: var(--text-xl);
+    font-weight: var(--font-heading-heavy, 700);
+    line-height: 1.12;
+    letter-spacing: -0.025em;
+  }
 
-    h2 {
-        font-size: var(--text-lg);
-        line-height: 1.25;
-        margin-block-start: var(--space-xl);
-        margin-block-end: var(--space-sm);
-    }
+  h2 {
+    font-size: var(--text-lg);
+    line-height: 1.25;
+    margin-block-start: var(--space-xl);
+    margin-block-end: var(--space-sm);
+  }
 
-    h3 {
-        font-size: var(--text-md);
-        line-height: 1.3;
-        margin-block-start: var(--space-xl);
-        margin-block-end: var(--space-xs);
-    }
+  h3 {
+    font-size: var(--text-md);
+    line-height: 1.3;
+    margin-block-start: var(--space-xl);
+    margin-block-end: var(--space-xs);
+  }
 
-    h4 {
-        font-size: var(--text-base);
-        line-height: 1.4;
-        margin-block-start: var(--space-lg);
-        margin-block-end: var(--space-2xs);
-    }
+  h4 {
+    font-size: var(--text-base);
+    line-height: 1.4;
+    margin-block-start: var(--space-lg);
+    margin-block-end: var(--space-2xs);
+  }
 
-    /* -- Links -------------------------------------------------------------- */
+  /* -- Links -------------------------------------------------------------- */
 
-    a {
-        color: var(--accent);
-        text-decoration-line: underline;
-        text-decoration-thickness: 1px;
-        text-underline-offset: 0.15em;
-        text-decoration-color: color-mix(
-            in oklch,
-            var(--accent) 40%,
-            transparent
-        );
-        transition: text-decoration-color 0.15s ease;
-    }
+  a {
+    color: var(--accent);
+    text-decoration-line: underline;
+    text-decoration-thickness: 1px;
+    text-underline-offset: 0.15em;
+    text-decoration-color: color-mix(in oklch, var(--accent) 40%, transparent);
+    transition: text-decoration-color 0.15s ease;
+  }
 
-    a:hover {
-        text-decoration-color: var(--accent);
-    }
+  a:hover {
+    text-decoration-color: var(--accent);
+  }
 
-    /*a:visited {
+  /*a:visited {
         color: var(--accent-dark);
         text-decoration-color: color-mix(
             in oklch,
@@ -348,182 +335,184 @@
         text-decoration-color: var(--accent-dark);
     }*/
 
-    /* -- Body text ---------------------------------------------------------- */
+  /* -- Body text ---------------------------------------------------------- */
 
-    .post-content p,
-    .page p {
-        margin-block-end: var(--space-sm);
-        max-width: 68ch;
-        hyphens: auto;
-        font-variant-numeric: oldstyle-nums;
-    }
+  .post-content p,
+  .page p {
+    margin-block-end: var(--space-sm);
+    max-width: 68ch;
+    hyphens: auto;
+    hyphenate-limit-chars: 8 4 4;
+    font-variant-numeric: oldstyle-nums;
+  }
 
-    .post-content ul,
-    .post-content ol,
-    .page ul:not(.post-list),
-    .page ol {
-        margin-block-end: var(--space-sm);
-        padding-inline-start: var(--space-md);
-        max-width: 68ch;
-    }
+  .post-content ul,
+  .post-content ol,
+  .page ul:not(.post-list),
+  .page ol {
+    margin-block-end: var(--space-sm);
+    padding-inline-start: var(--space-md);
+    max-width: 68ch;
+  }
 
-    .post-content li {
-        margin-block-end: var(--space-3xs);
-    }
+  .post-content li {
+    margin-block-end: var(--space-3xs);
+  }
 
-    /* -- Inline code -------------------------------------------------------- */
+  /* -- Inline code -------------------------------------------------------- */
 
-    :not(pre) > code {
-        font-family: var(--font-mono);
-        font-size: 0.88em;
-        font-variant-numeric: tabular-nums lining-nums;
-        background-color: var(--surface-code);
-        padding: 0.1em 0.35em;
-        border-radius: 3px;
-    }
+  :not(pre) > code {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    font-variant-numeric: tabular-nums lining-nums;
+    background-color: var(--surface-code);
+    padding: 0.1em 0.3em;
+    border-radius: 3px;
+    hyphens: none;
+  }
 
-    strong {
-        font-weight: var(--font-body-bold, 700);
-    }
+  strong {
+    font-weight: var(--font-body-bold, 700);
+  }
 
-    em {
-        font-style: italic;
-    }
+  em {
+    font-style: italic;
+  }
 
-    /* -- Horizontal rules --------------------------------------------------- */
+  /* -- Horizontal rules --------------------------------------------------- */
 
-    hr {
-        border: none;
-        border-block-start: 1px solid var(--border);
-        margin-block: var(--space-md);
-        max-width: 8rem;
-    }
+  hr {
+    border: none;
+    border-block-start: 1px solid var(--border);
+    margin-block: var(--space-md);
+    max-width: 8rem;
+  }
 
-    /* -- Blockquotes -------------------------------------------------------- */
+  /* -- Blockquotes -------------------------------------------------------- */
 
-    blockquote {
-        font-style: italic;
-        color: var(--text-secondary);
-        padding-inline-start: var(--space-md);
-        border-inline-start: 1px solid var(--border);
-        margin-block: var(--space-md);
-        max-width: 60ch;
-    }
+  blockquote {
+    font-style: italic;
+    color: var(--text-secondary);
+    padding-inline-start: var(--space-md);
+    border-inline-start: 1px solid var(--border);
+    margin-block: var(--space-md);
+    max-width: 60ch;
+  }
 
-    blockquote p {
-        margin-block-end: var(--space-2xs);
-    }
+  blockquote p {
+    margin-block-end: var(--space-2xs);
+  }
 
-    /* -- Definition lists --------------------------------------------------- */
+  /* -- Definition lists --------------------------------------------------- */
 
-    dl {
-        margin-block: var(--space-md);
-        max-width: 68ch;
-    }
+  dl {
+    margin-block: var(--space-md);
+    max-width: 68ch;
+  }
 
-    dt {
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-weight: var(--font-heading-weight, 600);
-        font-size: var(--text-sm);
-        color: var(--text);
-        margin-block-start: var(--space-sm);
-    }
+  dt {
+    font-family: var(--font-heading, system-ui, sans-serif);
+    font-weight: var(--font-heading-weight, 600);
+    font-size: var(--text-sm);
+    color: var(--text);
+    margin-block-start: var(--space-sm);
+  }
 
-    dt:first-child {
-        margin-block-start: 0;
-    }
+  dt:first-child {
+    margin-block-start: 0;
+  }
 
-    dd {
-        margin-inline-start: 0;
-        padding-inline-start: var(--space-md);
-        margin-block-start: var(--space-3xs);
-        color: var(--text-secondary);
-        font-size: var(--text-sm);
-        line-height: 1.5;
-    }
+  dd {
+    margin-inline-start: 0;
+    padding-inline-start: var(--space-md);
+    margin-block-start: var(--space-3xs);
+    color: var(--text-secondary);
+    /*font-size: var(--text-sm);*/
+    line-height: 1.5;
+  }
 
-    dd + dd {
-        margin-block-start: var(--space-3xs);
-    }
+  dd + dd {
+    margin-block-start: var(--space-3xs);
+  }
 
-    /* -- Tables ------------------------------------------------------------- */
+  /* -- Tables ------------------------------------------------------------- */
 
-    .post-content table {
-        display: block;
-        overflow-x: auto;
-        -webkit-overflow-scrolling: touch;
-    }
+  .post-content table {
+    display: block;
+    overflow-x: auto;
+    -webkit-overflow-scrolling: touch;
+  }
 
-    table {
-        width: 100%;
-        border-collapse: collapse;
-        margin-block: var(--space-md);
-        font-size: var(--text-sm);
-        font-variant-numeric: tabular-nums lining-nums;
-    }
+  table {
+    width: 100%;
+    border-collapse: collapse;
+    margin-block: var(--space-md);
+    font-size: var(--text-sm);
+    font-variant-numeric: tabular-nums lining-nums;
+  }
 
-    thead {
-        border-block-end: 2px solid var(--border);
-    }
+  thead {
+    border-block-end: 2px solid var(--border);
+  }
 
-    th,
-    td {
-        padding: var(--space-2xs) var(--space-xs);
-        text-align: left;
-        vertical-align: top;
-    }
+  th,
+  td {
+    padding: var(--space-2xs) var(--space-xs);
+    text-align: left;
+    vertical-align: top;
+  }
 
-    th {
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-weight: var(--font-heading-weight, 600);
-        font-size: var(--text-xs);
-        text-transform: uppercase;
-        letter-spacing: 0.04em;
-        color: var(--text-secondary);
-        white-space: nowrap;
-    }
+  th {
+    font-family: var(--font-heading, system-ui, sans-serif);
+    font-weight: var(--font-heading-weight, 600);
+    font-size: var(--text-xs);
+    text-transform: uppercase;
+    letter-spacing: 0.04em;
+    color: var(--text-secondary);
+    white-space: nowrap;
+  }
 
-    tbody tr {
-        border-block-end: 1px solid var(--border-light);
-    }
+  tbody tr {
+    border-block-end: 1px solid var(--border-light);
+  }
 
-    tbody tr:last-child {
-        border-block-end: none;
-    }
+  tbody tr:last-child {
+    border-block-end: none;
+  }
 
-    /* Zebra striping — subtle surface tint on even rows */
-    tbody tr:nth-child(even) {
-        background-color: var(--surface-raised);
-    }
+  /* Zebra striping — subtle surface tint on even rows */
+  tbody tr:nth-child(even) {
+    background-color: var(--surface-raised);
+  }
 
-    /* -- Images ------------------------------------------------------------- */
+  /* -- Images ------------------------------------------------------------- */
 
-    .post-content img {
-        margin-block: var(--space-md);
-        border-radius: 2px;
-    }
+  .post-content img {
+    margin-block: var(--space-md);
+    border-radius: 2px;
+  }
 
-    figure {
-        margin-block: var(--space-lg);
-    }
+  figure {
+    margin-block: var(--space-lg);
+  }
 
-    figcaption {
-        font-size: var(--text-sm);
-        color: var(--text-secondary);
-        margin-block-start: var(--space-2xs);
-    }
+  figcaption {
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-block-start: var(--space-2xs);
+  }
 
-    /* -- kbd ---------------------------------------------------------------- */
+  /* -- kbd ---------------------------------------------------------------- */
 
-    kbd {
-        font-family: var(--font-mono);
-        font-size: 0.85em;
-        padding: 0.1em 0.4em;
-        border: 1px solid var(--border);
-        border-radius: 3px;
-        background-color: var(--surface-raised);
-        box-shadow: 0 1px 0 var(--border);
-    }
+  kbd {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    padding: 0.1em 0.4em;
+    border: 1px solid var(--border);
+    border-radius: 3px;
+    background-color: var(--surface-raised);
+    box-shadow: 0 1px 0 var(--border);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -531,403 +520,431 @@
    -------------------------------------------------------------------------- */
 
 @layer components {
-    .breadcrumb {
-        margin: var(--space-sm) 0;
-    }
+  .breadcrumb {
+    margin: var(--space-sm) 0;
+  }
 
-    .breadcrumb a {
-        padding: var(--space-xs);
-        text-decoration: none;
-        border-radius: 0.5rem;
-    }
+  .breadcrumb a {
+    padding: var(--space-xs);
+    text-decoration: none;
+    border-radius: 0.5rem;
+  }
 
-    .breadcrumb a:hover {
-        background-color: var(--surface-raised);
-    }
+  .breadcrumb a:hover {
+    background-color: var(--surface-raised);
+  }
 
-    /* -- Theme toggle ------------------------------------------------------- */
+  /* -- Theme toggle ------------------------------------------------------- */
 
-    .theme-toggle {
-        position: fixed;
-        top: var(--space-sm);
-        right: var(--space-sm);
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-size: var(--text-xs);
-        color: var(--text-tertiary);
-        background: none;
-        border: 1px solid var(--border-light);
-        border-radius: 3px;
-        padding: var(--space-3xs) var(--space-2xs);
-        cursor: pointer;
-        letter-spacing: 0.03em;
-        z-index: 10;
-        transition:
-            color 0.15s ease,
-            border-color 0.15s ease;
-    }
+  .theme-toggle {
+    position: fixed;
+    top: var(--space-sm);
+    right: var(--space-sm);
+    font-family: var(--font-heading, system-ui, sans-serif);
+    font-size: var(--text-xs);
+    color: var(--text-tertiary);
+    background: none;
+    border: 1px solid var(--border-light);
+    border-radius: 3px;
+    padding: var(--space-3xs) var(--space-2xs);
+    cursor: pointer;
+    letter-spacing: 0.03em;
+    z-index: 10;
+    transition:
+      color 0.15s ease,
+      border-color 0.15s ease;
+  }
 
-    .theme-toggle:hover {
-        color: var(--text-secondary);
-        border-color: var(--border);
-    }
+  .theme-toggle:hover {
+    color: var(--text-secondary);
+    border-color: var(--border);
+  }
 
-    /* -- Post header -------------------------------------------------------- */
+  /* -- Post header -------------------------------------------------------- */
 
-    .post-header {
-        margin-block-end: var(--space-lg);
-    }
+  .post-header {
+    margin-block-end: var(--space-lg);
+  }
 
-    .post-title {
-        margin-block-end: var(--space-xs);
-    }
+  .post-title {
+    margin-block-end: var(--space-xs);
+  }
 
-    .post-meta {
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-size: var(--text-sm);
-        color: var(--text-secondary);
-        line-height: 1.5;
-    }
+  .post-meta {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
 
-    .post-meta a {
-        color: var(--text-secondary);
-        text-decoration-color: var(--border);
-    }
+  .post-meta a {
+    color: var(--text-secondary);
+    text-decoration-color: var(--border);
+  }
 
-    .post-meta a:hover {
-        color: var(--accent);
-        text-decoration-color: var(--accent);
-    }
+  .post-meta a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
 
-    .post-meta em {
-        font-style: normal;
-        background-color: var(--surface-raised);
-        padding: 0.05em 0.4em;
-        border-radius: 3px;
-        font-size: 0.92em;
-    }
+  .post-meta em {
+    font-style: normal;
+    background-color: var(--surface-raised);
+    padding: 0.05em 0.4em;
+    border-radius: 3px;
+    font-size: 0.92em;
+  }
 
-    /* -- Table of contents -------------------------------------------------- */
+  /* -- Table of contents -------------------------------------------------- */
 
-    #TableOfContents {
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-size: var(--text-sm);
-        color: var(--text-secondary);
-        margin-block-end: var(--space-xl);
-        padding-block: var(--space-sm);
-        border-block: 1px solid var(--border-light);
-    }
+  .post-toc {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    margin-block-end: var(--space-xl);
+    padding-block: var(--space-sm);
+    border-block: 1px solid var(--border-light);
+  }
 
-    #TableOfContents ol {
-        list-style: decimal;
-        padding-inline-start: var(--space-md);
-    }
+  .post-toc header {
+    margin-bottom: var(--space-sm);
+  }
 
-    #TableOfContents li {
-        margin-block-end: var(--space-3xs);
-        line-height: 1.4;
-    }
+  .post-toc header {
+    font-weight: var(--font-heading-weight);
+  }
 
-    #TableOfContents ol ol {
-        padding-inline-start: var(--space-sm);
-        margin-block-start: var(--space-3xs);
-    }
+  .post-toc p {
+    margin-bottom: var(--space-xs);
+    text-transform: uppercase;
+    letter-spacing: 1px;
+  }
 
-    #TableOfContents ol ol li {
-        font-size: var(--text-xs);
-    }
+  .post-toc header {
+    visibility: hidden;
+    opacity: 0;
+  }
 
-    #TableOfContents a {
-        color: var(--text-secondary);
-        text-decoration: none;
-    }
+  .post-toc ol {
+    list-style: decimal;
+    padding-inline-start: var(--space-md);
+  }
 
-    #TableOfContents a:hover {
-        color: var(--accent);
-    }
+  .post-toc li {
+    margin-block-end: var(--space-3xs);
+    line-height: 1.4;
+  }
 
-    /* Wide screens: pull TOC into left margin */
-    @media (min-width: 72rem) {
-        #TableOfContents {
-            position: sticky;
-            top: var(--space-lg);
-            float: left;
-            width: var(--toc-width, 12rem);
-            margin-left: calc(
-                -1 * (var(--toc-width, 12rem) + var(--toc-gap, 3rem))
-            );
-            border-block: none;
-            padding-block: 0;
-            margin-block-end: 0;
+  .post-toc ol ol {
+    padding-inline-start: var(--space-sm);
+    margin-block-start: var(--space-3xs);
+  }
+
+  .post-toc ol ol li {
+    font-size: var(--text-xs);
+  }
+
+  .post-toc a {
+    color: var(--text-secondary);
+    text-decoration: none;
+  }
+
+  .post-toc a:hover {
+    color: var(--accent);
+  }
+
+  /* Wide screens: pull TOC into left margin */
+  @media (min-width: 72rem) {
+    .post-toc {
+      position: sticky;
+      top: var(--space-lg);
+      float: left;
+      width: var(--toc-width, 12rem);
+      margin-left: calc(-1 * (var(--toc-width, 12rem) + var(--toc-gap, 3rem)));
+      border-block: none;
+      padding-block: 0;
+      margin-block-end: 0;
+
+      container-type: scroll-state;
+
+      header {
+        transition: opacity 0.15s linear;
+
+        @container scroll-state(stuck: top) {
+          visibility: visible;
+          opacity: 1;
         }
+      }
     }
+  }
 
-    /* -- Post list (index page) --------------------------------------------- */
+  /* -- Post list (index page) --------------------------------------------- */
 
-    .post-list {
-        list-style: none;
-        padding-inline-start: 0;
-        margin-block-start: var(--space-sm);
-    }
+  .post-list {
+    list-style: none;
+    padding-inline-start: 0;
+    margin-block-start: var(--space-sm);
+  }
 
-    .post-list li {
-        padding-block: var(--space-xs);
-        border-block-end: 1px solid var(--border-light);
-    }
+  .post-list li {
+    padding-block: var(--space-xs);
+    border-block-end: 1px solid var(--border-light);
+  }
 
-    .post-list li:first-child {
-        border-block-start: 1px solid var(--border-light);
-    }
+  .post-list li:first-child {
+    border-block-start: 1px solid var(--border-light);
+  }
 
-    .post-date {
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-size: 0.65rem;
-        color: var(--text-tertiary);
-        display: block;
-        margin-block-start: var(--space-3xs);
-        letter-spacing: 0.04em;
-        text-transform: uppercase;
-    }
+  .post-date {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    display: block;
+    margin-block-start: var(--space-3xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+  }
 
-    .post-link {
-        text-decoration: none;
-        color: var(--text);
-        transition: color 0.15s ease;
-        line-height: 1.35;
-        display: block;
-    }
+  .post-link {
+    text-decoration: none;
+    color: var(--text);
+    transition: color 0.15s ease;
+    line-height: 1.35;
+    display: block;
+  }
 
-    /*.post-link:visited {
+  /*.post-link:visited {
         color: var(--text-secondary);
     }*/
 
-    .post-link:hover {
-        color: var(--accent);
-    }
+  .post-link:hover {
+    color: var(--accent);
+  }
 
-    /* -- Footnotes ---------------------------------------------------------- */
+  /* -- Footnotes ---------------------------------------------------------- */
 
-    .footnotes {
-        margin-block-start: var(--space-md);
-        padding-block-start: var(--space-md);
-        font-size: var(--text-sm);
-        color: var(--text-secondary);
-        line-height: 1.5;
-    }
+  .footnotes {
+    margin-block-start: var(--space-md);
+    padding-block-start: var(--space-md);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+    line-height: 1.5;
+  }
 
-    .footnotes hr {
-        border-block-start: 1px solid var(--border-light);
-        max-width: none;
-    }
+  .footnotes hr {
+    border-block-start: 1px solid var(--border-light);
+    max-width: none;
+  }
 
-    .footnotes ol {
-        padding-inline-start: var(--space-md);
-        max-width: none;
-    }
+  .footnotes ol {
+    padding-inline-start: var(--space-md);
+    max-width: none;
+  }
 
-    .footnotes li {
-        margin-block-end: var(--space-2xs);
-    }
+  .footnotes li {
+    margin-block-end: var(--space-2xs);
+  }
 
-    .footnotes p {
-        margin-block-end: var(--space-3xs);
-    }
+  .footnotes p {
+    margin-block-end: var(--space-3xs);
+  }
 
-    sup[id^="fnref:"] {
-        line-height: 1;
-    }
+  sup[id^="fnref:"] {
+    line-height: 1;
+  }
 
-    .footnote-ref {
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-size: 0.75em;
-        text-decoration: none;
-        color: var(--accent);
-        margin-inline-start: 0.1em;
-    }
+  .footnote-ref {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.75em;
+    text-decoration: none;
+    color: var(--accent);
+    margin-inline-start: 0.1em;
+  }
 
-    .footnote-ref:hover {
-        text-decoration: underline;
-    }
+  .footnote-ref:hover {
+    text-decoration: underline;
+  }
 
-    .footnote-backref {
-        text-decoration: none;
-        color: var(--text-tertiary);
-        margin-inline-start: var(--space-3xs);
-    }
+  .footnote-backref {
+    text-decoration: none;
+    color: var(--text-tertiary);
+    margin-inline-start: var(--space-3xs);
+  }
 
-    .footnote-backref:hover {
-        color: var(--accent);
-    }
+  .footnote-backref:hover {
+    color: var(--accent);
+  }
 
-    /* -- Sidenotes ---------------------------------------------------------- */
+  /* -- Sidenotes ---------------------------------------------------------- */
 
+  .sidenote {
+    display: none;
+    text-decoration: none;
+  }
+
+  /* Never show empty sidenotes (prevents flash before script runs) */
+  .sidenote:empty {
+    display: none !important;
+  }
+
+  /* Prevent nested sidenotes (e.g. link title inside a footnote sidenote) */
+  .sidenote .sidenote {
+    display: contents;
+    float: none;
+    width: auto;
+    margin: 0;
+    font-size: inherit;
+    color: inherit;
+  }
+
+  @media (min-width: 72rem) {
     .sidenote {
-        display: none;
-        text-decoration: none;
+      display: block;
+      float: right;
+      clear: right;
+      width: var(--sidenote-width, 12rem);
+      margin-right: calc(
+        -1 * (var(--sidenote-width, 12rem) + var(--sidenote-gap, 2rem))
+      );
+      margin-bottom: var(--space-sm);
+      font-family: var(--font-sans, system-ui, sans-serif);
+      font-size: var(--text-xs);
+      color: var(--text-secondary);
+      line-height: 1.45;
+      padding: var(--space-3xs);
     }
 
-    /* Never show empty sidenotes (prevents flash before script runs) */
-    .sidenote:empty {
-        display: none !important;
+    .sidenote p {
+      margin-block-end: var(--space-3xs);
     }
 
-    /* Prevent nested sidenotes (e.g. link title inside a footnote sidenote) */
-    .sidenote .sidenote {
-        display: contents;
-        float: none;
-        width: auto;
-        margin: 0;
-        font-size: inherit;
-        color: inherit;
+    .sidenote p:last-child {
+      margin-block-end: 0;
     }
 
-    @media (min-width: 72rem) {
-        .sidenote {
-            display: block;
-            float: right;
-            clear: right;
-            width: var(--sidenote-width, 12rem);
-            margin-right: calc(
-                -1 * (var(--sidenote-width, 12rem) + var(--sidenote-gap, 2rem))
-            );
-            margin-bottom: var(--space-sm);
-            font-family: var(--font-heading, system-ui, sans-serif);
-            font-size: var(--text-xs);
-            color: var(--text-secondary);
-            line-height: 1.45;
-            padding: var(--space-3xs);
-        }
-
-        .sidenote p {
-            margin-block-end: var(--space-3xs);
-        }
-
-        .sidenote p:last-child {
-            margin-block-end: 0;
-        }
-
-        /* Footnote sidenotes: inline number with the first paragraph */
-        .sidenote-fn > p:first-of-type {
-            display: inline;
-        }
-
-        .sidenote-fn::before {
-            content: attr(data-sn);
-            color: var(--accent);
-            margin-inline-end: 0.3em;
-            font-size: 0.9em;
-            vertical-align: super;
-        }
-
-        /* Link title sidenotes */
-        .sidenote-link {
-            font-style: italic;
-            color: var(--text-tertiary);
-        }
-
-        .sidenote-link-domain {
-            font-style: normal;
-            font-size: 0.95em;
-            display: block;
-            margin-block-end: 0.15em;
-            text-decoration: none;
-            color: var(--text-secondary);
-        }
-
-        .sidenote-link-domain:hover {
-            color: var(--accent);
-        }
-
-        sup:hover + .sidenote {
-            background-color: var(--surface-raised);
-        }
-
-        a:hover + .sidenote-link,
-        .sidenote-link:hover {
-            color: var(--text-secondary);
-            background-color: var(--surface-raised);
-        }
-
-        a:hover + .sidenote-link span,
-        .sidenote-link:hover span {
-            color: var(--accent);
-        }
-
-        /* Hide footnotes section — content is shown as sidenotes */
-        .footnotes {
-            display: none;
-        }
+    /* Footnote sidenotes: inline number with the first paragraph */
+    .sidenote-fn > p:first-of-type {
+      display: inline;
     }
 
-    /* -- Article footer ----------------------------------------------------- */
-
-    .article-footer {
-        margin-block-start: var(--space-2xl);
-        padding-block-start: var(--space-md);
-        border-block-start: 1px solid var(--border-light);
-        font-size: var(--text-sm);
-        color: var(--text-secondary);
+    .sidenote-fn::before {
+      content: attr(data-sn);
+      color: var(--accent);
+      margin-inline-end: 0.3em;
+      font-size: 0.9em;
+      vertical-align: super;
     }
 
-    .article-footer p {
-        margin-block-end: var(--space-2xs);
+    /* Link title sidenotes */
+    .sidenote-link {
+      font-style: italic;
+      color: var(--text-tertiary);
     }
 
-    .article-footer a {
-        color: var(--text-secondary);
-        text-decoration-color: var(--border);
+    .sidenote-link-domain {
+      font-style: normal;
+      font-size: 0.95em;
+      display: block;
+      margin-block-end: 0.15em;
+      text-decoration: none;
+      color: var(--text-secondary);
     }
 
-    .article-footer a:hover {
-        color: var(--accent);
-        text-decoration-color: var(--accent);
+    .sidenote-link-domain:hover {
+      color: var(--accent);
     }
 
-    /* -- Site footer -------------------------------------------------------- */
-
-    .site-footer {
-        font-family: var(--font-heading, system-ui, sans-serif);
-        font-size: var(--text-sm);
-        color: var(--text-tertiary);
-        border-block-start: 1px solid var(--border-light);
+    sup:hover + .sidenote {
+      background-color: var(--surface-raised);
     }
 
-    .site-footer p {
-        margin-block-end: var(--space-2xs);
+    a:hover + .sidenote-link,
+    .sidenote-link:hover {
+      color: var(--text-secondary);
+      background-color: var(--surface-raised);
     }
 
-    .site-footer a {
-        color: var(--text-tertiary);
-        text-decoration: none;
+    a:hover + .sidenote-link span,
+    .sidenote-link:hover span {
+      color: var(--accent);
     }
 
-    .site-footer a:hover {
-        color: var(--accent);
+    /* Hide footnotes section — content is shown as sidenotes */
+    .footnotes {
+      display: none;
     }
+  }
 
-    /* -- Index page --------------------------------------------------------- */
+  /* -- Article footer ----------------------------------------------------- */
 
-    .page h1 {
-        margin-block-end: var(--space-sm);
-    }
+  .article-footer {
+    margin-block-start: var(--space-2xl);
+    padding-block-start: var(--space-md);
+    border-block-start: 1px solid var(--border-light);
+    font-size: var(--text-sm);
+    color: var(--text-secondary);
+  }
 
-    .page h2 {
-        margin-block-start: var(--space-xl);
-        font-size: var(--text-md);
-        color: var(--text-secondary);
-        font-weight: var(--font-heading-weight, 600);
-    }
+  .article-footer p {
+    margin-block-end: var(--space-2xs);
+  }
 
-    /* -- Comments (Sequoia) ------------------------------------------------- */
+  .article-footer a {
+    color: var(--text-secondary);
+    text-decoration-color: var(--border);
+  }
 
-    .comments {
-        margin-block-start: var(--space-xl);
-        --sequoia-accent-color: var(--accent);
-        --sequoia-border-radius: 4px;
-        --sequoia-bg-color: var(--surface-raised);
-        --sequoia-fg-color: var(--text);
-        --sequoia-border-color: var(--border);
-        --sequoia-secondary-color: var(--text-tertiary);
-    }
+  .article-footer a:hover {
+    color: var(--accent);
+    text-decoration-color: var(--accent);
+  }
+
+  /* -- Site footer -------------------------------------------------------- */
+
+  .site-footer {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: var(--text-sm);
+    color: var(--text-tertiary);
+    border-block-start: 1px solid var(--border-light);
+  }
+
+  .site-footer p {
+    margin-block-end: var(--space-2xs);
+  }
+
+  .site-footer a {
+    color: var(--text-tertiary);
+    text-decoration: none;
+  }
+
+  .site-footer a:hover {
+    color: var(--accent);
+  }
+
+  /* -- Index page --------------------------------------------------------- */
+
+  .page h1 {
+    margin-block-end: var(--space-sm);
+  }
+
+  .page h2 {
+    margin-block-start: var(--space-xl);
+    font-size: var(--text-md);
+    color: var(--text-secondary);
+    font-weight: var(--font-heading-weight, 600);
+  }
+
+  /* -- Comments (Sequoia) ------------------------------------------------- */
+
+  .comments {
+    margin-block-start: var(--space-xl);
+    --sequoia-accent-color: var(--accent);
+    --sequoia-border-radius: 4px;
+    --sequoia-bg-color: var(--surface-raised);
+    --sequoia-fg-color: var(--text);
+    --sequoia-border-color: var(--border);
+    --sequoia-secondary-color: var(--text-tertiary);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -935,143 +952,143 @@
    -------------------------------------------------------------------------- */
 
 @layer code {
-    /* -- Code blocks -------------------------------------------------------- */
+  /* -- Code blocks -------------------------------------------------------- */
 
-    .highlight {
-        margin-block: var(--space-md);
+  .highlight {
+    margin-block: var(--space-md);
+  }
+
+  pre {
+    font-family: var(--font-mono);
+    font-size: 0.85em;
+    line-height: 1.55;
+    padding: var(--space-sm) var(--space-md);
+    overflow-x: auto;
+    border-radius: 4px;
+    -webkit-overflow-scrolling: touch;
+  }
+
+  /* Non-highlighted pre (plain code blocks) */
+  pre:not(.chroma) {
+    background-color: var(--surface-code);
+    color: var(--text);
+  }
+
+  /* -- Chroma base -------------------------------------------------------- */
+
+  .chroma {
+    background-color: var(--code-bg);
+    color: var(--code-text);
+  }
+
+  /* -- Light mode code tokens --------------------------------------------- */
+
+  :root {
+    --code-bg: oklch(0.965 0.006 var(--hue));
+    --code-text: oklch(0.28 0.01 var(--hue));
+
+    --code-comment: oklch(0.55 0.01 var(--hue));
+    --code-keyword: oklch(0.48 0.18 12); /* warm red */
+    --code-string: oklch(0.42 0.1 250); /* deep blue */
+    --code-function: oklch(0.47 0.16 300); /* purple */
+    --code-number: oklch(0.45 0.14 255); /* blue */
+    --code-type: oklch(0.5 0.14 55); /* tawny orange */
+    --code-operator: oklch(0.48 0.18 12); /* same as keyword */
+    --code-punctuation: oklch(0.45 0.01 var(--hue));
+    --code-added: oklch(0.45 0.15 145); /* green */
+    --code-deleted: oklch(0.5 0.18 25); /* red */
+  }
+
+  /* -- Dark mode code tokens — system preference -------------------------- */
+
+  @media (prefers-color-scheme: dark) {
+    :root:not([data-theme="light"]) {
+      --code-bg: oklch(0.18 0.01 var(--hue));
+      --code-text: oklch(0.82 0.008 var(--hue));
+
+      --code-comment: oklch(0.58 0.01 var(--hue));
+      --code-keyword: oklch(0.72 0.14 15); /* soft red */
+      --code-string: oklch(0.78 0.08 220); /* light blue */
+      --code-function: oklch(0.78 0.12 300); /* lavender */
+      --code-number: oklch(0.75 0.1 235); /* sky */
+      --code-type: oklch(0.75 0.12 60); /* amber */
+      --code-operator: oklch(0.72 0.14 15); /* same as keyword */
+      --code-punctuation: oklch(0.62 0.008 var(--hue));
+      --code-added: oklch(0.72 0.12 145); /* green */
+      --code-deleted: oklch(0.72 0.14 25); /* red */
     }
+  }
 
-    pre {
-        font-family: var(--font-mono);
-        font-size: 0.85em;
-        line-height: 1.55;
-        padding: var(--space-sm) var(--space-md);
-        overflow-x: auto;
-        border-radius: 4px;
-        -webkit-overflow-scrolling: touch;
-    }
+  /* -- Dark mode code tokens — explicit override -------------------------- */
 
-    /* Non-highlighted pre (plain code blocks) */
-    pre:not(.chroma) {
-        background-color: var(--surface-code);
-        color: var(--text);
-    }
+  [data-theme="dark"] {
+    --code-bg: oklch(0.18 0.01 var(--hue));
+    --code-text: oklch(0.82 0.008 var(--hue));
 
-    /* -- Chroma base -------------------------------------------------------- */
+    --code-comment: oklch(0.58 0.01 var(--hue));
+    --code-keyword: oklch(0.72 0.14 15); /* soft red */
+    --code-string: oklch(0.78 0.08 220); /* light blue */
+    --code-function: oklch(0.78 0.12 300); /* lavender */
+    --code-number: oklch(0.75 0.1 235); /* sky */
+    --code-type: oklch(0.75 0.12 60); /* amber */
+    --code-operator: oklch(0.72 0.14 15); /* same as keyword */
+    --code-punctuation: oklch(0.62 0.008 var(--hue));
+    --code-added: oklch(0.72 0.12 145); /* green */
+    --code-deleted: oklch(0.72 0.14 25); /* red */
+  }
 
-    .chroma {
-        background-color: var(--code-bg);
-        color: var(--code-text);
-    }
+  /* -- Token classes ------------------------------------------------------ */
 
-    /* -- Light mode code tokens --------------------------------------------- */
-
-    :root {
-        --code-bg: oklch(0.965 0.006 var(--hue, 350));
-        --code-text: oklch(0.28 0.01 var(--hue, 350));
-
-        --code-comment: oklch(0.55 0.01 var(--hue, 350));
-        --code-keyword: oklch(0.48 0.18 12); /* warm red */
-        --code-string: oklch(0.42 0.1 250); /* deep blue */
-        --code-function: oklch(0.47 0.16 300); /* purple */
-        --code-number: oklch(0.45 0.14 255); /* blue */
-        --code-type: oklch(0.5 0.14 55); /* tawny orange */
-        --code-operator: oklch(0.48 0.18 12); /* same as keyword */
-        --code-punctuation: oklch(0.45 0.01 var(--hue, 350));
-        --code-added: oklch(0.45 0.15 145); /* green */
-        --code-deleted: oklch(0.5 0.18 25); /* red */
-    }
-
-    /* -- Dark mode code tokens — system preference -------------------------- */
-
-    @media (prefers-color-scheme: dark) {
-        :root:not([data-theme="light"]) {
-            --code-bg: oklch(0.18 0.01 var(--hue, 350));
-            --code-text: oklch(0.82 0.008 var(--hue, 350));
-
-            --code-comment: oklch(0.58 0.01 var(--hue, 350));
-            --code-keyword: oklch(0.72 0.14 15); /* soft red */
-            --code-string: oklch(0.78 0.08 220); /* light blue */
-            --code-function: oklch(0.78 0.12 300); /* lavender */
-            --code-number: oklch(0.75 0.1 235); /* sky */
-            --code-type: oklch(0.75 0.12 60); /* amber */
-            --code-operator: oklch(0.72 0.14 15); /* same as keyword */
-            --code-punctuation: oklch(0.62 0.008 var(--hue, 350));
-            --code-added: oklch(0.72 0.12 145); /* green */
-            --code-deleted: oklch(0.72 0.14 25); /* red */
-        }
-    }
-
-    /* -- Dark mode code tokens — explicit override -------------------------- */
-
-    [data-theme="dark"] {
-        --code-bg: oklch(0.18 0.01 var(--hue, 350));
-        --code-text: oklch(0.82 0.008 var(--hue, 350));
-
-        --code-comment: oklch(0.58 0.01 var(--hue, 350));
-        --code-keyword: oklch(0.72 0.14 15); /* soft red */
-        --code-string: oklch(0.78 0.08 220); /* light blue */
-        --code-function: oklch(0.78 0.12 300); /* lavender */
-        --code-number: oklch(0.75 0.1 235); /* sky */
-        --code-type: oklch(0.75 0.12 60); /* amber */
-        --code-operator: oklch(0.72 0.14 15); /* same as keyword */
-        --code-punctuation: oklch(0.62 0.008 var(--hue, 350));
-        --code-added: oklch(0.72 0.12 145); /* green */
-        --code-deleted: oklch(0.72 0.14 25); /* red */
-    }
-
-    /* -- Token classes ------------------------------------------------------ */
-
-    /* Comments */
-    .chroma .c,    /* comment */
+  /* Comments */
+  .chroma .c,    /* comment */
   .chroma .c1,   /* comment.single */
   .chroma .cm,   /* comment.multiline */
   .chroma .cp,   /* comment.preproc */
   .chroma .cpf,  /* comment.preprocfile */
   .chroma .cs {
-        /* comment.special */
-        color: var(--code-comment);
-        font-style: italic;
-    }
+    /* comment.special */
+    color: var(--code-comment);
+    font-style: italic;
+  }
 
-    /* Keywords */
-    .chroma .k,    /* keyword */
+  /* Keywords */
+  .chroma .k,    /* keyword */
   .chroma .kc,   /* keyword.constant */
   .chroma .kd,   /* keyword.declaration */
   .chroma .kn,   /* keyword.namespace */
   .chroma .kp,   /* keyword.pseudo */
   .chroma .kr,   /* keyword.reserved */
   .chroma .ow {
-        /* operator.word (as, in, is) */
-        color: var(--code-keyword);
-        font-weight: 500;
-    }
+    /* operator.word (as, in, is) */
+    color: var(--code-keyword);
+    font-weight: 500;
+  }
 
-    /* Keyword type (u32, String, etc.) */
-    .chroma .kt {
-        color: var(--code-type);
-    }
+  /* Keyword type (u32, String, etc.) */
+  .chroma .kt {
+    color: var(--code-type);
+  }
 
-    /* Strings */
-    .chroma .s,
-    .chroma .sa,
-    .chroma .sb,
-    .chroma .sc,
-    .chroma .sd,
-    .chroma .se,
-    .chroma .sh,
-    .chroma .si,
-    .chroma .sx,
-    .chroma .sr,
-    .chroma .s1,
-    .chroma .s2,
-    .chroma .ss,
-    .chroma .dl {
-        color: var(--code-string);
-    }
+  /* Strings */
+  .chroma .s,
+  .chroma .sa,
+  .chroma .sb,
+  .chroma .sc,
+  .chroma .sd,
+  .chroma .se,
+  .chroma .sh,
+  .chroma .si,
+  .chroma .sx,
+  .chroma .sr,
+  .chroma .s1,
+  .chroma .s2,
+  .chroma .ss,
+  .chroma .dl {
+    color: var(--code-string);
+  }
 
-    /* Names / identifiers */
-    .chroma .n,
+  /* Names / identifiers */
+  .chroma .n,
   .chroma .na,
   .chroma .nb,
   .chroma .ni,
@@ -1081,72 +1098,72 @@
   .chroma .vc,
   .chroma .vg,
   .chroma .vi {
-        color: var(--code-text);
-    }
+    color: var(--code-text);
+  }
 
-    /* Functions */
-    .chroma .nf,   /* name.function */
+  /* Functions */
+  .chroma .nf,   /* name.function */
   .chroma .fm,   /* name.function.magic */
   .chroma .nd {
-        /* name.decorator */
-        color: var(--code-function);
-    }
+    /* name.decorator */
+    color: var(--code-function);
+  }
 
-    /* Classes / types */
-    .chroma .nc,   /* name.class */
+  /* Classes / types */
+  .chroma .nc,   /* name.class */
   .chroma .ne,   /* name.exception */
   .chroma .no,   /* name.constant */
   .chroma .nn {
-        /* name.namespace */
-        color: var(--code-type);
-    }
+    /* name.namespace */
+    color: var(--code-type);
+  }
 
-    /* Name tag (HTML/XML) */
-    .chroma .nt {
-        color: var(--code-keyword);
-    }
+  /* Name tag (HTML/XML) */
+  .chroma .nt {
+    color: var(--code-keyword);
+  }
 
-    /* Numbers */
-    .chroma .m,
-    .chroma .mb,
-    .chroma .mf,
-    .chroma .mh,
-    .chroma .mi,
-    .chroma .mo,
-    .chroma .il {
-        color: var(--code-number);
-    }
+  /* Numbers */
+  .chroma .m,
+  .chroma .mb,
+  .chroma .mf,
+  .chroma .mh,
+  .chroma .mi,
+  .chroma .mo,
+  .chroma .il {
+    color: var(--code-number);
+  }
 
-    /* Operators & punctuation */
-    .chroma .o {
-        color: var(--code-operator);
-    }
+  /* Operators & punctuation */
+  .chroma .o {
+    color: var(--code-operator);
+  }
 
-    .chroma .p {
-        color: var(--code-punctuation);
-    }
+  .chroma .p {
+    color: var(--code-punctuation);
+  }
 
-    /* Generic diffs */
-    .chroma .gi {
-        color: var(--code-added);
-    }
-    .chroma .gd {
-        color: var(--code-deleted);
-    }
-    .chroma .gu {
-        color: var(--code-function);
-        font-weight: 600;
-    } /* subheading */
+  /* Generic diffs */
+  .chroma .gi {
+    color: var(--code-added);
+  }
+  .chroma .gd {
+    color: var(--code-deleted);
+  }
+  .chroma .gu {
+    color: var(--code-function);
+    font-weight: 600;
+  } /* subheading */
 
-    /* Whitespace — invisible */
-    .chroma .w {
-        color: transparent;
-    }
+  /* Whitespace — invisible */
+  .chroma .w {
+    color: transparent;
+  }
 
-    /* Error token */
-    .chroma .err {
-        color: var(--code-deleted);
-    }
+  /* Error token */
+  .chroma .err {
+    color: var(--code-deleted);
+  }
 }
 
 /* --------------------------------------------------------------------------
@@ -1155,111 +1172,111 @@
    -------------------------------------------------------------------------- */
 
 @layer markdown-look {
-    /* Marker color — syntax chars shown in a muted accent */
-    :root {
-        --md-marker: var(--text-tertiary);
-    }
+  /* Marker color — syntax chars shown in a muted accent */
+  :root {
+    --md-marker: var(--text-tertiary);
+    --font-heading: var(--font-mono);
+  }
 
-    /* -- Uniform sizing --------------------------------------------------- */
+  /* -- Uniform sizing --------------------------------------------------- */
 
-    h1,
-    h2,
-    h3,
-    h4,
-    h5,
-    h6 {
-        font-size: var(--text-base);
-        font-weight: var(--font-body-bold, 700);
-        line-height: 1.6;
-        letter-spacing: normal;
-        font-family: var(--font-mono);
-        font-variant-ligatures: none;
-        font-feature-settings:
-            "liga" 0,
-            "calt" 0;
-    }
+  h1,
+  h2,
+  h3,
+  h4,
+  h5,
+  h6 {
+    font-size: var(--text-base);
+    font-weight: var(--font-body-bold, 700);
+    line-height: 1.6;
+    letter-spacing: normal;
+    font-variant-ligatures: none;
+    font-feature-settings:
+      "liga" 0,
+      "calt" 0;
+  }
 
-    /* -- Heading markers -------------------------------------------------- */
+  /* -- Heading markers -------------------------------------------------- */
 
-    /* h1: setext style with ═══ underline */
-    h1::before {
-        content: none;
-    }
-    h1 {
-        padding-block-end: 0.15em;
-        border-block-end: 3px double var(--md-marker);
-    }
+  /* h1: setext style with ═══ underline */
+  h1::before {
+    content: none;
+  }
+  h1 {
+    padding-block-end: 0.15em;
+    border-block-end: 3px double var(--md-marker);
+  }
 
-    h2::before {
-        content: "## ";
-        color: var(--md-marker);
-        font-weight: var(--font-body-weight, 400);
-    }
-    h3::before {
-        content: "### ";
-        color: var(--md-marker);
-        font-weight: var(--font-body-weight, 400);
-    }
-    h4::before {
-        content: "#### ";
-        color: var(--md-marker);
-        font-weight: var(--font-body-weight, 400);
-    }
-    h5::before {
-        content: "##### ";
-        color: var(--md-marker);
-        font-weight: var(--font-body-weight, 400);
-    }
-    h6::before {
-        content: "###### ";
-        color: var(--md-marker);
-        font-weight: var(--font-body-weight, 400);
-    }
+  h2::before {
+    content: "## " / "";
+    color: var(--md-marker);
+    font-weight: var(--font-body-weight, 400);
+  }
+  h3::before {
+    content: "### " / "";
+    color: var(--md-marker);
+    font-weight: var(--font-body-weight, 400);
+  }
+  h4::before {
+    content: "#### " / "";
+    color: var(--md-marker);
+    font-weight: var(--font-body-weight, 400);
+  }
+  h5::before {
+    content: "##### " / "";
+    color: var(--md-marker);
+    font-weight: var(--font-body-weight, 400);
+  }
+  h6::before {
+    content: "###### " / "";
+    color: var(--md-marker);
+    font-weight: var(--font-body-weight, 400);
+  }
 
-    /* -- Bold & italic markers -------------------------------------------- */
+  /* -- Bold & italic markers -------------------------------------------- */
 
-    .post-content strong::before,
-    .post-content strong::after {
-        content: "**";
-        color: var(--md-marker);
-        font-weight: var(--font-body-weight, 400);
-    }
+  .post-content strong::before,
+  .post-content strong::after {
+    content: "**" / "";
+    color: var(--md-marker);
+    font-weight: var(--font-body-weight, 400);
+  }
 
-    .post-content em::before,
-    .post-content em::after {
-        content: "_";
-        color: var(--md-marker);
-        font-style: normal;
-    }
+  /*.post-content em::before,
+  .post-content em::after {
+    content: "_" / "";
+    color: var(--md-marker);
+    font-style: normal;
+  }*/
 
-    /* Bold italic */
-    .post-content strong em::before,
-    .post-content em strong::before {
-        content: "**_";
-    }
-    .post-content strong em::after,
-    .post-content em strong::after {
-        content: "_**";
-    }
+  /* Bold italic */
+  /*.post-content strong em::before,
+  .post-content em strong::before {
+    content: "**_" / "";
+  }
+  .post-content strong em::after,
+  .post-content em strong::after {
+    content: "_**" / "";
+  }*/
 
-    /* -- Inline code ------------------------------------------------------ */
+  /* -- Inline code ------------------------------------------------------ */
 
-    .post-content :not(pre) > code::before,
-    .post-content :not(pre) > code::after {
-        content: "`";
-        color: var(--md-marker);
-    }
+  .post-content :not(pre) > code::before,
+  .post-content :not(pre) > code::after {
+    content: "`" / "";
+    color: var(--md-marker);
+  }
 
-    .post-content :not(pre) > code {
-        background: none;
-        padding: 0;
-        border-radius: 0;
-    }
+  .post-content :not(pre) > code {
+    background: none;
+    padding: 0;
+    border-radius: 0;
+  }
 
-    /* -- Code blocks ------------------------------------------------------ */
-    /*
+  /* -- Code blocks ------------------------------------------------------ */
+  /*
     .highlight::before {
-        content: "```";
+        content: "```" / "";
         display: block;
         color: var(--md-marker);
         font-family: var(--font-mono);
@@ -1268,7 +1285,7 @@
     }
 
     .highlight::after {
-        content: "```";
+        content: "```" / "";
         display: block;
         color: var(--md-marker);
         font-family: var(--font-mono);
@@ -1276,7 +1293,7 @@
         margin-block-start: -0.5em;
     }*/
 
-    /*.highlight {
+  /*.highlight {
         background-color: var(--code-bg);
     }
 
@@ -1284,118 +1301,118 @@
         padding: var(--space-xs) 0;
     }*/
 
-    /* Plain pre blocks too */
-    /*pre:not(.chroma)::before {
-        content: "```";
+  /* Plain pre blocks too */
+  /*pre:not(.chroma)::before {
+        content: "```" / "";
         display: block;
         color: var(--md-marker);
         margin-block-end: 0.25em;
     }
 
     pre:not(.chroma)::after {
-        content: "```";
+        content: "```" / "";
         display: block;
         color: var(--md-marker);
         margin-block-start: 0.25em;
     }*/
 
-    /* -- Lists ------------------------------------------------------------ */
+  /* -- Lists ------------------------------------------------------------ */
 
-    @counter-style md-ol {
-        system: extends decimal;
-        suffix: ". ";
-    }
+  @counter-style md-ol {
+    system: extends decimal;
+    suffix: ". ";
+  }
 
-    ul {
-        list-style: "- " outside;
-    }
+  ul {
+    list-style: "- " outside;
+  }
 
-    ol:not(.footnotes ol) {
-        list-style: md-ol outside;
-    }
+  ol:not(.footnotes ol) {
+    list-style: md-ol outside;
+  }
 
-    .post-list {
-        list-style: none;
-    }
+  .post-list {
+    list-style: none;
+  }
 
-    /* Color markers — ::marker with color works in Safari */
-    :is(ul, ol:not(.footnotes ol)) > li::marker {
-        color: var(--md-marker);
-    }
+  /* Color markers — ::marker with color works in Safari */
+  :is(ul, ol:not(.footnotes ol)) > li::marker {
+    color: var(--md-marker);
+  }
 
-    /* TOC keeps its own numbering */
-    #TableOfContents ol {
-        list-style: decimal outside;
-    }
+  /* TOC keeps its own numbering */
+  .post-toc ol {
+    list-style: decimal outside;
+  }
 
-    /* -- Blockquotes ------------------------------------------------------ */
+  /* -- Blockquotes ------------------------------------------------------ */
 
-    blockquote {
-        border-inline-start: none;
-        padding-inline-start: 0;
-        font-style: normal;
-    }
+  /*blockquote {
+    border-inline-start: none;
+    padding-inline-start: 0;
+    font-style: normal;
+  }
 
-    blockquote p::before {
-        content: "> ";
-        color: var(--md-marker);
-        font-family: var(--font-mono);
-    }
+  blockquote p::before {
+    content: "> " / "";
+    color: var(--md-marker);
+    font-family: var(--font-mono);
+  }*/
 
-    /* -- Horizontal rules ------------------------------------------------- */
+  /* -- Horizontal rules ------------------------------------------------- */
 
-    hr {
-        border: none;
-        max-width: none;
-    }
+  hr {
+    border: none;
+    max-width: none;
+  }
 
-    hr::after {
-        content: "---";
-        display: block;
-        color: var(--md-marker);
-        text-align: left;
-        font-family: var(--font-mono);
-    }
+  hr::after {
+    content: "---" / "";
+    display: block;
+    color: var(--md-marker);
+    text-align: left;
+    font-family: var(--font-mono);
+  }
 
-    /* -- Footnote refs ---------------------------------------------------- */
+  /* -- Footnote refs ---------------------------------------------------- */
 
-    .footnote-ref {
-        font-size: inherit;
-    }
+  .footnote-ref {
+    font-size: inherit;
+  }
 
-    sup[id^="fnref:"]::before,
-    sup[id^="fnref:"],
-    sup[id^="fnref:"]::after {
-        color: var(--md-marker);
-        font-size: var(--text-sm);
-    }
+  sup[id^="fnref:"]::before,
+  sup[id^="fnref:"],
+  sup[id^="fnref:"]::after {
+    color: var(--md-marker);
+    font-size: var(--text-sm);
+  }
 
-    sup[id^="fnref:"]::before {
-        content: "[^";
-    }
+  sup[id^="fnref:"]::before {
+    content: "[^" / "";
+  }
 
-    sup[id^="fnref:"]::after {
-        content: "]";
-    }
+  sup[id^="fnref:"]::after {
+    content: "]" / "";
+  }
 
-    /* -- Definition lists ------------------------------------------------- */
+  /* -- Definition lists ------------------------------------------------- */
 
-    dt::before {
-        content: none;
-    }
+  /*dt::before {
+    content: none;
+  }
 
-    dd::before {
-        content: ": ";
-        color: var(--md-marker);
-    }
+  dd::before {
+    content: ": " / "";
+    color: var(--md-marker);
+  }
 
-    dd {
-        padding-inline-start: 0;
-    }
+  dd {
+    padding-inline-start: 0;
+  }*/
 
-    /* -- Images ----------------------------------------------------------- */
+  /* -- Images ----------------------------------------------------------- */
 
-    .post-content img {
-        border-radius: 0;
-    }
+  .post-content img {
+    border-radius: 0;
+  }
 }

@@ -1,7 +1,7 @@
 {{ define "main" }}
 
 <nav class="breadcrumb">
-    <a href="/">&larr; Home</a>
+  <a href="/">&larr; Home</a>
 </nav>
 
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
@@ -17,14 +17,21 @@
     </p>
   </header>
 
-  {{ .TableOfContents }}
+  <aside class="post-toc">
+    <header aria-hidden>
+      {{ .Title }}
+    </header>
+    <p>Chapters</p>
+    {{ .TableOfContents }}
+  </aside>
 
   <div class="post-content" itemprop="articleBody">
     {{ .Content }}
   </div>
 
-  {{- $js := resources.Get "sidenotes.js" | minify }}
-  <script>{{ $js.Content | safeJS }}</script>
+  {{- /* insert this JS here to not rerender */ -}}
+  {{- $sidenotes := resources.Get "sidenotes.js" | minify }}
+  <script>{{ $sidenotes.Content | safeJS }}</script>
 
   <footer class="article-footer">
     <p>
