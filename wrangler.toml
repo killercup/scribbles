@@ -8,7 +8,8 @@ preview_urls = false
 
 [assets]
 directory = "public"
-html_handling = "auto-trailing-slash"
+html_handling = "none"
+not_found_handling = "404-page"
 
 [build]
 command = "hugo"
