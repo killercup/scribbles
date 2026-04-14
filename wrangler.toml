@@ -8,6 +8,7 @@ preview_urls = false
 
 [assets]
 directory = "public"
+html_handling = "none"
 
 [build]
 command = "hugo"
