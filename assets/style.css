@@ -851,6 +851,11 @@
         .sidenote-link:hover span {
             color: var(--accent);
         }
+
+        /* Hide footnotes section — content is shown as sidenotes */
+        .footnotes {
+            display: none;
+        }
     }
 
     /* -- Article footer ----------------------------------------------------- */
@@ -1296,40 +1301,31 @@
 
     /* -- Lists ------------------------------------------------------------ */
 
+    @counter-style md-ol {
+        system: extends decimal;
+        suffix: ". ";
+    }
+
     ul {
+        list-style: "- " outside;
+    }
+
+    ol:not(.footnotes ol) {
+        list-style: md-ol outside;
+    }
+
+    .post-list {
         list-style: none;
     }
 
-    ul > li::marker {
-        content: "- ";
+    /* Color markers — ::marker with color works in Safari */
+    :is(ul, ol:not(.footnotes ol)) > li::marker {
         color: var(--md-marker);
     }
 
-    ol {
-        list-style: none;
-        counter-reset: md-ol;
-    }
-
-    ol > li {
-        counter-increment: md-ol;
-    }
-
-    .post-list li::marker {
-        content: none;
-    }
-
-    ol > li::marker {
-        content: counter(md-ol) ". ";
-        color: var(--md-marker);
-    }
-
-    /* TOC already has its own numbering */
+    /* TOC keeps its own numbering */
     #TableOfContents ol {
-        counter-reset: none;
-    }
-
-    #TableOfContents ol > li::before {
-        content: none;
+        list-style: decimal outside;
     }
 
     /* -- Blockquotes ------------------------------------------------------ */
