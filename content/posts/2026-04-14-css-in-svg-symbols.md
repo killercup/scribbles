@@ -2,7 +2,6 @@
 title: Using CSS vars to style SVG symbols
 publishDate: 2026-04-14
 updatedAt: 2026-04-14
-draft: true
 categories:
 - web
 - css
