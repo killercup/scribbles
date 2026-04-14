@@ -5,14 +5,13 @@ name = 'scribbles'
 compatibility_date = "2026-04-10"
 workers_dev = false
 preview_urls = false
+main = "worker.js"
 
 [assets]
 directory = "public"
 html_handling = "none"
 not_found_handling = "404-page"
 binding = "ASSETS"
-
-main = "worker.js"
 
 [build]
 command = "hugo"
