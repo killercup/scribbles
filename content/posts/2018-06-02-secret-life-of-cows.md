@@ -28,9 +28,6 @@ and compare them to other ways of organizing your data.
 [kevins-tweet]: https://twitter.com/KevinHoffman/status/1001075501358776322
 [llogiqs-post]: https://llogiq.github.io/2015/07/10/cow-redux.html
 
-## Contents
-
-1. Table of contents
 
 ## Organizing Data
 

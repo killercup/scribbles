@@ -18,9 +18,6 @@ atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvdesrs
 
 [quicli]: https://github.com/killercup/quicli
 
-## Contents
-
-1. Table of contents
 
 ## Quick CLI argument handling
 

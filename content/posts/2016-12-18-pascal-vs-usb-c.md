@@ -21,9 +21,6 @@ How hard can it be to find some adapter-y dock-y things[^adapters-n-docks] that 
 
 [^adapters-n-docks]: What is an adapter and what is dock? I'm using these terms pretty loosely. One way to differentiate might be to say an adapters is passive, while a dock has chips that actively transforms protocols for other physical ports. Or, a dock is large and expensive while you can buy a cheaper adapter that fits in your pocket. Or, a dock has more ports that are faster. For USB-C, these seem mostly equivalent, assuming that turning one USB-C connection with multiple alternate modes into a bunch of ports is not an "active" transformation as the host computer does all the hard work. Thus, a thing that has USB-C on one side, and HDMI or DisplayPort or the other, is an adapter. It gets fuzzy when an adapter has an ethernet port, as that most certainly means it has a dedicated chip for doing network stuff (that could also be USB 3.0 ethernet thing). Does this mean it becomes a dock? I'll say no. So, I'll settle on a simpler way to differentiate docks and adapters here: Docks are expensive. And good docks use Thunderbolt 3. That should make everything clear…
 
-## Contents
-
-* Table of contents
 
 ## What I want to connect
 

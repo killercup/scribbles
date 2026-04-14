@@ -12,9 +12,6 @@ atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvecb77
 ---
 Rust's error messages are pretty amazing. There is no way to format library-specific errors, though. I'm suggesting a way to implement this on stable Rust.
 
-## Contents
-
-1. Table of contents
 
 ## Precursor
 
@@ -88,4 +85,3 @@ Instead of the last two steps, one could also integrate all filters into the too
 The filters could be as simple as matching a regular expressing and as complex as parsing the source file referenced in the JSON.
 
 The obvious downside of this approach is the need to stay up-to-date with Rust's diagnostic output (neither JSON nor the human readable representation are stable as far as I know) as well as with the errors that the filters need to recognize.
-

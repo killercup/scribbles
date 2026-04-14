@@ -1,5 +1,9 @@
 {{ define "main" }}
 
+<nav class="breadcrumb">
+    <a href="/">&larr; Home</a>
+</nav>
+
 <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ .Title }}</h1>
@@ -18,6 +22,38 @@
   <div class="post-content" itemprop="articleBody">
     {{ .Content }}
   </div>
+
+  {{/* Create sidenotes from standard Hugo footnotes — synchronous, no flash */}}
+  <script>
+  (function(){
+    // Find all footnote refs (standard Hugo: <sup id="fnref:X"><a ...>N</a></sup>)
+    var refs = document.querySelectorAll('sup[id^="fnref:"]');
+    for (var i = 0; i < refs.length; i++) {
+      var sup = refs[i];
+      var ref = sup.id.replace('fnref:', '');
+      var index = sup.querySelector('a').textContent;
+
+      // Find the corresponding footnote content
+      var li = document.getElementById('fn:' + ref);
+      if (!li) continue;
+
+      // Clone content, remove the backref link
+      var clone = li.cloneNode(true);
+      var backrefs = clone.querySelectorAll('.footnote-backref');
+      for (var j = 0; j < backrefs.length; j++) backrefs[j].remove();
+
+      // Create the sidenote element
+      var sn = document.createElement('span');
+      sn.className = 'sidenote sidenote-fn';
+      sn.setAttribute('aria-hidden', 'true');
+      sn.setAttribute('data-sn', index);
+      sn.innerHTML = clone.innerHTML.trim();
+
+      // Insert right after the <sup>
+      sup.insertAdjacentElement('afterend', sn);
+    }
+  })();
+  </script>
 
   <footer class="article-footer">
     <p>
@@ -41,5 +77,14 @@
       <a href="{{ site.BaseURL }}">Back to index</a>.
     </p>
   </footer>
+
+  {{- /*
+  <footer class="comments">
+      <sequoia-comments></sequoia-comments>
+  </footer>
+  <script type="module" src="/assets/sequoia-comments.js"></script>
+  */ -}}
 </article>
+
+
 {{ end }}

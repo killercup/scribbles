@@ -16,11 +16,6 @@ The premise is simple:
 
 (I tend to call the file `README.md` and use Markdown syntax, but you can of course do whatever you want.)
 
-## tl;dr
-
-* Table of contents
-
-
 ## Describe everything
 
 Aside from the usual meta information like

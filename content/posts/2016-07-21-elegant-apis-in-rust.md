@@ -30,9 +30,6 @@ that are not discussed here.
 I've updated some of syntax and crate recommendations
 but otherwise kept the post as it was in 2016.
 
-## Contents
-
-* Table of contents
 
 ## What makes an API elegant?
 

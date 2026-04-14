@@ -1,0 +1,8 @@
+<a href="{{ .Destination | safeURL }}"{{ with .Title }} title="{{ . }}"{{ end }}>{{ .Text }}</a>
+{{- with .Title }}
+<a href="{{ $.Destination | safeURL }}" class="sidenote sidenote-link" aria-hidden="true">
+    <span class="sidenote-link-domain" tabindex="-1">
+        {{ with urls.Parse $.Destination }}{{ .Host }}{{ end }}
+    </span> {{ . }}
+</a>
+{{ end -}}

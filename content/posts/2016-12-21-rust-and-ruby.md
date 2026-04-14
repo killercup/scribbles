@@ -18,9 +18,6 @@ Completely by accident, the [January 2017 meetup of the Rust user group][meetup-
 
 [meetup-2017-01]: http://rust.cologne/2017/01/18/ruby-meets-rust.html
 
-## Contents
-
-* Table of contents
 
 ## First things first
 
@@ -181,4 +178,3 @@ You know how in Ruby, `%w(foo bar)` is the same as `["foo", "bar"]`? I wrote tha
 ```rust
 w![foo bar baz]
 ```
-

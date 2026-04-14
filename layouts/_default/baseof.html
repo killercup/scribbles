@@ -4,10 +4,41 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   {{- partial "head_meta.html" . }}
-  <link rel="stylesheet" href="/style.css">
+  {{- $css := resources.Get "style.css" | minify | fingerprint }}
+  <link rel="stylesheet" href="https://fonts.googleapis.com/css2?family=Piazzolla:ital,opsz,wght@0,8..30,400;0,8..30,500;0,8..30,600;0,8..30,700;1,8..30,400;1,8..30,500&display=swap"/>
+  <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
+  {{- /*
+  <script>
+    (function(){
+      var t = localStorage.theme;
+      if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
+    })();
+  </script>
+  */ -}}
 </head>
 <body>
-  <div class="hack container">
+  {{- /*
+  <button class="theme-toggle" aria-label="Toggle theme">
+    <script>
+      (function(btn){
+        var cycle = {auto:"light", light:"dark", dark:"auto"};
+        var labels = {auto:"auto", light:"light", dark:"dark"};
+        function current(){ return localStorage.theme || "auto"; }
+        function apply(t){
+          if(t==="auto"){delete localStorage.theme;delete document.documentElement.dataset.theme}
+          else{localStorage.theme=t;document.documentElement.dataset.theme=t}
+        }
+        btn.textContent = labels[current()];
+        btn.onclick = function(){
+          var next = cycle[current()];
+          apply(next);
+          btn.textContent = labels[next];
+        };
+      })(document.currentScript.parentElement);
+    </script>
+  </button>
+  */ -}}
+  <div class="container">
     {{- block "main" . }}{{ end }}
   </div>
   <footer class="container site-footer">

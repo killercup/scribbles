@@ -32,9 +32,6 @@ some well-designed and discoverable software.
 
 [static-filez]: https://github.com/killercup/static-filez
 
-## Contents
-
-1. Table of contents
 
 ## Storing and serving compressed data
 

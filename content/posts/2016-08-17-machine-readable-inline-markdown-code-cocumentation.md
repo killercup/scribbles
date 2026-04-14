@@ -11,9 +11,6 @@ In [Rust RFC 1713][rfc-pr-1713], a set of documentation 'tags' is proposed, to d
 
 Since Rust's [current documentation conventions][rfc-1574] already wants you to use common names for Markdown headlines to structure your code documentation, I think it would be very nice to continue in this style and use plain Markdown with specific conventions.
 
-## Contents
-
-* Table of contents
 
 
 ## Markdown formatting conventions
