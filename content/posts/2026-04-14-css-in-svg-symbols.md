@@ -6,6 +6,7 @@ categories:
 - web
 - css
 - svg
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjhv3hwmmz26"
 ---
 Styling SVG symbols that are defined using `<symbol id="x">`
 and included using `<use href="#x">`.
