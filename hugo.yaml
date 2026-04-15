@@ -8,7 +8,7 @@ params:
   activitypub:
     domain: deterministic.space
     username: blog
-    preferred_username: pascals_scribbles
+    preferred_username: blog
     avatar_url: https://deterministic.space/avatar.png
   github: killercup
   mastodon: https://mastodon.social/@killercup
