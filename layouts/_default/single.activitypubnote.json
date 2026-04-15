@@ -3,7 +3,7 @@
 {{- $username := $ap.username -}}
 {
   "@context": "https://www.w3.org/ns/activitystreams",
-  "id": "https://{{ $domain }}/socialweb/notes/{{ .File.TranslationBaseName }}.json",
+  "id": "https://{{ $domain }}/socialweb/notes/{{ .Slug }}.json",
   "type": "Article",
   "attributedTo": "https://{{ $domain }}/socialweb/{{ $username }}.json",
   "name": {{ .Title | jsonify }},
