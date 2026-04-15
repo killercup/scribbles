@@ -1,10 +1,13 @@
 {
   "@context": [
     "https://www.w3.org/ns/activitystreams",
-    "https://w3id.org/security/v1"
+    "https://w3id.org/security/v1",
+    "http://joinmastodon.org/ns"
   ],
   "id": "https://deterministic.space/socialweb/blog.json",
-  "type": "Person",
+  "type": "Service",
+  "discoverable": true,
+  "indexable": true,
   "preferredUsername": "blog",
   "name": "Pascal's Scribbles",
   "summary": "Posts on programming topics, with a few crazy ideas thrown in.",
