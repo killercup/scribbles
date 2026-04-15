@@ -41,6 +41,8 @@ So far, so good.
 [msgpack]: https://msgpack.org/ "MessagePack: It's like JSON. but fast and small."
 [serde]: https://serde.rs/ "Overview · Serde"
 
+[^rmp-stream]: `serde_json` includes a [`StreamDeserializer`][struct-streamdeserializer] but  `rmp_serde` does not, so I wrote one myself. It's not as feature-complete (I think), but you can find it [here][317].
+
 ## Compression with LZ4
 
 However, the output file was quite large
@@ -56,20 +58,28 @@ so we can just wrap our writer in it and continue to use it as before:
 [lz4]: https://lz4.github.io/lz4/ "LZ4 - Extremely fast compression"
 [struct-encoder]: https://docs.rs/lz4/1.28.1/lz4/struct.Encoder.html "Encoder in lz4"
 
+<div class="wide">
+
 ```rust
 let file = std::fs::File::create("output.msgpack.lz4")?;
 let encoder = lz4::EncoderBuilder::new().level(4).build(file)?;
 ```
 
+</div>
+
 Pretty early in my Rust journey,
 I learned that file I/O is not buffered by default,
 so it's a good idea to wrap the `file` in a `BufWriter`:
+
+<div class="wide">
 
 ```rust
 let file = std::fs::File::create("output.msgpack.lz4")?;
 let file_buffered = std::io::BufWriter::new(file);
 let encoder = lz4::EncoderBuilder::new().level(4).build(file_buffered)?;
 ```
+
+</div>
 
 This then creates a chain like this:
 
@@ -88,7 +98,7 @@ And that is based on Deflate, which, while optimized heavily,
 is not an algorithm that should play in the same league as LZ4.
 What is going on here?
 
-[samply]: https://github.com/mstange/samply/ "GitHub - mstange/samply: Command-line sampling profiler for macOS, Linux, and Windows · GitHub"
+[samply]: https://github.com/mstange/samply/ "mstange/samply: Command-line sampling profiler for macOS, Linux, and Windows"
 
 I saw that there were **many** stacks with calls to `LZ4F_compressUpdateImpl`.
 Looking at [the implementation][lz4frame]
@@ -99,7 +109,7 @@ I see a lot of calls to `LZ4F_selectCompression`, `LZ4F_compressBound_internal`,
 and finally `XXH32_update`, which computes the checksum for the block.
 Why is this being called so much and why are there so many blocks being made?
 
-[lz4frame]: https://github.com/lz4/lz4/blob/v1.10.0/lib/lz4frame.c#L977 "lz4/lib/lz4frame.c at v1.10.0 · lz4/lz4 · GitHub"
+[lz4frame]: https://github.com/lz4/lz4/blob/v1.10.0/lib/lz4frame.c#L977 "lz4/lib/lz4frame.c at v1.10.0 · lz4/lz4"
 
 LZ4 is a block-based compression algorithm,
 which means that it compresses data in chunks.
@@ -117,17 +127,19 @@ I had the idea that I could swap the way I use the buffer:
 Instead of buffering writing to the file system,
 I could buffer writing to the LZ4 encoder.
 
+<div class="wide">
+
 ```rust
 let file = std::fs::File::create("output.msgpack.lz4")?;
 let encoder = lz4::EncoderBuilder::new().level(4).build(file)?;
 let encoder_buffered = std::io::BufWriter::new(encoder);
 ```
 
+</div>
+
 And indeed, this works!
 In my initial benchmark, this made this part of the code 1.83 times faster.
 An amazing result for basically just swapping two lines of code.
-
-[^rmp-stream]: `serde_json` includes a [`StreamDeserializer`][struct-streamdeserializer] but  `rmp_serde` does not, so I wrote one myself. It's not as feature-complete (I think), but you can find it [here][317].
 
 [struct-streamdeserializer]: https://docs.rs/serde_json/1.0.140/serde_json/struct.StreamDeserializer.html "StreamDeserializer in serde_json"
 [317]: https://github.com/3Hren/msgpack-rust/issues/317#issuecomment-3012814957 "Can't deserialize entire file · Issue #317 · 3Hren/msgpack-rust · GitHub"

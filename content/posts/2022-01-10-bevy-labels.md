@@ -1,8 +1,8 @@
 ---
 title: How Bevy uses Rust traits for labeling
 categories:
-- rust
-- bevy
+  - rust
+  - bevy
 discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/s0fg3m/how_bevy_uses_rust_traits_for_labeling/"
   "Twitter": "https://twitter.com/killercup/status/1480460379960528896"
@@ -10,16 +10,13 @@ publishDate: 2022-01-10
 updatedAt: 2022-01-10
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvaqjmx25"
 ---
+
 Out of curiosity I've recently started following the development of [Bevy],
 a game engine written in [Rust].
 Today I want to talk about how Bevy uses Rust traits to let users very conveniently label elements.
 
 **Note:** The implementation we arrive at is actually very generic
 -- you can easily apply it to any other Rust project.
-
-
-[Bevy]: https://bevyengine.org/
-[Rust]: https://www.rust-lang.org/
 
 ## How to bevy
 
@@ -35,7 +32,7 @@ They are just regular Rust functions with specific parameters
 and through type-system magic (read: traits) Bevy knows how to call them.
 I wrote a separate article on them [here][ecs post].
 
-[ecs post]: /bevy-ecs-rust-type-system.html
+[ecs post]: /bevy-ecs-rust-type-system.html "The Rust features that make Bevy’s systems work"
 
 Here's a simple Bevy 0.6 app:
 
@@ -54,7 +51,7 @@ fn clock(time: Res<Time>) {
 }
 ```
 
-*Spoiler:* This will spam your terminal with how long the app has been running.
+_Spoiler:_ This will spam your terminal with how long the app has been running.
 
 ## Defining system relationships using labels
 
@@ -99,6 +96,8 @@ and declare it wants to run `after("world")`.
 Well, long story short, that [`after`][`ParallelSystemDescriptorCoercion`] method turns your system function into a [`ParallelSystemDescriptor`]
 with metadata that the scheduler can pick up and build a graph from.
 
+[`ParallelSystemDescriptorCoercion`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/trait.ParallelSystemDescriptorCoercion.html "ParallelSystemDescriptorCoercion in bevy::ecs::schedule"
+
 Feel free to play with this!
 Change it to `before("world")`,
 change the order in which the systems are added,
@@ -115,14 +114,10 @@ we wrote `.after("imput")`.
 
 How can we make sure that a simple typo won't break our game again?
 
-
-[^warn]: To be fair, with the `LogPlugin` Bevy prints a *warning* on start-up about an unknown label.
-But our example immediately starts printing a lot of other things,
-and I guess in this imaginary scenario drinking all this coffee didn't make us more alert after all.
-
-
-[`ParallelSystemDescriptorCoercion`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/trait.ParallelSystemDescriptorCoercion.html
-[`ParallelSystemDescriptor`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/struct.ParallelSystemDescriptor.html
+[^warn]:
+    To be fair, with the `LogPlugin` Bevy prints a _warning_ on start-up about an unknown label.
+    But our example immediately starts printing a lot of other things,
+    and I guess in this imaginary scenario drinking all this coffee didn't make us more alert after all.
 
 ## Get me out of this stringly-typed mess
 
@@ -130,11 +125,15 @@ So far we've used strings to define and refer to labels,
 but if you look at the definition of the `label`, `before`, and `after` methods [here][`ParallelSystemDescriptorCoercion`]
 you will see they actually accept anything that implements [`SystemLabel`].
 
-If you go to Bevy's API docs you can see [`SystemLabel`] is a trait and defined as 
+If you go to Bevy's API docs you can see `SystemLabel` is a trait and defined as
+
+<div class="wide">
 
 ```rust
 pub trait SystemLabel: 'static + DynHash + Debug + Send + Sync { }
 ```
+
+</div>
 
 Look at all these bounds!
 You might recognize a few from usual Rust code,
@@ -171,10 +170,6 @@ Which we can use just like our string previously:
 .add_startup_system(spawn_player.after(Setup::World))
 ```
 
-
-[`SystemLabel`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/trait.SystemLabel.html
-[`SystemLabel` derive macro]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/derive.SystemLabel.html
-
 ## Some notes on the magic
 
 So what is the deal with that [`DynHash`] trait?
@@ -182,6 +177,8 @@ If you look at the [API docs][`DynHash`],
 you can see that it requires an implementation of `DynEq`
 (also from Bevy),
 which in turn requires an implementation of `Any`.
+
+[`DynHash`]: https://docs.rs/bevy/0.6.0/bevy/utils/label/trait.DynHash.html "DynHash in bevy::utils::label"
 
 Its methods are also kind of strange:
 Compared to standard library's [`Hash`] trait,
@@ -198,11 +195,6 @@ which is actually called `dyn_clone`.
 Similar to the other dynamic trait implementations,
 this allows cloning any `SystemLabel` type,
 even if all you have is a `Box<dyn SystemLabel>`.
-
-
-[`DynHash`]: https://docs.rs/bevy/0.6.0/bevy/utils/label/trait.DynHash.html
-[`Hash`]: https://doc.rust-lang.org/1.57.0/core/hash/trait.Hash.html
-[object-safe]: https://doc.rust-lang.org/book/ch17-02-trait-objects.html
 
 ## Generic label types
 
@@ -229,11 +221,17 @@ The macro is called [`define_label`]
 and it's used [here][label.rs]
 to create all the label traits for the scheduler.
 
+[label.rs]: https://github.com/bevyengine/bevy/blob/e56685370ba82003af60a491667fac209a0f7897/crates/bevy_ecs/src/schedule/label.rs#L4-L7 "bevy/crates/bevy_ecs/src/schedule/label.rs"
+
 The derive macros are a bit more manual,
 and they live in the `bevy_ecs_macros` crate [here][macros].
 
-
-[`define_label`]: https://docs.rs/bevy/0.6.0/bevy/utils/macro.define_label.html
-[label.rs]: https://github.com/bevyengine/bevy/blob/e56685370ba82003af60a491667fac209a0f7897/crates/bevy_ecs/src/schedule/label.rs#L4-L7
-[macros]: https://github.com/bevyengine/bevy/blob/8009af3879fcdb8bad70ee19b36f79100da5ea22/crates/bevy_ecs/macros/src/lib.rs#L429-L438
-
+[macros]: https://github.com/bevyengine/bevy/blob/8009af3879fcdb8bad70ee19b36f79100da5ea22/crates/bevy_ecs/macros/src/lib.rs#L429-L438 "bevy/crates/bevy_ecs/macros/src/lib.rs"
+[Bevy]: https://bevyengine.org/ "Bevy Engine"
+[Rust]: https://www.rust-lang.org/ "Rust Programming Language"
+[`ParallelSystemDescriptor`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/struct.ParallelSystemDescriptor.html "ParallelSystemDescriptor in bevy::ecs::schedule"
+[`SystemLabel`]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/trait.SystemLabel.html "SystemLabel in bevy::ecs::schedule"
+[`SystemLabel` derive macro]: https://docs.rs/bevy/0.6.0/bevy/ecs/schedule/derive.SystemLabel.html "SystemLabel in bevy::ecs::schedule"
+[`Hash`]: https://doc.rust-lang.org/1.57.0/core/hash/trait.Hash.html "Hash in core::hash"
+[object-safe]: https://doc.rust-lang.org/book/ch17-02-trait-objects.html "Redirecting..."
+[`define_label`]: https://docs.rs/bevy/0.6.0/bevy/utils/macro.define_label.html "define_label in bevy::utils"
