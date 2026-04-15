@@ -518,6 +518,18 @@
    -------------------------------------------------------------------------- */
 
 @layer components {
+  /* -- Wide blocks -------------------------------------------------------- */
+  /* Opt-in: wrap a code block or table in <div class="wide"> to extend
+     into the sidenote column on desktop. Clears preceding sidenotes. */
+
+  @media (min-width: 72rem) {
+    .wide,
+    table {
+      clear: right;
+      width: calc(100% + var(--sidenote-gap) + var(--sidenote-width));
+    }
+  }
+
   .breadcrumb {
     margin: var(--space-sm) 0;
   }

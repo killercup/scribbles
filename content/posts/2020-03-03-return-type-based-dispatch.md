@@ -98,6 +98,6 @@ What we're building is a `Result<<T<A>, E>>`
 by collecting `Result<A, E>`s and specifying `T`.
 
 [`Iterator::collect`]: https://doc.rust-lang.org/1.41.1/std/iter/trait.Iterator.html#method.collect
-[`FromIterator` implemtators]: https://doc.rust-lang.org/1.41.1/std/iter/trait.FromIterator.html#implementors
+[`FromIterator` implementors]: https://doc.rust-lang.org/1.41.1/std/iter/trait.FromIterator.html#implementors
 [`Result`]: https://doc.rust-lang.org/1.41.1/std/result/enum.Result.html
 [`FromIterator for Result`]: https://doc.rust-lang.org/1.41.1/std/iter/trait.FromIterator.html#method.from_iter-14
