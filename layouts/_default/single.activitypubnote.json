@@ -7,7 +7,7 @@
   "type": "Article",
   "attributedTo": "https://{{ $domain }}/socialweb/{{ $username }}.json",
   "name": {{ .Title | jsonify }},
-  "content": {{ .Summary | plainify | jsonify }},
+  "content": {{ printf `<p>%s</p><p><a href="%s">Read more</a></p>` (.Summary | plainify) .Permalink | jsonify }},
   "url": "{{ .Permalink }}",
   "published": "{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}",
   "to": ["https://www.w3.org/ns/activitystreams#Public"],
