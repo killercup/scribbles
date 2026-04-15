@@ -27,6 +27,28 @@
     sup.insertAdjacentElement('afterend', sn);
   }
 
+  // Create sidenotes for links with title attributes
+  var article = document.querySelector('article');
+  if (article) {
+    var links = article.querySelectorAll('a[title]');
+    for (var i = 0; i < links.length; i++) {
+      var link = links[i];
+      // Skip links that are already sidenotes or inside sidenotes
+      if (link.closest('.sidenote')) continue;
+      var host = '';
+      try { host = new URL(link.href).host; } catch (e) {}
+      var sn = document.createElement('a');
+      sn.href = link.href;
+      sn.className = 'sidenote sidenote-link';
+      sn.setAttribute('aria-hidden', 'true');
+      sn.setAttribute('tabindex', '-1');
+      sn.innerHTML =
+        '<span class="sidenote-link-domain">' + host + '</span> ' +
+        link.title;
+      link.insertAdjacentElement('afterend', sn);
+    }
+  }
+
   // Swap footnote ref hrefs based on viewport width
   var mq = window.matchMedia('(min-width: 72rem)');
   function updateRefs() {
