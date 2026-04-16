@@ -8,7 +8,7 @@
   <header class="post-header">
     <h1 class="post-title" itemprop="name headline">{{ .Title }}</h1>
     <p class="post-meta">
-      Created <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "Jan 2, 2006" }}</time>
+      Published <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "2 Jan 2006" }}</time>
       <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"> by {{ site.Params.author }}</span></span>
       and published in <a href="{{ site.BaseURL }}">{{ site.Title }}</a>.
       {{- with .Params.categories }}
@@ -17,13 +17,16 @@
     </p>
   </header>
 
+  {{- $toc := .TableOfContents }}
+  {{- if gt (len (plainify $toc)) 0 }}
   <aside class="post-toc">
     <header aria-hidden>
-      {{ .Title }}
+      {{ $.Title }}
     </header>
     <p>Chapters</p>
-    {{ .TableOfContents }}
+    {{ $toc | safeHTML }}
   </aside>
+  {{- end }}
 
   <div class="post-content" itemprop="articleBody">
     {{ .Content }}
