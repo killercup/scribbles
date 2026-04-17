@@ -1,5 +1,5 @@
 ---
-title: 'Niched integer types in Rust'
+title: 'Niches for integer types in Rust'
 publishDate: '2026-05-02'
 updatedAt: '2026-05-02'
 draft: true
@@ -11,12 +11,11 @@ While working on [seqair]
 I also wrote a bunch of wrapper types
 for the domain we work in.
 One example is `Base` (a DNA base),
-another is `Pos` (a position in a DNA sequence).
-`Pos` is a bit special:
-We track if it is zero- or one-based[^one]
-using a type parameter;
-and its value range is also `u31`
-(if such a type were to exist).
+which is a fairly straightforward enum.
+Another is `Pos`, a position in a DNA sequence,
+which I'd like to talk about here.
+
+The value range for a position is effectively `u31`.
 We only support the positions that the BAM file format supports,
 which store positions as `i32`.
 But positions are always positive!
@@ -28,11 +27,12 @@ Can we make use of this in some other way?
 [seqair]: https://seqair.softleif.se/ "Pure-Rust BAM/SAM/CRAM/FASTA reader with a pileup engine and BCF/BAM writing."
 [seqair-post]: https://deterministic.space/seqair.html "Seqair, a custom htslib reimplementation"
 
-[^one]: Some file formats count from `1` for human convenience.
-
 ## Simple position type
 
-So here is what we have as a start:
+So here is what we have as a start[^counting]:
+
+[^counting]: We also track if it is zero- or one-based[^one] using a type parameter.
+  Some file formats count from `1` for human convenience.
 
 <div class="wide">
 
@@ -46,13 +46,17 @@ pub struct Pos<S> {
 }
 
 impl TryFrom<i32> for Pos<Zero> {
-    type Error = ();
+    type Error = InvalidPosition;
 
     fn try_from(value: i32) -> Result<Self, Self::Error> {
-        if value < 0 { return Err(()); }
+        if value < 0 { return Err(InvalidPosition); }
         Ok(Self { value: value as u32, _system: PhantomData })
     }
 }
+
+#[derive(Debug, thiserror::Error)]
+#[error("Invalid position")]
+struct InvalidPosition;
 ```
 
 </div>
@@ -63,8 +67,7 @@ which we can use like this:
 
 ```rust
 let record = get_raw_bam_record();
-let position: Pos<Zero> = record.pos.try_into()
-    .expect("position should be >=0");
+let position: Pos<Zero> = record.pos.try_into()?;
 ```
 
 </div>
@@ -88,7 +91,7 @@ the value `0` is invalid,
 so `Option<NonZero<u32>>` fits in 4 bytes.
 These invalid bit patterns are called "niches".
 
-[^alignment]: Because of alignment to 32 bit.
+[^alignment]: Because of alignment to 32 bits.
 [^null]: That means it is as efficient to use `Option` in Rust
   as it is to use a null pointer in C.
 
@@ -134,7 +137,7 @@ impl TryFrom<i32> for Pos<Zero> {
         if value < 0 { return Err(()); }
         let new_val = value as u32 + 1;
         Ok(Self {
-            // SAFETY: Every positive i32 fits into u32
+            // SAFETY: Every positive i32 x fits into u32, and so does x+1
             value: unsafe { NonZeroU32::new_unchecked(new_val) },
             _system: PhantomData,
         })
@@ -205,7 +208,7 @@ impl TryFrom<i32> for Pos {
 
 impl Pos {
     pub const fn get(self) -> i32 {
-        // zero-cost: the u32 is already in rang
+        // zero-cost: the u32 is already in range
         self.0 as i32
     }
 }
@@ -246,12 +249,11 @@ While researching this,
 I came across [this issue][rust-135996]
 where Oli proposes using a "pattern types" feature.
 So it seems there is *another* way of doing this!
-
-Digging around a bit more thru the [tracking issue][rust-123646] and Zulip,
+While reading through the [tracking issue][rust-123646] and Zulip thread,
 I found this [pre-RFC document][pre-rfc]
-(last updated in 2024 but discussed further in 2025)
-as well as the [`pattern_type!`] macro
-that exists on nightly.
+(last updated in 2024 but discussed further in 2025).
+What is in the standard library right now
+on nightly is a [`pattern_type!`] macro.
 [Rust PR 136006] has some usage of this so I could put this together:
 
 [rust-135996]: https://github.com/rust-lang/rust/issues/135996 "Replace rustc_layout_scalar_valid_range_start attribute with pattern types"
@@ -273,7 +275,7 @@ impl Pos {
         if value < 0 {
             None
         } else {
-            // SAFETY: In range
+            // SAFETY: values >=0 fit in pattern
             Some(Self(unsafe { std::mem::transmute(value) }))
         }
     }
@@ -291,6 +293,10 @@ impl Pos {
 
 [play2]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=d4c7bf6936d2bcef89455e7e271fba76
 
+I'm not sure about the `transmute` being the *best* way to do this,
+but `pattern_type!` produces a new type
+and I couldn't figure out how to construct it otherwise.
+
 Given the lack of actual documentation and RFC[^missed],
 I think it's fair to classify this feature
 as even more nightly than the other one.
@@ -301,9 +307,8 @@ as even more nightly than the other one.
 
 I'm not using any of these nightly features in the real code yet,
 but I'm glad to see momentum in this space.
-It looks like a feature that is very neat
-and that I wanted to use in a few cases already.
-Another case is, e.g., a proper type for an "inline length" type,
+It's a feature I've wanted in a few places already.
+Another use case is a proper type for an "inline length" type,
 removing a workaround like the one `SmolStr` uses [here][smol_str len].
 
 [smol_str len]: https://github.com/rust-lang/rust-analyzer/blob/4a244d4c6bf18bae57626dcaf81bf6442ad59380/lib/smol_str/src/lib.rs#L541-L569
