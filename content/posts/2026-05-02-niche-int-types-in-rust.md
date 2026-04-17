@@ -29,21 +29,20 @@ Can we make use of this in some other way?
 
 ## Simple position type
 
-So here is what we have as a start[^counting]:
-
-[^counting]: We also track if it is zero- or one-based[^one] using a type parameter.
-  Some file formats count from `1` for human convenience.
+So here is what we have as a start.
+We also track if it is zero- or one-based using a type parameter
+because some file formats count from `1` for human convenience.
 
 <div class="wide">
 
 ```rust
-pub struct Zero;
-pub struct One;
-
 pub struct Pos<S> {
     value: u32,
     _system: PhantomData<S>,
 }
+
+pub struct Zero;
+pub struct One;
 
 impl TryFrom<i32> for Pos<Zero> {
     type Error = InvalidPosition;
