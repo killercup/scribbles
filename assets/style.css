@@ -631,6 +631,7 @@
   }
 
   .post-toc header {
+    display: none;
     visibility: hidden;
     opacity: 0;
   }
@@ -678,6 +679,7 @@
       container-type: scroll-state;
 
       header {
+        display: block;
         transition: opacity 0.15s linear;
 
         @container scroll-state(stuck: top) {
@@ -1334,7 +1336,7 @@
   }
 
   ul {
-    list-style: "- " outside;
+    list-style: "–  " outside;
   }
 
   ol:not(.footnotes ol) {
