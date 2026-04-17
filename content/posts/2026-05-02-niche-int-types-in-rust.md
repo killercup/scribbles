@@ -112,7 +112,7 @@ That's billions of niches, and we can't use a single one!
 ## On stable: the `NonZero` bias trick
 
 [`NonZero<T>`] is the only niche-bearing integer type
-available on stable Rust (1.94.1).
+available on stable Rust (1.95.0).
 We can use it by storing `value + 1` internally:
 the position `0` maps to `NonZero(1)`,
 and `i32::MAX` maps to `NonZero(0x8000_0000)`.
@@ -158,8 +158,8 @@ Still, it's conceptually unsatisfying:
 we're contorting the representation
 to fit a niche that doesn't match our actual invariant.
 
-[`NonZero<u32>`]: https://doc.rust-lang.org/1.94.1/std/num/struct.NonZero.html "std::num::NonZero"
-[`NonZero<T>`]: https://doc.rust-lang.org/1.94.1/std/num/struct.NonZero.html "std::num::NonZero"
+[`NonZero<u32>`]: https://doc.rust-lang.org/1.95.0/std/num/struct.NonZero.html "std::num::NonZero"
+[`NonZero<T>`]: https://doc.rust-lang.org/1.95.0/std/num/struct.NonZero.html "std::num::NonZero"
 
 ## On nightly: declaring the valid range directly
 
@@ -193,18 +193,19 @@ The `get` accessor is a plain field read:
 <div class="wide">
 
 ```rust
-impl Pos {
-    pub const fn new(value: i32) -> Option<Self> {
-        if value < 0 {
-            None
-        } else {
-            // SAFETY: value is in 0..=i32::MAX
-            Some(unsafe { Self(value as u32) })
-        }
-    }
+impl TryFrom<i32> for Pos {
+    type Error = ();
 
+    fn try_from(value: i32) -> Result<Self, Self::Error> {
+        if value < 0 { return Err(()); }
+        // SAFETY: value is in 0..=i32::MAX
+        Ok(unsafe { Self(value as u32) })
+    }
+}
+
+impl Pos {
     pub const fn get(self) -> i32 {
-        // zero-cost: the u32 is already in range
+        // zero-cost: the u32 is already in rang
         self.0 as i32
     }
 }
@@ -225,7 +226,7 @@ assert_eq!(size_of::<Option<Pos>>(), 4);
 
 You can see a [little test script][play1] here.
 
-[play1]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=30c77c7afa9cb14ce52e98a10b7cf7e9 "Rust playground"
+[play1]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=f5b9731872fc5762c2c3fba0c1af6007 "Rust playground"
 
 There's a catch, though:
 these attributes make every construction of the type `unsafe`.
@@ -256,7 +257,7 @@ that exists on nightly.
 [rust-135996]: https://github.com/rust-lang/rust/issues/135996 "Replace rustc_layout_scalar_valid_range_start attribute with pattern types"
 [rust-123646]: https://github.com/rust-lang/rust/issues/123646 "Tracking Issue for pattern types"
 [pre-rfc]: https://gist.github.com/joboet/0cecbce925ee2ad1ee3e5520cec81e30
-[`pattern_type!`]: https://doc.rust-lang.org/1.94.1/core/macro.pattern_type.html "core::pattern_type!"
+[`pattern_type!`]: https://doc.rust-lang.org/1.95.0/core/macro.pattern_type.html "core::pattern_type!"
 [Rust PR 136006]: https://github.com/rust-lang/rust/pull/136006
 
 <div class="wide">
@@ -288,7 +289,7 @@ impl Pos {
 
 [You can play with the code here.][play2]
 
-[play2]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=8becfab4d2b01405da0e1922f0b8b3c2
+[play2]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=d4c7bf6936d2bcef89455e7e271fba76
 
 Given the lack of actual documentation and RFC[^missed],
 I think it's fair to classify this feature
