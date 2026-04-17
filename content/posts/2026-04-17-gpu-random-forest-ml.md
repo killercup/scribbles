@@ -1,8 +1,7 @@
 ---
 title: 'Random Forest ML on GPU'
-publishDate: '2026-04-18'
-updatedAt: '2026-04-18'
-draft: true
+publishDate: '2026-04-17'
+updatedAt: '2026-04-17'
 categories:
 - rust
 - bioinformatics
