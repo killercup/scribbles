@@ -1,0 +1,17 @@
+{{- $url := printf "https://kroki.io/%s/svg" .type -}}
+{{- $body := dict "diagram_source" .source "output_format" "svg" -}}
+{{- with .options -}}
+  {{- $body = merge $body (dict "diagram_options" .) -}}
+{{- end -}}
+{{- $opts := dict "method" "post" "body" ($body | jsonify) "headers" (dict "Content-Type" "application/json") -}}
+{{- $r := resources.GetRemote $url $opts -}}
+{{- with $r -}}
+  <figure class="diagram diagram-{{ $.type }}{{ with $.attributes.class }} {{ . }}{{ end }}"{{ with $.attributes.alt }} aria-label="{{ . }}"{{ end }}>
+    {{- $svg := .Content -}}
+    {{- $uid := printf "d-%s-%x" $.type (hash.FNV32a $svg) -}}
+    {{- $svg | replaceRE `id="container` (printf `id="%s` $uid) | replaceRE `#container` (printf `#%s` $uid) | safeHTML -}}
+    {{- with $.attributes.caption }}<figcaption>{{ . | markdownify }}</figcaption>{{ end -}}
+  </figure>
+{{- else -}}
+  {{- errorf "Kroki diagram failed for %s" $.type -}}
+{{- end -}}

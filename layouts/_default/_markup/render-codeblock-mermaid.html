@@ -1,0 +1,3 @@
+{{- $diagramOpts := dict -}}
+{{- with .Attributes.theme }}{{ $diagramOpts = merge $diagramOpts (dict "theme" .) }}{{ end -}}
+{{ partial "diagram-kroki.html" (dict "type" "mermaid" "source" .Inner "attributes" .Attributes "options" $diagramOpts) }}

@@ -530,6 +530,53 @@
     }
   }
 
+  /* -- Diagrams ----------------------------------------------------------- */
+
+  .diagram svg {
+    width: 100%;
+    height: auto;
+  }
+
+  /* Mermaid: Embedded styles use #container scoping, so we need
+     !important to override from the outside. */
+
+  .diagram-mermaid {
+    font-family: var(--font-mono);
+  }
+
+  .diagram-mermaid .node rect,
+  .diagram-mermaid .node polygon,
+  .diagram-mermaid .node circle {
+    fill: var(--surface-raised) !important;
+    stroke: var(--border) !important;
+  }
+  .diagram-mermaid .nodeLabel {
+    color: var(--text) !important;
+  }
+  .diagram-mermaid .cluster rect {
+    fill: var(--surface-code) !important;
+    stroke: var(--border) !important;
+  }
+  .diagram-mermaid .edgeLabel p {
+    background-color: var(--surface) !important;
+    color: var(--text-secondary) !important;
+  }
+  .diagram-mermaid .flowchart-link {
+    stroke: var(--text-tertiary) !important;
+  }
+  .diagram-mermaid .marker {
+    fill: var(--text-tertiary) !important;
+    stroke: var(--text-tertiary) !important;
+  }
+  .diagram-mermaid text {
+    fill: var(--text) !important;
+  }
+  .diagram-mermaid .label {
+    color: var(--text) !important;
+  }
+
+  /* -- Beadcrumb ----------------------------------------------------------- */
+
   .breadcrumb {
     margin: var(--space-sm) 0;
   }

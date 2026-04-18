@@ -60,5 +60,11 @@ sitemap:
 services:
   rss:
     limit: 100
+security:
+  http:
+    methods:
+      - '(?i)GET|HEAD|POST'
+    urls:
+      - 'https://kroki\.io/.*'
 frontmatter:
   date: ["date", ":filename"]
