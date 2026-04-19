@@ -810,6 +810,8 @@
 
   sup[id^="fnref:"] {
     line-height: 1;
+    /* prevent line-break just before footnote marker */
+    line-break: loose;
   }
 
   .footnote-ref {
