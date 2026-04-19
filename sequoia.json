@@ -1,6 +1,6 @@
 {
   "$schema": "https://tangled.org/stevedylan.dev/sequoia/raw/main/sequoia.schema.json",
-  "siteUrl": "https://deterministic.space/",
+  "siteUrl": "https://deterministic.space",
   "contentDir": "content/posts",
   "publicDir": "static",
   "outputDir": "public",
