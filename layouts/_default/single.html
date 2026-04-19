@@ -1,6 +1,6 @@
 {{ define "main" }}
 
-<nav class="breadcrumb">
+<nav class="breadcrumb" aria-label="Breadcrumb">
   <a href="/">&larr; Home</a>
 </nav>
 
@@ -9,7 +9,7 @@
     <h1 class="post-title" itemprop="name headline">{{ .Title }}</h1>
     <p class="post-meta">
       Published <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "2 Jan 2006" }}</time>
-      <span itemprop="author" itemscope itemtype="http://schema.org/Person"><span itemprop="name"> by {{ site.Params.author }}</span></span>
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person"> by <span itemprop="name">{{ site.Params.author }}</span></span>
       and published in <a href="{{ site.BaseURL }}">{{ site.Title }}</a>.
       {{- with .Params.categories }}
         Labeled as {{ range $i, $cat := . }}{{ if $i }}{{ if eq $i (sub (len $.Params.categories) 1) }} and {{ else }}, {{ end }}{{ end }}<em>{{ $cat }}</em>{{ end }}.
@@ -19,7 +19,7 @@
 
   {{- $toc := .TableOfContents }}
   {{- if gt (len (plainify $toc)) 0 }}
-  <aside class="post-toc">
+  <aside class="post-toc" aria-label="Table of Contents">
     <header aria-hidden>
       {{ $.Title }}
     </header>
