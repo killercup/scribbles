@@ -17,7 +17,7 @@ params:
   license_url: https://creativecommons.org/licenses/by-nc/4.0/
   feedback_url: https://github.com/killercup/scribbles/issues/new
   repository_url: https://github.com/killercup/scribbles
-  post_revisions_url: https://github.com/killercup/scribbles/commits/main/
+  post_revisions_url: https://github.com/killercup/scribbles/commits/main/content/
 permalinks:
   posts: "/:slug"
 uglyURLs:
@@ -63,7 +63,7 @@ services:
 security:
   http:
     methods:
-      - '(?i)GET|HEAD|POST'
+      - "(?i)GET|HEAD|POST"
     urls:
       - 'https://kroki\.io/.*'
 frontmatter:
