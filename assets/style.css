@@ -783,7 +783,8 @@
     padding-block: var(--space-xs);
   }
 
-  .post-date {
+  .post-date,
+  .post-count {
     font-family: var(--font-sans, system-ui, sans-serif);
     font-size: 0.65rem;
     color: var(--text-tertiary);

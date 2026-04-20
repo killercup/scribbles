@@ -1,0 +1,36 @@
+{{ define "main" }}
+<nav class="breadcrumb" aria-label="Breadcrumb">
+  <a href="{{ .Parent.RelPermalink }}">&larr; {{ .Parent.LinkTitle }}</a>
+</nav>
+
+<article class="page">
+  <h1>{{ .Title }}</h1>
+  {{ .Content }}
+
+  <p>
+    This is the list of posts in the category <em>{{ .Title }}</em>.
+    {{if eq .Title "Categories" }}(How meta!){{- end }}
+  </p>
+
+  <h2>
+    {{ len .Pages }}
+    Entries
+  </h2>
+
+  <ul class="post-list">
+  {{ range .Pages }}
+  <li>
+    <a class="post-link" href="{{ .RelPermalink }}">
+      <span class="post-title">{{ .Title }}</span>
+      {{- with .Date }}
+      <time class="post-date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 Jan 2006" }}</time>
+      {{- end }}
+      {{- with .Pages }}
+      <span class="post-count">{{ len . }} posts</span>
+      {{- end }}
+    </a>
+  </li>
+  {{ end }}
+  </ul>
+</article>
+{{ end }}
