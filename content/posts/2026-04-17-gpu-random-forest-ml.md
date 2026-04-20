@@ -5,6 +5,7 @@ updatedAt: '2026-04-17'
 categories:
 - rust
 - bioinformatics
+- performance
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjopknuz472z"
 ---
 In [my recent post on Rastair][rastair-post],

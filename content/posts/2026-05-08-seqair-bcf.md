@@ -6,6 +6,7 @@ draft: true
 categories:
 - rust
 - bioinformatics
+- type-system
 ---
 If you've ever needed to produce a typed binary format
 where the header constrains what the body can contain,

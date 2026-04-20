@@ -2,6 +2,7 @@
 title: README-driven Development
 categories:
 - tech
+- documentation
 discussions:
   "Twitter": "https://twitter.com/killercup/status/767452830210859010"
 publishDate: 2016-08-21

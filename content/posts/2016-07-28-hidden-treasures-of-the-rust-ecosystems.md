@@ -3,6 +3,7 @@ title: Hidden treasures of the Rust ecosystem
 categories:
 - rust
 - list
+- ecosystem
 discussions:
   "/r/rust": "https://www.reddit.com/r/rust/comments/4v0uvt/"
 publishDate: 2016-07-28

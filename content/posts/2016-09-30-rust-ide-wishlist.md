@@ -2,6 +2,7 @@
 title: Rust IDE Features Wishlist
 categories:
 - rust
+- tooling
 publishDate: 2016-09-30
 updatedAt: 2016-09-30
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvfzuqd2l"

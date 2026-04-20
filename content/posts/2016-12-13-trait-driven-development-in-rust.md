@@ -2,6 +2,8 @@
 title: Trait Driven Development in Rust
 categories:
 - rust
+- type-system
+- api-design
 discussions:
   "/r/rust": "https://www.reddit.com/r/rust/comments/5iarzx/"
 publishDate: 2016-12-13

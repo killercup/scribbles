@@ -3,6 +3,7 @@ title: A way to customize Rust error messages
 categories:
 - rust
 - idea
+- tooling
 discussions:
   "Twitter": "https://twitter.com/killercup/status/830495467356246017"
   "/r/rust": "https://www.reddit.com/r/rust/comments/5tgyy2/"

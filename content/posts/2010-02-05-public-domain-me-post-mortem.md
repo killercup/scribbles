@@ -3,6 +3,8 @@ title: Public Domain Me Post Mortem
 publishDate: 2010-02-05
 updatedAt: 2010-02-05
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvkbcex27"
+categories:
+- meta
 ---
 After my death, all my work should be public domain.
 

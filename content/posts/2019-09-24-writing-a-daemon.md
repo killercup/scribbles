@@ -3,6 +3,7 @@ title: Notes on proper systemd services
 categories:
 - systemd
 - linux
+- tooling
 publishDate: 2019-09-24
 updatedAt: 2019-09-24
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvbitvp2j"

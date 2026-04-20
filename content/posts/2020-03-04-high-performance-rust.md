@@ -2,6 +2,7 @@
 title: Cheap tricks for high-performance Rust
 categories:
 - rust
+- performance
 discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/fdbszu/cheap_tricks_for_highperformance_rust/"
   "Twitter": "https://twitter.com/killercup/status/1235127402520604672"

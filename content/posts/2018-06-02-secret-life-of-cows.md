@@ -2,6 +2,7 @@
 title: The Secret Life of Cows
 categories:
 - rust
+- type-system
 discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/8o1pxh/the_secret_life_of_cows/"
   "Twitter": "https://twitter.com/killercup/status/1002950105400475649"

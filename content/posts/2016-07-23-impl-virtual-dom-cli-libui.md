@@ -1,8 +1,9 @@
 ---
 title: Virtual DOM for CLI and libui
 categories:
-  - rust
-  - idea
+- rust
+- idea
+- ui
 discussions:
   "Twitter (@lqd)": "https://twitter.com/lqd/status/760223190182465538"
 publishDate: 2016-07-23

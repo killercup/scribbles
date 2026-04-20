@@ -2,6 +2,7 @@
 title: 5 Tips for Writing Small CLI Tools in Rust
 categories:
 - rust
+- cli
 discussions:
   "Twitter": https://twitter.com/killercup/status/903275512184918018
   "Reddit": https://www.reddit.com/r/rust/comments/6x82mw/5_tips_for_writing_small_cli_tools_in_rust/

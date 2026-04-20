@@ -3,6 +3,8 @@ title: Serve archived static files over HTTP
 categories:
 - tools
 - rust
+- cli
+- performance
 discussions:
   "Twitter": https://twitter.com/killercup/status/1061676996852363270
 publishDate: 2018-11-11

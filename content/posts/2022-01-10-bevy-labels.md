@@ -1,8 +1,9 @@
 ---
 title: How Bevy uses Rust traits for labeling
 categories:
-  - rust
-  - bevy
+- rust
+- bevy
+- type-system
 discussions:
   "Reddit": "https://www.reddit.com/r/rust/comments/s0fg3m/how_bevy_uses_rust_traits_for_labeling/"
   "Twitter": "https://twitter.com/killercup/status/1480460379960528896"

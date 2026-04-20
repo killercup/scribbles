@@ -2,6 +2,7 @@
 title: Rust BufWriter and LZ4 Compression
 categories:
 - rust
+- performance
 discussions:
   "Bluesky": https://bsky.app/profile/killercup.de/post/3ltkhuwpt6k2x
   "Mastodon": "https://mastodon.social/@killercup/114824754816997562"

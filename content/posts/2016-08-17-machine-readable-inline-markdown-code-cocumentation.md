@@ -2,6 +2,7 @@
 title: Machine Readable Inline Markdown Code Documentation
 categories:
 - rust
+- documentation
 publishDate: 2016-08-17
 updatedAt: 2016-08-17
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvgsfq725"

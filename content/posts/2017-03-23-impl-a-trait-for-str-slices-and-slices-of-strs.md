@@ -2,6 +2,8 @@
 title: "How to implement a trait for &str and &[&str]"
 categories:
 - rust
+- type-system
+- api-design
 discussions:
   "/r/rust": https://www.reddit.com/r/rust/comments/6134oc/how_to_implement_a_trait_for_str_and_str/
   "Twitter": https://twitter.com/killercup/status/845028907036409856

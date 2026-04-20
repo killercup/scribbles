@@ -2,6 +2,8 @@
 title: Return-type based dispatch
 categories:
 - rust
+- type-system
+- api-design
 discussions:
   "Twitter": "https://twitter.com/killercup/status/1234776754750984193"
 publishDate: 2020-03-03

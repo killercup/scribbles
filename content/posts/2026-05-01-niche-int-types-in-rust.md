@@ -5,6 +5,7 @@ updatedAt: '2026-05-01'
 draft: true
 categories:
 - rust
+- type-system
 ---
 While working on [seqair]
 (see [my post here][seqair-post]),

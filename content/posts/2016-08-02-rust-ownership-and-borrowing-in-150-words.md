@@ -2,6 +2,7 @@
 title: Rust's ownership and borrowing in 150 words
 categories:
 - rust
+- teaching
 publishDate: 2016-08-02
 updatedAt: 2016-08-02
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjcdvgyijh2t"

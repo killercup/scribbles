@@ -2,6 +2,8 @@
 title: Teaching libraries through good documentation
 categories:
 - rust
+- documentation
+- teaching
 discussions:
   "Twitter": "https://twitter.com/killercup/status/814104683266576384"
   "Twitter (re: waltz)": "https://twitter.com/killercup/status/815697459171258368"

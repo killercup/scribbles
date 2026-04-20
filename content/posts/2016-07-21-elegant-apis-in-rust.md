@@ -4,6 +4,7 @@ categories:
 - rust
 - writing
 - incomplete
+- api-design
 discussions:
   "Twitter (1)": "https://twitter.com/killercup/status/784391981673881600"
   "Twitter (2)": "https://twitter.com/killercup/status/785496842964443136"

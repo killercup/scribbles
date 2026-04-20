@@ -2,6 +2,7 @@
 title: "Diesel.rs Trick: Treat View as Table"
 categories:
 - rust
+- api-design
 discussions:
   "Twitter": https://twitter.com/killercup/status/900439564917014528
 publishDate: 2017-08-23
