@@ -1,0 +1,27 @@
+{{ define "main" }}
+<article class="page">
+  {{ .Content }}
+
+  <h2>Posts</h2>
+  <ul class="post-list">
+    {{- range site.RegularPages.ByDate.Reverse }}
+    <li>
+      <a class="post-link" href="{{ .RelPermalink }}">
+        <span class="post-title">{{ .Title }}</span>
+        <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+      </a>
+    </li>
+    {{- end }}
+  </ul>
+
+  {{- with site.Taxonomies.categories }}
+  <h2>Categories</h2>
+  <p>
+    {{- $categories := .ByCount }}
+    {{- range $i, $cat := $categories }}
+    {{- if $i }}, {{ end }}<a href="{{ $cat.Page.RelPermalink }}">{{ $cat.Page.Title }}</a> ({{ $cat.Count }})
+    {{- end }}
+  </p>
+  {{- end }}
+</article>
+{{ end }}

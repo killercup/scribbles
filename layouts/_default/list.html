@@ -1,17 +1,24 @@
 {{ define "main" }}
 <article class="page">
+  <h1>{{ .Title }}</h1>
   {{ .Content }}
 
-  <h2>Posts</h2>
+  {{- with .Pages }}
   <ul class="post-list">
-    {{- range site.RegularPages.ByDate.Reverse }}
+    {{- range . }}
     <li>
       <a class="post-link" href="{{ .RelPermalink }}">
         <span class="post-title">{{ .Title }}</span>
-        <time class="post-date" datetime="{{ .Date.Format "2006-01-02" }}">{{ .Date.Format "2 Jan 2006" }}</time>
+        {{- with .Date }}
+        <time class="post-date" datetime="{{ .Format "2006-01-02" }}">{{ .Format "2 Jan 2006" }}</time>
+        {{- end }}
+        {{- with .Pages }}
+        <span class="post-count">{{ len . }} posts</span>
+        {{- end }}
       </a>
     </li>
     {{- end }}
   </ul>
+  {{- end }}
 </article>
 {{ end }}
