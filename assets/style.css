@@ -746,22 +746,11 @@
   }
 
   .post-list li {
-    padding-block: var(--space-xs);
     border-block-end: 1px solid var(--border-light);
   }
 
   .post-list li:first-child {
     border-block-start: 1px solid var(--border-light);
-  }
-
-  .post-date {
-    font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 0.65rem;
-    color: var(--text-tertiary);
-    display: block;
-    margin-block-start: var(--space-3xs);
-    letter-spacing: 0.04em;
-    text-transform: uppercase;
   }
 
   .post-link {
@@ -770,6 +759,18 @@
     transition: color 0.15s ease;
     line-height: 1.35;
     display: block;
+    padding-block: var(--space-xs);
+  }
+
+  .post-date {
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: 0.65rem;
+    color: var(--text-tertiary);
+    display: inline-block;
+    margin-inline-start: var(--space-xs);
+    letter-spacing: 0.04em;
+    text-transform: uppercase;
+    white-space: nowrap;
   }
 
   /*.post-link:visited {
