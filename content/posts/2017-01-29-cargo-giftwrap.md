@@ -59,6 +59,6 @@ If you want to make it real: That's awesome! Get right on it! (Mentioning me on 
 
 [^naming]: Naming is [hard]. If you don't like "giftwrap", [Matthias Endler][mre] [suggests][mre-names] "tidy", "neat", or "lector".
 
-[hard]: /programming-wisdom.html
+[hard]: https://deterministic.space/programming-wisdom.html
 [mre]: https://github.com/mre
 [mre-names]: https://twitter.com/matthiasendler/status/825707332218847235

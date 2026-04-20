@@ -290,6 +290,6 @@ If you want to dig a little deeper, I'd suggest looking at how to [multi-platfor
 [`failure`]: https://boats.gitlab.io/failure/
 [cargo-expand]: https://crates.io/crates/cargo-expand
 [`loggerv`]: https://docs.rs/loggerv
-[elegant APIs]: /elegant-apis-in-rust.html
+[elegant APIs]: https://deterministic.space/elegant-apis-in-rust.html
 [trust]: https://github.com/japaric/trust
 [autocompletion for CLI args]: https://blog.clap.rs/complete-me/

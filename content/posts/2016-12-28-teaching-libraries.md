@@ -104,7 +104,7 @@ I'm thinking about making this work with rustdoc, which already has a lot of the
 
 I've also been thinking about making API docs better/more structured by specifying [some guidelines][doc-lints]. It will also be interesting to see if enforcing some of these guidelines, like "each public method/function needs an example", can further ensure that all parts of an API are documented and easy to grasp.
 
-[doc-lints]: /machine-readable-inline-markdown-code-cocumentation.html
+[doc-lints]: https://deterministic.space/machine-readable-inline-markdown-code-cocumentation.html
 
 Jimmy Cuadra wrote [an RFC][rfc-pr-1713] on the topic, but it was closed as he didn't have to time to revise it. I would love to see a new RFC (with my suggestions); and maybe I'll have some time in the new year to write one.
 

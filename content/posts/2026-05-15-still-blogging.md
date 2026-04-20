@@ -17,7 +17,7 @@ This site has been around since 2016[^older],
 and it was always just Markdown files in a git repo.
 Let's update the toolchain around it as a little spring cleaning for 2026.
 
-[rastair]: /rastair.html "Notes on Rastair, a variant and methylation caller"
+[rastair]: https://deterministic.space/rastair.html "Notes on Rastair, a variant and methylation caller"
 
 [^older]: Some of the content is even older, imported from a previous site.
 

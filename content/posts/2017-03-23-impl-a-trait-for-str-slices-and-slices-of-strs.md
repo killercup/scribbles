@@ -33,7 +33,7 @@ We do this by implementing a new trait[^traits] `ToFoo` for both types, so our `
 
 [book]: https://doc.rust-lang.org/book/traits.html
 [book2]: http://rust-lang.github.io/book/second-edition/ch10-00-generics.html
-[tdd]: /trait-driven-development-in-rust.html
+[tdd]: https://deterministic.space/trait-driven-development-in-rust.html
 
 ```rust
 trait ToFoo {

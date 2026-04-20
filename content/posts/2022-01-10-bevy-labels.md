@@ -32,7 +32,7 @@ They are just regular Rust functions with specific parameters
 and through type-system magic (read: traits) Bevy knows how to call them.
 I wrote a separate article on them [here][ecs post].
 
-[ecs post]: /bevy-ecs-rust-type-system.html "The Rust features that make Bevy’s systems work"
+[ecs post]: https://deterministic.space/bevy-ecs-rust-type-system.html "The Rust features that make Bevy’s systems work"
 
 Here's a simple Bevy 0.6 app:
 

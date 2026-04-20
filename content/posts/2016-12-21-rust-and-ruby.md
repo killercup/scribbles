@@ -25,8 +25,8 @@ Rust is a programming language with a focus on being able to do high performance
 
 I've previously written about [Rust's ownership and borrowing][ownership] and its [trait systems][traits].
 
-[ownership]: /rust-ownership-and-borrowing-in-150-words.html
-[traits]: /trait-driven-development-in-rust.html
+[ownership]: https://deterministic.space/rust-ownership-and-borrowing-in-150-words.html
+[traits]: https://deterministic.space/trait-driven-development-in-rust.html
 
 Now, with that out of the way, I'm not gonna explain the language to you (read the official book, it's awesome). This will be about emulating cool stuff from Rust in Ruby and vice versa to make both languages better.
 
@@ -58,7 +58,7 @@ This way, every class that inherits from it responds to the same method calls, a
 
 Rust can do this at compile time, using traits. If you want to go even deeper, have a look at [session types].
 
-[session types]: /elegant-apis-in-rust.html#session-types
+[session types]: https://deterministic.space/elegant-apis-in-rust.html#session-types
 
 ### enum
 
@@ -146,7 +146,7 @@ Oh god, do I miss rustc's error messages. Rubocop is nice and all, but rustc jus
 
 _Update, 17 Dec 2017_: I wrote a post on [Passing Functions as Parameters in Ruby][ruby-ufcs].
 
-[ruby-ufcs]: /ruby-ufcs.html
+[ruby-ufcs]: https://deterministic.space/ruby-ufcs.html
 
 ## Adapting Ruby-isms
 

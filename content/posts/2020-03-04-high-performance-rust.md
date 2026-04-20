@@ -198,5 +198,5 @@ And luckily ~~I tricked them~~ they had some good material for me to link to:
 [`mimalloc` features]: https://github.com/purpleprotocol/mimalloc_rust/blob/c6bf4578d3258a0b6a28696196ede6d50e5ee8c2/Cargo.toml#L25-L28
 [stack unwinding]: https://doc.rust-lang.org/1.41.1/nomicon/unwinding.html
 [pgo]: https://doc.rust-lang.org/1.41.1/rustc/profile-guided-optimization.html
-[cows]: /secret-life-of-cows.html
+[cows]: https://deterministic.space/secret-life-of-cows.html
 [`.cargo/config`]: https://doc.rust-lang.org/1.41.1/cargo/reference/config.html
