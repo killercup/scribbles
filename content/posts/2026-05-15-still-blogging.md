@@ -23,7 +23,7 @@ Let's update the toolchain around it as a little spring cleaning for 2026.
 
 ## Hugo
 
-The blog ran on [Jekyll] for its inception until last month.
+The blog ran on [Jekyll] from its inception until last month.
 I chose it because GitHub Pages shipped it by default
 and I wanted to publish something.
 That worked in 2016,
@@ -59,7 +59,7 @@ It gets the job done.
 
 [^gotmpl]: For example, `{{ .Title | truncate 50 }}` reads naturally. But conditionally wrapping output requires nesting `{{ if }}` blocks or calling `printf` with parenthesized arguments instead of piping. Not awful, just occasionally surprising.
 
-I nice thing Hugo has are [render hooks]
+A nice thing Hugo has is [render hooks]
 that let you customize how individual Markdown elements get rendered
 (e.g., links, images, code blocks)
 without touching the main templates.
@@ -154,7 +154,7 @@ The implementation is about 60 lines of JavaScript.
 It runs before first paint and
 clones both Hugo's footnote content and links with a `title` attribute
 into `<span>` elements next to each reference
-and float them into the margin.
+and floats them into the margin.
 
 The CSS is actually quite simple
 and has been done many times before.
