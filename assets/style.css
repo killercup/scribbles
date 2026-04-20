@@ -540,8 +540,12 @@
   /* Mermaid: Embedded styles use #container scoping, so we need
      !important to override from the outside. */
 
-  .diagram-mermaid {
-    font-family: var(--font-mono);
+  .diagram-mermaid,
+  .diagram-mermaid text,
+  .diagram-mermaid .nodeLabel,
+  .diagram-mermaid .edgeLabel {
+    font-family: var(--font-mono) !important;
+    font-size: var(--text-xs);
   }
 
   .diagram-mermaid .node rect,
@@ -550,8 +554,25 @@
     fill: var(--surface-raised) !important;
     stroke: var(--border) !important;
   }
+  /* Column color-coding for block diagrams.
+     Hues chosen for color-blind safety (Okabe-Ito-adjacent):
+     orange 75 / sky-blue 230 / teal 165 — distinguishable
+     under deuteranopia, protanopia, and tritanopia. */
+  .diagram-mermaid .node.col0 rect {
+    fill: light-dark(oklch(0.95 0.04 75), oklch(0.24 0.03 75)) !important;
+    stroke: light-dark(oklch(0.78 0.09 75), oklch(0.48 0.08 75)) !important;
+  }
+  .diagram-mermaid .node.col1 rect {
+    fill: light-dark(oklch(0.95 0.035 230), oklch(0.24 0.025 230)) !important;
+    stroke: light-dark(oklch(0.78 0.08 230), oklch(0.48 0.07 230)) !important;
+  }
+  .diagram-mermaid .node.col2 rect {
+    fill: light-dark(oklch(0.95 0.04 165), oklch(0.24 0.03 165)) !important;
+    stroke: light-dark(oklch(0.78 0.09 165), oklch(0.48 0.08 165)) !important;
+  }
   .diagram-mermaid .nodeLabel {
     color: var(--text) !important;
+    vertical-align: super;
   }
   .diagram-mermaid .cluster rect {
     fill: var(--surface-code) !important;
