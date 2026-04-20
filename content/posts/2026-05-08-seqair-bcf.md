@@ -166,9 +166,9 @@ impl InfoKey<Flag> {
 
 There is no way to hand a `&[f32]` to a `Scalar<i32>` key,
 or use a `FormatKey<Gt>` in an INFO context.
-The compiler rejects it.
-These are inherent methods, not a trait,
-I'll explain why [below](#why-keyencode-and-not-encoderencode).
+This is great!
+(These are inherent methods, not a trait,
+I'll explain why [below](#why-keyencode-and-not-encoderencode).)
 
 The `InfoEncoder` and `FormatEncoder` traits underneath
 are object-safe and format-agnostic.
@@ -188,16 +188,8 @@ Writing a record walks another state machine.
 As a diagram, it looks like this:
 
 ```mermaid
-graph TD
-  B["begin_record(contig, pos, alleles, qual)"] --> Begun
-  Begun -->|"filter_pass()"| Filtered
-  Begun -->|"filter_fail(..)"| Filtered
-  Begun -->|"no_filter()"| Filtered
-  Filtered -->|"info_*(…)"| Filtered
-  Filtered -->|"emit()"| Done1["done (no samples)"]
-  Filtered -->|"begin_samples()"| WS["WithSamples"]
-  WS -->|"format_*(…)"| WS
-  WS -->|"emit()"| Done2["done"]
+flowchart LR
+  Start --> Begun --> Filtered --> Samples --> Done
 ```
 
 The states are zero-sized marker structs,
