@@ -1,7 +1,7 @@
 ---
 title: 'Niches for integer types in Rust'
-publishDate: '2026-05-02'
-updatedAt: '2026-05-02'
+publishDate: '2026-05-01'
+updatedAt: '2026-05-01'
 draft: true
 categories:
 - rust
