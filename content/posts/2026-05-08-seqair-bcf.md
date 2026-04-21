@@ -1,18 +1,19 @@
 ---
-title: 'Using Rust typestates for BCF writing'
-publishDate: '2026-05-08'
-updatedAt: '2026-05-08'
+title: "Using Rust typestates for BCF writing"
+publishDate: "2026-05-08"
+updatedAt: "2026-05-08"
 draft: true
 categories:
-- rust
-- bioinformatics
-- type-system
+  - rust
+  - bioinformatics
+  - type-system
 ---
+
 If you've ever needed to produce a typed binary format
 where the header constrains what the body can contain,
 you've probably written validation code that runs at runtime
 and hoped your tests cover the edge cases.
-With Rust, you can turn this  into compile errors (my favorite!)
+With Rust, you can turn this into compile errors (my favorite!)
 using typestates and phantom types.
 These patterns generalize well beyond any single format.
 I've previously [mentioned this][elegant-apis-in-rust] 10 years ago in a post,
@@ -27,18 +28,19 @@ It's the main output of [Rastair], our variant caller.
 I [wrote previously about seqair][seqair-post],
 our reimplementation of core `htslib` functionality in Rust.
 Writing BCF records through [`rust-htslib`] was
-what originally motivated that work —
-the bindings worked but were inefficient,
+what originally motivated that work,
+the bindings worked but were (out of the box) inefficient[^forked],
 and I wanted to see if I could make it both correct and fast.
 
+[^forked]: In Rastair, I used a fork that replaces some `CString` usage and it got much faster.
+
 [Rastair]: https://www.rastair.com/ "Rastair website"
+[`rust-htslib`]: https://github.com/rust-bio/rust-htslib "HTSlib bindings and a high level Rust API for reading and writing BAM files."
+[seqair-post]: https://deterministic.space/seqair.html "Seqair, a custom htslib reimplementation"
 
 This post walks through the API choices I made,
 what alternatives exist,
 and what I learned about designing APIs like this.
-
-[`rust-htslib`]: https://github.com/rust-bio/rust-htslib "HTSlib bindings and a high level Rust API for reading and writing BAM files."
-[seqair-post]: https://deterministic.space/seqair.html "Seqair, a custom htslib reimplementation"
 
 ## The header builder
 
@@ -51,8 +53,9 @@ and that dictionary must be emitted in a fixed order[^bcf-dict].
 The header builder walks through phases
 that mirror this dictionary order.
 
-[^bcf-dict]: `PASS` filter at index 0, then other filters, then `INFO` definitions, then `FORMAT` definitions.
-  This is not always obvious from reading the spec but it's what `htslib` expects.
+[^bcf-dict]:
+    `PASS` filter at index 0, then other filters, then `INFO` definitions, then `FORMAT` definitions.
+    This is not always obvious from reading the spec but it's what `htslib` expects.
 
 ```mermaid
 graph LR
@@ -75,7 +78,7 @@ pub struct VcfHeaderBuilder<Phase = Contigs> {
 During each phase, only the matching `register_*` method is in scope.
 Each registration inserts the field name
 into the string dictionary at the next index
-and returns a *typed key*:
+and returns a _typed key_:
 
 ```rust {class="wide"}
 // In the Infos phase:
@@ -94,9 +97,10 @@ But the key also carries the BCF dictionary index (a `u32`)
 and the VCF field name[^smolstr],
 resolved once and reused for every record.
 
-[^smolstr]: I like using [`SmolStr`] for immutable small strings like these.
-  It inlines short strings (avoiding a heap allocation)
-  and clones cheaply via reference counting in case we get longer ones.
+[^smolstr]:
+    I like using [`SmolStr`] for immutable small strings like these.
+    It inlines short strings (avoiding a heap allocation)
+    and clones cheaply via reference counting in case we get longer ones.
 
 [`SmolStr`]: https://docs.rs/smol_str/0.3.6/smol_str/
 
@@ -137,10 +141,11 @@ I went with the uninhabited version
 because it more precisely states the intent:
 these types are not values, they are labels.
 
-[^inhabited]: You could also use a trait-based approach,
-  where `ScalarInt` is a unit struct implementing `trait InfoValueType { type Value; }`.
-  That avoids the weird-looking enum entirely
-  but adds more boilerplate for each new marker.
+[^inhabited]:
+    You could also use a trait-based approach,
+    where `ScalarInt` is a unit struct implementing `trait InfoValueType { type Value; }`.
+    That avoids the weird-looking enum entirely
+    but adds more boilerplate for each new marker.
 
 Anyway.
 Here is how the markers select the right method:
@@ -233,10 +238,11 @@ None of this catches actual logic bugs in practice.
 It's a safety net that makes the API hard to misuse,
 especially when someone else (or an LLM[^llm-help]) is writing the calling code.
 
-[^llm-help]: As I wrote about in the [previous post][seqair-post],
-  a lot of seqair was written with Claude Code.
-  Having the compiler enforce the protocol
-  meant I didn't have to review every call site for ordering mistakes.
+[^llm-help]:
+    As I wrote about in the [previous post][seqair-post],
+    a lot of seqair was written with Claude Code.
+    Having the compiler enforce the protocol
+    meant I didn't have to review every call site for ordering mistakes.
 
 Underneath, the BCF arm writes typed values into shared and individual buffers,
 picks the smallest integer width that fits each value,
@@ -246,10 +252,11 @@ and float-formatting rules the spec requires.
 Both arms reuse their internal buffers across records,
 so after the first record the encoder does zero allocations[^erased].
 
-[^erased]: The writer is generic over `W: Write`,
-  but the `RecordEncoder` itself uses `&mut dyn Write` internally
-  so that the encoder type stays `RecordEncoder<'a, State>`
-  with no extra type parameters leaking out.
+[^erased]:
+    The writer is generic over `W: Write`,
+    but the `RecordEncoder` itself uses `&mut dyn Write` internally
+    so that the encoder type stays `RecordEncoder<'a, State>`
+    with no extra type parameters leaking out.
 
 ## Why `key.encode()` and not `encoder.encode()`
 
@@ -372,13 +379,14 @@ using the smallest type that fits the values:
 Each width has its own sentinel value for "missing":
 `0x80` for `INT8`, `0x8000` for `INT16`, `0x80000000` for `INT32`.
 
-[^bcf-reserved]: Why -120 and not -128?
-  The BCF 2.2 spec reserves the 8 most-negative values of each integer type
-  for sentinels.
-  Two are currently defined — "missing" and "end of vector" —
-  and six are reserved for future use.
-  So for `INT8`, -128 through -121 are off-limits,
-  leaving `[-120, 127]` as the usable range.
+[^bcf-reserved]:
+    Why -120 and not -128?
+    The BCF 2.2 spec reserves the 8 most-negative values of each integer type
+    for sentinels.
+    Two are currently defined — "missing" and "end of vector" —
+    and six are reserved for future use.
+    So for `INT8`, -128 through -121 are off-limits,
+    leaving `[-120, 127]` as the usable range.
 
 An early version of seqair had a bug
 where the type selection scanned all values including placeholders,
@@ -390,7 +398,7 @@ which doesn't fit in a byte.
 The type system can't (currently) catch this.
 Both the declared type and the value type are `i32`.
 The bug is purely semantic:
-the sentinel must match the *encoding* width, not the *declared* width.
+the sentinel must match the _encoding_ width, not the _declared_ width.
 
 A cross-format property test caught it.
 The test generates random records,
@@ -411,9 +419,10 @@ Specifying what correct behavior looks like is often easier than implementing it
 and the tests immediately tell you whether the generated code is right
 leading to a quick feedback loop.
 
-[^layers]: We have: property tests, cross-validation against reference implementations, round-trip checks, and fuzz targets.
-  And what this doesn't catch will hopefully be caught when we run this in Rastair
-  against many different inputs.
+[^layers]:
+    We have: property tests, cross-validation against reference implementations, round-trip checks, and fuzz targets.
+    And what this doesn't catch will hopefully be caught when we run this in Rastair
+    against many different inputs.
 
 [noodles]: https://docs.rs/noodles "Bioinformatics I/O libraries in Rust"
 [fuzz]: https://github.com/Softleif/seqair/tree/main/crates/seqair/fuzz "seqair fuzz targets"
@@ -433,9 +442,10 @@ The builder places the record
 in the smallest "bin" that fully contains `[start, end)`
 and starts a new chunk when the bin or reference changes.
 
-[^voff]: A BGZF virtual offset lets an index point at any record
-  without decompressing the entire file.
-  See the [previous post][seqair-post] for more on BGZF.
+[^voff]:
+    A BGZF virtual offset lets an index point at any record
+    without decompressing the entire file.
+    See the [previous post][seqair-post] for more on BGZF.
 
 BAI, CSI, and TBI differ mostly in serialization details.
 One state machine, three output writers,
@@ -443,6 +453,49 @@ and the same code path produces all three index formats.
 I wrote the spec for this, had Claude Code implement it,
 and then realized it's the same algorithm htslib uses internally.
 That was reassuring!
+
+## Benchmarks
+
+I also wrote some benchmarks to make sure that seqair is not way slower
+than our comparison points `htslib` and `noodles`.
+Since this was my initial complained about `rust-htslib`,
+I had to make sure to pick this up again.
+Like the experiment with a columnar storage layout for BAM records
+(see [previous post][seqair-post]),
+just because I had the _idea_ that this streaming VCF encoder works,
+doesn't mean it performs well in a real-world setting.
+
+Luckily, I'm happy to say that we're quite performant,
+both in Rastair and in our microbenchmarks!
+All these numbers are in "elements per second", so higher is better:
+
+[`criterion`]: https://docs.rs/criterion/0.8.2/criterion/ "A statistics-driven micro-benchmarking library written in Rust."
+
+| format | complexity | rows | htslib | noodles | seqair |
+| ------ | ---------- | ---: | -----: | ------: | -----: |
+| BCF    | minimal    |   1k |  1.25M |    559k |  2.83M |
+| BCF    | minimal    |  10k |  1.30M |    564k |  2.82M |
+| BCF    | full       |   1k |   626k |    321k |  1.47M |
+| BCF    | full       |  10k |   646k |    321k |  1.50M |
+
+Using [`criterion`], I set up a couple benchmarks[^bench] for different use cases.
+To me, writing semi-complex BCF files was the most interesting one
+(that's what Rastair does),
+and that's what the table above shows.
+There are also benchmarks for writing `.vcf` and `.vcf.gz`.
+
+A couple notes for the "all benchmarks are lies" crowd:
+This was run on a MacBook, all implementations write to `/dev/null`,
+and, yes, `htslib` and `noodles` allocate per-row
+because that's the entire point of implementing seqair.
+
+[^bench]:
+    This is also a good anecdote for why I like writing blog posts.
+    I had Claude Code write the original VCF benchmark code, and it looked fine.
+    Then I added some more features and asked to extend the benchmark again.
+    But what I totally missed: The `htslib` benchmark wrote to a temp file,
+    while seqair and `noodles` wrote to a buffer!
+    Only when I was writing this post did I review the code again and found this bug.
 
 ## What I'd do differently
 
