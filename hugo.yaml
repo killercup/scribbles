@@ -9,7 +9,7 @@ params:
     domain: deterministic.space
     username: blog
     preferred_username: blog
-    avatar_url: https://deterministic.space/avatar.png
+    avatar_url: https://deterministic.space/avatar.jpg
   github: killercup
   mastodon: https://mastodon.social/@killercup
   bluesky: https://bsky.app/profile/killercup.de

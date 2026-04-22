@@ -19,7 +19,7 @@
   "icon": {
     "type": "Image",
     "mediaType": "image/png",
-    "url": "https://deterministic.space/avatar.png"
+    "url": "https://deterministic.space/avatar.jpg"
   },
   "publicKey": {
     "id": "https://deterministic.space/socialweb/blog.json#main-key",
