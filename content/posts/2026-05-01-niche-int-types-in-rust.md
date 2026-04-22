@@ -34,9 +34,7 @@ So here is what we have as a start.
 We also track if it is zero- or one-based using a type parameter
 because some file formats count from `1` for human convenience.
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 pub struct Pos<S> {
     value: u32,
     _system: PhantomData<S>,
@@ -59,18 +57,12 @@ impl TryFrom<i32> for Pos<Zero> {
 struct InvalidPosition;
 ```
 
-</div>
-
 which we can use like this:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 let record = get_raw_bam_record();
 let position: Pos<Zero> = record.pos.try_into()?;
 ```
-
-</div>
 
 ## Type niches
 
@@ -97,14 +89,10 @@ These invalid bit patterns are called "niches".
 
 You can verify this with `size_of`:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 assert_eq!(size_of::<Option<u32>>(), 8); // no niche
 assert_eq!(size_of::<Option<NonZero<u32>>>(), 4); // niche
 ```
-
-</div>
 
 Our `Pos` type wraps a plain `u32`, so `Option<Pos<Zero>>` is 8 bytes.
 That's wasteful:
@@ -121,9 +109,7 @@ the position `0` maps to `NonZero(1)`,
 and `i32::MAX` maps to `NonZero(0x8000_0000)`.
 The `0` bit pattern is never used, giving us our niche.
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 #[repr(transparent)]
 pub struct Pos<S> {
     value: NonZeroU32, // stores actual_value + 1
@@ -151,8 +137,6 @@ impl Pos<Zero> {
 }
 ```
 
-</div>
-
 This works, and `Option<Pos<Zero>>` is now 4 bytes.
 But every `new` adds 1 and every `get` subtracts 1.
 It's a single ALU instruction each time,
@@ -174,9 +158,7 @@ using the attributes
 `rustc_layout_scalar_valid_range_start` and `rustc_layout_scalar_valid_range_end`.
 On nightly, we can use them too:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 #![feature(rustc_attrs)]
 
 #[rustc_layout_scalar_valid_range_start(0)]
@@ -186,16 +168,12 @@ On nightly, we can use them too:
 pub struct Pos(u32);
 ```
 
-</div>
-
 This tells the compiler the full valid range,
 and every bit pattern outside it becomes a niche.
 No bias, no XOR, no runtime cost at all.
 The `get` accessor is a plain field read:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 impl TryFrom<i32> for Pos {
     type Error = ();
 
@@ -214,18 +192,12 @@ impl Pos {
 }
 ```
 
-</div>
-
 And we get the niche for free:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 assert_eq!(size_of::<Pos>(), 4);
 assert_eq!(size_of::<Option<Pos>>(), 4);
 ```
-
-</div>
 
 You can see a [little test script][play1] here.
 
@@ -262,9 +234,7 @@ on nightly is a [`pattern_type!`] macro.
 [`pattern_type!`]: https://doc.rust-lang.org/1.95.0/core/macro.pattern_type.html "core::pattern_type!"
 [Rust PR 136006]: https://github.com/rust-lang/rust/pull/136006
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 #![feature(pattern_types)]
 #![feature(pattern_type_macro)]
 
@@ -286,8 +256,6 @@ impl Pos {
     }
 }
 ```
-
-</div>
 
 [You can play with the code here.][play2]
 

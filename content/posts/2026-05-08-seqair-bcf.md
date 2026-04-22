@@ -68,7 +68,7 @@ You can skip phases you don't need
 (go from `Contigs` straight to `Infos` if you have no filters),
 but you can never go backwards.
 
-```rust {class="wide"}
+```rust {.wide}
 pub struct VcfHeaderBuilder<Phase = Contigs> {
   // ...
   _phase: PhantomData<Phase>,
@@ -80,7 +80,7 @@ Each registration inserts the field name
 into the string dictionary at the next index
 and returns a _typed key_:
 
-```rust {class="wide"}
+```rust {.wide}
 // In the Infos phase:
 let dp: InfoKey<Scalar<i32>> = header.register_info(&DP_DEF)?;
 let af: InfoKey<Arr<f32>>   = header.register_info(&AF_DEF)?;
@@ -109,7 +109,7 @@ resolved once and reused for every record.
 The type parameter on `InfoKey<V>` and `FormatKey<V>`
 is an uninhabited marker type:
 
-```rust {class="wide"}
+```rust {.wide}
 pub enum Scalar<T> { _Uninhabited(Infallible, PhantomData<T>) }
 pub enum Arr<T>    { _Uninhabited(Infallible, PhantomData<T>) }
 pub enum Flag      { _Uninhabited(Infallible) }
@@ -150,7 +150,7 @@ these types are not values, they are labels.
 Anyway.
 Here is how the markers select the right method:
 
-```rust {class="wide"}
+```rust {.wide}
 impl InfoKey<Scalar<i32>> {
     pub fn encode(&self, enc: &mut (impl InfoEncoder + ?Sized), value: i32) {
         enc.info_int(&self.0, value);
@@ -201,7 +201,7 @@ flowchart LR
 The states are zero-sized marker structs,
 and the encoder is generic over them:
 
-```rust {class="wide"}
+```rust {.wide}
 pub struct Begun;
 pub struct Filtered;
 pub struct WithSamples;
@@ -214,7 +214,7 @@ pub struct RecordEncoder<'a, S> {
 
 Each transition consumes `self` and returns the encoder in the next state:
 
-```rust {class="wide"}
+```rust {.wide}
 impl<'a> RecordEncoder<'a, Begun> {
     pub fn filter_pass(mut self) -> RecordEncoder<'a, Filtered> { /* … */ }
     pub fn filter_fail(mut self, filters: &[&FilterId]) -> RecordEncoder<'a, Filtered> { /* … */ }
@@ -311,7 +311,7 @@ the values usually come from domain types
 that know how to serialize themselves.
 The `EncodeInfo` trait captures this:
 
-```rust {class="wide"}
+```rust {.wide}
 pub trait EncodeInfo {
     type Key;
     fn encode_info(&self, enc: &mut dyn InfoEncoder, key: &Self::Key);
@@ -320,7 +320,7 @@ pub trait EncodeInfo {
 
 A simple wrapper type might look like this:
 
-```rust {class="wide"}
+```rust {.wide}
 struct Depth(i32);
 
 impl Depth {
@@ -346,7 +346,7 @@ The associated `Key` type also supports tuples,
 which handles the case
 where one domain type maps to multiple VCF fields:
 
-```rust {class="wide"}
+```rust {.wide}
 struct StrandBias { ot: Vec<i32>, ob: Vec<i32> }
 
 impl EncodeInfo for StrandBias {

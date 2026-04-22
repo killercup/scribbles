@@ -59,28 +59,20 @@ so we can just wrap our writer in it and continue to use it as before:
 [lz4]: https://lz4.github.io/lz4/ "LZ4 - Extremely fast compression"
 [struct-encoder]: https://docs.rs/lz4/1.28.1/lz4/struct.Encoder.html "Encoder in lz4"
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 let file = std::fs::File::create("output.msgpack.lz4")?;
 let encoder = lz4::EncoderBuilder::new().level(4).build(file)?;
 ```
-
-</div>
 
 Pretty early in my Rust journey,
 I learned that file I/O is not buffered by default,
 so it's a good idea to wrap the `file` in a `BufWriter`:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 let file = std::fs::File::create("output.msgpack.lz4")?;
 let file_buffered = std::io::BufWriter::new(file);
 let encoder = lz4::EncoderBuilder::new().level(4).build(file_buffered)?;
 ```
-
-</div>
 
 This then creates a chain like this:
 
@@ -128,15 +120,11 @@ I had the idea that I could swap the way I use the buffer:
 Instead of buffering writing to the file system,
 I could buffer writing to the LZ4 encoder.
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 let file = std::fs::File::create("output.msgpack.lz4")?;
 let encoder = lz4::EncoderBuilder::new().level(4).build(file)?;
 let encoder_buffered = std::io::BufWriter::new(encoder);
 ```
-
-</div>
 
 And indeed, this works!
 In my initial benchmark, this made this part of the code 1.83 times faster.

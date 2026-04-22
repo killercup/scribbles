@@ -128,13 +128,9 @@ you will see they actually accept anything that implements [`SystemLabel`].
 
 If you go to Bevy's API docs you can see `SystemLabel` is a trait and defined as
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 pub trait SystemLabel: 'static + DynHash + Debug + Send + Sync { }
 ```
-
-</div>
 
 Look at all these bounds!
 You might recognize a few from usual Rust code,

@@ -45,9 +45,7 @@ First off, let's look at how Bevy's API is used
 so that we can work backward from it to recreate it ourselves.
 Here's a small Bevy app with an example system:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 use bevy::prelude::*;
 
 fn main() {
@@ -78,8 +76,6 @@ fn move_player(
 }
 ```
 
-</div>
-
 What you can see here is that we can pass a regular Rust function to `add_system` and Bevy knows what to do with it. Even better, our function parameters are used to tell Bevy which components we want to query: We want the `Transform`s from all entities that also have the custom `Player` component.
 Behind the scenes, Bevy even infers which systems can run in parallel based on the function signature.
 
@@ -89,9 +85,7 @@ Bevy has a lot of API surface; after all it is a full game engine with a schedul
 
 Following Bevy’s example, we’re gonna call the  item we add the systems to `App`, and give it just two methods, `new`, and `add_system`:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 struct App {
     systems: Vec<System>,
 }
@@ -108,8 +102,6 @@ impl App {
 
 struct System; // What is this?
 ```
-
-</div>
 
 Oh, this leads to the first problem: What is a system? In Bevy, we can just call the method with a function that has some useful arguments, but how do we do that in our own code?
 
@@ -135,17 +127,13 @@ Now we have a trait for our systems, but to implement it on functions we need to
 
 Let’s use this:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 impl<F> System for F where F: Fn() -> () {
     fn run(&mut self) {
         self(); // Yup, we're calling ourselves here
     }
 }
 ```
-
-</div>
 
 If you’re not used to Rust, this might look quite unreadable. That’s okay, this is not something you see in an everyday Rust code base. You can read the first line as “Implement the system trait for all types that are functions without arguments that return nothing” and the following as “the `run` function takes the item itself and — since that is a function — calls it”.
 
@@ -173,9 +161,7 @@ struct App {
 Our `add_system` method now also needs to accept anything that implements the `System` trait, and then put it into that list. The argument type is now generic: We use `S` as a placeholder for anything that implements `System`; and since Rust wants us to make sure that it is a thing valid for the entirety of the program, we are also asked to add `'static`.
 And while we’re at it, let’s also add a method to actually run the app!
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 impl App {
     fn new() -> App { // same as before
         App { systems: Vec::new() }
@@ -194,11 +180,7 @@ impl App {
 }
 ```
 
-</div>
-
 With this, we can now write a small example:
-
-<div class="wide">
 
 ```rust
 fn main() {
@@ -211,8 +193,6 @@ fn example_system() {
     println!("foo");
 }
 ```
-
-</div>
 
 You can play with the full code so far [here][play].
 Now, back to the problem of having more complex system functions.
@@ -253,9 +233,7 @@ impl<T> SystemParam for Query<T> {}
 
 To distinguish the different `System` implementations, we can add type parameters, which become part of its signature:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 trait System<Params> {
     fn run(&mut self);
 }
@@ -275,13 +253,9 @@ impl<F, P1: SystemParam> System<(P1,)> for F where F: Fn(P1) -> () {
 }
 ```
 
-</div>
-
 But now the issue becomes that in all the places where we accept `System`, we need to add this type parameter! And, even worse, when we try to store the `Box<dyn System>`, we’d have to add one there, too:
 
-<div class="wide">
-
-```console
+```console {.wide}
 error[E0107]: missing generics for trait `System`
   --> src/main.rs:23:26
     |
@@ -295,8 +269,6 @@ error[E0107]: missing generics for trait `System`
     |                                          ^^^^^^ expected 1 generic argument
 …
 ```
-
-</div>
 
 (By the way: If you make all instances `System<()>` and comment out the `.add_system(another_example_system)`, this compiles.)
 
@@ -340,9 +312,7 @@ trait IntoSystem<Params> {
 
 This conversion trait still outputs a concrete “system”… but what is that? Here comes the magic: We add a struct `FunctionSystem` that will implement `System` and we’ll add an `IntoSystem` implementation that creates it:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 /// A wrapper around functions that are systems
 struct FunctionSystem<F, Params: SystemParam> {
     /// The system function
@@ -372,8 +342,6 @@ trait SystemParamFunction<Params: SystemParam>: 'static {
 }
 ```
 
-</div>
-
 (As you can see, `SystemParamFunction` is the generic trait we called `System` in the last chapter.)
 
 **Note:** As you can see, we’re not doing anything with the function parameters yet. We’ll just keep them around so everything is generic and then “store” them in the [`PhantomData`][struct-phantomdata] type.
@@ -382,9 +350,7 @@ trait SystemParamFunction<Params: SystemParam>: 'static {
 
 To fulfill the constraint from `IntoSystem` that its output has to be a `System`, we now implement the trait on our new type:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 /// Make our function wrapper be a System
 impl<F, Params: SystemParam> System for FunctionSystem<F, Params>
 where
@@ -396,13 +362,9 @@ where
 }
 ```
 
-</div>
-
 Now we’re almost ready! Let’s update our `add_system` function and then we can see how this all works:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 impl App {
     fn add_system<F: IntoSystem<Params>, Params: SystemParam>(mut self, function: F) -> Self {
         self.systems.push(Box::new(function.into_system()));
@@ -411,32 +373,22 @@ impl App {
 }
 ```
 
-</div>
-
 Our function now accepts everything that implements `IntoSystem` with a type parameter that is a `SystemParam`.
 To accept systems with more than one parameter we can implement `SystemParam` on tuples of items that are themselves system parameters:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 impl SystemParam for () {} // sure, a tuple with no elements counts
 impl<T1: SystemParam> SystemParam for (T1,) {} // remember the comma!
 impl<T1: SystemParam, T2: SystemParam> SystemParam for (T1, T2) {} // A real two-ple
 ```
 
-</div>
-
 But what do we store now? Actually the same as earlier:
-
-<div class="wide">
 
 ```rust
 struct App {
     systems: Vec<Box<dyn System>>,
 }
 ```
-
-</div>
 
 But now it works! How?
 
@@ -458,9 +410,7 @@ Sadly, this doesn’t work just yet: We have no way of fetching the parameters a
 
 The result would look somewhat like this:
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 fn main() {
     App::new()
         .add_system(example_system)
@@ -482,10 +432,7 @@ fn complex_example_system(_q: Query<&Position>, _r: ()) {
 }
 ```
 
-</div>
-<div class="wide">
-
-```console
+```console {.wide}
     Compiling playground v0.0.1 (/playground)
     Finished dev [unoptimized + debuginfo] target(s) in 0.64s
       Running `target/debug/playground`
@@ -493,8 +440,6 @@ foo
 TODO: fetching params
 TODO: fetching params
 ```
-
-</div>
 
 You can [find the full code from this post here][play-4] — press play and you’ll see this output (and some more). Feel free to play with it, try some combinations of systems, and maybe add some other things!
 
@@ -512,15 +457,11 @@ One example is the Axum web framework, which allows you to define “handler fun
 
 [extract]: https://docs.rs/axum/0.5.13/axum/extract/index.html "axum::extract"
 
-<div class="wide">
-
-```rust
+```rust {.wide}
 async fn create_user(Json(payload): Json<CreateUser>) { todo!() }
 
 let app = Router::new().route("/users", post(create_user));
 ```
-
-</div>
 
 There is a `post` function that accepts functions (even `async` ones) where all parameters are “extractors”, like a `Json` type here. As you can see this is a bit more tricky than what we’ve seen Bevy do so far. Axum has to take into account the return type and how it can be converted, as well as supporting async functions (i.e., those that return futures).
 

@@ -160,7 +160,7 @@ The CSS is actually quite simple
 and has been done many times before.
 It's just more fun with CSS features from 2026.
 
-```css {class="wide"}
+```css {.wide}
 .sidenote {
   float: right;
   clear: right;
@@ -195,11 +195,10 @@ Both themes use the same token names, different oklch values.
 `color-mix()` handles the subtler bits,
 like blending the accent with transparency for link underlines:
 
-```css
+```css {.wide}
 a {
-  text-decoration-color: color-mix(
-    in oklch, var(--accent) 40%, transparent
-  );
+  text-decoration-color:
+    color-mix(in oklch, var(--accent) 40%, transparent);
 }
 ```
 
