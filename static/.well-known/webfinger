@@ -1,9 +1,16 @@
 {
   "subject": "acct:blog@deterministic.space",
   "aliases": ["https://deterministic.space/socialweb/blog.json"],
-  "links": [{
-    "rel": "self",
-    "type": "application/activity+json",
-    "href": "https://deterministic.space/socialweb/blog.json"
-  }]
+  "links": [
+    {
+      "rel": "self",
+      "type": "application/activity+json",
+      "href": "https://deterministic.space/socialweb/blog.json"
+    },
+    {
+      "rel": "http://webfinger.net/rel/profile-page",
+      "type": "text/html",
+      "href": "https://deterministic.space/"
+    }
+  ]
 }
