@@ -7,6 +7,8 @@ categories:
 - css
 - svg
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjhv3hwmmz26"
+discussions:
+  Bluesky: https://bsky.app/profile/deterministic.space/post/3mjhv3hy2ji2b
 ---
 Styling SVG symbols that are defined using `<symbol id="x">`
 and included using `<use href="#x">`.

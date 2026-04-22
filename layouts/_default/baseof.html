@@ -80,10 +80,10 @@
     <nav>
       <p>
         <a href="{{ "feed.xml" | absURL }}">RSS feed</a>
-        {{- with site.Params.mastodon }} /
-        <a rel="me" href="{{ . }}">Follow me on Mastodon</a>{{ end }}
         {{- with site.Params.bluesky }} /
         <a rel="me" href="{{ . }}">Follow me on Bluesky</a>{{ end }}
+        {{- with site.Params.mastodon }} /
+        <a rel="me" href="{{ . }}">Follow me on Mastodon</a>{{ end }}
       </p>
       <p>
         <a href="{{ site.Params.license_url }}" rel="license">&copy; Copyright {{ now.Year }} {{ site.Params.author }}</a>

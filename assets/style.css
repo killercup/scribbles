@@ -1028,6 +1028,7 @@
     --sequoia-fg-color: var(--text);
     --sequoia-border-color: var(--border);
     --sequoia-secondary-color: var(--text-tertiary);
+    --sequoia-font-family: var(--font-sans);
   }
 }
 

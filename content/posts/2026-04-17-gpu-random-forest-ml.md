@@ -7,6 +7,8 @@ categories:
 - bioinformatics
 - performance
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mjopknuz472z"
+discussions:
+  Bluesky: https://bsky.app/profile/deterministic.space/post/3mjosq32uws27
 ---
 In [my recent post on Rastair][rastair-post],
 we looked at some performance best-practices and optimizations

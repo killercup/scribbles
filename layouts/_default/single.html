@@ -39,7 +39,6 @@
   <footer class="article-footer">
     <p>
       Thanks for reading.
-      {{- with site.Params.feedback_url }} <a href="{{ . }}">Comment on this post!</a>{{ end }}
       {{- with site.Params.post_revisions_url }} <a href="{{ . }}{{ $.File.Path }}">Revision history.</a>{{ end }}
     </p>
     {{- with .Params.discussions }}
@@ -59,12 +58,40 @@
     </p>
   </footer>
 
-  {{- /*
+  {{- with .Params.discussions.Bluesky }}
   <footer class="comments">
-      <sequoia-comments></sequoia-comments>
+      <sequoia-comments post-uri="{{ . }}">
+        <a slot="reply-button" href="{{.}}">
+          Reply on Bluesky!
+        </a>
+      </sequoia-comments>
   </footer>
-  <script type="module" src="/assets/sequoia-comments.js"></script>
-  */ -}}
+  {{- $comments := resources.Get "sequoia-comments.js" | minify | fingerprint }}
+  <script>
+    (() => {
+      const footer = document.currentScript.previousElementSibling;
+      const load = () => {
+        const s = document.createElement('script');
+        s.type = 'module';
+        s.src = {{ $comments.RelPermalink }};
+        {{ with $comments.Data.Integrity }}s.integrity = {{ . }};{{ end }}
+        s.crossOrigin = 'anonymous';
+        document.head.appendChild(s);
+      };
+      if ('IntersectionObserver' in window) {
+        const io = new IntersectionObserver((entries, obs) => {
+          if (entries.some(e => e.isIntersecting)) {
+            obs.disconnect();
+            load();
+          }
+        }, { rootMargin: '200px 0px' });
+        io.observe(footer);
+      } else {
+        load();
+      }
+    })();
+  </script>
+  {{- end }}
 </article>
 
 
