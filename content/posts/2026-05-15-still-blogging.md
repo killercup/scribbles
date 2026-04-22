@@ -212,6 +212,29 @@ only when it's stuck to the top of the viewport.
 
 [^scroll-state]: `@container scroll-state(stuck: top)` landed in Chrome 133 and Safari 18.4
   and as of May 2026 doesn't work in Firefox.
+  
+### Diagrams
+
+For my recent posts I also felt the urge to include some diagrams.
+I've gotten used to adding mermaid diagrams to markdown files
+and this blog feels no different.
+I didn't want to include [mermaid.js] for client-side rendering
+since it's quite big and also doesn't work in feed readers.
+So I was happy to see [kroki.io],
+which provides a public API to which you can post text diagram formats
+(incl. Mermaid, GraphViz, and even Vega)
+and get SVGs back.
+With a bit of config,
+you can call HTTP endpoints from Hugo templates:
+A match made in heaven!
+
+[mermaid.js]: https://mermaid.js.org/
+[kroki.io]: https://kroki.io/ "A unified API for rendering text diagrams as SVGs"
+
+With this, we have diagrams as SVGs embedded in posts,
+but they come with their own styles (at least the Mermaid ones).
+But thanks to a little of `!important` styling,
+I made it work with dark mode.
 
 ## Open Social Stuff
 
