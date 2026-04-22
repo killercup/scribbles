@@ -7,5 +7,8 @@
 /fonts/*
   Cache-Control: public, max-age=31536000, immutable
 
-/style.min.*.css
+/*.min.*.css
+  Cache-Control: public, max-age=31536000, immutable
+
+/*.min.*.js
   Cache-Control: public, max-age=31536000, immutable
