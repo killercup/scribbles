@@ -6,13 +6,13 @@ draft: true
 categories:
 - meta
 ---
-All of a sudden
 I published three posts on this blog just in April.
 Before that, I've published 3 posts since May 2020.
 Going back to freelance work
 and having an interesting [bioinformatics project][rastair]
 made me want to write again,
-but the blog had to feel usable first.
+and it feels good.
+But this blog had to feel a bit nicer first!
 This site has been around since 2016[^older],
 and it was always just Markdown files in a git repo.
 Let's update the toolchain around it as a little spring cleaning for 2026.
@@ -216,25 +216,42 @@ only when it's stuck to the top of the viewport.
 ### Diagrams
 
 For my recent posts I also felt the urge to include some diagrams.
-I've gotten used to adding mermaid diagrams to markdown files
+I've gotten used to adding [Mermaid] diagrams to markdown files
 and this blog feels no different.
-I didn't want to include [mermaid.js] for client-side rendering
-since it's quite big and also doesn't work in feed readers.
+Adding diagrams via code blocks with annotations also means the source stays just text
+and people are you these a lot so I guess they will stay around.
+
+I didn't want to include Mermaid's client-side JS rendering library
+since it's quite big and also won't work in feed readers.
 So I was happy to see [kroki.io],
-which provides a public API to which you can post text diagram formats
+which provides a public API that you can post text diagram formats to
 (incl. Mermaid, GraphViz, and even Vega)
 and get SVGs back.
 With a bit of config,
 you can call HTTP endpoints from Hugo templates:
 A match made in heaven!
 
-[mermaid.js]: https://mermaid.js.org/
+[Mermaid]: https://mermaid.js.org/ "Create diagrams and visualizations using text and code"
 [kroki.io]: https://kroki.io/ "A unified API for rendering text diagrams as SVGs"
 
-With this, we have diagrams as SVGs embedded in posts,
-but they come with their own styles (at least the Mermaid ones).
-But thanks to a little of `!important` styling,
-I made it work with dark mode.
+With this, we have diagrams as SVGs directly embedded in the rendered post pages.
+But they come with their own styles (at least the Mermaid ones).
+No worries. With a little bit of `!important` CSS styling,
+I overwrote the colors and fonts
+so its looks more "native" to the blog
+and also works in dark mode.
+
+I wasnt't sure how to demostrate this but here we go:
+
+```mermaid
+sequenceDiagram
+    Pascal->>Hugo: Markdown post
+    loop every mermaid block
+        Hugo->>Kroki: please render
+        Kroki->>Hugo: enjoy SVG
+    end
+    Hugo->>Pascal: HTML
+```
 
 ## Open Social Stuff
 
@@ -245,21 +262,46 @@ Feel nicer than to publish
 on Medium[^medium], dev.to, Substack,
 or some social media channel.
 
+[^medium]: Is that still a thing people use?
+
 This blog has an RSS feed,
 and as someone who uses a feedreader daily,
 this is important to me.
-I also looked into publishing the content
-as an ActivityPub account.
-Let's say it's a work-in-progress.
+No need to visit this website if you want to read my content.
 
 Publishing on the "ATmosphere"[^at] was quite simple.
-You can follow this blog [here][bsky] on bluesky.
+I set up an account for this blog (on [Eurosky])
+and then used [Sequoia] which syncs the blog content with it.
+It was very easy!
+You can now follow this blog [here][bsky-acc] on Bluesky.
 
-[^medium]: Is that still a thing people use?
-[^at]: This is what Blusky is built on, the AT protocol.
-  I used [`sequoia`](https://sequoia.pub/) and it was very easy.
-  
-[bsky]: https://bsky.app/profile/deterministic.space "This blog on bluesky"
+One more thing I used from Sequoia is their comments feature.
+Since the Bluesky API is public[^twitter-api],
+Sequoia comes with a little Web Component
+that allows showing all Bluesky replies just like comments.
+(I also added support for showing quote posts.)
+This means that the best way to reply to my blog posts
+is now to reply on Bluesky.
+
+I also looked into publishing the content
+as an ActivityPub account,
+but in contrast to some tutorials I've seen
+it doesn't really work with a static site.
+Looks like I need a slightly more dynamic setup
+to make it work[^dynamic].
+
+[^dynamic]: This blog is currently hosted on Cloudflare,
+  so dymanic ActivityPub stuff as well as hosting my own PDS for AT
+  would be [both](https://paul.kinlan.me/adding-activity-pub-to-your-static-site/) [doable](https://github.com/ascorbic/cirrus),
+  but outside the "everything is Markdown files" realm,
+  so I didn't do anything for this yet.
+
+[^at]: This is what [Bluesky](https://bsky.app/) is built on, the AT protocol.
+[^twitter-api]: Like APIs were in the good old days!
+
+[Eurosky]: https://eurosky.tech/
+[Sequoia]: https://sequoia.pub/ "Publish evergreen content to the ATmosphere"
+[bsky-acc]: https://bsky.app/profile/deterministic.space "This blog on bluesky"
 
 ## More writing
 

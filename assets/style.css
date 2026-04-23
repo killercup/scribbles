@@ -548,9 +548,11 @@
     font-size: var(--text-xs);
   }
 
+  .diagram-mermaid rect.actor,
   .diagram-mermaid .node rect,
   .diagram-mermaid .node polygon,
-  .diagram-mermaid .node circle {
+  .diagram-mermaid .node circle,
+  .diagram-mermaid .labelBox {
     fill: var(--surface-raised) !important;
     stroke: var(--border) !important;
   }
@@ -574,7 +576,8 @@
     color: var(--text) !important;
     vertical-align: super;
   }
-  .diagram-mermaid .cluster rect {
+  .diagram-mermaid .cluster rect,
+  .diagram-mermaid .actor-line {
     fill: var(--surface-code) !important;
     stroke: var(--border) !important;
   }
@@ -585,11 +588,15 @@
   .diagram-mermaid .flowchart-link {
     stroke: var(--text-tertiary) !important;
   }
-  .diagram-mermaid .marker {
+  .diagram-mermaid .marker,
+  .diagram-mermaid .loopLine,
+  .diagram-mermaid .messageLine0,
+  .diagram-mermaid path {
     fill: var(--text-tertiary) !important;
     stroke: var(--text-tertiary) !important;
   }
-  .diagram-mermaid text {
+  .diagram-mermaid text,
+  .diagram-mermaid tspan {
     fill: var(--text) !important;
   }
   .diagram-mermaid .label {
