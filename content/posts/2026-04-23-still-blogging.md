@@ -1,8 +1,7 @@
 ---
 title: Still blogging
-publishDate: '2026-05-15'
-updatedAt: '2026-05-15'
-draft: true
+publishDate: '2026-04-23'
+updatedAt: '2026-04-23'
 categories:
 - meta
 ---
@@ -311,5 +310,5 @@ but my hope is that this will last for a while.
 I've always been keen on clarifying my thoughts by phrasing them out
 and I read a lot of posts from other people every day.
 
-Please let me know what you'd like me to write more about
+Let me know what you'd like me to write more about
 and what you thought of this and my recent posts!
