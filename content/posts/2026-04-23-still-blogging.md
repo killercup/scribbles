@@ -5,6 +5,8 @@ updatedAt: '2026-04-23'
 categories:
 - meta
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mk5obqcnsj2k"
+discussions:
+  Bluesky: https://bsky.app/profile/deterministic.space/post/3mk5obqeahs2y
 ---
 I published three posts on this blog just in April.
 Before that, I've published 3 posts since May 2020.
