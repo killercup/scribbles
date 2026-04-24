@@ -277,14 +277,6 @@ and then used [Sequoia] which syncs the blog content with it.
 It was very easy!
 You can now follow this blog [here][bsky-acc] on Bluesky.
 
-One more thing I used from Sequoia is their comments feature.
-Since the Bluesky API is public[^twitter-api],
-Sequoia comes with a little Web Component
-that allows showing all Bluesky replies just like comments.
-(I also added support for showing quote posts.)
-This means that the best way to reply to my blog posts
-is now to reply on Bluesky.
-
 I also looked into publishing the content
 as an ActivityPub account,
 but in contrast to some tutorials I've seen
@@ -299,7 +291,6 @@ to make it work[^dynamic].
   so I didn't do anything for this yet.
 
 [^at]: This is what [Bluesky](https://bsky.app/) is built on, the AT protocol.
-[^twitter-api]: Like APIs were in the good old days!
 
 [Eurosky]: https://eurosky.tech/
 [Sequoia]: https://sequoia.pub/ "Publish evergreen content to the ATmosphere"
