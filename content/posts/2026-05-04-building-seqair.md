@@ -1,7 +1,7 @@
 ---
 title: 'Building Seqair'
-publishDate: '2026-04-30'
-updatedAt: '2026-04-30'
+publishDate: '2026-05-04'
+updatedAt: '2026-05-04'
 draft: true
 ---
 Over the last couple years,
