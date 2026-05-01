@@ -12,7 +12,7 @@
       <span itemprop="author" itemscope itemtype="http://schema.org/Person"> by <span itemprop="name">{{ site.Params.author }}</span></span>
       and published in <a href="{{ site.BaseURL }}">{{ site.Title }}</a>.
       {{- with .Params.categories }}
-        Labeled as {{ range $i, $cat := . }}{{ if $i }}{{ if eq $i (sub (len $.Params.categories) 1) }} and {{ else }}, {{ end }}{{ end }}<a href="{{ site.BaseURL }}categories/{{ $cat | urlize }}">{{ $cat }}</a>{{ end }}.
+        Labeled as {{ range $i, $cat := . }}{{ if $i }}{{ if eq $i (sub (len $.Params.categories) 1) }} and {{ else }}, {{ end }}{{ end }}<em>{{ $cat }}</em>{{ end }}.
       {{- end }}
     </p>
   </header>
