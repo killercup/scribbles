@@ -1327,12 +1327,12 @@
 
   /* -- Bold & italic markers -------------------------------------------- */
 
-  .post-content strong::before,
+  /*.post-content strong::before,
   .post-content strong::after {
     content: "**" / "";
     color: var(--md-marker);
     font-weight: var(--font-body-weight, 400);
-  }
+  }*/
 
   /*.post-content em::before,
   .post-content em::after {
