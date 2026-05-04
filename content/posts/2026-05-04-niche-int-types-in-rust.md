@@ -28,7 +28,7 @@ In C, one would use `-1` to indicate "no position", "invalid position"
 but in Rust, I'd prefer not to do that.
 Can we make use of this in some other way?
 
-[seqair]: https://seqair.softleif.se/ "Pure-Rust BAM/SAM/CRAM/FASTA reader with a pileup engine and BCF/BAM writing."
+[seqair]: https://github.com/Softleif/seqair "Pure-Rust BAM/SAM/CRAM/FASTA reader with a pileup engine and BCF/BAM writing."
 [seqair-post]: https://deterministic.space/seqair.html "Seqair, a custom htslib reimplementation"
 
 ## Simple position type
