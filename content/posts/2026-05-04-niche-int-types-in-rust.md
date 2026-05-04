@@ -1,8 +1,7 @@
 ---
 title: 'Niches for integer types in Rust'
-publishDate: '2026-05-15'
-updatedAt: '2026-05-15'
-draft: true
+publishDate: '2026-05-04'
+updatedAt: '2026-05-04'
 categories:
 - rust
 - type-system
@@ -140,7 +139,7 @@ impl Pos<Zero> {
 This works, and `Option<Pos<Zero>>` is now 4 bytes.
 But every `new` adds 1 and every `get` subtracts 1.
 It's a single ALU instruction each time,
-so the cost is negligible in practice.
+so the cost is probably negligible in most code paths.
 Still, it's conceptually unsatisfying:
 we're contorting the representation
 to fit a niche that doesn't match our actual invariant.
@@ -153,92 +152,40 @@ to fit a niche that doesn't match our actual invariant.
 As of Rust 1.95 (May 2026),
 there is no stable way to tell the compiler
 "this `u32` only holds values `0..=0x7FFF_FFFF`."
-But internally, the standard library does exactly that for its own types
+
+~~But internally, the standard library does exactly that for its own types
 using the attributes
-`rustc_layout_scalar_valid_range_start` and `rustc_layout_scalar_valid_range_end`.
-On nightly, we can use them too:
+`rustc_layout_scalar_valid_range_start` and `rustc_layout_scalar_valid_range_end`.~~
 
-```rust {.wide}
-#![feature(rustc_attrs)]
-
-#[rustc_layout_scalar_valid_range_start(0)]
-#[rustc_layout_scalar_valid_range_end(0x7FFF_FFFF)] // i32::MAX
-#[repr(transparent)]
-#[derive(Clone, Copy, PartialEq, Eq, PartialOrd, Ord, Hash)]
-pub struct Pos(u32);
-```
-
-This tells the compiler the full valid range,
-and every bit pattern outside it becomes a niche.
-No bias, no XOR, no runtime cost at all.
-The `get` accessor is a plain field read:
-
-```rust {.wide}
-impl TryFrom<i32> for Pos {
-    type Error = ();
-
-    fn try_from(value: i32) -> Result<Self, Self::Error> {
-        if value < 0 { return Err(()); }
-        // SAFETY: value is in 0..=i32::MAX
-        Ok(unsafe { Self(value as u32) })
-    }
-}
-
-impl Pos {
-    pub const fn get(self) -> i32 {
-        // zero-cost: the u32 is already in range
-        self.0 as i32
-    }
-}
-```
-
-And we get the niche for free:
-
-```rust {.wide}
-assert_eq!(size_of::<Pos>(), 4);
-assert_eq!(size_of::<Option<Pos>>(), 4);
-```
-
-You can see a [little test script][play1] here.
-
-[play1]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=f5b9731872fc5762c2c3fba0c1af6007 "Rust playground"
-
-There's a catch, though:
-these attributes make every construction of the type `unsafe`.
-Any code that writes to the inner `u32`
-must uphold the range invariant,
-and the compiler won't check it for you.
-That's fine when it's behind a `new` constructor,
-but it does mean we need to restrict how this can be used.
-
-These attributes are not a public API.
-They are clearly marked as `rustc_attrs`
-which sounds *very* internal.
+**Oh wait -- while I was writing this post,
+this exact feature got replaced!**
 
 ## On nightly: Pattern types
 
 While researching this,
 I came across [this issue][rust-135996]
-where Oli proposes using a "pattern types" feature.
-So it seems there is *another* way of doing this!
-While reading through the [tracking issue][rust-123646] and Zulip thread,
+where [Oli] proposes using a "pattern types" feature.
+So it seems there is new way of doing this!
+While reading through the [tracking issue][rust-123646] and [Zulip channel],
 I found this [pre-RFC document][pre-rfc]
 (last updated in 2024 but discussed further in 2025).
 What is in the standard library right now
 on nightly is a [`pattern_type!`] macro.
 [Rust PR 136006] has some usage of this so I could put this together:
 
+[Oli]: https://github.com/oli-obk
 [rust-135996]: https://github.com/rust-lang/rust/issues/135996 "Replace rustc_layout_scalar_valid_range_start attribute with pattern types"
-[rust-123646]: https://github.com/rust-lang/rust/issues/123646 "Tracking Issue for pattern types"
+[rust-123646]: https://github.com/rust-lang/rust/issues/123646
 [pre-rfc]: https://gist.github.com/joboet/0cecbce925ee2ad1ee3e5520cec81e30
 [`pattern_type!`]: https://doc.rust-lang.org/1.95.0/core/macro.pattern_type.html "core::pattern_type!"
 [Rust PR 136006]: https://github.com/rust-lang/rust/pull/136006
+[Zulip channel]: https://rust-lang.zulipchat.com/#narrow/channel/481660-t-lang.2Fpattern-types
 
 ```rust {.wide}
 #![feature(pattern_types)]
 #![feature(pattern_type_macro)]
 
-pub struct Pos(pattern_type!(i32 is 0..));
+pub struct Pos(pattern_type!(i32 is 0..=i32::MAX));
 
 impl Pos {
     pub const fn new(value: i32) -> Option<Self> {
@@ -261,22 +208,18 @@ impl Pos {
 
 [play2]: https://play.rust-lang.org/?version=nightly&mode=debug&edition=2024&gist=d4c7bf6936d2bcef89455e7e271fba76
 
-I'm not sure about the `transmute` being the *best* way to do this,
-but `pattern_type!` produces a new type
-and I couldn't figure out how to construct it otherwise.
-
-Given the lack of actual documentation and RFC[^missed],
-I think it's fair to classify this feature
-as even more nightly than the other one.
-
-[^missed]: Or did I miss it?
+For now, `transmute` from the underlying type is the only way
+to construct the pattern type.
+On Zulip, Oli also recommended using inclusive ranges.
 
 ## Conclusion
 
 I'm not using any of these nightly features in the real code yet,
 but I'm glad to see momentum in this space.
 It's a feature I've wanted in a few places already.
-Another use case is a proper type for an "inline length" type,
-removing a workaround like the one `SmolStr` uses [here][smol_str len].
+Other use cases for patterns type are an "inline length" type,
+removing a workaround like the one `SmolStr` uses [here][smol_str len],
+or types that have sentinels by specification,
+like `INT8` in BAM files which actuallys is `-120..=127`.
 
 [smol_str len]: https://github.com/rust-lang/rust-analyzer/blob/4a244d4c6bf18bae57626dcaf81bf6442ad59380/lib/smol_str/src/lib.rs#L541-L569
