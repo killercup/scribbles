@@ -5,6 +5,10 @@ updatedAt: '2026-05-04'
 categories:
 - rust
 - type-system
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mkzwpee6d422"
+discussions:
+  Bluesky: https://bsky.app/profile/deterministic.space/post/3mkzwpegfyu2k
+  Mastodon: https://mastodon.social/@killercup/116516902709168589
 ---
 While working on [seqair]
 (see [my post here][seqair-post]),
