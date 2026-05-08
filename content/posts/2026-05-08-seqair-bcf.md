@@ -2,13 +2,11 @@
 title: "Using Rust typestates for BCF writing"
 publishDate: "2026-05-08"
 updatedAt: "2026-05-08"
-draft: true
 categories:
   - rust
   - bioinformatics
   - type-system
 ---
-
 If you've ever needed to produce a typed binary format
 where the header constrains what the body can contain,
 you've probably written validation code that runs at runtime
@@ -17,24 +15,23 @@ With Rust, you can turn this into compile errors (my favorite!)
 using typestates and phantom types.
 These patterns generalize well beyond any single format.
 I've previously [mentioned this][elegant-apis-in-rust] 10 years ago in a post,
-and I still think its such a cool pattern
-that it deserves another (proper) post.
+and I still think it's such a cool pattern
+that it deserves another post.
 
 [elegant-apis-in-rust]: https://deterministic.space/elegant-apis-in-rust.html#session-types
 
-The format I'm working with is BCF,
-the binary encoding of VCF used in genomics.
-It's the main output of [Rastair], our variant caller.
-I [wrote previously about seqair][seqair-post],
-our reimplementation of core `htslib` functionality in Rust.
-Writing BCF records through [`rust-htslib`] was
-what originally motivated that work,
-the bindings worked but were (out of the box) inefficient[^forked],
+The format I'm working with is VCF (and its binary version BCF).
+It's the main output of [Rastair], the variant caller I'm working on.
+I [previously wrote about seqair][seqair-post],
+my reimplementation of core `htslib` functionality in Rust.
+Writing VCF/BCF records through [`rust-htslib`] was
+what originally motivated that work:
+The bindings worked but were (out of the box) inefficient[^forked],
 and I wanted to see if I could make it both correct and fast.
 
 [^forked]: In Rastair, I used a fork that replaces some `CString` usage and it got much faster.
 
-[Rastair]: https://www.rastair.com/ "Rastair website"
+[Rastair]: https://deterministic.space/rastair.html "Notes on Rastair, a variant and methylation caller"
 [`rust-htslib`]: https://github.com/rust-bio/rust-htslib "HTSlib bindings and a high level Rust API for reading and writing BAM files."
 [seqair-post]: https://deterministic.space/seqair.html "Seqair, a custom htslib reimplementation"
 
@@ -92,7 +89,7 @@ let gt: FormatKey<Gt>        = header.register_format(&GT_DEF)?;
 The type parameter (`Scalar<i32>`, `Arr<f32>`, `Gt`)
 flows from the field definition to the key,
 and it's what makes the rest of the system type-safe.
-This is the format's actual invariants expressed in the type system.
+These are the format's actual invariants expressed in the type system.
 But the key also carries the BCF dictionary index (a `u32`)
 and the VCF field name[^smolstr],
 resolved once and reused for every record.
@@ -193,9 +190,9 @@ without being generic over the encoder.
 Writing a record walks another state machine.
 As a diagram, it looks like this:
 
-```mermaid
+```mermaid {.wide}
 flowchart LR
-  Start --> Begun --> Filtered --> Samples --> Done
+  Start --> Begun --> Filtered --> WithSamples --> Done
 ```
 
 The states are zero-sized marker structs,
@@ -383,14 +380,17 @@ Each width has its own sentinel value for "missing":
     Why -120 and not -128?
     The BCF 2.2 spec reserves the 8 most-negative values of each integer type
     for sentinels.
-    Two are currently defined — "missing" and "end of vector" —
+    Two are currently defined ("missing" and "end of vector")
     and six are reserved for future use.
     So for `INT8`, -128 through -121 are off-limits,
     leaving `[-120, 127]` as the usable range.
+    (A great use-case for [niches]!)
+
+[niches]: https://deterministic.space/niche-int-types-in-rust.html "Niches for integer types in Rust"
 
 An early version of seqair had a bug
 where the type selection scanned all values including placeholders,
-and the missing-value sentinel was always `i32::MIN`.
+and the missing-value sentinel was always set as `i32::MIN`.
 An array like `[1, 2, MISSING]` would
 correctly pick INT8 as the encoding (`1` and `2` fit),
 but then always emit `i32::MIN` as the sentinel,
@@ -420,7 +420,7 @@ and the tests immediately tell you whether the generated code is right
 leading to a quick feedback loop.
 
 [^layers]:
-    We have: property tests, cross-validation against reference implementations, round-trip checks, and fuzz targets.
+    We have: property tests, cross-validation against reference implementations, round-trip checks, and [fuzz targets][fuzz].
     And what this doesn't catch will hopefully be caught when we run this in Rastair
     against many different inputs.
 
@@ -458,7 +458,7 @@ That was reassuring!
 
 I also wrote some benchmarks to make sure that seqair is not way slower
 than our comparison points `htslib` and `noodles`.
-Since this was my initial complained about `rust-htslib`,
+Since this was my initial complaint about `rust-htslib`,
 I had to make sure to pick this up again.
 Like the experiment with a columnar storage layout for BAM records
 (see [previous post][seqair-post]),
@@ -495,7 +495,8 @@ because that's the entire point of implementing seqair.
     Then I added some more features and asked to extend the benchmark again.
     But what I totally missed: The `htslib` benchmark wrote to a temp file,
     while seqair and `noodles` wrote to a buffer!
-    Only when I was writing this post did I review the code again and found this bug.
+    Only when writing this post did I review the code again and found this bug.
+    The numbers here reflect the fixed version.
 
 ## What I'd do differently
 
