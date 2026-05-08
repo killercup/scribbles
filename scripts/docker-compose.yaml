@@ -1,0 +1,17 @@
+# Run kroki.io locally
+services:
+  kroki:
+    image: yuzutech/kroki
+    depends_on:
+      - mermaid
+    environment:
+      - KROKI_MERMAID_HOST=mermaid
+    ports:
+      - "8000:8000"
+    # If you do need to explicitly mount /tmp, make sure to include the exec option
+    tmpfs:
+      - /tmp:exec
+  mermaid:
+    image: yuzutech/kroki-mermaid
+    expose:
+      - "8002"

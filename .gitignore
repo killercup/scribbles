@@ -1,5 +1,6 @@
 public/
 resources/
 .hugo_build.lock
+.wrangler/
 
 .sequoia-state.json

@@ -66,5 +66,6 @@ security:
       - "(?i)GET|HEAD|POST"
     urls:
       - 'https://kroki\.io/.*'
+      - "http://localhost:8000/.*"
 frontmatter:
   date: ["date", ":filename"]
