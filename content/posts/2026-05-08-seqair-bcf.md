@@ -6,6 +6,10 @@ categories:
   - rust
   - bioinformatics
   - type-system
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mldk3q4b2h2v"
+discussions:
+  Bluesky: https://bsky.app/profile/deterministic.space/post/3mldk3q6ncb2g
+  Mastodon: https://mastodon.social/@killercup/116538545269011416
 ---
 
 If you've ever needed to produce a typed binary format
