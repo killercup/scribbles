@@ -7,6 +7,7 @@ categories:
   - bioinformatics
   - type-system
 ---
+
 If you've ever needed to produce a typed binary format
 where the header constrains what the body can contain,
 you've probably written validation code that runs at runtime
@@ -471,21 +472,22 @@ All these numbers are in "elements per second", so higher is better:
 
 [`criterion`]: https://docs.rs/criterion/0.8.2/criterion/ "A statistics-driven micro-benchmarking library written in Rust."
 
-| format | complexity | rows | htslib | noodles | seqair |
-| ------ | ---------- | ---: | -----: | ------: | -----: |
-| BCF    | minimal    |   1k |  1.25M |    559k |  2.83M |
-| BCF    | minimal    |  10k |  1.30M |    564k |  2.82M |
-| BCF    | full       |   1k |   626k |    321k |  1.47M |
-| BCF    | full       |  10k |   646k |    321k |  1.50M |
+| format | complexity | htslib | noodles | seqair |
+| ------ | ---------- | -----: | ------: | -----: |
+| BCF    | minimal    |  1.30M |    564k |  2.82M |
+|        | full       |   646k |    321k |  1.50M |
+| VCF    | minimal    |  2.38M |    793k |  3.99M |
+|        | full       |   942k |    505k |  1.36M |
+| VCF.GZ | minimal    |  1.25M |    667k |  2.41M |
+|        | full       |   538k |    369k |   760k |
 
-Using [`criterion`], I set up a couple benchmarks[^bench] for different use cases.
-To me, writing semi-complex BCF files was the most interesting one
+Using [`criterion`], I set up a couple benchmarks for different use cases.
+To me, writing semi-complex VCF and BCF files was the most interesting one
 (that's what Rastair does),
 and that's what the table above shows.
-There are also benchmarks for writing `.vcf` and `.vcf.gz`.
 
 A couple notes for the "all benchmarks are lies" crowd:
-This was run on a MacBook, all implementations write to `/dev/null`,
+This was run on a MacBook, all implementations write to `/dev/null`[^bench],
 and, yes, `htslib` and `noodles` allocate per-row
 because that's the entire point of implementing seqair.
 
@@ -513,9 +515,8 @@ It worked, but the allocation profile was (obviously) worse,
 the API surface was larger,
 and adding the streaming encoder made it redundant.
 I had both implementations for a while before deleting the owned path.
-In hindsight I should have committed to streaming earlier
-and prototyped with real workloads
-before investing in the owned-record API.
+Clearly, I should have committed to streaming
+and prototyped with real workloads earlier.
 
 The phantom type boilerplate is another… choice.
 Every new field type needs a marker enum, an impl block on the key,
