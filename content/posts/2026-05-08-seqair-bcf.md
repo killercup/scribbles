@@ -541,3 +541,11 @@ is whether `key.encode(&mut enc, value)` is actually better
 than the more conventional `enc.encode(&key, value)`.
 A new contributor's first instinct might be to look at the encoder type for methods, not the key.
 I find it more scannable but it's harder to discover.
+
+With BCF writing in place,
+I think I will focusing on building out [Rastair] for a while again,
+but if you have a project that could use seqair,
+please give it a try.
+I'd love to hear your feedback
+and look forward to contributions
+or sponsorships to allow me to continue to work on this.
