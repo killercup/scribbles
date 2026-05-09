@@ -44,6 +44,10 @@ This post walks through the API choices I made,
 what alternatives exist,
 and what I learned about designing APIs like this.
 
+By the way, I released Seqair 0.1 now!
+Find it on [crates.io](https://crates.io/crates/seqair) and [docs.rs](https://docs.rs/seqair/0.1.0/seqair/).
+{class="btw"}
+
 ## The header builder
 
 A VCF file starts with a header

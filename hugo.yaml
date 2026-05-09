@@ -28,6 +28,10 @@ markup:
       unsafe: true
     extensions:
       footnote: true
+    parser:
+      attribute:
+        block: true
+        title: true
   highlight:
     style: github
     noClasses: false

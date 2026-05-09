@@ -966,6 +966,15 @@
     }
   }
 
+  /* -- Admonitions --------------------------------------------------------- */
+
+  .btw {
+    background-color: var(--surface-raised);
+    border-left: 4px solid var(--accent);
+    padding: var(--space-sm);
+    margin-block: var(--space-md);
+  }
+
   /* -- Article footer ----------------------------------------------------- */
 
   .article-footer {
