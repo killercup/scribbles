@@ -8,7 +8,7 @@ categories:
   - type-system
 atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mldk3q4b2h2v"
 discussions:
-  Bluesky: https://bsky.app/profile/deterministic.space/post/3mldk3q6ncb2g
+  Bluesky: https://bsky.app/profile/did:plc:lva4uak3qmci3tmt5mfuwlhd/post/3mldkdx42mc2w
   Mastodon: https://mastodon.social/@killercup/116538545269011416
 ---
 
