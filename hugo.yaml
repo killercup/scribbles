@@ -20,8 +20,7 @@ params:
   post_revisions_url: https://github.com/killercup/scribbles/commits/main/content/
 permalinks:
   posts: "/:slug"
-uglyURLs:
-  posts: true
+uglyURLs: true
 markup:
   goldmark:
     renderer:
