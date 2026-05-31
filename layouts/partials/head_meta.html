@@ -33,3 +33,6 @@
 {{- with .Params.atUri }}
 <link rel="site.standard.document" href="{{ safe.URL . }}" />
 {{- end }}
+{{- with .Site.Params.standard_site_publication }}
+<link rel="site.standard.publication" href="{{ safe.URL . }}" />
+{{- end }}

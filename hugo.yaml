@@ -13,6 +13,7 @@ params:
   github: killercup
   mastodon: https://mastodon.social/@killercup
   bluesky: https://bsky.app/profile/killercup.de
+  standard_site_publication: at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.publication/3mjcd2t6afe25
   imprint_url: https://pascalhertleif.de/impressum/
   license_url: https://creativecommons.org/licenses/by-nc/4.0/
   feedback_url: https://github.com/killercup/scribbles/issues/new
