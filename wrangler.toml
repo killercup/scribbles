@@ -18,4 +18,4 @@ not_found_handling = "404-page"
 command = "hugo"
 
 [build.environment]
-HUGO_VERSION = "0.160.1"
+HUGO_VERSION = "0.164.0"

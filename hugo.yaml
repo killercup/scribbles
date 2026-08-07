@@ -73,3 +73,5 @@ security:
       - "http://localhost:8000/.*"
 frontmatter:
   date: ["date", ":filename"]
+minify:
+  minifyOutput: true
