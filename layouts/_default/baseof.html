@@ -4,6 +4,7 @@
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1"/>
   {{- partial "head_meta.html" . }}
+  {{- partial "ogimage.html" . }}
   {{- $fontRegular := resources.Get "fonts/Piazzolla-Regular.woff2" | fingerprint }}
   {{- $fontItalic := resources.Get "fonts/Piazzolla-Italic.woff2" | fingerprint }}
   {{- $fontSemiBold := resources.Get "fonts/Piazzolla-SemiBold.woff2" | fingerprint }}

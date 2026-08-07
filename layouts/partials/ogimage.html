@@ -1,0 +1,25 @@
+{{/* Generate opengraph image */}}
+{{- if .IsPage -}}
+  {{ $base := resources.Get "ogimage-template.png" }}
+  {{ $font := resources.Get "fonts/Piazzolla-Regular.ttf"}}
+  {{ $img := $base.Filter (images.Text (.Page.Date.Format "2 Jan 2006") (dict
+    "color" "#DCD5D8"
+    "size" 32
+    "linespacing" 2
+    "x" 63
+    "y" 239
+    "font" $font
+  )) }}
+  {{ $img = $img.Filter (images.Text .Page.Title (dict
+    "color" "#FF78BE"
+    "size" 64
+    "linespacing" 2
+    "x" 63
+    "y" 303
+    "font" $font
+  )) }}
+  {{ $img = resources.Copy (print .Page.Slug "-og.png") $img }}
+  <meta property="og:image" content="{{$img.Permalink}}">
+  <meta property="og:image:width" content="{{$img.Width}}" />
+  <meta property="og:image:height" content="{{$img.Height}}" />
+{{ end }}
