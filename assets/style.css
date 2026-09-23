@@ -486,12 +486,36 @@
   /* -- Images ------------------------------------------------------------- */
 
   .post-content img {
+    max-width: 100%;
+    height: auto;
     margin-block: var(--space-md);
     border-radius: 2px;
   }
 
   figure {
     margin-block: var(--space-lg);
+  }
+
+  figure img {
+    display: block;
+    margin-block: 0;
+    border: 1px solid var(--border-light);
+  }
+
+  /* Tall portrait images stay small instead of letting a 2600px-tall
+     screenshot take over the page. */
+  figure.narrow {
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+  }
+
+  figure.narrow img {
+    width: 20rem;
+  }
+
+  figure.narrow figcaption {
+    max-width: 24rem;
   }
 
   figcaption {
@@ -519,14 +543,20 @@
 
 @layer components {
   /* -- Wide blocks -------------------------------------------------------- */
-  /* Opt-in: wrap a code block or table in <div class="wide"> to extend
-     into the sidenote column on desktop. Clears preceding sidenotes. */
+  /* Opt-in: wrap a code block or table in <div class="wide">, or mark up an
+     image as {class="wide"}, to extend into the sidenote column on desktop.
+     Clears preceding sidenotes. */
 
   @media (min-width: 72rem) {
     .wide,
     table {
       clear: right;
       width: calc(100% + var(--sidenote-gap) + var(--sidenote-width));
+    }
+
+    /* The image goes wide, the caption stays at reading width. */
+    figure.wide figcaption {
+      max-width: var(--content-width);
     }
   }
 
@@ -1063,10 +1093,11 @@
     font-family: var(--font-mono);
     font-size: 0.85em;
     line-height: 1.55;
-    padding: var(--space-sm) var(--space-md);
+    padding: var(--space-sm) var(--space-sm);
     overflow-x: auto;
     border-radius: 4px;
     -webkit-overflow-scrolling: touch;
+    margin-block-end: var(--space-sm);
   }
 
   /* Non-highlighted pre (plain code blocks) */

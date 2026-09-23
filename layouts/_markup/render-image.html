@@ -1,0 +1,105 @@
+{{- /*
+  Image render hook.
+
+  Local images (page resources of a leaf bundle, or files in assets/) are
+  served as WebP via <picture>, at the display size and at 2x, with the
+  untouched original as the <img> fallback. Remote images, absolute paths,
+  SVGs and GIFs are passed through as-is.
+
+  Block images become <figure>; the markdown title becomes the <figcaption>.
+  Two block attribute classes change the display size:
+
+      ![Alt text](screenshot.png "Caption")
+      {class="narrow"}  20rem, for tall portrait images
+      {class="wide"}    extends into the sidenote column, like .wide code blocks
+*/ -}}
+
+{{- $dest := .Destination -}}
+{{- $alt := .PlainText -}}
+{{- $caption := .Title -}}
+{{- $class := or .Attributes.class "" -}}
+
+{{- /* Resolve local destinations to a resource. */ -}}
+{{- $img := false -}}
+{{- $external := or (urls.Parse $dest).IsAbs (hasPrefix $dest "/") (hasPrefix $dest "data:") -}}
+{{- if not $external -}}
+  {{- with .PageInner.Resources.Get $dest -}}
+    {{- $img = . -}}
+  {{- else -}}
+    {{- with resources.Get $dest -}}
+      {{- $img = . -}}
+    {{- end -}}
+  {{- end -}}
+{{- end -}}
+
+{{- /* Only raster formats are worth converting. */ -}}
+{{- $processable := false -}}
+{{- if $img -}}
+  {{- if eq $img.ResourceType "image" -}}
+    {{- $processable = in (slice "png" "jpeg") $img.MediaType.SubType -}}
+  {{- end -}}
+{{- end -}}
+
+{{- $markup := "" -}}
+
+{{- if $processable -}}
+  {{- /* Two WebP variants per figure, sized for the width the figure is
+         actually displayed at. Both are retina-sized, roughly 2x and 3x: a 1x
+         screen downloads more than it needs, which is the better trade these
+         days. The content column is 42rem (672px); a .wide figure also covers
+         the sidenote gap and column (56rem). 2800 is as large as we ever go. */ -}}
+  {{- $classes := split $class " " -}}
+  {{- $candidates := slice 1200 2000 -}}
+  {{- $sizes := "(min-width: 44rem) 42rem, 100vw" -}}
+  {{- if in $classes "narrow" -}}
+    {{- $candidates = slice 640 960 -}}
+    {{- $sizes = "(max-width: 22rem) 100vw, 20rem" -}}
+  {{- else if in $classes "wide" -}}
+    {{- $candidates = slice 1800 2800 -}}
+    {{- $sizes = "(min-width: 72rem) 56rem, (min-width: 44rem) 42rem, 100vw" -}}
+  {{- end -}}
+  {{- with .Attributes.sizes -}}{{- $sizes = . -}}{{- end -}}
+
+  {{- /* Skip anything the source is too small for; if it is smaller than all
+         of them, the source width is the best we can do. */ -}}
+  {{- $widths := slice -}}
+  {{- range $w := $candidates -}}
+    {{- if lt $w $img.Width -}}{{- $widths = $widths | append $w -}}{{- end -}}
+  {{- end -}}
+  {{- if not $widths -}}{{- $widths = slice $img.Width -}}{{- end -}}
+
+  {{- /* q70: indistinguishable from q82 on UI screenshots, which are the main
+         case here, and these are downscaled by 2x on screen anyway. */ -}}
+  {{- $webpSet := slice -}}
+  {{- range $w := $widths -}}
+    {{- $webp := $img.Process (printf "resize %dx webp q70" $w) -}}
+    {{- $webpSet = $webpSet | append (printf "%s %dw" $webp.Permalink $w) -}}
+  {{- end -}}
+
+  {{- /* The original is the fallback: only browsers without WebP fetch it. */ -}}
+  {{- $markup = printf `<picture><source type="image/webp" srcset="%s" sizes="%s"><img src="%s" width="%d" height="%d" loading="lazy" decoding="async"%s></picture>`
+    (delimit $webpSet ", ")
+    $sizes
+    $img.Permalink
+    $img.Width
+    $img.Height
+    (cond (eq $alt "") "" (printf ` alt=%q` $alt))
+  -}}
+{{- else -}}
+  {{- $src := $dest -}}
+  {{- with $img -}}{{- $src = .Permalink -}}{{- end -}}
+  {{- $markup = printf `<img src="%s" loading="lazy" decoding="async"%s%s>`
+    ($src | safeURL)
+    (cond (eq $alt "") "" (printf ` alt=%q` $alt))
+    (cond (or .IsBlock (eq $caption "")) "" (printf ` title=%q` $caption))
+  -}}
+{{- end -}}
+
+{{- if .IsBlock -}}
+  <figure{{ with $class }} class="{{ . }}"{{ end }}>
+    {{ $markup | safeHTML }}
+    {{- with $caption }}<figcaption>{{ . | safeHTML }}</figcaption>{{ end -}}
+  </figure>
+{{- else -}}
+  {{- $markup | safeHTML -}}
+{{- end -}}

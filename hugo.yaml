@@ -29,6 +29,7 @@ markup:
     extensions:
       footnote: true
     parser:
+      wrapStandAloneImageWithinParagraph: false
       attribute:
         block: true
         title: true
