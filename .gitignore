@@ -4,3 +4,7 @@ resources/
 .wrangler/
 
 .sequoia-state.json
+
+# wrangler dev secrets
+.dev.vars
+activitypub_private.pem

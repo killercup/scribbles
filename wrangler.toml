@@ -11,8 +11,17 @@ main = "./worker/index.js"
 directory = "public"
 html_handling = "none"
 binding = "ASSETS"
-run_worker_first = ["/", "/*.html"]
+run_worker_first = ["/", "/*.html", "/activitypub/*"]
 not_found_handling = "404-page"
+
+# ActivityPub follower store (see worker/activitypub.js)
+[[kv_namespaces]]
+binding = "AP"
+id = "1f9183530e704cc4bd379490b69d70bf"
+
+# Deliver new posts to followers
+[triggers]
+crons = ["*/30 * * * *"]
 
 [build]
 command = "hugo"

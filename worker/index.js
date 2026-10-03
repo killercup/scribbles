@@ -1,3 +1,5 @@
+import { deliverNewPosts, handleActivityPub } from "./activitypub.js";
+
 // Content negotiation: agents sending `Accept: text/markdown` get the
 // Hugo-generated .md twin of an HTML page.
 const wantsMarkdown = (request) =>
@@ -12,6 +14,7 @@ const withHeaders = (response, headers) => {
 export default {
   async fetch(request, env) {
     const url = new URL(request.url);
+    if (url.pathname.startsWith("/activitypub/")) return handleActivityPub(request, env);
     if (url.pathname === "/") url.pathname = "/index.html";
     if (!url.pathname.endsWith(".html")) return env.ASSETS.fetch(request);
 
@@ -28,5 +31,9 @@ export default {
     }
     const html = await env.ASSETS.fetch(new Request(url, request));
     return withHeaders(html, { Vary: "Accept" });
+  },
+
+  async scheduled(_event, env) {
+    await deliverNewPosts(env);
   },
 };
