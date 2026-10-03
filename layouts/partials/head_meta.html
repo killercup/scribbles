@@ -11,6 +11,9 @@
 {{- $description := .Description | default .Summary | default site.Params.description | plainify | htmlUnescape | truncate 200 -}}
 
 <link rel="alternate" type="application/rss+xml" title="{{ $siteTitle }}" href="{{ "feed.xml" | absURL }}" />
+{{- with .OutputFormats.Get "Markdown" }}
+<link rel="alternate" type="text/markdown" href="{{ .Permalink }}" />
+{{- end }}
 <title>{{ $fullTitle }}</title>
 
 <meta property="og:type" content="{{ if .IsPage }}article{{ else }}website{{ end }}" />

@@ -44,9 +44,12 @@ mediaTypes:
   application/activity+json:
     suffixes: ["json"]
 outputs:
-  home: [HTML, RSS, ActivityPubOutbox]
-  page: [HTML, ActivityPubNote]
+  home: [HTML, RSS, ActivityPubOutbox, Markdown]
+  page: [HTML, ActivityPubNote, Markdown]
 outputFormats:
+  Markdown:
+    mediaType: text/markdown
+    isPlainText: true
   RSS:
     mediaType: application/rss+xml
     baseName: feed
