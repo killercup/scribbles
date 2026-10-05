@@ -2,7 +2,6 @@
 title: 'Nice CLI Crash Reports in Rust'
 publishDate: '2026-10-05'
 updatedAt: '2026-10-05'
-draft: true
 categories:
   - rust
   - cli
