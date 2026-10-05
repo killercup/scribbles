@@ -5,7 +5,7 @@ updatedAt: '2026-08-06'
 categories:
   - swift
   - atproto
-atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3msfvzfyckw2z"
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mx4p33jy2s2h"
 build:
   # Only publish the resized/converted screenshots, not the originals.
   publishResources: false

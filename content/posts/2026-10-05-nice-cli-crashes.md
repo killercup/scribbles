@@ -5,6 +5,9 @@ updatedAt: '2026-10-05'
 categories:
   - rust
   - cli
+atUri: "at://did:plc:x67qh7v3fd7znbdhauc45ng3/site.standard.document/3mx4p337cbc2h"
+discussions:
+  Bluesky: https://bsky.app/profile/did:plc:lva4uak3qmci3tmt5mfuwlhd/post/3mx4p7nuw5k2v
 ---
 While working on [Rastair] (see also [my post]),
 I got back into one of my favorite niches in Rust:
