@@ -26,6 +26,10 @@
   html {
     hanging-punctuation: first last;
     interpolate-size: allow-keywords;
+    overflow-wrap: break-word;
+    scrollbar-gutter: stable;
+    scroll-padding-block-start: 2rem;
+    -webkit-text-size-adjust: 100%;
   }
 
   body {
@@ -39,6 +43,7 @@
   canvas {
     display: block;
     max-width: 100%;
+    height: auto;
   }
 
   input,
@@ -62,15 +67,9 @@
     text-wrap: pretty;
   }
 
-  @media (prefers-reduced-motion: reduce) {
-    *,
-    *::before,
-    *::after {
-      animation-duration: 0.01ms !important;
-      animation-iteration-count: 1 !important;
-      transition-duration: 0.01ms !important;
-      scroll-behavior: auto !important;
-    }
+  :focus-visible {
+    outline: max(2px, 0.08em) solid currentColor;
+    outline-offset: 0.15em;
   }
 }
 
@@ -98,21 +97,23 @@
     --font-heading-weight: 600;
   }
 
-  /* -- Color palettes ----------------------------------------------------- */
-  :root {
-    --hue: 350;
-    --accent: oklch(0.637 0.255 var(--hue));
-    --accent-light: oklch(0.75 0.18 var(--hue));
-    --accent-soft: oklch(0.75 0.12 var(--hue));
-    --accent-faint: oklch(0.93 0.03 var(--hue));
-    --accent-dark: oklch(0.5 0.2 var(--hue));
-  }
-
-  /* -- Surface & text colors ---------------------------------------------- */
-  /* These adapt to the chosen palette via --hue */
+  /* -- Colors ------------------------------------------------------------ */
+  /* Each token is light-dark(light, dark). Themes only flip color-scheme. */
 
   :root {
     color-scheme: light dark;
+    --hue: 350;
+    --accent: light-dark(oklch(0.58 0.255 var(--hue)), oklch(0.75 0.18 var(--hue)));
+    --accent-dark: oklch(0.5 0.2 var(--hue));
+
+    --surface: light-dark(oklch(0.985 0.005 var(--hue)), oklch(0.15 0.008 var(--hue)));
+    --surface-raised: light-dark(oklch(0.965 0.008 var(--hue)), oklch(0.2 0.01 var(--hue)));
+    --surface-code: light-dark(oklch(0.955 0.008 var(--hue)), oklch(0.18 0.01 var(--hue)));
+    --text: light-dark(oklch(0.2 0.01 var(--hue)), oklch(0.88 0.008 var(--hue)));
+    --text-secondary: light-dark(oklch(0.42 0.01 var(--hue)), oklch(0.65 0.01 var(--hue)));
+    --text-tertiary: light-dark(oklch(0.55 0.008 var(--hue)), oklch(0.6 0.008 var(--hue)));
+    --border: light-dark(oklch(0.87 0.01 var(--hue)), oklch(0.3 0.012 var(--hue)));
+    --border-light: light-dark(oklch(0.92 0.008 var(--hue)), oklch(0.25 0.01 var(--hue)));
   }
 
   [data-theme="light"] {
@@ -121,46 +122,6 @@
 
   [data-theme="dark"] {
     color-scheme: dark;
-  }
-
-  /* Light mode surfaces */
-  :root {
-    --surface: oklch(0.985 0.005 var(--hue));
-    --surface-raised: oklch(0.965 0.008 var(--hue));
-    --surface-code: oklch(0.955 0.008 var(--hue));
-    --text: oklch(0.2 0.01 var(--hue));
-    --text-secondary: oklch(0.42 0.01 var(--hue));
-    --text-tertiary: oklch(0.55 0.008 var(--hue));
-    --border: oklch(0.87 0.01 var(--hue));
-    --border-light: oklch(0.92 0.008 var(--hue));
-  }
-
-  /* Dark mode — system preference (when no explicit theme set) */
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --accent: var(--accent-light);
-      --surface: oklch(0.15 0.008 var(--hue));
-      --surface-raised: oklch(0.2 0.01 var(--hue));
-      --surface-code: oklch(0.18 0.01 var(--hue));
-      --text: oklch(0.88 0.008 var(--hue));
-      --text-secondary: oklch(0.65 0.01 var(--hue));
-      --text-tertiary: oklch(0.52 0.008 var(--hue));
-      --border: oklch(0.3 0.012 var(--hue));
-      --border-light: oklch(0.25 0.01 var(--hue));
-    }
-  }
-
-  /* Dark mode — explicit override */
-  [data-theme="dark"] {
-    --accent: var(--accent-light);
-    --surface: oklch(0.15 0.008 var(--hue));
-    --surface-raised: oklch(0.2 0.01 var(--hue));
-    --surface-code: oklch(0.18 0.01 var(--hue));
-    --text: oklch(0.88 0.008 var(--hue));
-    --text-secondary: oklch(0.65 0.01 var(--hue));
-    --text-tertiary: oklch(0.52 0.008 var(--hue));
-    --border: oklch(0.3 0.012 var(--hue));
-    --border-light: oklch(0.25 0.01 var(--hue));
   }
 
   /* -- Spacing scale (4pt base) ------------------------------------------ */
@@ -316,8 +277,10 @@
     transition: text-decoration-color 0.15s ease;
   }
 
-  a:hover {
-    text-decoration-color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    a:hover {
+      text-decoration-color: var(--accent);
+    }
   }
 
   /*a:visited {
@@ -438,7 +401,6 @@
   .post-content table {
     display: block;
     overflow-x: auto;
-    -webkit-overflow-scrolling: touch;
   }
 
   table {
@@ -456,7 +418,7 @@
   th,
   td {
     padding: var(--space-2xs) var(--space-xs);
-    text-align: left;
+    text-align: start;
     vertical-align: top;
   }
 
@@ -550,7 +512,7 @@
   @media (min-width: 72rem) {
     .wide,
     table {
-      clear: right;
+      clear: inline-end;
       width: calc(100% + var(--sidenote-gap) + var(--sidenote-width));
     }
 
@@ -645,16 +607,18 @@
     border-radius: 0.5rem;
   }
 
-  .breadcrumb a:hover {
-    background-color: var(--surface-raised);
+  @media (hover: hover) and (pointer: fine) {
+    .breadcrumb a:hover {
+      background-color: var(--surface-raised);
+    }
   }
 
   /* -- Theme toggle ------------------------------------------------------- */
 
   .theme-toggle {
     position: fixed;
-    top: var(--space-sm);
-    right: var(--space-sm);
+    inset-block-start: var(--space-sm);
+    inset-inline-end: var(--space-sm);
     font-family: var(--font-heading, system-ui, sans-serif);
     font-size: var(--text-xs);
     color: var(--text-tertiary);
@@ -670,9 +634,11 @@
       border-color 0.15s ease;
   }
 
-  .theme-toggle:hover {
-    color: var(--text-secondary);
-    border-color: var(--border);
+  @media (hover: hover) and (pointer: fine) {
+    .theme-toggle:hover {
+      color: var(--text-secondary);
+      border-color: var(--border);
+    }
   }
 
   /* -- Post header -------------------------------------------------------- */
@@ -697,9 +663,11 @@
     text-decoration-color: var(--border);
   }
 
-  .post-meta a:hover {
-    color: var(--accent);
-    text-decoration-color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .post-meta a:hover {
+      color: var(--accent);
+      text-decoration-color: var(--accent);
+    }
   }
 
   .post-meta em {
@@ -722,7 +690,7 @@
   }
 
   .post-toc header {
-    margin-bottom: var(--space-sm);
+    margin-block-end: var(--space-sm);
   }
 
   .post-toc header {
@@ -730,7 +698,7 @@
   }
 
   .post-toc p {
-    margin-bottom: var(--space-xs);
+    margin-block-end: var(--space-xs);
     text-transform: uppercase;
     letter-spacing: 1px;
   }
@@ -765,18 +733,20 @@
     text-decoration: none;
   }
 
-  .post-toc a:hover {
-    color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .post-toc a:hover {
+      color: var(--accent);
+    }
   }
 
   /* Wide screens: pull TOC into left margin */
   @media (min-width: 72rem) {
     .post-toc {
       position: sticky;
-      top: var(--space-lg);
-      float: left;
+      inset-block-start: var(--space-lg);
+      float: inline-start;
       width: var(--toc-width, 12rem);
-      margin-left: calc(-1 * (var(--toc-width, 12rem) + var(--toc-gap, 3rem)));
+      margin-inline-start: calc(-1 * (var(--toc-width, 12rem) + var(--toc-gap, 3rem)));
       border-block: none;
       padding-block: 0;
       margin-block-end: 0;
@@ -823,7 +793,7 @@
   .post-date,
   .post-count {
     font-family: var(--font-sans, system-ui, sans-serif);
-    font-size: 0.65rem;
+    font-size: var(--text-xs);
     color: var(--text-tertiary);
     display: inline-block;
     margin-inline-start: var(--space-xs);
@@ -836,8 +806,10 @@
         color: var(--text-secondary);
     }*/
 
-  .post-link:hover {
-    color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .post-link:hover {
+      color: var(--accent);
+    }
   }
 
   /* -- Footnotes ---------------------------------------------------------- */
@@ -882,8 +854,10 @@
     margin-inline-start: 0.1em;
   }
 
-  .footnote-ref:hover {
-    text-decoration: underline;
+  @media (hover: hover) and (pointer: fine) {
+    .footnote-ref:hover {
+      text-decoration: underline;
+    }
   }
 
   .footnote-backref {
@@ -892,8 +866,10 @@
     margin-inline-start: var(--space-3xs);
   }
 
-  .footnote-backref:hover {
-    color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .footnote-backref:hover {
+      color: var(--accent);
+    }
   }
 
   /* -- Sidenotes ---------------------------------------------------------- */
@@ -921,13 +897,13 @@
   @media (min-width: 72rem) {
     .sidenote {
       display: block;
-      float: right;
-      clear: right;
+      float: inline-end;
+      clear: inline-end;
       width: var(--sidenote-width, 12rem);
-      margin-right: calc(
+      margin-inline-end: calc(
         -1 * (var(--sidenote-width, 12rem) + var(--sidenote-gap, 2rem))
       );
-      margin-bottom: var(--space-sm);
+      margin-block-end: var(--space-sm);
       font-family: var(--font-sans, system-ui, sans-serif);
       font-size: var(--text-xs);
       color: var(--text-secondary);
@@ -971,23 +947,25 @@
       color: var(--text-secondary);
     }
 
-    .sidenote-link-domain:hover {
-      color: var(--accent);
-    }
+    @media (hover: hover) and (pointer: fine) {
+      .sidenote-link-domain:hover {
+        color: var(--accent);
+      }
 
-    sup:hover + .sidenote {
-      background-color: var(--surface-raised);
-    }
+      sup:hover + .sidenote {
+        background-color: var(--surface-raised);
+      }
 
-    a:hover + .sidenote-link,
-    .sidenote-link:hover {
-      color: var(--text-secondary);
-      background-color: var(--surface-raised);
-    }
+      a:hover + .sidenote-link,
+      .sidenote-link:hover {
+        color: var(--text-secondary);
+        background-color: var(--surface-raised);
+      }
 
-    a:hover + .sidenote-link span,
-    .sidenote-link:hover span {
-      color: var(--accent);
+      a:hover + .sidenote-link span,
+      .sidenote-link:hover span {
+        color: var(--accent);
+      }
     }
 
     /* Hide footnotes section — content is shown as sidenotes */
@@ -1000,7 +978,7 @@
 
   .btw {
     background-color: var(--surface-raised);
-    border-left: 4px solid var(--accent);
+    border-inline-start: 4px solid var(--accent);
     padding: var(--space-sm);
     margin-block: var(--space-md);
   }
@@ -1024,9 +1002,11 @@
     text-decoration-color: var(--border);
   }
 
-  .article-footer a:hover {
-    color: var(--accent);
-    text-decoration-color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .article-footer a:hover {
+      color: var(--accent);
+      text-decoration-color: var(--accent);
+    }
   }
 
   /* -- Site footer -------------------------------------------------------- */
@@ -1047,8 +1027,10 @@
     text-decoration: none;
   }
 
-  .site-footer a:hover {
-    color: var(--accent);
+  @media (hover: hover) and (pointer: fine) {
+    .site-footer a:hover {
+      color: var(--accent);
+    }
   }
 
   /* -- Index page --------------------------------------------------------- */
@@ -1096,7 +1078,6 @@
     padding: var(--space-sm) var(--space-sm);
     overflow-x: auto;
     border-radius: 4px;
-    -webkit-overflow-scrolling: touch;
     margin-block-end: var(--space-sm);
   }
 
@@ -1113,60 +1094,22 @@
     color: var(--code-text);
   }
 
-  /* -- Light mode code tokens --------------------------------------------- */
+  /* -- Code tokens (light, dark) ----------------------------------------- */
 
   :root {
-    --code-bg: oklch(0.965 0.006 var(--hue));
-    --code-text: oklch(0.28 0.01 var(--hue));
+    --code-bg: light-dark(oklch(0.965 0.006 var(--hue)), oklch(0.18 0.01 var(--hue)));
+    --code-text: light-dark(oklch(0.28 0.01 var(--hue)), oklch(0.82 0.008 var(--hue)));
 
-    --code-comment: oklch(0.55 0.01 var(--hue));
-    --code-keyword: oklch(0.48 0.18 12); /* warm red */
-    --code-string: oklch(0.42 0.1 250); /* deep blue */
-    --code-function: oklch(0.47 0.16 300); /* purple */
-    --code-number: oklch(0.45 0.14 255); /* blue */
-    --code-type: oklch(0.5 0.14 55); /* tawny orange */
-    --code-operator: oklch(0.48 0.18 12); /* same as keyword */
-    --code-punctuation: oklch(0.45 0.01 var(--hue));
-    --code-added: oklch(0.45 0.15 145); /* green */
-    --code-deleted: oklch(0.5 0.18 25); /* red */
-  }
-
-  /* -- Dark mode code tokens — system preference -------------------------- */
-
-  @media (prefers-color-scheme: dark) {
-    :root:not([data-theme="light"]) {
-      --code-bg: oklch(0.18 0.01 var(--hue));
-      --code-text: oklch(0.82 0.008 var(--hue));
-
-      --code-comment: oklch(0.58 0.01 var(--hue));
-      --code-keyword: oklch(0.72 0.14 15); /* soft red */
-      --code-string: oklch(0.78 0.08 220); /* light blue */
-      --code-function: oklch(0.78 0.12 300); /* lavender */
-      --code-number: oklch(0.75 0.1 235); /* sky */
-      --code-type: oklch(0.75 0.12 60); /* amber */
-      --code-operator: oklch(0.72 0.14 15); /* same as keyword */
-      --code-punctuation: oklch(0.62 0.008 var(--hue));
-      --code-added: oklch(0.72 0.12 145); /* green */
-      --code-deleted: oklch(0.72 0.14 25); /* red */
-    }
-  }
-
-  /* -- Dark mode code tokens — explicit override -------------------------- */
-
-  [data-theme="dark"] {
-    --code-bg: oklch(0.18 0.01 var(--hue));
-    --code-text: oklch(0.82 0.008 var(--hue));
-
-    --code-comment: oklch(0.58 0.01 var(--hue));
-    --code-keyword: oklch(0.72 0.14 15); /* soft red */
-    --code-string: oklch(0.78 0.08 220); /* light blue */
-    --code-function: oklch(0.78 0.12 300); /* lavender */
-    --code-number: oklch(0.75 0.1 235); /* sky */
-    --code-type: oklch(0.75 0.12 60); /* amber */
-    --code-operator: oklch(0.72 0.14 15); /* same as keyword */
-    --code-punctuation: oklch(0.62 0.008 var(--hue));
-    --code-added: oklch(0.72 0.12 145); /* green */
-    --code-deleted: oklch(0.72 0.14 25); /* red */
+    --code-comment: light-dark(oklch(0.52 0.01 var(--hue)), oklch(0.62 0.01 var(--hue)));
+    --code-keyword: light-dark(oklch(0.48 0.18 12), oklch(0.72 0.14 15)); /* red */
+    --code-string: light-dark(oklch(0.42 0.1 250), oklch(0.78 0.08 220)); /* blue */
+    --code-function: light-dark(oklch(0.47 0.16 300), oklch(0.78 0.12 300)); /* purple */
+    --code-number: light-dark(oklch(0.45 0.14 255), oklch(0.75 0.1 235)); /* blue */
+    --code-type: light-dark(oklch(0.5 0.14 55), oklch(0.75 0.12 60)); /* orange */
+    --code-operator: var(--code-keyword);
+    --code-punctuation: light-dark(oklch(0.45 0.01 var(--hue)), oklch(0.62 0.008 var(--hue)));
+    --code-added: light-dark(oklch(0.45 0.15 145), oklch(0.72 0.12 145)); /* green */
+    --code-deleted: light-dark(oklch(0.5 0.18 25), oklch(0.72 0.14 25)); /* red */
   }
 
   /* -- Token classes ------------------------------------------------------ */
@@ -1502,7 +1445,7 @@
     content: "---" / "";
     display: block;
     color: var(--md-marker);
-    text-align: left;
+    text-align: start;
     font-family: var(--font-mono);
   }
 
