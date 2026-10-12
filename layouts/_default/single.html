@@ -9,10 +9,15 @@
     <h1 class="post-title" itemprop="name headline">{{ .Title }}</h1>
     <p class="post-meta">
       Published <time datetime="{{ .Date.Format "2006-01-02T15:04:05Z07:00" }}" itemprop="datePublished">{{ .Date.Format "2 Jan 2006" }}</time>
-      <span itemprop="author" itemscope itemtype="http://schema.org/Person"> by <span itemprop="name">{{ site.Params.author }}</span></span>
-      and published in <a href="{{ site.BaseURL }}">{{ site.Title }}</a>.
+      <span itemprop="author" itemscope itemtype="http://schema.org/Person"> by <span itemprop="name">{{ site.Params.author }}</span></span>.
+      {{- if gt (.Lastmod.Format "2006-01-02") (.Date.Format "2006-01-02") }}
+      Updated <a href="{{ site.Params.post_revisions_url }}{{ .File.Path }}"><time datetime="{{ .Lastmod.Format "2006-01-02" }}" itemprop="dateModified">{{ .Lastmod.Format "2 Jan 2006" }}</time></a>.
+      {{- end }}
       {{- with .Params.categories }}
         Labeled as {{ range $i, $cat := . }}{{ if $i }}{{ if eq $i (sub (len $.Params.categories) 1) }} and {{ else }}, {{ end }}{{ end }}<a href="/categories/{{ $cat | urlize }}.html">{{ $cat }}</a>{{ end }}.
+      {{- end }}
+      {{- with .OutputFormats.Get "markdown" }}
+      <a href="{{ .RelPermalink }}" type="text/markdown">Read as Markdown</a>.
       {{- end }}
     </p>
   </header>
@@ -20,11 +25,13 @@
   {{- $toc := .TableOfContents }}
   {{- if gt (len (plainify $toc)) 0 }}
   <aside class="post-toc" aria-label="Table of Contents">
-    <header aria-hidden>
+    <header aria-hidden="true">
       {{ $.Title }}
     </header>
-    <p>Chapters</p>
-    {{ $toc | safeHTML }}
+    <details>
+      <summary>Chapters</summary>
+      {{ $toc | safeHTML }}
+    </details>
   </aside>
   {{- end }}
 

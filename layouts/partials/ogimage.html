@@ -1,24 +1,67 @@
-{{/* Generate opengraph image */}}
-{{- if .IsPage -}}
+{{/* Generate opengraph image.
+     Everything sits between x=230 and x=970 so it survives apps that crop
+     the 1200×630 card to ~4:3. The template only provides the background
+     and the double rule. */}}
+{{- if or .IsPage .IsHome -}}
   {{ $base := resources.Get "ogimage-template.png" }}
-  {{ $font := resources.Get "fonts/Piazzolla-Regular.ttf"}}
-  {{ $img := $base.Filter (images.Text (.Page.Date.Format "2 Jan 2006") (dict
-    "color" "#DCD5D8"
-    "size" 32
-    "linespacing" 2
-    "x" 63
-    "y" 239
-    "font" $font
-  )) }}
-  {{ $img = $img.Filter (images.Text .Page.Title (dict
-    "color" "#FF78BE"
-    "size" 64
-    "linespacing" 2
-    "x" 63
-    "y" 303
-    "font" $font
-  )) }}
-  {{ $img = resources.Copy (print .Page.Slug "-og.png") $img }}
+  {{ $bg := ($base.Crop "1200x400 BottomLeft").Resize "1200x630" }}
+  {{ $rule := (($base.Crop "1200x170 TopLeft").Crop "1200x24 BottomLeft").Crop "740x24 Center" }}
+  {{ $mono := resources.Get "fonts/FiraCode-SemiBold.ttf" }}
+  {{ $serif := resources.Get "fonts/Piazzolla-Regular.ttf" }}
+  {{ $light := "#DCD5D8" }}
+  {{ $gray := "#8A8387" }}
+  {{ $pink := "#FF78BE" }}
+  {{ $img := $bg }}
+  {{ $name := "" }}
+
+  {{- if .IsPage }}
+    {{/* Wrap the title by character count; Hugo only wraps at the image edge */}}
+    {{ $lines := slice }}
+    {{ $line := "" }}
+    {{ range split .Title " " }}
+      {{ if and $line (gt (add (strings.RuneCount $line) (strings.RuneCount .) 1) 31) }}
+        {{ $lines = $lines | append $line }}
+        {{ $line = . }}
+      {{ else }}
+        {{ $line = trim (printf "%s %s" $line .) " " }}
+      {{ end }}
+    {{ end }}
+    {{ $lines = $lines | append $line }}
+
+    {{ $img = $img.Filter
+      (images.Text "Pascal’s scribbles" (dict "color" $light "size" 40 "font" $mono "x" 230 "y" 110))
+      (images.Overlay $rule 230 172)
+      (images.Text (.Date.Format "2 Jan 2006") (dict "color" $gray "size" 28 "font" $serif "x" 230 "y" 228))
+      (images.Text (delimit $lines "\n") (dict "color" $pink "size" 50 "linespacing" 14 "font" $serif "x" 230 "y" 280))
+      (images.Text "deterministic.space" (dict "color" $gray "size" 22 "font" $serif "x" 230 "y" 540))
+    }}
+    {{ $name = print .Slug "-og.png" }}
+
+  {{- else }}
+    {{/* Homepage: the description gets a footnote set as a sidenote, like the
+         posts. Positions are measured for this exact text at these sizes;
+         re-check them when changing the copy. */}}
+    {{ $body := dict "color" "#EDE7EA" "size" 36 "font" $serif }}
+    {{ $marker := dict "color" $gray "size" 22 "font" $serif }}
+    {{ $note := dict "color" "#A39BA0" "size" 22 "font" $serif }}
+    {{ $img = $img.Filter
+      (images.Text "Pascal’s scribbles" (dict "color" $light "size" 68 "font" $mono "x" 230 "y" 150))
+      (images.Overlay $rule 230 244)
+      (images.Text "Posts on programming topics," (merge $body (dict "x" 230 "y" 300)))
+      (images.Text "with a few crazy ideas" (merge $body (dict "x" 230 "y" 348)))
+      (images.Text "[^" (merge $marker (dict "x" 572 "y" 345)))
+      (images.Text "1" (merge $marker (dict "x" 591 "y" 345 "color" $pink)))
+      (images.Text "]" (merge $marker (dict "x" 600 "y" 345)))
+      (images.Text "thrown in." (merge $body (dict "x" 617 "y" 348)))
+      (images.Text "1" (merge $note (dict "x" 818 "y" 352 "size" 15 "color" $pink)))
+      (images.Text "Some of them" (merge $note (dict "x" 829 "y" 355)))
+      (images.Text "even work." (merge $note (dict "x" 818 "y" 384)))
+      (images.Text "deterministic.space" (merge $marker (dict "x" 230 "y" 540)))
+    }}
+    {{ $name = "home-og.png" }}
+  {{- end }}
+
+  {{ $img = resources.Copy $name $img }}
   <meta property="og:image" content="{{$img.Permalink}}">
   <meta property="og:image:width" content="{{$img.Width}}" />
   <meta property="og:image:height" content="{{$img.Height}}" />

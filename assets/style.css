@@ -74,17 +74,11 @@
 }
 
 /* --------------------------------------------------------------------------
-   Tokens — Fonts
-
-   Add one of these classes to <html> to switch font sets:
-     fonts-a      Piazzolla + Hanken Grotesk  (warm editorial)
-     fonts-b      Vollkorn + Archivo          (structured & dry)
-     fonts-c      Brygada 1918 + Figtree      (contemporary clarity)
-     fonts-default  System stacks             (conservative fallback)
+   Tokens
    -------------------------------------------------------------------------- */
 
 @layer tokens {
-  /* -- Font classes -------------------------------------------------------- */
+  /* -- Fonts --------------------------------------------------------------- */
   :root {
     --font-body: "Piazzolla", "Georgia", serif;
     --font-sans: system-ui, sans-serif;
@@ -104,7 +98,6 @@
     color-scheme: light dark;
     --hue: 350;
     --accent: light-dark(oklch(0.58 0.255 var(--hue)), oklch(0.75 0.18 var(--hue)));
-    --accent-dark: oklch(0.5 0.2 var(--hue));
 
     --surface: light-dark(oklch(0.985 0.005 var(--hue)), oklch(0.15 0.008 var(--hue)));
     --surface-raised: light-dark(oklch(0.965 0.008 var(--hue)), oklch(0.2 0.01 var(--hue)));
@@ -136,6 +129,12 @@
     --space-xl: 3rem; /* 48px */
     --space-2xl: 4rem; /* 64px */
     --space-3xl: 6rem; /* 96px */
+  }
+
+  /* -- Motion ----------------------------------------------------------- */
+
+  :root {
+    --ease-out: cubic-bezier(0.23, 1, 0.32, 1);
   }
 
   /* -- Type scale --------------------------------------------------------- */
@@ -283,19 +282,6 @@
     }
   }
 
-  /*a:visited {
-        color: var(--accent-dark);
-        text-decoration-color: color-mix(
-            in oklch,
-            var(--accent-dark) 40%,
-            transparent
-        );
-    }
-
-    a:visited:hover {
-        text-decoration-color: var(--accent-dark);
-    }*/
-
   /* -- Body text ---------------------------------------------------------- */
 
   .post-content p,
@@ -349,8 +335,6 @@
     max-width: 8rem;
   }
 
-  /* -- Blockquotes -------------------------------------------------------- */
-
   blockquote {
     font-style: italic;
     color: var(--text-secondary);
@@ -363,8 +347,6 @@
   blockquote p {
     margin-block-end: var(--space-2xs);
   }
-
-  /* -- Definition lists --------------------------------------------------- */
 
   dl {
     margin-block: var(--space-md);
@@ -388,7 +370,6 @@
     padding-inline-start: var(--space-md);
     margin-block-start: var(--space-3xs);
     color: var(--text-secondary);
-    /*font-size: var(--text-sm);*/
     line-height: 1.5;
   }
 
@@ -595,13 +576,14 @@
     color: var(--text) !important;
   }
 
-  /* -- Beadcrumb ----------------------------------------------------------- */
+  /* -- Breadcrumb ---------------------------------------------------------- */
 
   .breadcrumb {
     margin: var(--space-sm) 0;
   }
 
   .breadcrumb a {
+    color: var(--text-secondary);
     padding: var(--space-xs);
     text-decoration: none;
     border-radius: 0.5rem;
@@ -609,35 +591,8 @@
 
   @media (hover: hover) and (pointer: fine) {
     .breadcrumb a:hover {
+      color: var(--accent);
       background-color: var(--surface-raised);
-    }
-  }
-
-  /* -- Theme toggle ------------------------------------------------------- */
-
-  .theme-toggle {
-    position: fixed;
-    inset-block-start: var(--space-sm);
-    inset-inline-end: var(--space-sm);
-    font-family: var(--font-heading, system-ui, sans-serif);
-    font-size: var(--text-xs);
-    color: var(--text-tertiary);
-    background: none;
-    border: 1px solid var(--border-light);
-    border-radius: 3px;
-    padding: var(--space-3xs) var(--space-2xs);
-    cursor: pointer;
-    letter-spacing: 0.03em;
-    z-index: 10;
-    transition:
-      color 0.15s ease,
-      border-color 0.15s ease;
-  }
-
-  @media (hover: hover) and (pointer: fine) {
-    .theme-toggle:hover {
-      color: var(--text-secondary);
-      border-color: var(--border);
     }
   }
 
@@ -689,24 +644,26 @@
     border-block: 1px solid var(--border-light);
   }
 
+  /* Title shown above the TOC once it sticks (wide screens only) */
   .post-toc header {
+    display: none;
     margin-block-end: var(--space-sm);
-  }
-
-  .post-toc header {
     font-weight: var(--font-heading-weight);
   }
 
-  .post-toc p {
-    margin-block-end: var(--space-xs);
+  /* Narrow screens: collapsed behind "Chapters" */
+  .post-toc summary {
     text-transform: uppercase;
     letter-spacing: 1px;
+    cursor: pointer;
   }
 
-  .post-toc header {
-    display: none;
-    visibility: hidden;
-    opacity: 0;
+  .post-toc summary::marker {
+    color: var(--text-tertiary);
+  }
+
+  .post-toc nav {
+    margin-block-start: var(--space-xs);
   }
 
   .post-toc ol {
@@ -755,12 +712,27 @@
 
       header {
         display: block;
+        visibility: hidden;
+        opacity: 0;
         transition: opacity 0.15s linear;
 
         @container scroll-state(stuck: top) {
           visibility: visible;
           opacity: 1;
         }
+      }
+    }
+
+    /* Always expanded; without ::details-content support it stays a
+       normal toggle. */
+    @supports selector(::details-content) {
+      .post-toc details::details-content {
+        content-visibility: visible;
+      }
+
+      .post-toc summary {
+        list-style: none;
+        pointer-events: none;
       }
     }
   }
@@ -801,10 +773,6 @@
     text-transform: uppercase;
     white-space: nowrap;
   }
-
-  /*.post-link:visited {
-        color: var(--text-secondary);
-    }*/
 
   @media (hover: hover) and (pointer: fine) {
     .post-link:hover {
@@ -894,9 +862,72 @@
     color: inherit;
   }
 
+  .sidenote p {
+    margin-block-end: var(--space-3xs);
+  }
+
+  .sidenote p:last-child {
+    margin-block-end: 0;
+  }
+
+  /* Footnote sidenotes: inline number with the first paragraph */
+  .sidenote-fn > p:first-of-type {
+    display: inline;
+  }
+
+  .sidenote-fn::before {
+    content: attr(data-sn);
+    color: var(--accent);
+    margin-inline-end: 0.3em;
+    font-size: 0.9em;
+    vertical-align: super;
+  }
+
+  /* Narrow screens: footnotes open as a popover at the bottom edge
+     (sidenotes.js adds the popover attribute) */
+  .sidenote-fn:popover-open {
+    display: block;
+    position: fixed;
+    inset: auto var(--space-sm) var(--space-sm);
+    width: auto;
+    max-width: 40rem;
+    max-height: 50dvh;
+    margin-inline: auto;
+    padding: var(--space-sm) var(--space-md);
+    font-family: var(--font-sans, system-ui, sans-serif);
+    font-size: var(--text-sm);
+    line-height: 1.5;
+    color: var(--text);
+    background-color: var(--surface-raised);
+    border: 1px solid var(--border);
+    border-radius: 4px;
+    box-shadow: 0 0.5rem 2rem oklch(0 0 none / 0.15);
+  }
+
+  @media (prefers-reduced-motion: no-preference) {
+    .sidenote-fn:popover-open {
+      transition:
+        opacity 0.2s var(--ease-out),
+        translate 0.2s var(--ease-out);
+
+      @starting-style {
+        opacity: 0;
+        translate: 0 0.5rem;
+      }
+    }
+  }
+
   @media (min-width: 72rem) {
     .sidenote {
       display: block;
+      /* undo the UA popover styles */
+      position: static;
+      height: auto;
+      overflow: visible;
+      border: none;
+      background: none;
+      margin-block-start: 0;
+      margin-inline-start: 0;
       float: inline-end;
       clear: inline-end;
       width: var(--sidenote-width, 12rem);
@@ -909,27 +940,6 @@
       color: var(--text-secondary);
       line-height: 1.45;
       padding: var(--space-3xs);
-    }
-
-    .sidenote p {
-      margin-block-end: var(--space-3xs);
-    }
-
-    .sidenote p:last-child {
-      margin-block-end: 0;
-    }
-
-    /* Footnote sidenotes: inline number with the first paragraph */
-    .sidenote-fn > p:first-of-type {
-      display: inline;
-    }
-
-    .sidenote-fn::before {
-      content: attr(data-sn);
-      color: var(--accent);
-      margin-inline-end: 0.3em;
-      font-size: 0.9em;
-      vertical-align: super;
     }
 
     /* Link title sidenotes */
@@ -971,6 +981,23 @@
     /* Hide footnotes section — content is shown as sidenotes */
     .footnotes {
       display: none;
+    }
+  }
+
+  /* -- Jump targets ------------------------------------------------------- */
+  /* Briefly tint whatever an in-page link jumped to (section, footnote,
+     sidenote). Reduced motion gets no flash at all. */
+
+  @media (prefers-reduced-motion: no-preference) {
+    :target {
+      animation: target-flash 1.5s var(--ease-out);
+    }
+  }
+
+  @keyframes target-flash {
+    from,
+    30% {
+      background-color: color-mix(in oklch, var(--accent) 15%, transparent);
     }
   }
 
@@ -1282,57 +1309,47 @@
     border-block-end: 3px double var(--md-marker);
   }
 
-  h2::before {
-    content: "## " / "";
+  :is(h2, h3, h4, h5, h6)::before,
+  .heading-anchor::before {
     color: var(--md-marker);
     font-weight: var(--font-body-weight, 400);
+  }
+
+  h2::before {
+    content: "## " / "";
   }
   h3::before {
     content: "### " / "";
-    color: var(--md-marker);
-    font-weight: var(--font-body-weight, 400);
   }
   h4::before {
     content: "#### " / "";
-    color: var(--md-marker);
-    font-weight: var(--font-body-weight, 400);
   }
   h5::before {
     content: "##### " / "";
-    color: var(--md-marker);
-    font-weight: var(--font-body-weight, 400);
   }
   h6::before {
     content: "###### " / "";
-    color: var(--md-marker);
-    font-weight: var(--font-body-weight, 400);
   }
 
-  /* -- Bold & italic markers -------------------------------------------- */
-
-  /*.post-content strong::before,
-  .post-content strong::after {
-    content: "**" / "";
-    color: var(--md-marker);
-    font-weight: var(--font-body-weight, 400);
-  }*/
-
-  /*.post-content em::before,
-  .post-content em::after {
-    content: "_" / "";
-    color: var(--md-marker);
-    font-style: normal;
-  }*/
-
-  /* Bold italic */
-  /*.post-content strong em::before,
-  .post-content em strong::before {
-    content: "**_" / "";
+  /* Markdown headings carry the marker in a self-link instead
+     (layouts/_markup/render-heading.html) */
+  :is(h2, h3, h4, h5, h6):has(> .heading-anchor)::before {
+    content: none;
   }
-  .post-content strong em::after,
-  .post-content em strong::after {
-    content: "_**" / "";
-  }*/
+
+  .heading-anchor {
+    text-decoration: none;
+  }
+
+  .heading-anchor::before {
+    content: attr(data-marker) " " / "";
+  }
+
+  @media (hover: hover) and (pointer: fine) {
+    :hover > .heading-anchor::before {
+      color: var(--accent);
+    }
+  }
 
   /* -- Inline code ------------------------------------------------------ */
 
@@ -1347,49 +1364,6 @@
     padding: 0;
     border-radius: 0;
   }
-
-  /* -- Code blocks ------------------------------------------------------ */
-  /*
-    .highlight::before {
-        content: "```" / "";
-        display: block;
-        color: var(--md-marker);
-        font-family: var(--font-mono);
-        font-size: 0.85em;
-        margin-block-end: -0.5em;
-    }
-
-    .highlight::after {
-        content: "```" / "";
-        display: block;
-        color: var(--md-marker);
-        font-family: var(--font-mono);
-        font-size: 0.85em;
-        margin-block-start: -0.5em;
-    }*/
-
-  /*.highlight {
-        background-color: var(--code-bg);
-    }
-
-    pre {
-        padding: var(--space-xs) 0;
-    }*/
-
-  /* Plain pre blocks too */
-  /*pre:not(.chroma)::before {
-        content: "```" / "";
-        display: block;
-        color: var(--md-marker);
-        margin-block-end: 0.25em;
-    }
-
-    pre:not(.chroma)::after {
-        content: "```" / "";
-        display: block;
-        color: var(--md-marker);
-        margin-block-start: 0.25em;
-    }*/
 
   /* -- Lists ------------------------------------------------------------ */
 
@@ -1419,20 +1393,6 @@
   .post-toc ol {
     list-style: decimal outside;
   }
-
-  /* -- Blockquotes ------------------------------------------------------ */
-
-  /*blockquote {
-    border-inline-start: none;
-    padding-inline-start: 0;
-    font-style: normal;
-  }
-
-  blockquote p::before {
-    content: "> " / "";
-    color: var(--md-marker);
-    font-family: var(--font-mono);
-  }*/
 
   /* -- Horizontal rules ------------------------------------------------- */
 
@@ -1469,21 +1429,6 @@
   sup[id^="fnref:"]::after {
     content: "]" / "";
   }
-
-  /* -- Definition lists ------------------------------------------------- */
-
-  /*dt::before {
-    content: none;
-  }
-
-  dd::before {
-    content: ": " / "";
-    color: var(--md-marker);
-  }
-
-  dd {
-    padding-inline-start: 0;
-  }*/
 
   /* -- Images ----------------------------------------------------------- */
 

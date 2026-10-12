@@ -1,0 +1,3 @@
+<h{{ .Level }} id="{{ .Anchor }}" {{- with .Attributes.class }} class="{{ . }}" {{- end }}>
+  {{- if gt .Level 1 }}<a class="heading-anchor" href="#{{ .Anchor }}" data-marker="{{ strings.Repeat .Level "#" }}" aria-hidden="true" tabindex="-1"></a>{{ end -}}
+  {{ .Text }}</h{{ .Level }}>

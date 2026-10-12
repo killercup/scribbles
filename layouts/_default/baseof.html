@@ -44,37 +44,8 @@
   </style>
   {{- $css := resources.Get "style.css" | minify | fingerprint }}
   <link rel="stylesheet" href="{{ $css.RelPermalink }}" integrity="{{ $css.Data.Integrity }}">
-  {{- /*
-  <script>
-    (function(){
-      var t = localStorage.theme;
-      if (t === "dark" || t === "light") document.documentElement.dataset.theme = t;
-    })();
-  </script>
-  */ -}}
 </head>
 <body>
-  {{- /*
-  <button class="theme-toggle" aria-label="Toggle theme">
-    <script>
-      (function(btn){
-        var cycle = {auto:"light", light:"dark", dark:"auto"};
-        var labels = {auto:"auto", light:"light", dark:"dark"};
-        function current(){ return localStorage.theme || "auto"; }
-        function apply(t){
-          if(t==="auto"){delete localStorage.theme;delete document.documentElement.dataset.theme}
-          else{localStorage.theme=t;document.documentElement.dataset.theme=t}
-        }
-        btn.textContent = labels[current()];
-        btn.onclick = function(){
-          var next = cycle[current()];
-          apply(next);
-          btn.textContent = labels[next];
-        };
-      })(document.currentScript.parentElement);
-    </script>
-  </button>
-  */ -}}
   <div class="container">
     {{- block "main" . }}{{ end }}
   </div>

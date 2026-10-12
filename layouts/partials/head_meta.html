@@ -24,8 +24,10 @@
 <meta name="description" content="{{ . }}" />
 <meta property="og:description" content="{{ . }}" />
 {{- end }}
-<link rel="canonical" href="{{ .Permalink }}" />
-<meta property="og:url" content="{{ .Permalink }}" />
+{{- /* uglyURLs would make the homepage /index.html */ -}}
+{{- $canonical := cond .IsHome ("/" | absURL) .Permalink }}
+<link rel="canonical" href="{{ $canonical }}" />
+<meta property="og:url" content="{{ $canonical }}" />
 {{- with $siteTitle }}
 <meta property="og:site_name" content="{{ . }}" />
 {{- end }}

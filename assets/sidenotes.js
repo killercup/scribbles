@@ -1,31 +1,40 @@
 (function(){
   // Find all footnote refs (standard Hugo: <sup id="fnref:X"><a ...>N</a></sup>)
   var refs = document.querySelectorAll('sup[id^="fnref:"]');
-  for (var i = 0; i < refs.length; i++) {
-    var sup = refs[i];
+  var mq = window.matchMedia('(min-width: 72rem)');
+  refs.forEach(function (sup) {
     var ref = sup.id.replace('fnref:', '');
-    var index = sup.querySelector('a').textContent;
+    var link = sup.querySelector('a');
 
     // Find the corresponding footnote content
     var li = document.getElementById('fn:' + ref);
-    if (!li) continue;
+    if (!li) return;
 
     // Clone content, remove the backref link
     var clone = li.cloneNode(true);
     var backrefs = clone.querySelectorAll('.footnote-backref');
     for (var j = 0; j < backrefs.length; j++) backrefs[j].remove();
 
-    // Create the sidenote element
+    // Create the sidenote element. Not aria-hidden: on wide screens the
+    // footnotes section is hidden, so this is the only copy.
     var sn = document.createElement('span');
     sn.className = 'sidenote sidenote-fn';
-    sn.setAttribute('aria-hidden', 'true');
-    sn.setAttribute('data-sn', index);
+    sn.setAttribute('data-sn', link.textContent);
     sn.id = 'sn-' + ref;
     sn.innerHTML = clone.innerHTML.trim();
 
     // Insert right after the <sup>
     sup.insertAdjacentElement('afterend', sn);
-  }
+
+    // Narrow screens: show the note as a popover instead of jumping away
+    if (!sn.showPopover) return;
+    sn.popover = 'auto';
+    link.addEventListener('click', function (e) {
+      if (mq.matches) return;
+      e.preventDefault();
+      if (!sn.matches(':popover-open')) sn.showPopover();
+    });
+  });
 
   // Create sidenotes for links with title attributes
   var article = document.querySelector('article');
@@ -50,7 +59,6 @@
   }
 
   // Swap footnote ref hrefs based on viewport width
-  var mq = window.matchMedia('(min-width: 72rem)');
   function updateRefs() {
     for (var i = 0; i < refs.length; i++) {
       var sup = refs[i];
